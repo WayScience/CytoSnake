@@ -6,11 +6,30 @@ import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
 
-def get_profiles(plate, sql_file, metadata_dir, barcode_platemap_df, strata, image_cols, compression):
-    """
-    Apply all profiling steps for a given plate.
-    Output:
-    Will write a series of processed files to disk
+def aggregate_cells(plate, sql_file, metadata_dir, barcode_platemap, strata, image_cols, compression):
+    """ Aggregates cellular image data. Aggregates are convereted into compressed csv files.
+
+    Parameters
+    ----------
+    plate : str
+       plate identifier 
+    sql_file : str
+        path to file containing cell image data
+    metadata_dir : str
+        path to cell metadata diretory
+    barcode_platemap : str
+        path to file containing barcode metadata
+    strata : list[StringType]
+        columns used for grouping aggregate single cells
+    image_cols : list[StringTypes]
+        selected columns from cell image data 
+    compression : str
+        compression algoirthm applied on aggregate data
+        
+    Raises
+    ------
+    FileNotFoundError
+        raised if the single cell data file
     """
     print("Processing {}.....".format(plate))
 
@@ -20,7 +39,7 @@ def get_profiles(plate, sql_file, metadata_dir, barcode_platemap_df, strata, ima
     sqlite_file = "sqlite:///{}.sqlite".format(plate)
 
     # Load specific platemap
-    barcode_platemap_df = pd.read_csv(barcode_platemap_df)
+    barcode_platemap_df = pd.read_csv(barcode_platemap)
     platemap = barcode_platemap_df.query(
         "Assay_Plate_Barcode == @plate"
     ).Plate_Map_Name.values[0]
@@ -82,10 +101,10 @@ if __name__ == "__main__":
     #extracting platename name from sql file
     plate_name = os.path.splitext(os.path.basename(args.sql_file))[0]
 
-    get_profiles(plate=plate_name,
+    aggregate_cells(plate=plate_name,
                  sql_file=args.sql_file,
                  metadata_dir=args.metadata_dir,
-                 barcode_platemap_df=args.profile_platemap,
+                 barcode_platemap=args.profile_platemap,
                  strata=args.strata,
                  image_cols = args.image_cols,
                  compression=args.compression
