@@ -22,31 +22,33 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     platemap_file = os.path.join(metadata_dir, "platemap", "{}.csv".format(platemap))
     platemap_df = pd.read_csv(platemap_file)
 
-    # TODO: generate a configuration that contains the default parameters
+    # TODO: generate a configuration file that contains the default parameters
     # -- Configurations will be in the snakefile under the "param:" rule attribute
     sqlite_file = "sqlite:///{}".format(sql_file)
     strata = ["Image_Metadata_Plate", "Image_Metadata_Well"]
     image_cols = ["TableNumber", "ImageNumber"]
-    ap = SingleCells(
-        sqlite_file, strata=strata, image_cols=image_cols, fields_of_view_feature=[]
+    single_cell_profile = SingleCells(
+        sqlite_file, strata=strata, image_cols=image_cols, fields_of_view_feature="Image_Metadata_Well"
     )
     
     # counting cells in each well and saving it as csv file
     print("Counting cells within each well")
-    cell_count_file = str(snakemake.output["cell_counts"])
-    cell_count_df = ap.count_cells()
+    cell_count_outfile = str(snakemake.output["cell_counts"])
+    cell_count_df = single_cell_profile.count_cells()
 
-    print("Saving cell counts in: {}".format(cell_count_file))
+    print("Saving cell counts in: {}".format(cell_count_outfile))
     cell_count_df = cell_count_df.merge(
         platemap_df, left_on="Image_Metadata_Well", right_on="well_position"
     ).drop(["WellRow", "WellCol", "well_position"], axis="columns")
-    cell_count_df.to_csv(cell_count_file, sep="\t", index=False) 
+    cell_count_df.to_csv(cell_count_outfile, sep="\t", index=False) 
 
-    # aggregating cells to generate profiles
+
+    # aggregating single cell profiles into well profiles
+    # TODO: Figure out why SEGFAULTS are being raised here
     faulthandler.enable()
     print("aggregating cells")
-    aggregate_output = str(snakemake.output["aggregate_profile"]) 
-    ap.aggregate_profiles(output_file=aggregate_output, compression_options="gzip")
+    aggregate_outfile = str(snakemake.output["aggregate_profile"])
+    single_cell_profile.aggregate_profiles(output_file=aggregate_outfile, compression_options="gzip")
 
 
 

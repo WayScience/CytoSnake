@@ -1,0 +1,25 @@
+name: configuration 
+
+classes:
+  SingleCell:
+    parameters:
+      strata: ["Metadata_Plate", "Metadata_Well"]
+      aggregation_operation: "median"
+      output_file: "none"
+      compartments: default_compartments
+      compartment_linking_cols: default_linking_cols
+      merge_cols: ["TableNumber", "ImageNumber"]
+      image_cols: ["TableNumber", "ImageNumber", "Metadata_Site"]
+      add_image_features: False
+      image_feature_categories: None
+      features: "infer"
+      load_image_data: True
+      subsample_frac: 1
+      subsample_n: "all"
+      subsampling_random_state: "none"
+      fields_of_view: "all"
+      fields_of_view_feature: "Metadata_Site"
+      object_feature: "Metadata_ObjectNumber"
+  Normalization:
+    parameters:
+      # add parameters here
