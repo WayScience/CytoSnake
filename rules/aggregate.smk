@@ -1,8 +1,8 @@
-import os 
+import os
 import glob
 # assimptions:
 # - must have a barcode map, metadata, and associated sql file
-# - inputs must have consistent 
+# - inputs must have consistent
 #
 #--------------------
 # if multiple
@@ -10,10 +10,10 @@ import glob
 
 # collecting all unqieuids from plate
 
-rule preprocess:
+rule aggregate:
     input:
         sql_files=expand("data/{plate_id}.sqlite", plate_id=PLATE_IDS),
-        barcode="data/barcode_platemap.csv",
+        barcodes="data/barcode_platemap.csv",
         metadata="data/metadata"
     output:
         cell_counts=expand("results/preprocessing/{plate_id}.cell_counts.tsv", plate_id=PLATE_IDS),
@@ -23,6 +23,17 @@ rule preprocess:
     script:
         "../scripts/aggregate_cells.py"
 
+
+rule annotate:
+    input:
+        barcodes="data/barcode_platemap.csv",
+        aggregate_profiles=expand("results/preprocessing/{plate_id}.aggregate.csv.gz", plate_id=PLATE_IDS)
+    output:
+        expand("{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS)
+    conda:
+        "../envs/cytominer_env.yaml"
+    script:
+        "../scripts/annotate.py"
 
 
 
@@ -88,7 +99,7 @@ rule preprocess:
 #     input:
 #         sql_file="SQ00014613.sqlite",
 #         barcode="barcode_platemap.csv"
-    
+
 #     params:
 #         strata="mage_Metadata_Plate Image_Metadata_Well"
 #         imgage_cols="TableNumber ImageNumber Metadata_Site"

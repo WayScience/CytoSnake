@@ -30,7 +30,7 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     single_cell_profile = SingleCells(
         sqlite_file, strata=strata, image_cols=image_cols, fields_of_view_feature="Image_Metadata_Well"
     )
-    
+
     # counting cells in each well and saving it as csv file
     print("Counting cells within each well")
     cell_count_outfile = str(snakemake.output["cell_counts"])
@@ -40,7 +40,7 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     cell_count_df = cell_count_df.merge(
         platemap_df, left_on="Image_Metadata_Well", right_on="well_position"
     ).drop(["WellRow", "WellCol", "well_position"], axis="columns")
-    cell_count_df.to_csv(cell_count_outfile, sep="\t", index=False) 
+    cell_count_df.to_csv(cell_count_outfile, sep="\t", index=False)
 
 
     # aggregating single cell profiles into well profiles
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     # transforming snakemake objects into python standard datatypes
     sqlfiles = [str(sqlfile) for sqlfile in snakemake.input["sql_files"]]
     meta_data_dir = str(snakemake.input["metadata"])
-    barcode = str(snakemake.input["barcode"])
+    barcode = str(snakemake.input["barcodes"])
 
     # running the aggregate algorithm
     for sqlfile in sqlfiles:
