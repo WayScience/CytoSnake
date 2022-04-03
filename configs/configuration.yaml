@@ -20,6 +20,7 @@ classes:
       fields_of_view: "all"
       fields_of_view_feature: "Metadata_Site"
       object_feature: "Metadata_ObjectNumber"
-  Normalization:
-    parameters:
+Normalization:
+  parameters:
+    method: "mad_robustize"
       # add parameters here

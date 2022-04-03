@@ -9,7 +9,7 @@ import glob
 # sql_files = golob.glob("input/*.sql")
 
 # collecting all unqieuids from plate
-
+configfile: "configs/configuration.yaml"
 rule aggregate:
     input:
         sql_files=expand("data/{plate_id}.sqlite", plate_id=PLATE_IDS),
@@ -29,15 +29,24 @@ rule annotate:
         barcodes="data/barcode_platemap.csv",
         aggregate_profiles=expand("results/preprocessing/{plate_id}.aggregate.csv.gz", plate_id=PLATE_IDS)
     output:
-        expand("{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS)
+        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS)
     conda:
         "../envs/cytominer_env.yaml"
     script:
         "../scripts/annotate.py"
 
 
-
-
+rule normalize:
+    input:
+        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS)
+    output:
+        expand("results/preprocessing/{plate_id}.normalized.csv.gz", plate_id=PLATE_IDS)
+    params:
+        norm_method=config["Normalization"]["parameters"]["method"]
+    conda:
+        "../envs/cytominer_env.yaml"
+    script:
+        "../scripts/normalize.py"
 
 
 
