@@ -1,4 +1,4 @@
-name: ctyominer_env
+name: cytominer_env
 channels:
   - conda-forge
   - bioconda
