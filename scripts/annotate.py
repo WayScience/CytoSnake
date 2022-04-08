@@ -19,7 +19,6 @@ def annotate_cells(aggregated_data, platemaps):
     platemap_df = pd.read_csv(barcodes)
 
     # annotating the aggregated profiles
-    # NOTE: join_on should be in config file
     annotate(
         profiles=aggregated_profiles,
         platemap=platemap_df,
