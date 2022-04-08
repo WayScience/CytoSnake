@@ -1,12 +1,28 @@
 import os
 import glob
-# assimptions:
-# - must have a barcode map, metadata, and associated sql file
-# - inputs must have consistent
+# Documentation:
+# Workflow that involves preprocessing raw single-cell plate data and
+# transforming it into normalized aggregate profiles.
 #
+# Parameters
+# ---------
+# sql_files : List[str]
+#   List of SQL files containing plate data
+# barcodes : str
+#   path pointing to the
+# metadata : str
+#   path pointing to plate metadata
+#
+# Generates
+# -------
+# cell_counts: .csv file
+#   csv file containing n_cells per well
+# augmented: csv.gz file
+#   Annotated aggregated profiles
+# normalized: csv.gz file
+#   Normalized annotated aggregate profiles
 #--------------------
-# if multiple
-# sql_files = golob.glob("input/*.sql")
+
 
 # collecting all unqieuids from plate
 configfile: "configs/configuration.yaml"
@@ -47,78 +63,3 @@ rule normalize:
         "../envs/cytominer_env.yaml"
     script:
         "../scripts/normalize.py"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # NOTE: assuming one entry
-# platename = "SQ00014613.sqlite".split(".")[0]
-# rule aggergate_cells:
-#     # NOTE: what are we assuming that user has?
-#     # -- should we expect multiple?
-#     input:
-#         sql_file="SQ00014613.sqlite",
-#         barcode="barcode_platemap.csv"
-
-#     params:
-#         strata="mage_Metadata_Plate Image_Metadata_Well"
-#         imgage_cols="TableNumber ImageNumber Metadata_Site"
-#         compression="gzip"
-#     output:
-#         count_out="results/{platename}.cell_counts.csv"
-#         agger_out="data/{platename}.cell_aggregates.gz."
-#         meta_out="metadata/{platename}.csv"
-#     threads:
-#     conda:
-#         "../envs/cytominer_env.yaml"
-#     # shell:
-#         "echo scripts/aggergate.py -i {input.sql} -o {}

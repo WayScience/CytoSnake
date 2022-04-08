@@ -28,7 +28,10 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     strata = ["Image_Metadata_Plate", "Image_Metadata_Well"]
     image_cols = ["TableNumber", "ImageNumber"]
     single_cell_profile = SingleCells(
-        sqlite_file, strata=strata, image_cols=image_cols, fields_of_view_feature="Image_Metadata_Well"
+        sqlite_file,
+        strata=strata,
+        image_cols=image_cols,
+        fields_of_view_feature="Image_Metadata_Well",
     )
 
     # counting cells in each well and saving it as csv file
@@ -42,14 +45,14 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     ).drop(["WellRow", "WellCol", "well_position"], axis="columns")
     cell_count_df.to_csv(cell_count_outfile, sep="\t", index=False)
 
-
     # aggregating single cell profiles into well profiles
     # TODO: Figure out why SEGFAULTS are being raised here
     faulthandler.enable()
     print("aggregating cells")
     aggregate_outfile = str(snakemake.output["aggregate_profile"])
-    single_cell_profile.aggregate_profiles(output_file=aggregate_outfile, compression_options="gzip")
-
+    single_cell_profile.aggregate_profiles(
+        output_file=aggregate_outfile, compression_options="gzip"
+    )
 
 
 if __name__ == "__main__":
@@ -62,5 +65,3 @@ if __name__ == "__main__":
     # running the aggregate algorithm
     for sqlfile in sqlfiles:
         aggregate(sqlfile, meta_data_dir, barcode)
-
-

@@ -1,7 +1,5 @@
-
 import pandas as pd
 from pycytominer.annotate import annotate
-
 
 
 def annotate_cells(aggregated_data, platemaps):
@@ -39,4 +37,3 @@ if __name__ == "__main__":
     print("Annotaing profiles ...")
     for ap in aggregated_profiles:
         annotate_cells(ap, barcodes)
-

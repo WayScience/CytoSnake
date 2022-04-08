@@ -2,16 +2,16 @@ from pycytominer.normalize import normalize
 
 
 def normalization(anno_file, norm_outfile, norm_method):
-    
+
     # TODO: Add this to config file as deafaults
     # Define metadata features
     meta_features = [
         "Metadata_Plate",
         "Metadata_Well",
-        'Metadata_Plate_Map_Name',
-        'Metadata_Plate',
-        'Metadata_Well',
-        'Metadata_Object_Count',
+        "Metadata_Plate_Map_Name",
+        "Metadata_Plate",
+        "Metadata_Well",
+        "Metadata_Object_Count",
     ]
 
     # Normalizing annotated profiles
@@ -26,7 +26,7 @@ def normalization(anno_file, norm_outfile, norm_method):
         compression_options="gzip",
     )
 
-    
+
 if __name__ == "__main__":
 
     # preprocessing converting snakemake objects into python strings
@@ -43,6 +43,3 @@ if __name__ == "__main__":
     # iteratively normalizing annotated files
     for annotated_file, out_file in io_files:
         normalization(annotated_file, out_file, norm_method=method)
-
-        
-
