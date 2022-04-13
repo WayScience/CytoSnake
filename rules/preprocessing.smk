@@ -14,7 +14,7 @@ import glob
 #   path pointing to plate metadata
 #
 # Generates
-# -------
+# ---------
 # cell_counts: .csv file
 #   csv file containing n_cells per well
 # augmented: csv.gz file
