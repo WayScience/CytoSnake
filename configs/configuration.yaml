@@ -1,4 +1,4 @@
-name: configuration 
+name: cytopipe_default 
 
 classes:
   SingleCell:
