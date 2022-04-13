@@ -9,7 +9,7 @@ import glob
 # sql_files : List[str]
 #   List of SQL files containing plate data
 # barcodes : str
-#   path pointing to the
+#   path pointing to the barcode file storing platemap IDs
 # metadata : str
 #   path pointing to plate metadata
 #
