@@ -5,7 +5,7 @@ import glob
 # transforming it into normalized aggregate profiles.
 #
 # Parameters
-# ---------
+# ----------
 # sql_files : List[str]
 #   List of SQL files containing plate data
 # barcodes : str
