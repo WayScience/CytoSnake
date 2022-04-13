@@ -32,7 +32,7 @@ rule aggregate:
         barcodes="data/barcode_platemap.csv",
         metadata="data/metadata"
     output:
-        cell_counts=expand("results/preprocessing/{plate_id}.cell_counts.tsv", plate_id=PLATE_IDS),
+        cell_counts=expand("results/preprocessing/{plate_id}_cell_counts.tsv", plate_id=PLATE_IDS),
         aggregate_profile=expand("results/preprocessing/{plate_id}.aggregate.csv.gz", plate_id=PLATE_IDS)
     conda:
         "../envs/cytominer_env.yaml"
