@@ -1,5 +1,3 @@
-import os
-import glob
 # Documentation:
 # Workflow that involves preprocessing raw single-cell plate data and
 # transforming it into normalized aggregate profiles.
@@ -21,19 +19,25 @@ import glob
 #   Annotated aggregated profiles
 # normalized: csv.gz file
 #   Normalized annotated aggregate profiles
-#--------------------
+# --------------------
 
 
 # collecting all unqieuids from plate
 configfile: "configs/configuration.yaml"
+
+
 rule aggregate:
     input:
         sql_files=expand("data/{plate_id}.sqlite", plate_id=PLATE_IDS),
         barcodes="data/barcode_platemap.csv",
-        metadata="data/metadata"
+        metadata="data/metadata",
     output:
-        cell_counts=expand("results/preprocessing/{plate_id}.cell_counts.tsv", plate_id=PLATE_IDS),
-        aggregate_profile=expand("results/preprocessing/{plate_id}.aggregate.csv.gz", plate_id=PLATE_IDS)
+        cell_counts=expand(
+            "results/preprocessing/{plate_id}.cell_counts.tsv", plate_id=PLATE_IDS
+        ),
+        aggregate_profile=expand(
+            "results/preprocessing/{plate_id}.aggregate.csv.gz", plate_id=PLATE_IDS
+        ),
     conda:
         "../envs/cytominer_env.yaml"
     script:
@@ -43,9 +47,11 @@ rule aggregate:
 rule annotate:
     input:
         barcodes="data/barcode_platemap.csv",
-        aggregate_profiles=expand("results/preprocessing/{plate_id}.aggregate.csv.gz", plate_id=PLATE_IDS)
+        aggregate_profiles=expand(
+            "results/preprocessing/{plate_id}.aggregate.csv.gz", plate_id=PLATE_IDS
+        ),
     output:
-        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS)
+        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS),
     conda:
         "../envs/cytominer_env.yaml"
     script:
@@ -54,11 +60,11 @@ rule annotate:
 
 rule normalize:
     input:
-        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS)
+        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS),
     output:
-        expand("results/preprocessing/{plate_id}.normalized.csv.gz", plate_id=PLATE_IDS)
+        expand("results/preprocessing/{plate_id}.normalized.csv.gz", plate_id=PLATE_IDS),
     params:
-        norm_method=config["Normalization"]["parameters"]["method"]
+        norm_method=config["Normalization"]["parameters"]["method"],
     conda:
         "../envs/cytominer_env.yaml"
     script:

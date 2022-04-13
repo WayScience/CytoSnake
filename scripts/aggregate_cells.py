@@ -1,16 +1,26 @@
 import os
-import faulthandler
 import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
 
 def aggregate(sql_file, metadata_dir, barcode_platemap):
-    """_summary_
+    """aggregates single cell data into aggregate profiles
 
-    Args:
-        sql_file (str): _description_
-        metadata_dir (str): _description_
-        barcode_platemap (str): _description_
+    Paramters:
+    ----------
+    sql_file: str
+            SQl file that contains single cell data obtain from a single plate
+    metadata_dir : str 
+        associated metadata file with the single cell data
+    barcode_platemap : str 
+        file containing the barcode id of each platedata
+
+    Returns:
+    --------
+        No object is returned
+
+        Generates cell count, aggregate aggregate, augmented aggregate profiles, and normalized
+        augmented aggregate profiles in the results/ directory.
     """
 
     # Loading appropriate platemaps with given plate data
@@ -22,8 +32,6 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     platemap_file = os.path.join(metadata_dir, "platemap", "{}.csv".format(platemap))
     platemap_df = pd.read_csv(platemap_file)
 
-    # TODO: generate a configuration file that contains the default parameters
-    # -- Configurations will be in the snakefile under the "param:" rule attribute
     sqlite_file = "sqlite:///{}".format(sql_file)
     strata = ["Image_Metadata_Plate", "Image_Metadata_Well"]
     image_cols = ["TableNumber", "ImageNumber"]
@@ -45,9 +53,6 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     ).drop(["WellRow", "WellCol", "well_position"], axis="columns")
     cell_count_df.to_csv(cell_count_outfile, sep="\t", index=False)
 
-    # aggregating single cell profiles into well profiles
-    # TODO: Figure out why SEGFAULTS are being raised here
-    faulthandler.enable()
     print("aggregating cells")
     aggregate_outfile = str(snakemake.output["aggregate_profile"])
     single_cell_profile.aggregate_profiles(

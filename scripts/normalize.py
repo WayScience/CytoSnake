@@ -2,9 +2,22 @@ from pycytominer.normalize import normalize
 
 
 def normalization(anno_file, norm_outfile, norm_method):
+    """Normalizes aggregate profiles
 
-    # TODO: Add this to config file as deafaults
-    # Define metadata features
+    Parameters
+    ----------
+    anno_file : str
+        path leading to aggregate profiles file
+    norm_outfile : str
+        output name of the generated normalized file
+    norm_method : str
+        Method of normalization
+
+    Returns
+    -------
+    No python object is returned. Generates normalized aggregated profile in the
+    results/ directory
+    """
     meta_features = [
         "Metadata_Plate",
         "Metadata_Well",
@@ -14,8 +27,6 @@ def normalization(anno_file, norm_outfile, norm_method):
         "Metadata_Object_Count",
     ]
 
-    # Normalizing annotated profiles
-    # TODO: Normalization method requires in configurations file
     normalize(
         profiles=anno_file,
         features="infer",

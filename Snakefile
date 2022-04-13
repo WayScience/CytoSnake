@@ -1,5 +1,6 @@
-import os
+from pathlib import Path
 import glob
+
 
 # obtaining plate_ids
 sql_paths = glob.glob("./data/*.sqlite")
