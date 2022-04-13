@@ -42,7 +42,7 @@ rule aggregate:
 rule annotate:
     input:
         barcodes="data/barcode_platemap.csv",
-        aggregate_profiles=expand("results/preprocessing/{plate_id}.aggregate.csv.gz", plate_id=PLATE_IDS)
+        aggregate_profiles=expand("results/preprocessing/{plate_id}_aggregated.csv.gz", plate_id=PLATE_IDS)
     output:
         expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS)
     conda:
