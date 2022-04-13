@@ -55,7 +55,7 @@ rule normalize:
     input:
         expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS)
     output:
-        expand("results/preprocessing/{plate_id}.normalized.csv.gz", plate_id=PLATE_IDS)
+        expand("results/preprocessing/{plate_id}_normalized.csv.gz", plate_id=PLATE_IDS)
     params:
         norm_method=config["Normalization"]["parameters"]["method"]
     conda:
