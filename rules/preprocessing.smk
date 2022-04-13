@@ -39,7 +39,6 @@ rule aggregate:
     script:
         "../scripts/aggregate_cells.py"
 
-
 rule annotate:
     input:
         barcodes="data/barcode_platemap.csv",
