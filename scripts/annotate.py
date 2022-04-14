@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     # iterative loop
     barcodes = str(snakemake.input["barcodes"])
-    aggregated_profiles = str(snakemake.input["aggregate_profiles"])
-    print("Annotaing profiles ...")
+    aggregated_profiles = str(snakemake.input["aggregate_profile"]).split()
+    print("Annotating profiles ...")
     for ap in aggregated_profiles:
         annotate_cells(ap, barcodes)

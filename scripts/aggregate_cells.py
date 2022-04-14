@@ -10,9 +10,9 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     ----------
     sql_file: str
             SQl file that contains single cell data obtain from a single plate
-    metadata_dir : str 
+    metadata_dir : str
         associated metadata file with the single cell data
-    barcode_platemap : str 
+    barcode_platemap : str
         file containing the barcode id of each platedata
 
     Returns:
