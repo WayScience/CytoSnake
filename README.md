@@ -78,7 +78,8 @@ total            2              1              1
 
 ```
 
-The resulting output is a summary of the `dry-run` and it shows that two rules were tested despite only specifying one. This is due to the `aggregate` rule creating an output that is a required input for the `annotate` rule; therefore, indicating that the `aggregate` rule is a requirement for the `annotate` rule .
+The resulting output is a summary of the `dry-run` and it shows that two rules were tested despite only specifying one.
+This is due to the `aggregate` rule creating an output that is a required input for the `annotate` rule; therefore, indicating that the `aggregate` rule is a requirement for the `annotate` rule.
 
 The `job stats` gives a summary which rules were checked in the `dry-run` and the resources used.  
 
