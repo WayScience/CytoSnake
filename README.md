@@ -23,7 +23,8 @@ In order to use `snakefmt`, `snakemake` must be installed, which can be found he
 
 ## Dry Runs
 
-`Snakemake`'s `dry-runs` is a simple test that ensures that all the required inputs and expected outputs are satisfied. No execution is conducted therefore any potential errors found within the executables **will not be captured.**
+`Snakemake`'s `dry-runs` is a simple test that ensures that all the required inputs and expected outputs are satisfied.
+No execution is conducted, therefore the dry run **will not capture** any potential errors found within the executables.
 
 Below is an example on how to conduct a `dry-run` on `snakemake`:
 
