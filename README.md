@@ -37,7 +37,7 @@ Using the `-n`, by default, will conduct a `dry-run` to all rules that exists wi
 One can specify a specific rule to conduct a `dry-run` test by inputting the name of the rule after the `-n` flag.
 This will only check all the required inputs and expected outputs that are specific to the specified rule.
 
-The example below executes a `dry-run` test to only the `annotate` rule
+The example below executes a `dry-run` test to only the `annotate` rule.
 
 ```text
 snakemake -n annotate
