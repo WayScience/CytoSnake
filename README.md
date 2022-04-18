@@ -32,7 +32,7 @@ Below is an example on how to conduct a `dry-run` on `snakemake`:
 snakemake -n
 ```
 
-Using the `-n`, by default, will conduct a `dry-run` to all rules that exists within the workflow
+Using the `-n`, by default, will conduct a `dry-run` to all rules that exists within the workflow.
 
 One can specify a specific rule to conduct a `dry-run` test by inputting the name of the rule after the `-n` flag.
 This will only check all the required inputs and expected outputs that are specific to the specified rule.
