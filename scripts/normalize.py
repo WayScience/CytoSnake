@@ -1,3 +1,5 @@
+from pathlib import Path
+import yaml
 from pycytominer.normalize import normalize
 
 
@@ -18,6 +20,12 @@ def normalization(anno_file, norm_outfile, norm_method):
     No python object is returned. Generates normalized aggregated profile in the
     results/ directory
     """
+    # loading paramters
+    normalize_ep = Path(snakemake.params["normalize_config"])
+    normalize_config_path = normalize_ep.absolute()
+    with open(normalize_config_path, "r") as yaml_contents:
+        normalize_config = yaml.load(yaml_contents)
+
     meta_features = [
         "Metadata_Plate",
         "Metadata_Well",
@@ -28,13 +36,20 @@ def normalization(anno_file, norm_outfile, norm_method):
     ]
 
     normalize(
-        profiles=anno_file,
-        features="infer",
-        meta_features=meta_features,
-        samples="all",
-        method=norm_method,
-        output_file=norm_outfile,
-        compression_options="gzip",
+        anno_file,
+        features=normalize_config["features"],
+        image_features=normalize_config["image_features"],
+        # meta_features=normalize_config["meta_features"],
+        meta_features=meta_features, # this is 
+        samples=normalize_config["samples"],
+        method=normalize_config["method"],
+        output_file=normalize_config["output_file"],
+        compression_options=normalize_config["compression_options"],
+        float_format=normalize_config["float_format"],
+        mad_robustize_epsilon=normalize_config["mad_robustize_epsilon"],
+        spherize_center=normalize_config["spherize_center"],
+        spherize_method=normalize_config["spherize_method"],
+        spherize_epsilon=normalize_config["spherize_epsilon"],
     )
 
 

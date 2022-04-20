@@ -1,4 +1,6 @@
 import os
+import yaml
+from pathlib import Path
 import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
@@ -22,6 +24,11 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
         Generates cell count, aggregate aggregate, augmented aggregate profiles, and normalized
         augmented aggregate profiles in the results/ directory.
     """
+    # loading paramters
+    aggregate_path_obj = Path(snakemake.params["aggregate_configs"])
+    aggregate_config_path = aggregate_path_obj.absolute()
+    with open(aggregate_config_path, "r") as yaml_contents:
+        aggregate_configs = yaml.load(yaml_contents)
 
     # Loading appropriate platemaps with given plate data
     plate = os.path.basename(sql_file).rsplit(".", 1)
@@ -33,13 +40,26 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     platemap_df = pd.read_csv(platemap_file)
 
     sqlite_file = "sqlite:///{}".format(sql_file)
-    strata = ["Image_Metadata_Plate", "Image_Metadata_Well"]
-    image_cols = ["TableNumber", "ImageNumber"]
+    # strata = ["Image_Metadata_Plate", "Image_Metadata_Well"]
+    # image_cols = ["TableNumber", "ImageNumber"]
     single_cell_profile = SingleCells(
         sqlite_file,
-        strata=strata,
-        image_cols=image_cols,
+        strata=aggregate_configs["strata"],
+        image_cols=aggregate_configs["image_cols"],
+        aggregation_operation=aggregate_configs["aggregation_operation"],
+        output_file=aggregate_configs["output_file"]
+        compartments=aggregate_configs["compartments"],
+        merge_cols=aggregate_configs["merge_cols"],
+        image_cols=aggregate_configs["image_cols"],
+        add_image_features=aggregate_configs["add_image_features"],
+        image_feature_categories=aggregate_configs["image_feature_categories"],
+        features=aggregate_configs["features"],
+        load_image_data=aggregate_configs["load_image_data"],
+        subsample_frac=aggregate_configs["subsample_frac"],
+        subsampling_random_state=aggregate_configs["subsampling_random_state"],
+        fields_of_view=aggregate_configs["fields_of_view"],
         fields_of_view_feature="Image_Metadata_Well",
+        object_feature=aggregate_configs["object_feature"]
     )
 
     # counting cells in each well and saving it as csv file

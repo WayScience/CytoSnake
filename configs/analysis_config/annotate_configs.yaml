@@ -1,0 +1,13 @@
+annotate_configs:
+  params:
+    join_on: ["Metadata_well_position", "Metadata_Well"]
+    output_file: "none"
+    add_metadata_id_to_platemap: True
+    format_broad_cmap: False
+    clean_cellprofiler: True
+    external_metadata: "none"
+    external_join_left: "none"
+    external_join_right: "none"
+    compression_options: None
+    float_format: None
+    cmap_args: {}
