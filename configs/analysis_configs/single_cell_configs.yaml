@@ -1,4 +1,3 @@
-# NOTE: comment out defaults in order for the test to work
 single_cell_config:
   params:
     # strata: ["Metadata_Plate", "Metadata_Well"]
@@ -11,10 +10,10 @@ single_cell_config:
     merge_cols: ["TableNumber", "ImageNumber"]
     # image_cols: ["TableNumber", "ImageNumber", "Metadata_Site"]
     add_image_features: False
-    image_feature_categories: None
+    image_feature_categories: null
     features: "infer"
     load_image_data: True
-    subsample_frac: 1,
+    subsample_frac: 1
     subsample_n: "all"
     subsampling_random_state: "none"
     fields_of_view: "all"

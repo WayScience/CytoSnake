@@ -25,10 +25,12 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
         augmented aggregate profiles in the results/ directory.
     """
     # loading paramters
-    aggregate_path_obj = Path(snakemake.params["aggregate_configs"])
+    aggregate_path_obj = Path(snakemake.params["aggregate_config"])
     aggregate_config_path = aggregate_path_obj.absolute()
     with open(aggregate_config_path, "r") as yaml_contents:
-        aggregate_configs = yaml.load(yaml_contents)
+        aggregate_configs = yaml.safe_load(yaml_contents)["single_cell_config"][
+            "params"
+        ]
 
     # Loading appropriate platemaps with given plate data
     plate = os.path.basename(sql_file).rsplit(".", 1)
@@ -47,10 +49,8 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
         strata=aggregate_configs["strata"],
         image_cols=aggregate_configs["image_cols"],
         aggregation_operation=aggregate_configs["aggregation_operation"],
-        output_file=aggregate_configs["output_file"]
-        compartments=aggregate_configs["compartments"],
+        output_file=aggregate_configs["output_file"],
         merge_cols=aggregate_configs["merge_cols"],
-        image_cols=aggregate_configs["image_cols"],
         add_image_features=aggregate_configs["add_image_features"],
         image_feature_categories=aggregate_configs["image_feature_categories"],
         features=aggregate_configs["features"],
@@ -59,7 +59,7 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
         subsampling_random_state=aggregate_configs["subsampling_random_state"],
         fields_of_view=aggregate_configs["fields_of_view"],
         fields_of_view_feature="Image_Metadata_Well",
-        object_feature=aggregate_configs["object_feature"]
+        object_feature=aggregate_configs["object_feature"],
     )
 
     # counting cells in each well and saving it as csv file

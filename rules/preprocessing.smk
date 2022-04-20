@@ -41,7 +41,7 @@ rule aggregate:
     conda:
         "../envs/cytominer_env.yaml"
     params:
-        aggregate_configs=config["config_paths"]["single_cell"]
+        aggregate_config=config["config_paths"]["single_cell"]
     script:
         "../scripts/aggregate_cells.py"
 

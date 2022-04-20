@@ -1,5 +1,5 @@
 config_name: cytopipe_defaults
 config_paths:
-  single_cell: "config/analysis_confings/single_cell_config.yaml"
-  annotate: "config/analysis_confings/annotate_config.yaml"
-  normalize: "config/analysis_confings/normalize_config.yaml"
+  single_cell: "configs/analysis_configs/single_cell_configs.yaml"
+  annotate: "configs/analysis_configs/annotate_configs.yaml"
+  normalize: "configs/analysis_configs/normalize_configs.yaml"
