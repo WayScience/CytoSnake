@@ -1,17 +1,30 @@
+# CytoPipe
+
+"Reproducible pipelines for processing high-dimensional systems morphology data with snakemake 🐍 "
+
 # Table of contents
 
-- [Table of contents](#table-of-contents)
 - [CytoPipe](#cytopipe)
-- [Formatting](#formatting)
-  - [smkfmt](#smkfmt)
+- [Table of contents](#table-of-contents)
+  - [Formatting](#formatting)
+    - [Black](#black)
+    - [Snakefmt](#snakefmt)
 - [Testing](#testing)
   - [Dry Runs](#dry-runs)
 
-# CytoPipe
-
 ## Formatting
 
-## smkfmt
+### Black
+`Black` is a python code formatter that follows `PEP8` rules in order to maintain source code in a readable fromat. 
+
+To install `Black`:
+```
+pip install black
+```
+More in depth informaton can be found in the [Documentation](https://black.readthedocs.io/en/stable/)
+
+
+### Snakefmt
 
 `snakefmt` is a `snakemake` code formatter that is developed and maintained by the developers of `snakemake`.
 
@@ -75,7 +88,6 @@ job          count    min threads    max threads
 aggregate        1              1              1
 annotate         1              1              1
 total            2              1              1
-
 ```
 
 The resulting output is a summary of the `dry-run` and it shows that two rules were tested despite only specifying one.
