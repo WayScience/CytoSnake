@@ -40,6 +40,8 @@ rule aggregate:
         ),
     conda:
         "../envs/cytominer_env.yaml"
+    params:
+        aggregate_config=config["config_paths"]["single_cell"]
     script:
         "../scripts/aggregate_cells.py"
 
@@ -54,6 +56,8 @@ rule annotate:
         expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS),
     conda:
         "../envs/cytominer_env.yaml"
+    params:
+        annotate_config=config["config_paths"]["annotate"]
     script:
         "../scripts/annotate.py"
 
@@ -63,9 +67,9 @@ rule normalize:
         expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS),
     output:
         expand("results/preprocessing/{plate_id}_normalized.csv.gz", plate_id=PLATE_IDS),
-    params:
-        norm_method=config["Normalization"]["parameters"]["method"],
     conda:
         "../envs/cytominer_env.yaml"
+    params:
+        normalize_config=config["config_paths"]["normalize"]
     script:
         "../scripts/normalize.py"

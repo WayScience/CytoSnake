@@ -1,0 +1,13 @@
+normalize_configs:
+  params:
+    features: "infer"
+    image_features: False
+    meta_features: "infer"
+    samples: "all"
+    method: "standardize"
+    compression_options: "gzip"
+    float_format: null
+    mad_robustize_epsilon: 1.0e-18
+    spherize_center: True
+    spherize_method: "ZCA-cor"
+    spherize_epsilon: 1.0e-6
