@@ -24,6 +24,7 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
         Generates cell count, aggregate aggregate, augmented aggregate profiles, and normalized
         augmented aggregate profiles in the results/ directory.
     """
+
     # loading paramters
     aggregate_path_obj = Path(snakemake.params["aggregate_config"])
     aggregate_config_path = aggregate_path_obj.absolute()

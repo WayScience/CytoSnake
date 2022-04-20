@@ -1,6 +1,5 @@
 single_cell_config:
   params:
-    # strata: ["Metadata_Plate", "Metadata_Well"]
     strata: ["Image_Metadata_Plate", "Image_Metadata_Well"]
     image_cols: ["TableNumber", "ImageNumber"]
     aggregation_operation: "median"
@@ -8,7 +7,6 @@ single_cell_config:
     compartments: "default_compartments"
     compartment_linking_cols: "default_linking_cols"
     merge_cols: ["TableNumber", "ImageNumber"]
-    # image_cols: ["TableNumber", "ImageNumber", "Metadata_Site"]
     add_image_features: False
     image_feature_categories: null
     features: "infer"

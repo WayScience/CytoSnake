@@ -1,7 +1,6 @@
 annotate_configs:
   params:
     join_on: ["Metadata_Assay_Plate_Barcode", "Image_Metadata_Plate"]
-    # join_on: ["Metadata_well_position", "Metadata_Well"]
     output_file: "none"
     add_metadata_id_to_platemap: True
     format_broad_cmap: False
