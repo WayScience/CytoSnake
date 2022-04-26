@@ -1,7 +1,6 @@
-
 evaluate_configs:
   params:
-    operation:  "replicate_reproducibility"
+    operation: "replicate_reproducibility"
     groupby_columns: ["Metadata_broad_sample"]
     similarity_metric: "pearson"
     replicate_reproducibility_quantile: 0.95

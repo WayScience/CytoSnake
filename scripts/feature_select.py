@@ -22,7 +22,9 @@ def feature_selection(normalized_profile, out_file):
     feature_select_ep = Path(snakemake.params["feature_select"])
     feature_select_config_path = feature_select_ep.absolute()
     with open(feature_select_config_path, "r") as yaml_contents:
-        feature_select_config = yaml.safe_load(yaml_contents)["feature_select_configs"]["params"]
+        feature_select_config = yaml.safe_load(yaml_contents)["feature_select_configs"][
+            "params"
+        ]
 
     feature_select(
         normalized_profile,
@@ -39,13 +41,15 @@ def feature_selection(normalized_profile, out_file):
         float_format=feature_select_config["float_format"],
         blocklist_file=feature_select_config["blocklist_file"],
         outlier_cutoff=feature_select_config["outlier_cutoff"],
-        noise_removal_perturb_groups=feature_select_config["noise_removal_perturb_groups"],
+        noise_removal_perturb_groups=feature_select_config[
+            "noise_removal_perturb_groups"
+        ],
         noise_removal_stdev_cutoff=feature_select_config["noise_removal_stdev_cutoff"],
         output_file=out_file,
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     norm_data = [str(f_in) for f_in in snakemake.input]
     out_files = [str(f_out) for f_out in snakemake.output]
     io_files = zip(norm_data, out_files)
@@ -53,5 +57,3 @@ if __name__ == '__main__':
     # iteratively passing normalized data
     for norm_data, out_file in io_files:
         feature_selection(norm_data, out_file)
-
-

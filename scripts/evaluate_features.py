@@ -34,6 +34,7 @@ def evaluate_features(profile, features, meta_features, replicate_groups, outnam
 
     evaluate_df.to_csv(outname, index=False)
 
+
 if __name__ == "__main__":
 
     profiles = [str(f_in) for f_in in snakemake.input]
