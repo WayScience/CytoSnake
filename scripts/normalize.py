@@ -20,6 +20,7 @@ def normalization(anno_file, norm_outfile):
     No python object is returned. Generates normalized aggregated profile in the
     results/ directory
     """
+
     # loading paramters
     normalize_ep = Path(snakemake.params["normalize_config"])
     normalize_config_path = normalize_ep.absolute()
@@ -59,7 +60,7 @@ if __name__ == "__main__":
     annotated_files = [str(f_in) for f_in in snakemake.input]
     out_files = [str(f_out) for f_out in snakemake.output]
     io_files = zip(annotated_files, out_files)
-    print(annotated_files)
+
     # iteratively normalizing annotated files
     for annotated_file, out_file in io_files:
         normalization(annotated_file, out_file)

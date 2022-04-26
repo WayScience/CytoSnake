@@ -5,7 +5,6 @@ normalize_configs:
     meta_features: "infer"
     samples: "all"
     method: "standardize"
-    # output_file: "none"
     compression_options: "gzip"
     float_format: null
     mad_robustize_epsilon: 1.0e-18
