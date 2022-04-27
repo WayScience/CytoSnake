@@ -46,11 +46,12 @@ def concatenate_data(profiles: list) -> pd.DataFrame:
     na_cols = get_na_columns(concat_df, cutoff=0)
     concat_df = concat_df.drop(na_cols, axis="columns")
 
-    # droping costes features 
-    costes_cols= [x for x in concat_df.columns if "costes" in x.lower()]
+    # droping costes features
+    costes_cols = [x for x in concat_df.columns if "costes" in x.lower()]
     concat_df = concat_df.drop(costes_cols, axis="columns")
 
     return cocnat_df
+
 
 if __name__ in "__main__":
 
