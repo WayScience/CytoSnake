@@ -6,5 +6,3 @@ channels:
 dependencies:
   - python>=3.7.0
   - conda-forge::pycytominer=0.1
-  - pip:
-    - cytominer-eval
