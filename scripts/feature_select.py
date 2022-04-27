@@ -1,6 +1,5 @@
 from pathlib import Path
 import yaml
-from pycytominer import audit
 from pycytominer.feature_select import feature_select
 
 
@@ -19,7 +18,7 @@ def feature_selection(normalized_profile, out_file):
     """
 
     # loading paramters
-    feature_select_ep = Path(snakemake.params["feature_select"])
+    feature_select_ep = Path(snakemake.params["feature_select_config"])
     feature_select_config_path = feature_select_ep.absolute()
     with open(feature_select_config_path, "r") as yaml_contents:
         feature_select_config = yaml.safe_load(yaml_contents)["feature_select_configs"][
