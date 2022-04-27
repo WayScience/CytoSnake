@@ -4,3 +4,4 @@ config_paths:
   annotate: "configs/analysis_configs/annotate_configs.yaml"
   normalize: "configs/analysis_configs/normalize_configs.yaml"
   feature_select: "configs/analysis_configs/feature_select_configs.yaml"
+  aggregate: "configs/analysis_configs/aggregate_configs.yaml"

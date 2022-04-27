@@ -24,3 +24,4 @@ rule all:
             plate_id=PLATE_IDS,
         ),
         expand("results/preprocessing/{plate_id}_evaluated.csv", plate_id=PLATE_IDS),
+        expand("results/preprocessing/{plate_id}_consensus.csv", plate_id=PLATE_IDS),

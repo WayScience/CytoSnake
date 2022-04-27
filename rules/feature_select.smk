@@ -15,3 +15,19 @@ rule feature_select:
         "../envs/cytominer_env.yaml"
     script:
         "../scripts/feature_select.py"
+
+
+rule create_consensus:
+    input:
+        expand(
+            "results/preprocessing/{plate_id}_feature_select.csv.gz",
+            plate_id=PLATE_IDS,
+        ),
+    output:
+        expand("results/preprocessing/{plate_id}_consensus.csv", plate_id=PLATE_IDS),
+    params:
+        aggregate_config=config["config_paths"]["aggregate"],
+    conda:
+        "../envs/cytominer_env.yaml"
+    script:
+        "../script/consensus.py"
