@@ -6,7 +6,9 @@ import glob
 sql_paths = glob.glob("./data/*.sqlite")
 PLATE_IDS = [Path(sql_file).stem for sql_file in sql_paths]
 
+# importing DAGs
 include: "rules/preprocessing.smk"
+include: "rules/feature_select.smk"
 
 rule all:
     input:
