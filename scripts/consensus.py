@@ -5,10 +5,11 @@ import numpy as np
 import pandas as pd
 
 from pycytominer.consensus import modz
-from pycytominer import get_na_columns, aggregate
+from pycytominer import aggregate
+from pycytominer.operations import get_na_columns
 
 
-def concatenate_data(profiles: list) -> pd.DataFrame:
+def concatenate_data(profile_list: list) -> pd.DataFrame:
     """Concatenates all normalized aggregated features into one
     pandas DataFrame
 
@@ -22,16 +23,18 @@ def concatenate_data(profiles: list) -> pd.DataFrame:
     pd.DataFrame
         concatenated normalized aggregated features
     """
+
     concat_df = (
-        pd.concat(profiles, sort=True)
-        .rename(
+        pd.concat(
+            [pd.read_csv(profile_path) for profile_path in profile_list], sort=True
+        ).rename(
             {
                 "Image_Metadata_Plate": "Metadata_Plate",
                 "Image_Metadata_Well": "Metadata_Well",
             },
-            axis="column",
+            axis="columns",
         )
-        .drop(["Metadata_broad_sample"], axis="columns")
+        # .drop(["Metadata_broad_sample"], axis="columns")
     )
 
     # realignment of the meta data column names
@@ -50,13 +53,15 @@ def concatenate_data(profiles: list) -> pd.DataFrame:
     costes_cols = [x for x in concat_df.columns if "costes" in x.lower()]
     concat_df = concat_df.drop(costes_cols, axis="columns")
 
-    return cocnat_df
+    return concat_df
 
 
 if __name__ in "__main__":
 
     inputs = [str(f_in) for f_in in snakemake.input]
-    output = None
-
+    output = str(snakemake.output)
+    print(inputs)
     # concatenated all Normalized aggregated profiles
     concat_dataset = concatenate_data(inputs)
+
+    concat_dataset.to_csv(output, compression="gzip")

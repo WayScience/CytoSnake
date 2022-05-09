@@ -24,10 +24,10 @@ rule create_consensus:
             plate_id=PLATE_IDS,
         ),
     output:
-        expand("results/preprocessing/{plate_id}_consensus.csv", plate_id=PLATE_IDS),
+        "results/preprocessing/consensus.csv",
     params:
         aggregate_config=config["config_paths"]["aggregate"],
     conda:
         "../envs/cytominer_env.yaml"
     script:
-        "../script/consensus.py"
+        "../scripts/consensus.py"

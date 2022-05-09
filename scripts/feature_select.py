@@ -4,7 +4,7 @@ from pycytominer.feature_select import feature_select
 
 
 def feature_selection(normalized_profile, out_file):
-    """Perfroms feature selection based on the given parameters explained
+    """Performs feature selection based on the given parameters explained
     in the configs/analysis_configs/feature_selection_configs.yaml file.
 
     Parameters
