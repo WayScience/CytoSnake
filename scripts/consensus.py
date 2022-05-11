@@ -60,8 +60,7 @@ if __name__ in "__main__":
 
     inputs = [str(f_in) for f_in in snakemake.input]
     output = str(snakemake.output)
-    print(inputs)
+
     # concatenated all Normalized aggregated profiles
     concat_dataset = concatenate_data(inputs)
-
     concat_dataset.to_csv(output, compression="gzip")
