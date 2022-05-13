@@ -24,7 +24,7 @@ rule create_consensus:
             plate_id=PLATE_IDS,
         ),
     output:
-        "results/preprocessing/consensus.csv",
+        "results/preprocessing/consensus.csv.gz",
     params:
         aggregate_config=config["config_paths"]["aggregate"],
     conda:

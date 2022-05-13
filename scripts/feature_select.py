@@ -12,6 +12,9 @@ def feature_selection(normalized_profile, out_file):
     normalized_profile : str
         path that points to normalized profile
 
+    out_file : str
+        Name of generated outfile
+
     Returns
     -------
     Generates output
