@@ -1,4 +1,3 @@
-from calendar import c
 from pathlib import Path
 from re import A
 import numpy as np
@@ -24,17 +23,14 @@ def concatenate_data(profile_list: list) -> pd.DataFrame:
         concatenated normalized aggregated features
     """
 
-    concat_df = (
-        pd.concat(
-            [pd.read_csv(profile_path) for profile_path in profile_list], sort=True
-        ).rename(
-            {
-                "Image_Metadata_Plate": "Metadata_Plate",
-                "Image_Metadata_Well": "Metadata_Well",
-            },
-            axis="columns",
-        )
-        # .drop(["Metadata_broad_sample"], axis="columns")
+    concat_df = pd.concat(
+        [pd.read_csv(profile_path) for profile_path in profile_list], sort=True
+    ).rename(
+        {
+            "Image_Metadata_Plate": "Metadata_Plate",
+            "Image_Metadata_Well": "Metadata_Well",
+        },
+        axis="columns",
     )
 
     # realignment of the meta data column names
@@ -49,10 +45,6 @@ def concatenate_data(profile_list: list) -> pd.DataFrame:
     na_cols = get_na_columns(concat_df, cutoff=0)
     concat_df = concat_df.drop(na_cols, axis="columns")
 
-    # droping costes features
-    costes_cols = [x for x in concat_df.columns if "costes" in x.lower()]
-    concat_df = concat_df.drop(costes_cols, axis="columns")
-
     return concat_df
 
 
@@ -60,8 +52,7 @@ if __name__ in "__main__":
 
     inputs = [str(f_in) for f_in in snakemake.input]
     output = str(snakemake.output)
-    print(inputs)
+
     # concatenated all Normalized aggregated profiles
     concat_dataset = concatenate_data(inputs)
-
     concat_dataset.to_csv(output, compression="gzip")

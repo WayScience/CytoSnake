@@ -3,7 +3,13 @@ feature_select_configs:
     features: infer
     image_features: False
     samples: all
-    operation: variance_threshold
+    operation:
+      - variance_threshold
+      - drop_na_columns
+      - correlation_threshold
+      - blocklist
+      - drop_outliers
+      - noise_removal
     na_cutoff: 0.05
     corr_threshold: 0.9
     corr_method: pearson
