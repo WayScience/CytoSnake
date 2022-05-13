@@ -52,10 +52,10 @@ def feature_selection(normalized_profile, out_file):
 
 
 if __name__ == "__main__":
-    norm_data = [str(f_in) for f_in in snakemake.input]
+    all_norm_profile = [str(f_in) for f_in in snakemake.input]
     out_files = [str(f_out) for f_out in snakemake.output]
-    io_files = zip(norm_data, out_files)
+    inputs = zip(all_norm_profile, out_files)
 
     # iteratively passing normalized data
-    for norm_data, out_file in io_files:
+    for norm_data, out_file in inputs:
         feature_selection(norm_data, out_file)
