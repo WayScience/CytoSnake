@@ -5,7 +5,9 @@ import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
 
-def aggregate(sql_file, metadata_dir, barcode_platemap):
+def aggregate(
+    sql_file, metadata_dir, barcode_platemap, cell_count_out, aggregate_file_out
+):
     """aggregates single cell data into aggregate profiles
 
     Paramters:
@@ -65,19 +67,17 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
 
     # counting cells in each well and saving it as csv file
     print("Counting cells within each well")
-    cell_count_outfile = str(snakemake.output["cell_counts"])
     cell_count_df = single_cell_profile.count_cells()
 
-    print("Saving cell counts in: {}".format(cell_count_outfile))
+    print("Saving cell counts in: {}".format(cell_count_out))
     cell_count_df = cell_count_df.merge(
         platemap_df, left_on="Image_Metadata_Well", right_on="well_position"
     ).drop(["WellRow", "WellCol", "well_position"], axis="columns")
-    cell_count_df.to_csv(cell_count_outfile, sep="\t", index=False)
+    cell_count_df.to_csv(cell_count_out, sep="\t", index=False)
 
     print("aggregating cells")
-    aggregate_outfile = str(snakemake.output["aggregate_profile"])
     single_cell_profile.aggregate_profiles(
-        output_file=aggregate_outfile, compression_options="gzip"
+        output_file=aggregate_file_out, compression_options="gzip"
     )
 
 
@@ -85,9 +85,24 @@ if __name__ == "__main__":
 
     # transforming snakemake objects into python standard datatypes
     sqlfiles = [str(sqlfile) for sqlfile in snakemake.input["sql_files"]]
+    cell_count_out = [str(out_name) for out_name in snakemake.output["cell_counts"]]
+    aggregate_profile_out = [
+        str(out_name) for out_name in snakemake.output["aggregate_profile"]
+    ]
     meta_data_dir = str(snakemake.input["metadata"])
-    barcode = str(snakemake.input["barcodes"])
+    barcode_map = str(snakemake.input["barcodes"])
 
+    inputs = zip(sqlfiles, cell_count_out, aggregate_profile_out)
     # running the aggregate algorithm
-    for sqlfile in sqlfiles:
-        aggregate(sqlfile, meta_data_dir, barcode)
+    for (
+        sqlfile,
+        counts_out,
+        aggregate_out,
+    ) in inputs:
+        aggregate(
+            sql_file=sqlfile,
+            metadata_dir=meta_data_dir,
+            barcode_platemap=barcode_map,
+            cell_count_out=counts_out,
+            aggregate_file_out=aggregate_out,
+        )
