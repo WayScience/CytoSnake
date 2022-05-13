@@ -41,7 +41,8 @@ rule aggregate:
     conda:
         "../envs/cytominer_env.yaml"
     params:
-        aggregate_config=config["config_paths"]["single_cell"]
+        aggregate_config=config["config_paths"]["single_cell"],
+    threads: 6
     script:
         "../scripts/aggregate_cells.py"
 
@@ -57,7 +58,7 @@ rule annotate:
     conda:
         "../envs/cytominer_env.yaml"
     params:
-        annotate_config=config["config_paths"]["annotate"]
+        annotate_config=config["config_paths"]["annotate"],
     script:
         "../scripts/annotate.py"
 
@@ -70,6 +71,6 @@ rule normalize:
     conda:
         "../envs/cytominer_env.yaml"
     params:
-        normalize_config=config["config_paths"]["normalize"]
+        normalize_config=config["config_paths"]["normalize"],
     script:
         "../scripts/normalize.py"
