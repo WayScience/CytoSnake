@@ -18,13 +18,15 @@ def aggregate(
         associated metadata file with the single cell data
     barcode_platemap : str
         file containing the barcode id of each platedata
+    cell_count_out : str
+        output file generated for cell counts given cell plate
+    aggregate_file_out : str
+        output file generated for aggregate profiles
 
     Returns:
     --------
         No object is returned
-
-        Generates cell count, aggregate aggregate, augmented aggregate profiles, and normalized
-        augmented aggregate profiles in the results/ directory.
+        Generates cell counts and aggregate profile output
     """
 
     # loading paramters
