@@ -3,17 +3,18 @@ import yaml
 from pycytominer.feature_select import feature_select
 
 
-def feature_selection(normalized_profile, out_file):
+def feature_selection(normalized_profile: str, out_file: str, config: str) -> None:
     """Performs feature selection based on the given parameters explained
     in the configs/analysis_configs/feature_selection_configs.yaml file.
 
     Parameters
     ----------
     normalized_profile : str
-        path that points to normalized profile
-
+        Path that points to normalized profile
     out_file : str
         Name of generated outfile
+    config: str
+        Path pointing to config file
 
     Returns
     -------
@@ -21,7 +22,7 @@ def feature_selection(normalized_profile, out_file):
     """
 
     # loading paramters
-    feature_select_ep = Path(snakemake.params["feature_select_config"])
+    feature_select_ep = Path(config)
     feature_select_config_path = feature_select_ep.absolute()
     with open(feature_select_config_path, "r") as yaml_contents:
         feature_select_config = yaml.safe_load(yaml_contents)["feature_select_configs"][
@@ -54,8 +55,11 @@ def feature_selection(normalized_profile, out_file):
 if __name__ == "__main__":
     all_norm_profile = [str(f_in) for f_in in snakemake.input]
     out_files = [str(f_out) for f_out in snakemake.output]
-    inputs = zip(all_norm_profile, out_files)
+    io_files = zip(norm_data, out_files)
+    config_path = str(snakemake.params["feature_select_config"])
 
     # iteratively passing normalized data
-    for norm_data, out_file in inputs:
-        feature_selection(norm_data, out_file)
+    for norm_data, feature_file_out in io_files:
+        feature_selection(
+            normalized_profile=norm_data, out_file=feature_file_out, config=config_path
+        )
