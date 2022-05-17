@@ -22,7 +22,7 @@ def annotate_cells(aggregated_data, barcodes_path):
         annotate_configs = yaml.safe_load(yaml_contents)["annotate_configs"]["params"]
 
     # input paths retrived by snakemake
-    annotated_outfile = str(snakemake.output)
+    annotate_file_out = str(snakemake.output)
     platemap_df = pd.read_csv(barcodes_path)
 
     # annotating the aggregated profiles
@@ -30,7 +30,7 @@ def annotate_cells(aggregated_data, barcodes_path):
         profiles=aggregated_data,
         platemap=platemap_df,
         join_on=annotate_configs["join_on"],
-        output_file=annotated_outfile,
+        output_file=annotate_file_out,
         add_metadata_id_to_platemap=annotate_configs["add_metadata_id_to_platemap"],
         format_broad_cmap=annotate_configs["format_broad_cmap"],
         clean_cellprofiler=annotate_configs["clean_cellprofiler"],
