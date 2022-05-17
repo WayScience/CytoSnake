@@ -3,7 +3,7 @@ import yaml
 from pycytominer.normalize import normalize
 
 
-def normalization(anno_file, norm_outfile):
+def normalization(anno_file: str, norm_outfile: str) -> None:
     """Normalizes aggregate profiles
 
     Parameters
@@ -12,8 +12,6 @@ def normalization(anno_file, norm_outfile):
         path leading to aggregate profiles file
     norm_outfile : str
         output name of the generated normalized file
-    norm_method : str
-        Method of normalization
 
     Returns
     -------

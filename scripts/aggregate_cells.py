@@ -5,21 +5,21 @@ import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
 
-def aggregate(sql_file, metadata_dir, barcode_platemap):
+def aggregate(sql_file: str, metadata_dir: str, barcode_path: str, config: str):
     """aggregates single cell data into aggregate profiles
 
     Paramters:
     ----------
     sql_file: str
-            SQl file that contains single cell data obtain from a single plate
+            SQL file that contains single cell data obtain from a single plate
     metadata_dir : str
         associated metadata file with the single cell data
-    barcode_platemap : str
+    barcode_path : str
         file containing the barcode id of each platedata
-    cell_count_out : str
-        output file generated for cell counts given cell plate
     aggregate_file_out : str
         output file generated for aggregate profiles
+    config: str
+        Path to config file
 
     Returns:
     --------
@@ -28,7 +28,7 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
     """
 
     # loading paramters
-    aggregate_path_obj = Path(snakemake.params["aggregate_config"])
+    aggregate_path_obj = Path(config)
     aggregate_config_path = aggregate_path_obj.absolute()
     with open(aggregate_config_path, "r") as yaml_contents:
         aggregate_configs = yaml.safe_load(yaml_contents)["single_cell_config"][
@@ -37,7 +37,7 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
 
     # Loading appropriate platemaps with given plate data
     plate = os.path.basename(sql_file).rsplit(".", 1)
-    barcode_platemap_df = pd.read_csv(barcode_platemap)
+    barcode_platemap_df = pd.read_csv(barcode_path)
     platemap = barcode_platemap_df.query(
         "Assay_Plate_Barcode == @plate"
     ).Plate_Map_Name.values[0]
@@ -89,7 +89,13 @@ if __name__ == "__main__":
     sqlfiles = [str(sqlfile) for sqlfile in snakemake.input["sql_files"]]
     meta_data_dir = str(snakemake.input["metadata"])
     barcode = str(snakemake.input["barcodes"])
+    config_path = str(snakemake.params["aggregate_config"])
 
     # running the aggregate algorithm
     for sqlfile in sqlfiles:
-        aggregate(sqlfile, meta_data_dir, barcode)
+        aggregate(
+            sql_file=sqlfile,
+            metadata_dir=meta_data_dir,
+            barcode_platemap=barcode,
+            config=config_path,
+        )

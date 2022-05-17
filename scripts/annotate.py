@@ -4,14 +4,14 @@ import pandas as pd
 from pycytominer.annotate import annotate
 
 
-def annotate_cells(aggregated_data, barcodes_path):
+def annotate_cells(aggregated_data: str, barcodes_path: str) -> None:
     """Annoates
 
     Parameters
     ----------
     aggregated_data : str
         path pointing to aggregated dataset
-    platemaps : str
+    barcodes_path : str
         path pointing to platemaps
 
     """
