@@ -60,7 +60,6 @@ if __name__ == "__main__":
 
     # iteratively passing normalized data
     for norm_data, feature_file_out in io_files:
-        print(norm_data, feature_file_out)
         feature_selection(
             normalized_profile=norm_data, out_file=feature_file_out, config=config_path
         )

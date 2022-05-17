@@ -1,4 +1,6 @@
 import os
+import multiprocessing as mp
+import itertools
 import yaml
 from pathlib import Path
 import pandas as pd
@@ -98,18 +100,22 @@ if __name__ == "__main__":
     aggregate_profile_out = [
         str(out_name) for out_name in snakemake.output["aggregate_profile"]
     ]
-    meta_data_dir = str(snakemake.input["metadata"])
-    barcode = str(snakemake.input["barcodes"])
-    config_path = str(snakemake.params["aggregate_config"])
-    inputs = zip(sqlfiles, cell_count_out, aggregate_profile_out)
+    meta_data_dir = itertools.repeat(str(snakemake.input["metadata"]))
+    barcode_map = itertools.repeat(str(snakemake.input["barcodes"]))
+    config_path = itertools.repeat(str(snakemake.params["aggregate_config"]))
+    inputs = list(
+        zip(sqlfiles, meta_data_dir, barcode_map, cell_count_out, aggregate_profile_out, config_path)
+    )
 
-    # running the aggregate algorithm
-    for sqlfile, cell_count_out, aggregate_profile_out in inputs:
-        aggregate(
-            sql_file=sqlfile,
-            metadata_dir=meta_data_dir,
-            barcode_path=barcode,
-            aggregate_file_out=aggregate_profile_out,
-            cell_count_out=cell_count_out,
-            config=config_path,
+    # init multi process
+    n_cores = int(snakemake.threads)
+    if n_cores > len(inputs):
+        print(
+            f"WARNING: number of specify cores exceeds number of inputs, defaulting to {len(inputs)}"
         )
+        n_cores = len(inputs)
+
+    with mp.Pool(processes=n_cores) as pool:
+        pool.starmap(aggregate, inputs)
+        pool.close()
+        pool.join()
