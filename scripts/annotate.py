@@ -4,7 +4,9 @@ import pandas as pd
 from pycytominer.annotate import annotate
 
 
-def annotate_cells(aggregated_data: str, barcodes_path: str) -> None:
+def annotate_cells(
+    aggregated_data: str, barcodes_path: str, annotate_file_out: str, config: str
+) -> None:
     """Annoates
 
     Parameters
@@ -20,13 +22,12 @@ def annotate_cells(aggregated_data: str, barcodes_path: str) -> None:
     """
 
     # loading in paramters
-    annotate_path_obj = Path(configs)
+    annotate_path_obj = Path(config)
     annotate_config_path = annotate_path_obj.absolute()
     with open(annotate_config_path, "r") as yaml_contents:
         annotate_configs = yaml.safe_load(yaml_contents)["annotate_configs"]["params"]
 
     # input paths retrived by snakemake
-    annotate_file_out = str(snakemake.output)
     platemap_df = pd.read_csv(barcodes_path)
 
     # annotating the aggregated profiles
@@ -64,6 +65,6 @@ if __name__ == "__main__":
         annotate_cells(
             aggregated_data=agg_profile,
             barcodes_path=barcodes,
-            output=out_name,
-            configs=config_path,
+            annotate_file_out=out_name,
+            config=config_path,
         )

@@ -5,7 +5,14 @@ import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
 
-def aggregate(sql_file: str, metadata_dir: str, barcode_path: str, config: str):
+def aggregate(
+    sql_file: str,
+    metadata_dir: str,
+    barcode_path: str,
+    cell_count_out: str,
+    aggregate_file_out: str,
+    config: str,
+):
     """aggregates single cell data into aggregate profiles
 
     Paramters:
@@ -18,6 +25,8 @@ def aggregate(sql_file: str, metadata_dir: str, barcode_path: str, config: str):
         file containing the barcode id of each platedata
     aggregate_file_out : str
         output file generated for aggregate profiles
+    cell_count_out: str
+        output file generating cell counts
     config: str
         Path to config file
 
@@ -92,13 +101,15 @@ if __name__ == "__main__":
     meta_data_dir = str(snakemake.input["metadata"])
     barcode = str(snakemake.input["barcodes"])
     config_path = str(snakemake.params["aggregate_config"])
-
     inputs = zip(sqlfiles, cell_count_out, aggregate_profile_out)
+
     # running the aggregate algorithm
-    for sqlfile in sqlfiles:
+    for sqlfile, cell_count_out, aggregate_profile_out in inputs:
         aggregate(
             sql_file=sqlfile,
             metadata_dir=meta_data_dir,
-            barcode_platemap=barcode,
+            barcode_path=barcode,
+            aggregate_file_out=aggregate_profile_out,
+            cell_count_out=cell_count_out,
             config=config_path,
         )

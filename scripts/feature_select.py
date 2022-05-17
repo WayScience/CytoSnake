@@ -55,11 +55,12 @@ def feature_selection(normalized_profile: str, out_file: str, config: str) -> No
 if __name__ == "__main__":
     all_norm_profile = [str(f_in) for f_in in snakemake.input]
     out_files = [str(f_out) for f_out in snakemake.output]
-    io_files = zip(norm_data, out_files)
     config_path = str(snakemake.params["feature_select_config"])
+    io_files = zip(all_norm_profile, out_files)
 
     # iteratively passing normalized data
     for norm_data, feature_file_out in io_files:
+        print(norm_data, feature_file_out)
         feature_selection(
             normalized_profile=norm_data, out_file=feature_file_out, config=config_path
         )

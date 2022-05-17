@@ -7,9 +7,9 @@ feature_select_configs:
       - variance_threshold
       - drop_na_columns
       - correlation_threshold
-      - blocklist
+      # - blocklist This requires a blocklist file. (meeting with greg)
       - drop_outliers
-      - noise_removal
+      #- noise_removal
     na_cutoff: 0.05
     corr_threshold: 0.9
     corr_method: pearson
