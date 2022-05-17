@@ -5,28 +5,39 @@ import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
 
-def aggregate(sql_file, metadata_dir, barcode_platemap):
+def aggregate(
+    sql_file: str,
+    metadata_dir: str,
+    barcode_path: str,
+    cell_count_out: str,
+    aggregate_file_out: str,
+    config: str,
+):
     """aggregates single cell data into aggregate profiles
 
     Paramters:
     ----------
     sql_file: str
-            SQl file that contains single cell data obtain from a single plate
+            SQL file that contains single cell data obtain from a single plate
     metadata_dir : str
         associated metadata file with the single cell data
-    barcode_platemap : str
+    barcode_path : str
         file containing the barcode id of each platedata
+    aggregate_file_out : str
+        output file generated for aggregate profiles
+    cell_count_out: str
+        output file generating cell counts
+    config: str
+        Path to config file
 
     Returns:
     --------
         No object is returned
-
-        Generates cell count, aggregate aggregate, augmented aggregate profiles, and normalized
-        augmented aggregate profiles in the results/ directory.
+        Generates cell counts and aggregate profile output
     """
 
     # loading paramters
-    aggregate_path_obj = Path(snakemake.params["aggregate_config"])
+    aggregate_path_obj = Path(config)
     aggregate_config_path = aggregate_path_obj.absolute()
     with open(aggregate_config_path, "r") as yaml_contents:
         aggregate_configs = yaml.safe_load(yaml_contents)["single_cell_config"][
@@ -35,7 +46,7 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
 
     # Loading appropriate platemaps with given plate data
     plate = os.path.basename(sql_file).rsplit(".", 1)
-    barcode_platemap_df = pd.read_csv(barcode_platemap)
+    barcode_platemap_df = pd.read_csv(barcode_path)
     platemap = barcode_platemap_df.query(
         "Assay_Plate_Barcode == @plate"
     ).Plate_Map_Name.values[0]
@@ -65,19 +76,17 @@ def aggregate(sql_file, metadata_dir, barcode_platemap):
 
     # counting cells in each well and saving it as csv file
     print("Counting cells within each well")
-    cell_count_outfile = str(snakemake.output["cell_counts"])
     cell_count_df = single_cell_profile.count_cells()
 
-    print("Saving cell counts in: {}".format(cell_count_outfile))
+    print("Saving cell counts in: {}".format(cell_count_out))
     cell_count_df = cell_count_df.merge(
         platemap_df, left_on="Image_Metadata_Well", right_on="well_position"
     ).drop(["WellRow", "WellCol", "well_position"], axis="columns")
-    cell_count_df.to_csv(cell_count_outfile, sep="\t", index=False)
+    cell_count_df.to_csv(cell_count_out, sep="\t", index=False)
 
     print("aggregating cells")
-    aggregate_outfile = str(snakemake.output["aggregate_profile"])
     single_cell_profile.aggregate_profiles(
-        output_file=aggregate_outfile, compression_options="gzip"
+        output_file=aggregate_file_out, compression_options="gzip"
     )
 
 
@@ -85,9 +94,22 @@ if __name__ == "__main__":
 
     # transforming snakemake objects into python standard datatypes
     sqlfiles = [str(sqlfile) for sqlfile in snakemake.input["sql_files"]]
+    cell_count_out = [str(out_name) for out_name in snakemake.output["cell_counts"]]
+    aggregate_profile_out = [
+        str(out_name) for out_name in snakemake.output["aggregate_profile"]
+    ]
     meta_data_dir = str(snakemake.input["metadata"])
     barcode = str(snakemake.input["barcodes"])
+    config_path = str(snakemake.params["aggregate_config"])
+    inputs = zip(sqlfiles, cell_count_out, aggregate_profile_out)
 
     # running the aggregate algorithm
-    for sqlfile in sqlfiles:
-        aggregate(sqlfile, meta_data_dir, barcode)
+    for sqlfile, cell_count_out, aggregate_profile_out in inputs:
+        aggregate(
+            sql_file=sqlfile,
+            metadata_dir=meta_data_dir,
+            barcode_path=barcode,
+            aggregate_file_out=aggregate_profile_out,
+            cell_count_out=cell_count_out,
+            config=config_path,
+        )
