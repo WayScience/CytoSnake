@@ -115,6 +115,7 @@ if __name__ == "__main__":
         )
         n_cores = len(inputs)
 
+    # Initiate the multi-threading procedure
     with mp.Pool(processes=n_cores) as pool:
         pool.starmap(aggregate, inputs)
         pool.close()
