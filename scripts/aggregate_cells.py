@@ -17,14 +17,14 @@ def aggregate(
 ):
     """aggregates single cell data into aggregate profiles
 
-    Paramters:
+    Parameters:
     ----------
     sql_file: str
             SQL file that contains single cell data obtain from a single plate
     metadata_dir : str
         associated metadata file with the single cell data
     barcode_path : str
-        file containing the barcode id of each platedata
+        file containing the barcode id of each plate data
     aggregate_file_out : str
         output file generated for aggregate profiles
     cell_count_out: str
@@ -38,7 +38,7 @@ def aggregate(
         Generates cell counts and aggregate profile output
     """
 
-    # loading paramters
+    # loading parameters
     aggregate_path_obj = Path(config)
     aggregate_config_path = aggregate_path_obj.absolute()
     with open(aggregate_config_path, "r") as yaml_contents:
