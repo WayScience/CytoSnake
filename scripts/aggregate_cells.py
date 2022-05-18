@@ -1,4 +1,6 @@
 import os
+import multiprocessing as mp
+import itertools
 import yaml
 from pathlib import Path
 import pandas as pd
@@ -15,14 +17,14 @@ def aggregate(
 ):
     """aggregates single cell data into aggregate profiles
 
-    Paramters:
+    Parameters:
     ----------
     sql_file: str
             SQL file that contains single cell data obtain from a single plate
     metadata_dir : str
         associated metadata file with the single cell data
     barcode_path : str
-        file containing the barcode id of each platedata
+        file containing the barcode id of each plate data
     aggregate_file_out : str
         output file generated for aggregate profiles
     cell_count_out: str
@@ -36,7 +38,7 @@ def aggregate(
         Generates cell counts and aggregate profile output
     """
 
-    # loading paramters
+    # loading parameters
     aggregate_path_obj = Path(config)
     aggregate_config_path = aggregate_path_obj.absolute()
     with open(aggregate_config_path, "r") as yaml_contents:
@@ -98,18 +100,23 @@ if __name__ == "__main__":
     aggregate_profile_out = [
         str(out_name) for out_name in snakemake.output["aggregate_profile"]
     ]
-    meta_data_dir = str(snakemake.input["metadata"])
-    barcode = str(snakemake.input["barcodes"])
-    config_path = str(snakemake.params["aggregate_config"])
-    inputs = zip(sqlfiles, cell_count_out, aggregate_profile_out)
+    meta_data_dir = itertools.repeat(str(snakemake.input["metadata"]))
+    barcode_map = itertools.repeat(str(snakemake.input["barcodes"]))
+    config_path = itertools.repeat(str(snakemake.params["aggregate_config"]))
+    inputs = list(
+        zip(sqlfiles, meta_data_dir, barcode_map, cell_count_out, aggregate_profile_out, config_path)
+    )
 
-    # running the aggregate algorithm
-    for sqlfile, cell_count_out, aggregate_profile_out in inputs:
-        aggregate(
-            sql_file=sqlfile,
-            metadata_dir=meta_data_dir,
-            barcode_path=barcode,
-            aggregate_file_out=aggregate_profile_out,
-            cell_count_out=cell_count_out,
-            config=config_path,
+    # init multi process
+    n_cores = int(snakemake.threads)
+    if n_cores > len(inputs):
+        print(
+            f"WARNING: number of specified cores ({n_cores}) exceeds number of inputs ({len(inputs)}), defaulting to {len(inputs)}"
         )
+        n_cores = len(inputs)
+
+    # Initiate the multi-threading procedure
+    with mp.Pool(processes=n_cores) as pool:
+        pool.starmap(aggregate, inputs)
+        pool.close()
+        pool.join()

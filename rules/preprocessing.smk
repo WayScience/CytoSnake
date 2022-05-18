@@ -42,7 +42,7 @@ rule aggregate:
         "../envs/cytominer_env.yaml"
     params:
         aggregate_config=config["config_paths"]["single_cell"],
-    threads: 6
+    threads: config["analysis_configs"]["preprocessing"]["threads"]
     script:
         "../scripts/aggregate_cells.py"
 

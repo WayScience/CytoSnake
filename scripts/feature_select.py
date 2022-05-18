@@ -21,7 +21,7 @@ def feature_selection(normalized_profile: str, out_file: str, config: str) -> No
     Generates output
     """
 
-    # loading paramters
+    # loading parameters
     feature_select_ep = Path(config)
     feature_select_config_path = feature_select_ep.absolute()
     with open(feature_select_config_path, "r") as yaml_contents:
@@ -60,7 +60,6 @@ if __name__ == "__main__":
 
     # iteratively passing normalized data
     for norm_data, feature_file_out in io_files:
-        print(norm_data, feature_file_out)
         feature_selection(
             normalized_profile=norm_data, out_file=feature_file_out, config=config_path
         )
