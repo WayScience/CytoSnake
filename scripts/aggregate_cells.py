@@ -111,7 +111,7 @@ if __name__ == "__main__":
     n_cores = int(snakemake.threads)
     if n_cores > len(inputs):
         print(
-            f"WARNING: number of specify cores exceeds number of inputs, defaulting to {len(inputs)}"
+            f"WARNING: number of specified cores ({n_cores}) exceeds number of inputs ({len(inputs)}), defaulting to {len(inputs)}"
         )
         n_cores = len(inputs)
 
