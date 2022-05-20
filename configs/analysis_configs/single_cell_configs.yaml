@@ -1,14 +1,17 @@
 single_cell_config:
   params:
+    # strata: ["Metadata_Plate", "Metadata_Well"]
     strata: ["Image_Metadata_Plate", "Image_Metadata_Well"]
-    image_cols: ["TableNumber", "ImageNumber"]
+    image_cols: ["TableNumber", "ImageNumber", "Image_Metadata_Site"]
     aggregation_operation: "median"
-    output_file: "none"
-    compartments: "default_compartments"
-    compartment_linking_cols: "default_linking_cols"
-    merge_cols: ["TableNumber", "ImageNumber"]
+    compartments:
+      - cells
+      - cytoplasm
+      - nuclei
+    compartment_linking_cols: "default_linking_cols" # linking cols link (Discord)
+    merge_cols: ["TableNumber", "ImageNumber"] # support yaml format
     add_image_features: False
-    image_feature_categories: null
+    image_feature_categories: None
     features: "infer"
     load_image_data: True
     subsample_frac: 1

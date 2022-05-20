@@ -63,7 +63,7 @@ def aggregate(
         strata=aggregate_configs["strata"],
         image_cols=aggregate_configs["image_cols"],
         aggregation_operation=aggregate_configs["aggregation_operation"],
-        output_file=aggregate_configs["output_file"],
+        output_file=aggregate_file_out,
         merge_cols=aggregate_configs["merge_cols"],
         add_image_features=aggregate_configs["add_image_features"],
         image_feature_categories=aggregate_configs["image_feature_categories"],

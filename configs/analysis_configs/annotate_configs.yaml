@@ -1,13 +1,25 @@
 annotate_configs:
   params:
-    join_on: ["Metadata_Assay_Plate_Barcode", "Image_Metadata_Plate"]
-    output_file: "none"
+    join_on:
+      - Metadata_well_position
+      # - Metadata_Well
+      - Image_Metadata_Well
     add_metadata_id_to_platemap: True
     format_broad_cmap: False
     clean_cellprofiler: True
     external_metadata: "none"
     external_join_left: "none"
     external_join_right: "none"
-    compression_options: "gzip"
+    compression_options:
+      method: "gzip"
+      mtime: 1
     float_format: null
     cmap_args: {}
+
+# challenges
+# -- compression options:
+  # -- compression time changes for each gzip there github might flag changes
+  # occurred in the data
+  #
+  # future: conpressino_options might not be in the config file. define in
+  # global configs (i.e threads)

@@ -53,6 +53,7 @@ rule annotate:
         aggregate_profile=expand(
             "results/preprocessing/{plate_id}_aggregate.csv.gz", plate_id=PLATE_IDS
         ),
+        metadata="data/metadata",
     output:
         expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS),
     conda:
