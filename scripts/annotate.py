@@ -1,3 +1,4 @@
+import os
 import yaml
 from pathlib import Path
 import pandas as pd
@@ -5,7 +6,11 @@ from pycytominer.annotate import annotate
 
 
 def annotate_cells(
-    aggregated_data: str, barcodes_path: str, annotate_file_out: str, config: str
+    aggregated_data: str,
+    barcodes_path: str,
+    metadata_dir: str,
+    annotate_file_out: str,
+    config: str,
 ) -> None:
     """Annoates
 
@@ -15,20 +20,28 @@ def annotate_cells(
         path pointing to aggregated dataset
     barcodes_path : str
         path pointing to platemaps
-    output: str
+    metadata_dir : str
+        path to metadata folder
+    annotate_file_out: str
         name of generated annotated profile
     configs:
         path to configuration file
     """
 
-    # loading in paramters
+    # loading in annotate configs
     annotate_path_obj = Path(config)
     annotate_config_path = annotate_path_obj.absolute()
     with open(annotate_config_path, "r") as yaml_contents:
         annotate_configs = yaml.safe_load(yaml_contents)["annotate_configs"]["params"]
 
-    # input paths retrived by snakemake
-    platemap_df = pd.read_csv(barcodes_path)
+    # loading in platmap
+    plate = Path(aggregated_data).name.split("_")[0]
+    barcode_platemap_df = pd.read_csv(barcodes_path)
+    platemap = barcode_platemap_df.query(
+        "Assay_Plate_Barcode == @plate"
+    ).Plate_Map_Name.values[0]
+    platemap_file = os.path.join(metadata_dir, "platemap", "{}.csv".format(platemap))
+    platemap_df = pd.read_csv(platemap_file)
 
     # annotating the aggregated profiles
     annotate(
@@ -50,21 +63,23 @@ def annotate_cells(
 
 if __name__ == "__main__":
 
-    # iterative loop
+    # collecting inputs
     barcodes = str(snakemake.input["barcodes"])
-    config_path = Path(snakemake.params["annotate_config"])
-
+    metadata_path = str(snakemake.input["metadata"])
+    config_path = str(snakemake.params["annotate_config"])
     aggregated_profiles = [
         str(agg_prof) for agg_prof in snakemake.input["aggregate_profile"]
     ]
     outname = [str(f_out) for f_out in snakemake.output]
     inputs = zip(aggregated_profiles, outname)
 
+    # iterating all aggregated profiles for annotation
     print("Annotating profiles ...")
     for agg_profile, out_name in inputs:
         annotate_cells(
             aggregated_data=agg_profile,
             barcodes_path=barcodes,
+            metadata_dir=metadata_path,
             annotate_file_out=out_name,
             config=config_path,
         )
