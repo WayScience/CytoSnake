@@ -24,4 +24,4 @@ rule all:
             "results/preprocessing/{plate_id}_feature_select.csv.gz",
             plate_id=PLATE_IDS,
         ),
-        "results/preprocessing/consensus.csv.gz",
+        "results/preprocessing/median_consensus.csv.gz",

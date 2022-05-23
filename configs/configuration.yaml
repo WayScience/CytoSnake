@@ -1,7 +1,7 @@
 config_name: cytopipe_defaults
 analysis_configs:
   preprocessing:
-    threads: 9
+    threads: 4
 config_paths:
   single_cell: "configs/analysis_configs/single_cell_configs.yaml"
   annotate: "configs/analysis_configs/annotate_configs.yaml"

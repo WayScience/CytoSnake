@@ -2,3 +2,13 @@
 trash
 *.sqlite
 results
+data
+tests/test_multiprocessing/.snakemake/
+*.csv.gz
+*.csv
+*.tsv
+
+.vscode
+configs.bak
+.ipynb
+view.ipynb

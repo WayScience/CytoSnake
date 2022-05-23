@@ -2,7 +2,6 @@ annotate_configs:
   params:
     join_on:
       - Metadata_well_position
-      # - Metadata_Well
       - Image_Metadata_Well
     add_metadata_id_to_platemap: True
     format_broad_cmap: False
@@ -16,6 +15,7 @@ annotate_configs:
     float_format: null
     cmap_args: {}
 
+      # - Metadata_Well
 # challenges
 # -- compression options:
   # -- compression time changes for each gzip there github might flag changes
