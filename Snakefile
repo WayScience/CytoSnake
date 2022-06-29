@@ -4,7 +4,7 @@ import glob
 
 # obtaining plate_ids
 sql_paths = glob.glob("./data/*.sqlite")
-PLATE_IDS = [Path(sql_file).stem for sql_file in sql_paths]
+PLATE_IDS = glob_wildcards("data/{id}.sqlite").id
 
 
 # importing DAGs

@@ -1,8 +1,8 @@
 import os
-import multiprocessing as mp
-import itertools
 import yaml
+import argparse
 from pathlib import Path
+
 import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
@@ -94,29 +94,37 @@ def aggregate(
 
 if __name__ == "__main__":
 
-    # transforming snakemake objects into python standard datatypes
-    sqlfiles = [str(sqlfile) for sqlfile in snakemake.input["sql_files"]]
-    cell_count_out = [str(out_name) for out_name in snakemake.output["cell_counts"]]
-    aggregate_profile_out = [
-        str(out_name) for out_name in snakemake.output["aggregate_profile"]
-    ]
-    meta_data_dir = itertools.repeat(str(snakemake.input["metadata"]))
-    barcode_map = itertools.repeat(str(snakemake.input["barcodes"]))
-    config_path = itertools.repeat(str(snakemake.params["aggregate_config"]))
-    inputs = list(
-        zip(sqlfiles, meta_data_dir, barcode_map, cell_count_out, aggregate_profile_out, config_path)
+    # CLI arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-i", "--input", type=str, required=True, help="cell plate feature data"
     )
+    parser.add_argument(
+        "-o", "--output", type=str, required=True, help="aggregated output files"
+    )
+    parser.add_argument(
+        "-co", "--cellcount_out", type=str, required=True, help="cell out output file"
+    )
+    parser.add_argument(
+        "-m",
+        "--metadata_dir",
+        type=str,
+        required=True,
+        help="Path to metadata directory",
+    )
+    parser.add_argument(
+        "-b", "--barcode", type=str, required=True, help="Path to barcode labels"
+    )
+    parser.add_argument(
+        "-c", "--config", type=str, required=True, help="Path to config file"
+    )
+    args = parser.parse_args()
 
-    # init multi process
-    n_cores = int(snakemake.threads)
-    if n_cores > len(inputs):
-        print(
-            f"WARNING: number of specified cores ({n_cores}) exceeds number of inputs ({len(inputs)}), defaulting to {len(inputs)}"
-        )
-        n_cores = len(inputs)
-
-    # Initiate the multi-threading procedure
-    with mp.Pool(processes=n_cores) as pool:
-        pool.starmap(aggregate, inputs)
-        pool.close()
-        pool.join()
+    aggregate(
+        sql_file=args.input,
+        metadata_dir=args.metadata_dir,
+        barcode_path=args.barcode,
+        aggregate_file_out=args.output,
+        cell_count_out=args.cellcount_out,
+        config=args.config,
+    )

@@ -28,23 +28,26 @@ configfile: "configs/configuration.yaml"
 
 rule aggregate:
     input:
-        sql_files=expand("data/{plate_id}.sqlite", plate_id=PLATE_IDS),
+        sql_files="data/{plate_id}.sqlite", # sql_files=expand("data/{plate_id}.sqlite", plate_id=PLATE_IDS),
         barcodes="data/barcode_platemap.csv",
         metadata="data/metadata",
     output:
-        cell_counts=expand(
-            "results/preprocessing/{plate_id}_cell_counts.tsv", plate_id=PLATE_IDS
-        ),
-        aggregate_profile=expand(
-            "results/preprocessing/{plate_id}_aggregate.csv.gz", plate_id=PLATE_IDS
-        ),
+        cell_counts="results/preprocessing/{plate_id}_cell_counts.tsv",
+        aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
     conda:
         "../envs/cytominer_env.yaml"
     params:
         aggregate_config=config["config_paths"]["single_cell"],
-    threads: config["analysis_configs"]["preprocessing"]["threads"]
-    script:
-        "../scripts/aggregate_cells.py"
+    # threads: config["analysis_configs"]["preprocessing"]["threads"] # script:
+    shell:
+        """
+        python scripts/aggregate_cells.py -i {input.sql_files} \
+        -m {input.metadata} \
+        -b {input.barcodes} \
+        -o {output.aggregate_profile} \
+        -co {output.cell_counts} \
+        -c {params.aggregate_config}
+        """
 
 
 rule annotate:
