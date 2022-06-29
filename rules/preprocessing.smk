@@ -72,12 +72,16 @@ rule annotate:
 
 rule normalize:
     input:
-        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS),
+        "results/preprocessing/{plate_id}_augmented.csv.gz"
     output:
-        expand("results/preprocessing/{plate_id}_normalized.csv.gz", plate_id=PLATE_IDS),
+        "results/preprocessing/{plate_id}_normalized.csv.gz"
     conda:
         "../envs/cytominer_env.yaml"
     params:
         normalize_config=config["config_paths"]["normalize"],
-    script:
-        "../scripts/normalize.py"
+    shell:
+        """ 
+        python scripts/normalize.py -i {input} \
+        -o {output} \
+        -c {params.normalize_config}
+        """

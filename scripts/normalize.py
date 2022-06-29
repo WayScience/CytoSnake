@@ -1,9 +1,11 @@
+import argparse
 from pathlib import Path
+
 import yaml
 from pycytominer.normalize import normalize
 
 
-def normalization(anno_file: str, norm_outfile: str) -> None:
+def normalization(anno_file: str, norm_outfile: str, config: str) -> None:
     """Normalizes aggregate profiles
 
     Parameters
@@ -12,6 +14,8 @@ def normalization(anno_file: str, norm_outfile: str) -> None:
         path leading to aggregate profiles file
     norm_outfile : str
         output name of the generated normalized file
+    config : str
+        Path to normalization config file
 
     Returns
     -------
@@ -20,7 +24,7 @@ def normalization(anno_file: str, norm_outfile: str) -> None:
     """
 
     # loading paramters
-    normalize_ep = Path(snakemake.params["normalize_config"])
+    normalize_ep = Path(config)
     normalize_config_path = normalize_ep.absolute()
     with open(normalize_config_path, "r") as yaml_contents:
         normalize_config = yaml.safe_load(yaml_contents)["normalize_configs"]["params"]
@@ -64,11 +68,30 @@ def normalization(anno_file: str, norm_outfile: str) -> None:
 
 if __name__ == "__main__":
 
+    # CLI Arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-i", "--input", type=str, required=True, help="annotated aggregated profiles"
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        required=True,
+        help="normalized annotated aggregate profiles outputs",
+    )
+    parser.add_argument(
+        "-c", "--config", type=str, required=True, help="path to config file"
+    )
+    args = parser.parse_args()
+
     # preprocessing converting snakemake objects into python strings
-    annotated_files = [str(f_in) for f_in in snakemake.input]
-    out_files = [str(f_out) for f_out in snakemake.output]
-    io_files = zip(annotated_files, out_files)
+    # annotated_files = [str(f_in) for f_in in snakemake.input]
+    # out_files = [str(f_out) for f_out in snakemake.output]
+    # io_files = zip(annotated_files, out_files)
 
     # iteratively normalizing annotated files
-    for annotated_file, out_file in io_files:
-        normalization(annotated_file, out_file)
+    # for annotated_file, out_file in io_files:
+    normalization(anno_file=args.input, 
+        norm_outfile=args.output, 
+    config=args.config)
