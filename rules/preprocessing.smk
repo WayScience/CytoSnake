@@ -52,18 +52,22 @@ rule aggregate:
 rule annotate:
     input:
         barcodes="data/barcode_platemap.csv",
-        aggregate_profile=expand(
-            "results/preprocessing/{plate_id}_aggregate.csv.gz", plate_id=PLATE_IDS
-        ),
+        aggregate_profile= "results/preprocessing/{plate_id}_aggregate.csv.gz",
         metadata="data/metadata",
     output:
-        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS),
+        "results/preprocessing/{plate_id}_augmented.csv.gz"
     conda:
         "../envs/cytominer_env.yaml"
     params:
         annotate_config=config["config_paths"]["annotate"],
-    script:
-        "../scripts/annotate.py"
+    shell:
+        """
+        python scripts/annotate.py -i {input.aggregate_profile} \
+        -m {input.metadata} \
+        -b {input.barcodes} \
+        -o {output} \
+        -c {params.annotate_config}
+        """
 
 
 rule normalize:

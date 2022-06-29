@@ -1,7 +1,13 @@
+from ast import arg
 import os
+from numpy import require
 import yaml
+import argparse
 from pathlib import Path
+
 import pandas as pd
+
+# pycytominer imports
 from pycytominer.annotate import annotate
 
 
@@ -63,23 +69,33 @@ def annotate_cells(
 
 if __name__ == "__main__":
 
-    # collecting inputs
-    barcodes = str(snakemake.input["barcodes"])
-    metadata_path = str(snakemake.input["metadata"])
-    config_path = str(snakemake.params["annotate_config"])
-    aggregated_profiles = [
-        str(agg_prof) for agg_prof in snakemake.input["aggregate_profile"]
-    ]
-    outname = [str(f_out) for f_out in snakemake.output]
-    inputs = zip(aggregated_profiles, outname)
+    # CLI
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-i", "--input", type=str, required=True, help="aggregated profiles"
+    )
+    parser.add_argument(
+        "-o", "--output", type=str, required=True, help="Annotated profiles output"
+    )
+    parser.add_argument(
+        "-b", "--barcode", type=str, required=True, help="Path to barcode file"
+    )
+    parser.add_argument(
+        "-m",
+        "--metadata_dir",
+        type=str,
+        required=True,
+        help="Path of metadata directory",
+    )
+    parser.add_argument(
+        "-c", "--config", type=str, required=True, help="Path to config file"
+    )
+    args = parser.parse_args()
 
-    # iterating all aggregated profiles for annotation
-    print("Annotating profiles ...")
-    for agg_profile, out_name in inputs:
-        annotate_cells(
-            aggregated_data=agg_profile,
-            barcodes_path=barcodes,
-            metadata_dir=metadata_path,
-            annotate_file_out=out_name,
-            config=config_path,
-        )
+    annotate_cells(
+        aggregated_data=args.input,
+        barcodes_path=args.barcode,
+        metadata_dir=args.metadata_dir,
+        annotate_file_out=args.output,
+        config=args.config,
+    )
