@@ -185,8 +185,6 @@ def build_consensus(profile_list: list, consensus_file_out) -> None:
         ["guide", "cell_id"], axis="columns"
     )
 
-   
-
     # Confirm that matrices are aligned
     pd.testing.assert_series_equal(
         x_median_df.Metadata_profile_id,
