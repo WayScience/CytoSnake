@@ -23,7 +23,7 @@ def normalization(anno_file: str, norm_outfile: str, config: str) -> None:
     results/ directory
     """
 
-    # loading paramters
+    # loading parameters
     normalize_ep = Path(config)
     normalize_config_path = normalize_ep.absolute()
     with open(normalize_config_path, "r") as yaml_contents:
@@ -85,13 +85,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    # preprocessing converting snakemake objects into python strings
-    # annotated_files = [str(f_in) for f_in in snakemake.input]
-    # out_files = [str(f_out) for f_out in snakemake.output]
-    # io_files = zip(annotated_files, out_files)
-
-    # iteratively normalizing annotated files
-    # for annotated_file, out_file in io_files:
-    normalization(anno_file=args.input, 
-        norm_outfile=args.output, 
-    config=args.config)
+    # normalization step 
+    normalization(anno_file=args.input, norm_outfile=args.output, config=args.config)
