@@ -28,7 +28,7 @@ configfile: "configs/configuration.yaml"
 
 rule aggregate:
     input:
-        sql_files="data/{plate_id}.sqlite", # sql_files=expand("data/{plate_id}.sqlite", plate_id=PLATE_IDS),
+        sql_files="data/{plate_id}.sqlite", 
         barcodes="data/barcode_platemap.csv",
         metadata="data/metadata",
     output:
@@ -38,7 +38,6 @@ rule aggregate:
         "../envs/cytominer_env.yaml"
     params:
         aggregate_config=config["config_paths"]["single_cell"],
-    # threads: config["analysis_configs"]["preprocessing"]["threads"] # script:
     shell:
         """
         python scripts/aggregate_cells.py -i {input.sql_files} \
