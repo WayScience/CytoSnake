@@ -29,14 +29,7 @@ def normalization(anno_file: str, norm_outfile: str, config: str) -> None:
     with open(normalize_config_path, "r") as yaml_contents:
         normalize_config = yaml.safe_load(yaml_contents)["normalize_configs"]["params"]
 
-    # meta_features = [
-    #     "Metadata_Plate",
-    #     "Metadata_Well",
-    #     # "Metadata_Plate_Map_Name",
-    #     "Metadata_Plate",
-    #     "Metadata_Well",
-    #     "Metadata_Object_Count",
-    # ]
+
     meta_features = [
         "Metadata_Plate",
         "Metadata_Well",

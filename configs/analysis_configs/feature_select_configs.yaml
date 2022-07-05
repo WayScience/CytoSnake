@@ -6,7 +6,7 @@ feature_select_configs:
     operation:
       - variance_threshold
       - drop_na_columns
-      # - correlation_threshold
+      - correlation_threshold
       - drop_outliers
       - blocklist
     na_cutoff: 0.05
@@ -22,9 +22,3 @@ feature_select_configs:
     outlier_cutoff: 15
     noise_removal_perturb_groups: null
     noise_removal_stdev_cutoff: null
-
-
-
-# there is a path but snakemake is not capturing it.
-# also the blocklist_file var might be wrong
-# - blocklist This requires a blocklist file. (meeting with greg)

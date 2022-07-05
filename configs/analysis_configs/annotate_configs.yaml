@@ -14,12 +14,3 @@ annotate_configs:
       mtime: 1
     float_format: null
     cmap_args: {}
-
-      # - Metadata_Well
-# challenges
-# -- compression options:
-  # -- compression time changes for each gzip there github might flag changes
-  # occurred in the data
-  #
-  # future: conpressino_options might not be in the config file. define in
-  # global configs (i.e threads)

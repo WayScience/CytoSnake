@@ -3,9 +3,7 @@ normalize_configs:
     features: infer
     image_features: False
     meta_features: infer
-    # samples: all
-    samples: "Metadata_pert_name == 'EMPTY'"
-    # method: standardize
+    samples: all
     method: mad_robustize
     compression_options:
       method: gzip
@@ -15,6 +13,3 @@ normalize_configs:
     spherize_center: True
     spherize_method: ZCA-cor
     spherize_epsilon: 1.0e-6
-
-# Notes
-# -- order of different normalization methods

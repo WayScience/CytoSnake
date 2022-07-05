@@ -1,11 +1,11 @@
 single_cell_config:
   params:
-    strata: 
-      - Image_Metadata_Plate 
+    strata:
+      - Image_Metadata_Plate
       - Image_Metadata_Well
-    image_cols: 
-      - TableNumber 
-      - ImageNumber 
+    image_cols:
+      - TableNumber
+      - ImageNumber
       - Image_Metadata_Site
     aggregation_operation: median
     compartments:
@@ -13,7 +13,7 @@ single_cell_config:
       - cytoplasm
       - nuclei
     compartment_linking_cols: default_linking_cols
-    merge_cols:  
+    merge_cols:
       - TableNumber
       - ImageNumber
     add_image_features: False
@@ -21,12 +21,8 @@ single_cell_config:
     features: infer
     load_image_data: True
     subsample_frac: 1
-    subsample_n: "all"
+    subsample_n: all
     subsampling_random_state: none
     fields_of_view: all
     fields_of_view_feature: Metadata_Site
     object_feature: Metadata_ObjectNumber
-
-
-# linking cols link (Discord) -> notes are there
-# strata: ["Metadata_Plate", "Metadata_Well"]
