@@ -10,5 +10,4 @@ tests/test_multiprocessing/.snakemake/
 
 .vscode
 configs.bak
-.ipynb
-view.ipynb
+*.ipynb
