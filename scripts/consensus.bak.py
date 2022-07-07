@@ -51,6 +51,20 @@ def build_consensus(profile_list: list, consensus_file_out) -> None:
 
     x_groupby_cols = ["Metadata_gene_name", "Metadata_pert_name", "Metadata_cell_line"]
 
+    x_metacount_df = (
+        concat_df.loc[:, x_groupby_cols]
+        .assign(n_measurements=1)
+        .groupby(x_groupby_cols)
+        .count()
+        .reset_index()
+        .assign(data_type="cell_painting")
+        .merge(
+            concat_df.loc[:, x_groupby_cols + ["Metadata_Well", "Metadata_Plate"]],
+            how="left",
+            on=x_groupby_cols,
+        )
+    )
+
     # TODO: this path should be in the meta data
     y_df = pd.read_csv("./data/normalized_cell_health_labels.tsv", sep="\t").drop(
         ["plate_name", "well_col", "well_row"], axis="columns"
@@ -103,6 +117,10 @@ def build_consensus(profile_list: list, consensus_file_out) -> None:
         .reset_index(drop=True)
         .drop(["Metadata_Well", "guide", "cell_id"], axis="columns")
     )
+
+    # this should also be in the paramters as well
+    file = os.path.join("results", "all_profile_metadata.tsv")
+    all_measurements_df.to_csv(file, sep="\t", index=False)
 
     x_median_df = aggregate(
         concat_df,
@@ -192,4 +210,5 @@ if __name__ in "__main__":
     output = str(snakemake.output)
 
     # concatenated all Normalized aggregated profiles
-    build_consensus(profile_list=inputs, consensus_file_out=output)
+    concat_dataset = build_consensus(profile_list=inputs, consensus_file_out=output)
+    # concat_dataset.to_csv(output, compression="gzip")
