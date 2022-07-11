@@ -1,4 +1,3 @@
-import argparse
 from pathlib import Path
 
 import yaml
@@ -44,7 +43,6 @@ def normalization(anno_file: str, norm_outfile: str, config: str) -> None:
         anno_file,
         features=normalize_config["features"],
         image_features=normalize_config["image_features"],
-        # meta_features=normalize_config["meta_features"],
         meta_features=meta_features,
         samples=normalize_config["samples"],
         method=normalize_config["method"],
@@ -60,22 +58,14 @@ def normalization(anno_file: str, norm_outfile: str, config: str) -> None:
 
 if __name__ == "__main__":
 
-    # CLI Arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-i", "--input", type=str, required=True, help="annotated aggregated profiles"
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
-        type=str,
-        required=True,
-        help="normalized annotated aggregate profiles outputs",
-    )
-    parser.add_argument(
-        "-c", "--config", type=str, required=True, help="path to config file"
-    )
-    args = parser.parse_args()
+    # snakemake inputs
+    annotated_data_path = str(snakemake.input)
+    config_path = str(snakemake.params["normalize_config"])
+    normalized_data_output = str(snakemake.output)
 
     # normalization step
-    normalization(anno_file=args.input, norm_outfile=args.output, config=args.config)
+    normalization(
+        anno_file=annotated_data_path,
+        norm_outfile=normalized_data_output,
+        config=config_path,
+    )

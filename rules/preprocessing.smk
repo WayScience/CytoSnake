@@ -28,7 +28,7 @@ configfile: "configs/configuration.yaml"
 
 rule aggregate:
     input:
-        sql_files="data/{plate_id}.sqlite", 
+        sql_files="data/{plate_id}.sqlite",
         barcodes="data/barcode_platemap.csv",
         metadata="data/metadata",
     output:
@@ -38,50 +38,33 @@ rule aggregate:
         "../envs/cytominer_env.yaml"
     params:
         aggregate_config=config["config_paths"]["single_cell"],
-    shell:
-        """
-        python scripts/aggregate_cells.py -i {input.sql_files} \
-        -m {input.metadata} \
-        -b {input.barcodes} \
-        -o {output.aggregate_profile} \
-        -co {output.cell_counts} \
-        -c {params.aggregate_config}
-        """
+    script:
+        "../scripts/aggregate_cells.py"
 
 
 rule annotate:
     input:
         barcodes="data/barcode_platemap.csv",
-        aggregate_profile= "results/preprocessing/{plate_id}_aggregate.csv.gz",
+        aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
         metadata="data/metadata",
     output:
-        "results/preprocessing/{plate_id}_augmented.csv.gz"
+        "results/preprocessing/{plate_id}_augmented.csv.gz",
     conda:
         "../envs/cytominer_env.yaml"
     params:
         annotate_config=config["config_paths"]["annotate"],
-    shell:
-        """
-        python scripts/annotate.py -i {input.aggregate_profile} \
-        -m {input.metadata} \
-        -b {input.barcodes} \
-        -o {output} \
-        -c {params.annotate_config}
-        """
+    script:
+        "../scripts/annotate.py"
 
 
 rule normalize:
     input:
-        "results/preprocessing/{plate_id}_augmented.csv.gz"
+        "results/preprocessing/{plate_id}_augmented.csv.gz",
     output:
-        "results/preprocessing/{plate_id}_normalized.csv.gz"
+        "results/preprocessing/{plate_id}_normalized.csv.gz",
     conda:
         "../envs/cytominer_env.yaml"
     params:
         normalize_config=config["config_paths"]["normalize"],
-    shell:
-        """ 
-        python scripts/normalize.py -i {input} \
-        -o {output} \
-        -c {params.normalize_config}
-        """
+    script:
+        "../scripts/normalize.py"

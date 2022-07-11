@@ -1,6 +1,5 @@
 import os
 import yaml
-import argparse
 from pathlib import Path
 
 import pandas as pd
@@ -56,8 +55,6 @@ def aggregate(
     platemap_df = pd.read_csv(platemap_file)
 
     sqlite_file = "sqlite:///{}".format(sql_file)
-    # strata = ["Image_Metadata_Plate", "Image_Metadata_Well"]
-    # image_cols = ["TableNumber", "ImageNumber"]
     single_cell_profile = SingleCells(
         sqlite_file,
         strata=aggregate_configs["strata"],
@@ -94,37 +91,19 @@ def aggregate(
 
 if __name__ == "__main__":
 
-    # CLI arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-i", "--input", type=str, required=True, help="cell plate feature data"
-    )
-    parser.add_argument(
-        "-o", "--output", type=str, required=True, help="aggregated output files"
-    )
-    parser.add_argument(
-        "-co", "--cellcount_out", type=str, required=True, help="cell out output file"
-    )
-    parser.add_argument(
-        "-m",
-        "--metadata_dir",
-        type=str,
-        required=True,
-        help="Path to metadata directory",
-    )
-    parser.add_argument(
-        "-b", "--barcode", type=str, required=True, help="Path to barcode labels"
-    )
-    parser.add_argument(
-        "-c", "--config", type=str, required=True, help="Path to config file"
-    )
-    args = parser.parse_args()
+    # snakemake inputs
+    plate_data = str(snakemake.input["sql_files"])
+    barcode_path = str(snakemake.input["barcodes"])
+    metadata_dir_path = str(snakemake.input["metadata"])
+    cell_count_output = str(snakemake.output["cell_counts"])
+    aggregate_output = str(snakemake.output["aggregate_profile"])
+    config_path = str(snakemake.params["aggregate_config"])
 
     aggregate(
-        sql_file=args.input,
-        metadata_dir=args.metadata_dir,
-        barcode_path=args.barcode,
-        aggregate_file_out=args.output,
-        cell_count_out=args.cellcount_out,
-        config=args.config,
+        sql_file=plate_data,
+        metadata_dir=metadata_dir_path,
+        barcode_path=barcode_path,
+        aggregate_file_out=aggregate_output,
+        cell_count_out=cell_count_output,
+        config=config_path,
     )
