@@ -1,0 +1,46 @@
+consensus_config:
+  params:
+    drop_input_features:
+      - plate_name
+      - well_col
+      - well_row
+    x_feature_groupby:
+      - Metadata_gene_name
+      - Metadata_pert_name
+      - Metadata_cell_line
+    y_labels_groupby:
+      - guide
+      - cell_id
+    cell_health_meta_features:
+      - cell_id
+      - guide
+    y_meta_label_merge_cols:
+      - Metadata_profile_id
+      - Metadata_pert_name
+      - Metadata_cell_line
+    x_features_aggregation:
+      strata:
+        - Metadata_cell_line
+        - Metadata_pert_name
+      y_labels_aggregation:
+        strata:
+        operation: "median"
+      y_aggregate_merge:
+        y_meta_label_merge_cols:
+          - Metadata_profile_id
+          - Metadata_pert_name
+          - Metadata_cell_line
+        left_on:
+          - guide
+          - cell_id
+        right_on:
+          - Metadata_pert_name
+          - Metadata_cell_line
+      features:
+        - infer
+      operation:
+        - median
+      feature_query:
+        - Metadata_pert_name
+      outputs:
+        meta_data_mapping: _metadata_mapping.tsv

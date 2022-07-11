@@ -45,7 +45,7 @@ def build_consensus(profile_list: list, consensus_file_out) -> None:
     na_cols = get_na_columns(concat_df, cutoff=0)
     concat_df = concat_df.drop(na_cols, axis="columns")
 
-
+    # x_feature_groupby
     x_groupby_cols = ["Metadata_gene_name", "Metadata_pert_name", "Metadata_cell_line"]
 
     # TODO: this path should be in the meta data
@@ -53,6 +53,7 @@ def build_consensus(profile_list: list, consensus_file_out) -> None:
         ["plate_name", "well_col", "well_row"], axis="columns"
     )
 
+    # NOTE in config file
     y_groupby_cols = ["guide", "cell_id"]
     y_metacount_df = (
         y_df.loc[:, y_groupby_cols]
@@ -78,6 +79,7 @@ def build_consensus(profile_list: list, consensus_file_out) -> None:
         )
     )
 
+    # NOTE in config file
     y_groupby_cols = ["guide", "cell_id"]
     y_metacount_df = (
         y_df.loc[:, y_groupby_cols]
@@ -132,6 +134,8 @@ def build_consensus(profile_list: list, consensus_file_out) -> None:
     cell_health_features = y_df.drop(
         cell_health_meta_features, axis="columns"
     ).columns.tolist()
+    
+    # NOTE: in config file 
     y_meta_merge_cols = [
         "Metadata_profile_id",
         "Metadata_pert_name",
