@@ -45,9 +45,6 @@ def build_consensus(profile_list: list, consensus_file_out) -> None:
     na_cols = get_na_columns(concat_df, cutoff=0)
     concat_df = concat_df.drop(na_cols, axis="columns")
 
-    # dropping Costes Features
-    costes_cols_to_drop = [x for x in concat_df.columns if "costes" in x.lower()]
-    concat_df = concat_df.drop(costes_cols_to_drop, axis="columns")
 
     x_groupby_cols = ["Metadata_gene_name", "Metadata_pert_name", "Metadata_cell_line"]
 
