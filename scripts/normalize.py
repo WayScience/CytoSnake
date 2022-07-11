@@ -29,7 +29,6 @@ def normalization(anno_file: str, norm_outfile: str, config: str) -> None:
     with open(normalize_config_path, "r") as yaml_contents:
         normalize_config = yaml.safe_load(yaml_contents)["normalize_configs"]["params"]
 
-
     meta_features = [
         "Metadata_Plate",
         "Metadata_Well",
@@ -78,5 +77,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    # normalization step 
+    # normalization step
     normalization(anno_file=args.input, norm_outfile=args.output, config=args.config)
