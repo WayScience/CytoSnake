@@ -55,7 +55,7 @@ def build_consensus(profile_list: list, consensus_file_out: str, config: str) ->
     concat_df = concat_df.drop(na_cols, axis="columns")
 
     # generating consensus profile
-    x_median_df = consensus(
+    x_consensus_df = consensus(
         concat_df,
         replicate_columns=consensus_config["replicate_columns"],
         operation=consensus_config["operation"],
