@@ -66,7 +66,7 @@ def build_consensus(profile_list: list, consensus_file_out: str, config: str) ->
     )
 
     # Saving consensus profile
-    x_median_df.to_csv(consensus_file_out, sep="\t", index=False)
+    x_consensus_df.to_csv(consensus_file_out, sep="\t", index=False)
 
 
 if __name__ in "__main__":
