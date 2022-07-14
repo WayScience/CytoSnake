@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 from pycytominer.operations import get_na_columns
-from pycytominer import aggregate
+from pycytominer import consensus
 
 
 def build_consensus(profile_list: list, consensus_file_out: str, config: str) -> None:
@@ -26,8 +26,8 @@ def build_consensus(profile_list: list, consensus_file_out: str, config: str) ->
     """
     # loading config file
     consensus_path_obj = Path(config)
-    aggregate_config_path = aggregate_path_obj.absolute()
-    with open(aggregate_config_path, "r") as yaml_contents:
+    consensus_config_path = consensus_path_obj.absolute()
+    with open(consensus_config_path, "r") as yaml_contents:
         consensus_config = yaml.safe_load(yaml_contents)["consensus_config"]["params"]
 
     concat_df = pd.concat(
@@ -46,6 +46,7 @@ def build_consensus(profile_list: list, consensus_file_out: str, config: str) ->
     ]
     concat_metadata_df = concat_df.loc[:, concat_metadata_cols]
 
+    # concatenating metadata
     concat_df = concat_df.drop(concat_metadata_cols, axis="columns")
     concat_df = pd.concat([concat_metadata_df, concat_df], axis="columns")
 
@@ -53,20 +54,18 @@ def build_consensus(profile_list: list, consensus_file_out: str, config: str) ->
     na_cols = get_na_columns(concat_df, cutoff=0)
     concat_df = concat_df.drop(na_cols, axis="columns")
 
-    # aggregate
-    consensus_aggregate_config = consensus_config["aggregate"]
-    x_median_df = aggregate(
+    # generating consensus profile
+    x_median_df = consensus(
         concat_df,
-        strata=consensus_aggregate_config["strata"],
-        features=consensus_aggregate_config["features"],
-        operation=consensus_aggregate_config["operation"],
-        compute_object_count=consensus_aggregate_config["compute_object_count"],
-        object_feature=consensus_aggregate_config["object_feature"],
-        subset_data_df=consensus_aggregate_config["subset_data_df"],
-        compression_options=consensus_aggregate_config["compression_options"],
-        float_format=consensus_aggregate_config["float_format"],
+        replicate_columns=consensus_config["replicate_columns"],
+        operation=consensus_config["operation"],
+        features=consensus_config["features"],
+        compression_options=consensus_config["replicate_columns"],
+        float_format=consensus_config["float_format"],
+        modz_args=consensus_config["modz_args"],
     )
 
+    # Saving consensus profile
     x_median_df.to_csv(consensus_file_out, sep="\t", index=False)
 
 

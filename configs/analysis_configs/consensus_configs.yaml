@@ -1,13 +1,10 @@
 consensus_config:
   params:
-    aggregate:
-      strata:
-        - Metadata_cell_line
-        - Metadata_pert_name
-      features: infer
-      operation: median
-      compute_object_count: False
-      object_feature: Metadata_ObjectNumber
-      subset_data_df: "none"
-      compression_options: null
-      float_format: null
+    replicate_columns:
+      - Metadata_cell_line
+      - Metadata_pert_name
+    operation: median
+    features: infer
+    compression_options: null
+    float_format: null
+    modz_args: {"method": "spearman"}
