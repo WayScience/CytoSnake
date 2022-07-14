@@ -24,9 +24,9 @@ rule create_consensus:
             plate_id=PLATE_IDS,
         ),
     output:
-        "results/preprocessing/median_consensus.csv.gz",
+        "results/preprocessing/median_consensus.tsv.gz",
     params:
-        aggregate_config=config["config_paths"]["aggregate"],
+        consensus_configs=config["config_paths"]["consensus_config"],
     conda:
         "../envs/cytominer_env.yaml"
     script:

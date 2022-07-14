@@ -8,3 +8,4 @@ config_paths:
   normalize: "configs/analysis_configs/normalize_configs.yaml"
   feature_select: "configs/analysis_configs/feature_select_configs.yaml"
   aggregate: "configs/analysis_configs/aggregate_configs.yaml"
+  consensus_config: "configs/analysis_configs/consensus_configs.yaml"
