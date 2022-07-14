@@ -25,7 +25,7 @@ def build_consensus(profile_list: list, consensus_file_out: str, config: str) ->
         concatenated normalized aggregated features
     """
     # loading config file
-    aggregate_path_obj = Path(config)
+    consensus_path_obj = Path(config)
     aggregate_config_path = aggregate_path_obj.absolute()
     with open(aggregate_config_path, "r") as yaml_contents:
         consensus_config = yaml.safe_load(yaml_contents)["consensus_config"]["params"]
@@ -66,13 +66,6 @@ def build_consensus(profile_list: list, consensus_file_out: str, config: str) ->
         compression_options=consensus_aggregate_config["compression_options"],
         float_format=consensus_aggregate_config["float_format"],
     )
-
-    # Output Profile Mapping for Downstream Analysis
-    profile_id_mapping_df = x_median_df.loc[
-        :, x_median_df.columns.str.startswith("Metadata")
-    ]
-    file = os.path.join("data", "profile_id_metadata_mapping.tsv")
-    profile_id_mapping_df.to_csv(file, sep="\t", index=False)
 
     x_median_df.to_csv(consensus_file_out, sep="\t", index=False)
 
