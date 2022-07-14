@@ -7,4 +7,4 @@ consensus_config:
     features: infer
     compression_options: null
     float_format: null
-    modz_args: {"method": "spearman"}
+    modz_args: { "method": "spearman" }
