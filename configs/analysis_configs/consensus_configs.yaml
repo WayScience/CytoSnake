@@ -1,0 +1,10 @@
+consensus_config:
+  params:
+    replicate_columns:
+      - Metadata_cell_line
+      - Metadata_pert_name
+    operation: median
+    features: infer
+    compression_options: null
+    float_format: null
+    modz_args: { "method": "spearman" }

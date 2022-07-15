@@ -1,8 +1,7 @@
 import os
-import multiprocessing as mp
-import itertools
 import yaml
 from pathlib import Path
+
 import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
@@ -56,14 +55,12 @@ def aggregate(
     platemap_df = pd.read_csv(platemap_file)
 
     sqlite_file = "sqlite:///{}".format(sql_file)
-    # strata = ["Image_Metadata_Plate", "Image_Metadata_Well"]
-    # image_cols = ["TableNumber", "ImageNumber"]
     single_cell_profile = SingleCells(
         sqlite_file,
         strata=aggregate_configs["strata"],
         image_cols=aggregate_configs["image_cols"],
         aggregation_operation=aggregate_configs["aggregation_operation"],
-        output_file=aggregate_configs["output_file"],
+        output_file=aggregate_file_out,
         merge_cols=aggregate_configs["merge_cols"],
         add_image_features=aggregate_configs["add_image_features"],
         image_feature_categories=aggregate_configs["image_feature_categories"],
@@ -94,29 +91,19 @@ def aggregate(
 
 if __name__ == "__main__":
 
-    # transforming snakemake objects into python standard datatypes
-    sqlfiles = [str(sqlfile) for sqlfile in snakemake.input["sql_files"]]
-    cell_count_out = [str(out_name) for out_name in snakemake.output["cell_counts"]]
-    aggregate_profile_out = [
-        str(out_name) for out_name in snakemake.output["aggregate_profile"]
-    ]
-    meta_data_dir = itertools.repeat(str(snakemake.input["metadata"]))
-    barcode_map = itertools.repeat(str(snakemake.input["barcodes"]))
-    config_path = itertools.repeat(str(snakemake.params["aggregate_config"]))
-    inputs = list(
-        zip(sqlfiles, meta_data_dir, barcode_map, cell_count_out, aggregate_profile_out, config_path)
+    # snakemake inputs
+    plate_data = str(snakemake.input["sql_files"])
+    barcode_path = str(snakemake.input["barcodes"])
+    metadata_dir_path = str(snakemake.input["metadata"])
+    cell_count_output = str(snakemake.output["cell_counts"])
+    aggregate_output = str(snakemake.output["aggregate_profile"])
+    config_path = str(snakemake.params["aggregate_config"])
+
+    aggregate(
+        sql_file=plate_data,
+        metadata_dir=metadata_dir_path,
+        barcode_path=barcode_path,
+        aggregate_file_out=aggregate_output,
+        cell_count_out=cell_count_output,
+        config=config_path,
     )
-
-    # init multi process
-    n_cores = int(snakemake.threads)
-    if n_cores > len(inputs):
-        print(
-            f"WARNING: number of specified cores ({n_cores}) exceeds number of inputs ({len(inputs)}), defaulting to {len(inputs)}"
-        )
-        n_cores = len(inputs)
-
-    # Initiate the multi-threading procedure
-    with mp.Pool(processes=n_cores) as pool:
-        pool.starmap(aggregate, inputs)
-        pool.close()
-        pool.join()

@@ -1,9 +1,10 @@
 from pathlib import Path
+
 import yaml
 from pycytominer.normalize import normalize
 
 
-def normalization(anno_file: str, norm_outfile: str) -> None:
+def normalization(anno_file: str, norm_outfile: str, config: str) -> None:
     """Normalizes aggregate profiles
 
     Parameters
@@ -12,6 +13,8 @@ def normalization(anno_file: str, norm_outfile: str) -> None:
         path leading to aggregate profiles file
     norm_outfile : str
         output name of the generated normalized file
+    config : str
+        Path to normalization config file
 
     Returns
     -------
@@ -19,8 +22,8 @@ def normalization(anno_file: str, norm_outfile: str) -> None:
     results/ directory
     """
 
-    # loading paramters
-    normalize_ep = Path(snakemake.params["normalize_config"])
+    # loading parameters
+    normalize_ep = Path(config)
     normalize_config_path = normalize_ep.absolute()
     with open(normalize_config_path, "r") as yaml_contents:
         normalize_config = yaml.safe_load(yaml_contents)["normalize_configs"]["params"]
@@ -28,17 +31,18 @@ def normalization(anno_file: str, norm_outfile: str) -> None:
     meta_features = [
         "Metadata_Plate",
         "Metadata_Well",
-        "Metadata_Plate_Map_Name",
-        "Metadata_Plate",
-        "Metadata_Well",
-        "Metadata_Object_Count",
+        "Metadata_WellRow",
+        "Metadata_WellCol",
+        "Metadata_gene_name",
+        "Metadata_pert_name",
+        "Metadata_broad_sample",
+        "Metadata_cell_line",
     ]
 
     normalize(
         anno_file,
         features=normalize_config["features"],
         image_features=normalize_config["image_features"],
-        # meta_features=normalize_config["meta_features"],
         meta_features=meta_features,
         samples=normalize_config["samples"],
         method=normalize_config["method"],
@@ -54,11 +58,14 @@ def normalization(anno_file: str, norm_outfile: str) -> None:
 
 if __name__ == "__main__":
 
-    # preprocessing converting snakemake objects into python strings
-    annotated_files = [str(f_in) for f_in in snakemake.input]
-    out_files = [str(f_out) for f_out in snakemake.output]
-    io_files = zip(annotated_files, out_files)
+    # snakemake inputs
+    annotated_data_path = str(snakemake.input)
+    config_path = str(snakemake.params["normalize_config"])
+    normalized_data_output = str(snakemake.output)
 
-    # iteratively normalizing annotated files
-    for annotated_file, out_file in io_files:
-        normalization(annotated_file, out_file)
+    # normalization step
+    normalization(
+        anno_file=annotated_data_path,
+        norm_outfile=normalized_data_output,
+        config=config_path,
+    )

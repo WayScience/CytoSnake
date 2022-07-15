@@ -28,21 +28,16 @@ configfile: "configs/configuration.yaml"
 
 rule aggregate:
     input:
-        sql_files=expand("data/{plate_id}.sqlite", plate_id=PLATE_IDS),
+        sql_files="data/{plate_id}.sqlite",
         barcodes="data/barcode_platemap.csv",
         metadata="data/metadata",
     output:
-        cell_counts=expand(
-            "results/preprocessing/{plate_id}_cell_counts.tsv", plate_id=PLATE_IDS
-        ),
-        aggregate_profile=expand(
-            "results/preprocessing/{plate_id}_aggregate.csv.gz", plate_id=PLATE_IDS
-        ),
+        cell_counts="results/preprocessing/{plate_id}_cell_counts.tsv",
+        aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
     conda:
         "../envs/cytominer_env.yaml"
     params:
         aggregate_config=config["config_paths"]["single_cell"],
-    threads: config["analysis_configs"]["preprocessing"]["threads"]
     script:
         "../scripts/aggregate_cells.py"
 
@@ -50,11 +45,10 @@ rule aggregate:
 rule annotate:
     input:
         barcodes="data/barcode_platemap.csv",
-        aggregate_profile=expand(
-            "results/preprocessing/{plate_id}_aggregate.csv.gz", plate_id=PLATE_IDS
-        ),
+        aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
+        metadata="data/metadata",
     output:
-        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS),
+        "results/preprocessing/{plate_id}_augmented.csv.gz",
     conda:
         "../envs/cytominer_env.yaml"
     params:
@@ -65,9 +59,9 @@ rule annotate:
 
 rule normalize:
     input:
-        expand("results/preprocessing/{plate_id}_augmented.csv.gz", plate_id=PLATE_IDS),
+        "results/preprocessing/{plate_id}_augmented.csv.gz",
     output:
-        expand("results/preprocessing/{plate_id}_normalized.csv.gz", plate_id=PLATE_IDS),
+        "results/preprocessing/{plate_id}_normalized.csv.gz",
     conda:
         "../envs/cytominer_env.yaml"
     params:
