@@ -1,5 +1,6 @@
 import os
 import yaml
+import logging
 from pathlib import Path
 
 import pandas as pd
@@ -13,6 +14,7 @@ def aggregate(
     cell_count_out: str,
     aggregate_file_out: str,
     config: str,
+    log_file: str,
 ):
     """aggregates single cell data into aggregate profiles
 
@@ -30,30 +32,67 @@ def aggregate(
         output file generating cell counts
     config: str
         Path to config file
+    log_file : str
+        Path to log file
 
     Returns:
     --------
         No object is returned
         Generates cell counts and aggregate profile output
     """
+    # opening logger
+    log_path = Path(log_file).absolute()
+    logging.basicConfig(
+        filename=log_path,
+        encoding="utf-8",
+        level=logging.DEBUG,
+        format="%(asctime)s.%(msecs)03d - %(levelname)s - %(thread)d - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+
+    logging.info(f"Aggregating Single Cells in: {sql_file}")
 
     # loading parameters
+    logging.info(f"Loading single cell aggregation configurations from: {config}")
     aggregate_path_obj = Path(config)
     aggregate_config_path = aggregate_path_obj.absolute()
+    config_check = Path(aggregate_config_path).is_file()
+
+    if not config_check:
+        e_msg = f"Unable to find aggregation configuration file"
+        logging.error(e_msg)
+        raise FileNotFoundError(e_msg)
+
     with open(aggregate_config_path, "r") as yaml_contents:
         aggregate_configs = yaml.safe_load(yaml_contents)["single_cell_config"][
             "params"
         ]
+        logging.info("Aggregation configurations loaded.")
 
     # Loading appropriate platemaps with given plate data
+    logging.info(f"Loading plate data from: {sql_file}")
     plate = os.path.basename(sql_file).rsplit(".", 1)
+    plate_file_check = Path(sql_file).is_file()
+
+    if not plate_file_check:
+        e_msg = f"Unable to find plate file: {sql_file}"
+        logging.error(e_msg)
+        raise FileNotFoundError(e_msg)
+
+    # generating cell count
+    logging.info(f"Loading barcodes from: {barcode_path}")
     barcode_platemap_df = pd.read_csv(barcode_path)
+
+    logging.info("Selecting associated plate map")
     platemap = barcode_platemap_df.query(
         "Assay_Plate_Barcode == @plate"
     ).Plate_Map_Name.values[0]
+
+    logging.info(f"Identified plate map: {platemap}")
     platemap_file = os.path.join(metadata_dir, "platemap", "{}.csv".format(platemap))
     platemap_df = pd.read_csv(platemap_file)
 
+    logging.info(f"Loading Plate map data from: {sql_file}")
     sqlite_file = "sqlite:///{}".format(sql_file)
     single_cell_profile = SingleCells(
         sqlite_file,
@@ -74,19 +113,21 @@ def aggregate(
     )
 
     # counting cells in each well and saving it as csv file
-    print("Counting cells within each well")
+    logging.info("Counting cells within each well")
     cell_count_df = single_cell_profile.count_cells()
 
-    print("Saving cell counts in: {}".format(cell_count_out))
+    logging.info(f"Saving cell counts in: {cell_count_out}")
     cell_count_df = cell_count_df.merge(
         platemap_df, left_on="Image_Metadata_Well", right_on="well_position"
     ).drop(["WellRow", "WellCol", "well_position"], axis="columns")
     cell_count_df.to_csv(cell_count_out, sep="\t", index=False)
 
-    print("aggregating cells")
+    # aggregating singel cells into aggregate profile
+    logging.info("Aggregating cells")
     single_cell_profile.aggregate_profiles(
         output_file=aggregate_file_out, compression_options="gzip"
     )
+    logging.info(f"Aggregate profile saved in : {aggregate_file_out}")
 
 
 if __name__ == "__main__":
@@ -98,6 +139,7 @@ if __name__ == "__main__":
     cell_count_output = str(snakemake.output["cell_counts"])
     aggregate_output = str(snakemake.output["aggregate_profile"])
     config_path = str(snakemake.params["aggregate_config"])
+    log_path = str(snakemake.log)
 
     aggregate(
         sql_file=plate_data,
@@ -106,4 +148,5 @@ if __name__ == "__main__":
         aggregate_file_out=aggregate_output,
         cell_count_out=cell_count_output,
         config=config_path,
+        log_file=log_path,
     )
