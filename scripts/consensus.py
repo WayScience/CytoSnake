@@ -103,6 +103,12 @@ if __name__ in "__main__":
     inputs = [str(f_in) for f_in in snakemake.input]
     output = str(snakemake.output)
     config_path = str(snakemake.params["consensus_configs"])
+    log_path = str(snakemake.log)
 
     # concatenated all Normalized aggregated profiles
-    build_consensus(profile_list=inputs, consensus_file_out=output, config=config_path)
+    build_consensus(
+        profile_list=inputs,
+        consensus_file_out=output,
+        config=config_path,
+        log_file=log_path,
+    )

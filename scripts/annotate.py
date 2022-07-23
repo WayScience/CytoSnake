@@ -117,6 +117,7 @@ if __name__ == "__main__":
     barcode_path = str(snakemake.input["barcodes"])
     metadata_dir_path = str(snakemake.input["metadata"])
     config_path = str(snakemake.params["annotate_config"])
+    log_path = str(snakemake.log)
 
     # annotating cells
     annotate_cells(
@@ -125,4 +126,5 @@ if __name__ == "__main__":
         metadata_dir=metadata_dir_path,
         annotate_file_out=annotate_data_output,
         config=config_path,
+        log_file=log_path
     )

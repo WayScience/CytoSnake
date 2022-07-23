@@ -89,10 +89,12 @@ if __name__ == "__main__":
     annotated_data_path = str(snakemake.input)
     config_path = str(snakemake.params["normalize_config"])
     normalized_data_output = str(snakemake.output)
+    log_path = str(snakemake.log)
 
     # normalization step
     normalization(
         anno_file=annotated_data_path,
         norm_outfile=normalized_data_output,
         config=config_path,
+        log_file=log_path,
     )
