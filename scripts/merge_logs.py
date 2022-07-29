@@ -1,8 +1,34 @@
-import glob
+import shutil
+from typing import Union
 from pathlib import Path
 from datetime import datetime
 
 import pandas as pd
+
+
+def archive_logs(files: Union[str, list[str]], dest: str) -> None:
+    """Move single or list of files into 
+
+    Parameters
+    ----------
+    files : Union[str, list[str]]
+        path of files to move
+    dest : str
+        Destinations to where the files will be move to
+    """
+
+    if isinstance(files, str):
+        files = files.split()
+
+    # checking if the directory exists
+    if Path(dest).is_file():
+        raise TypeError(e_msg)
+    elif not Path(dest).is_dir():
+        print("Archive folder does nto exists")
+
+    # moving files
+    for f_path in files:
+        shutil.move(f_path, dest)
 
 
 def extract_logs(log_file_paths: list[str]) -> list[str]:
@@ -57,20 +83,7 @@ def sort_log_files(log_paths: list[str]) -> list[str]:
     return sorted_paths
 
 
-def get_all_logs() -> list[str]:
-    """Retuns all logs relative paths
-
-    Returns
-    -------
-    list[str]
-        relative paths of logs
-    """
-    log_rel_paths = glob.glob("./logs/*")
-    log_abs_path = [str(Path(rel_path).absolute()) for rel_path in log_rel_paths]
-    return log_abs_path
-
-
-def write_merge_logs(logs: list[str], outname: str) -> None:
+def combine_logs(logs: list[str], outname: str) -> None:
     """Merges all logs into one file
 
     Parameters
@@ -102,3 +115,24 @@ def write_merge_logs(logs: list[str], outname: str) -> None:
         for row_data in log_df.values.tolist():
             log_str = " ".join(row_data) + "\n"
             outlog.write(log_str)
+
+    # archiving individual log files
+    # -- using month-day-year and hour-min-sec as and id
+    id_tag = datetime.now().strftime("%m%d%y-%H%M%S")
+    dir_path = f"logs/{id_tag}-archived_logs"
+    archive_dir_obj = Path(dir_path)
+    archive_dir_obj.mkdir(exist_ok=False)
+    archive_dir_path = str(archive_dir_obj.absolute())
+
+    archive_logs(files=sorted_logs, dest=archive_dir_path)
+    shutil.copy(outname, archive_dir_path)
+
+
+if __name__ == "__main__":
+
+    # loading snakemake inputs
+    log_files = list(snakemake.input)
+    out_name = str(snakemake.output)
+
+    # merge logs
+    combine_logs(logs=log_files, outname=out_name)
