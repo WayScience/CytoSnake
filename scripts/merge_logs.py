@@ -7,7 +7,7 @@ import pandas as pd
 
 
 def archive_logs(files: Union[str, list[str]], dest: str) -> None:
-    """Move single or list of files into 
+    """Move single or list of files into
 
     Parameters
     ----------

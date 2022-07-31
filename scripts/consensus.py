@@ -1,4 +1,3 @@
-import os
 import logging
 import yaml
 from pathlib import Path

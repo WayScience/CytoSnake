@@ -4,8 +4,6 @@ import yaml
 from pathlib import Path
 
 import pandas as pd
-
-# pycytominer imports
 from pycytominer.annotate import annotate
 
 
@@ -126,5 +124,5 @@ if __name__ == "__main__":
         metadata_dir=metadata_dir_path,
         annotate_file_out=annotate_data_output,
         config=config_path,
-        log_file=log_path
+        log_file=log_path,
     )
