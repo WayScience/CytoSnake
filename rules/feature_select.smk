@@ -11,6 +11,8 @@ rule feature_select:
         ),
     params:
         feature_select_config=config["config_paths"]["feature_select"],
+    log:
+        "logs/feature_select.log"
     conda:
         "../envs/cytominer_env.yaml"
     script:
@@ -24,9 +26,11 @@ rule create_consensus:
             plate_id=PLATE_IDS,
         ),
     output:
-        "results/preprocessing/median_consensus.tsv.gz",
+        "results/preprocessing/consensus.tsv.gz",
     params:
         consensus_configs=config["config_paths"]["consensus_config"],
+    log:
+        "logs/create_consensus.log"
     conda:
         "../envs/cytominer_env.yaml"
     script:

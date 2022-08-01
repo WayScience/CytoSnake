@@ -36,6 +36,8 @@ rule aggregate:
         aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
     conda:
         "../envs/cytominer_env.yaml"
+    log:
+        "logs/aggregate_{plate_id}.log",
     params:
         aggregate_config=config["config_paths"]["single_cell"],
     script:
@@ -51,6 +53,8 @@ rule annotate:
         "results/preprocessing/{plate_id}_augmented.csv.gz",
     conda:
         "../envs/cytominer_env.yaml"
+    log:
+        "logs/annotate_{plate_id}.log",
     params:
         annotate_config=config["config_paths"]["annotate"],
     script:
@@ -64,6 +68,8 @@ rule normalize:
         "results/preprocessing/{plate_id}_normalized.csv.gz",
     conda:
         "../envs/cytominer_env.yaml"
+    log:
+        "logs/normalized_{plate_id}.log",
     params:
         normalize_config=config["config_paths"]["normalize"],
     script:

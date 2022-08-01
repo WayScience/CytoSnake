@@ -3,13 +3,17 @@ import glob
 
 
 # obtaining plate_ids
-sql_paths = glob.glob("./data/*.sqlite")
 PLATE_IDS = glob_wildcards("data/{id}.sqlite").id
 
 
 # importing DAGs
 include: "rules/preprocessing.smk"
 include: "rules/feature_select.smk"
+
+
+# appending logs
+LOG_NAMES = glob_wildcards("logs/{log_name}.log").log_name
+include: "rules/merge_logs.smk"
 
 
 rule all:
@@ -23,3 +27,4 @@ rule all:
             plate_id=PLATE_IDS,
         ),
         "results/preprocessing/consensus.tsv.gz",
+        "logs/CytoPipe_preprocess.log",

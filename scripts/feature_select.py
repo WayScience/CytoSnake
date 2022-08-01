@@ -1,9 +1,12 @@
+import logging
 from pathlib import Path
 import yaml
 from pycytominer.feature_select import feature_select
 
 
-def feature_selection(normalized_profile: str, out_file: str, config: str) -> None:
+def feature_selection(
+    normalized_profile: str, out_file: str, config: str, log_file: str
+) -> None:
     """Performs feature selection based on the given parameters explained
     in the configs/analysis_configs/feature_selection_configs.yaml file.
 
@@ -15,20 +18,45 @@ def feature_selection(normalized_profile: str, out_file: str, config: str) -> No
         Name of generated outfile
     config: str
         Path pointing to config file
+    log_file : str
+        Path pointing to log file.
 
     Returns
     -------
     Generates output
     """
 
-    # loading parameters
-    feature_select_ep = Path(config)
-    feature_select_config_path = feature_select_ep.absolute()
+    # initiating logger
+    log_path = Path(log_file).absolute()
+    logging.basicConfig(
+        filename=log_path,
+        encoding="utf-8",
+        level=logging.DEBUG,
+        format="%(asctime)s.%(msecs)03d - %(levelname)s - %(thread)d - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+    logging.info("Starting Feature selection")
+
+    # loading configs
+    logging.info(f"Loading feature selection configuration from: {config}")
+
+    # -- checking if the config file exists
+    feature_select_obj = Path(config)
+    if not feature_select_obj.is_file():
+        e_msg = "Unable to find Feature Selection configuration file"
+        logging.error(e_msg)
+        raise FileNotFoundError(e_msg)
+
+    # -- reading config parameters
+    feature_select_config_path = feature_select_obj.absolute()
     with open(feature_select_config_path, "r") as yaml_contents:
         feature_select_config = yaml.safe_load(yaml_contents)["feature_select_configs"][
             "params"
         ]
+        logging.info(f"Feature Selection configuration loaded")
 
+    # Feature selection
+    logging.info(f"Conducting feature selection")
     feature_select(
         normalized_profile,
         features=feature_select_config["features"],
@@ -50,6 +78,7 @@ def feature_selection(normalized_profile: str, out_file: str, config: str) -> No
         noise_removal_stdev_cutoff=feature_select_config["noise_removal_stdev_cutoff"],
         output_file=out_file,
     )
+    logging.info(f"Selected features saved: {out_file}")
 
 
 if __name__ == "__main__":
@@ -57,9 +86,13 @@ if __name__ == "__main__":
     out_files = [str(f_out) for f_out in snakemake.output]
     config_path = str(snakemake.params["feature_select_config"])
     io_files = zip(all_norm_profile, out_files)
+    log_path = str(snakemake.log)
 
     # iteratively passing normalized data
     for norm_data, feature_file_out in io_files:
         feature_selection(
-            normalized_profile=norm_data, out_file=feature_file_out, config=config_path
+            normalized_profile=norm_data,
+            out_file=feature_file_out,
+            config=config_path,
+            log_file=log_path,
         )
