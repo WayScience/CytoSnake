@@ -3,7 +3,7 @@
 # Rule collects all generated logs from all porcessess and merges
 # them into a single log file.
 #
-# individual log files are stored into an archive file along wtih
+# individual log files are stored into an archive file along with
 # the generated merged log.
 #
 # The archive file is taged with (Month-day-year)-(hour-min-sec)
