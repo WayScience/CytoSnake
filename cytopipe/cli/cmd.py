@@ -2,10 +2,10 @@ import sys
 import shutil
 from pathlib import Path
 
-from .args import parse_init_args
+from .args import *
+from ..exec.workflow_exec import exec_preprocessing
 
 
-# def run_cmd(params: list) -> None:
 def run_cmd() -> None:
     """obtains all parameters and executes workflows
 
@@ -26,21 +26,22 @@ def run_cmd() -> None:
     mode_type = params[0]
 
     # checking if mode type is supported
-    supported_modes = ["init", "cp_process"]
+    supported_modes = ["init", "run", "test"]
     if mode_type not in supported_modes:
-        raise ValueError(f"{mode_type} is not a mode supported modes: {supported_modes}")
-    
-    # checking if more than one mode is provided, raise error 
+        raise ValueError(
+            f"{mode_type} is not a mode supported modes: {supported_modes}"
+        )
+
+    # checking if more than one mode is provided, raise error
     bool_mask = [param in supported_modes for param in params]
     check = len([_bool for _bool in bool_mask if _bool == True])
-    print(check)
     if check > 1:
         raise RuntimeError("two modes detected, please select one")
 
     # parsing arguments based on modes
     if mode_type == "init":
-        
-        init_args= parse_init_args(params)
+
+        init_args = parse_init_args(params)
 
         # setting up file paths
         platemap_path = str(Path(init_args.platemap).absolute())
@@ -62,10 +63,30 @@ def run_cmd() -> None:
         shutil.move(barcode_path, data_dir_path)
         shutil.move(metadata_path, data_dir_path)
 
-    if mode_type == "cp_process":
-        pass
+    elif mode_type == "run":
+        # selecting workflow process
+        proc_sel = params[1]
 
-        
+        # checking if the workflow process exists
+        supported_workflows = ["cp_process", "dp_process"]
+        if proc_sel not in supported_workflows:
+            raise ValueError(f"{proc_sel} is not a supported workflow")
+
+        # executing process
+        if proc_sel == "cp_process":
+            cp_process_args = parse_cp_process_args(params)
+
+            print("executing cell profiler preprocessing")
+            status = exec_preprocessing(cp_process_args)
+            if status:
+                sys.exit(status)
+            else:
+                print("Error: Unable to execute workflow")
+                sys.exit(1)
+
+        elif proc_sel == "dp_process":
+            pass
+
 
 if __name__ == "__main__":
 
