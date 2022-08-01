@@ -24,7 +24,7 @@ def archive_logs(files: Union[str, list[str]], dest: str) -> None:
     if Path(dest).is_file():
         raise TypeError(e_msg)
     elif not Path(dest).is_dir():
-        print("Archive folder does nto exists")
+        print("Archive folder does not exists")
 
     # moving files
     for f_path in files:
