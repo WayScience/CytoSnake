@@ -20,8 +20,9 @@ def archive_logs(files: Union[str, list[str]], dest: str) -> None:
     if isinstance(files, str):
         files = files.split()
 
-    # checking if the directory exists
+    # checking if directory is passed
     if Path(dest).is_file():
+        e_msg = "must be a path to a directory not to a file"
         raise TypeError(e_msg)
     elif not Path(dest).is_dir():
         print("Archive folder does not exists")
@@ -120,6 +121,8 @@ def combine_logs(logs: list[str], outname: str) -> None:
     # -- using month-day-year and hour-min-sec as and id
     id_tag = datetime.now().strftime("%m%d%y-%H%M%S")
     dir_path = f"logs/{id_tag}-archived_logs"
+    
+    # -- creating directory for archiving logs
     archive_dir_obj = Path(dir_path)
     archive_dir_obj.mkdir(exist_ok=False)
     archive_dir_path = str(archive_dir_obj.absolute())
