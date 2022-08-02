@@ -8,7 +8,7 @@ import shutil
 from pathlib import Path
 
 from .args import *
-from .args_checker import CytoArgs
+from .cli_checker import cli_check
 from ..exec.workflow_exec import exec_preprocessing
 
 
@@ -24,26 +24,12 @@ def run_cmd() -> None:
     -------
     None
     """
+    # checking provided cli arguments
+    cli_check(args_list=sys.argv)
+
     # collecting parameters
-    cyto_args = CytoArgs()
     params = sys.argv[1:]
-    if len(params) == 0:
-        raise RuntimeError("please provide a mode")
-
     mode_type = params[0]
-
-    # checking if mode type is supported
-    # supported_modes = ["init", "run", "test"]
-    if mode_type not in cyto_args.modes:
-        raise ValueError(
-            f"{mode_type} is not a mode supported modes: {cyto_args.modes}"
-        )
-
-    # checking if more than one mode is provided, raise error
-    bool_mask = [param in cyto_args.modes for param in params]
-    check = len([_bool for _bool in bool_mask if _bool == True])
-    if check > 1:
-        raise RuntimeError("two modes detected, please select one")
 
     # parsing arguments based on modes
     if mode_type == "init":
@@ -75,10 +61,6 @@ def run_cmd() -> None:
 
         # selecting workflow process
         proc_sel = params[1]
-
-        # checking if the workflow process exists
-        if proc_sel not in cyto_args.workflows:
-            raise ValueError(f"{proc_sel} is not a supported workflow")
 
         # executing process
         if proc_sel == "cp_process":
