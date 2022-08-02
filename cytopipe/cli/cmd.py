@@ -9,7 +9,7 @@ from pathlib import Path
 
 from .args import *
 from .cli_checker import cli_check
-from ..exec.workflow_exec import exec_preprocessing
+from .exec.workflow_exec import exec_preprocessing
 
 
 def run_cmd() -> None:
@@ -73,8 +73,7 @@ def run_cmd() -> None:
             if status:
                 sys.exit(0)
             else:
-                print("Error: Unsuccessful workflow")
-                sys.exit(1)
+                sys.exit("Workflow unsuccessful")
 
     elif mode_type == "help":
         # display documentation of all modes

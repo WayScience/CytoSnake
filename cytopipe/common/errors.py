@@ -18,6 +18,7 @@
 class BaseValueError(ValueError):
     """Based Exception if incorrect values are passed"""
 
+
 class BaseExecutorException(RuntimeError):
     """Based exception related to cytopipe execution"""
 
@@ -25,8 +26,9 @@ class BaseExecutorException(RuntimeError):
 # ------------------------------
 # Cytopipe specific errors
 # ------------------------------
-class InvalidCytoPipeExec():
+class InvalidCytoPipeExec:
     """Raised if invalid cytopipe executable is being called"""
+
 
 class InvalidModeException(BaseValueError):
     """Raised if in unsupported mode was passed"""
