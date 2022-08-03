@@ -26,7 +26,7 @@ class BaseExecutorException(RuntimeError):
 # ------------------------------
 # Cytopipe specific errors
 # ------------------------------
-class InvalidCytoPipeExec:
+class InvalidCytoPipeExec(BaseExecutorException):
     """Raised if invalid cytopipe executable is being called"""
 
 

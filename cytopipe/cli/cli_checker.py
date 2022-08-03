@@ -4,11 +4,12 @@
 # Argument checking module that checks and validates user input
 # arguments from cytopipe's cli interface,
 # ------------------------------------------------------------
-import shutil
+import sys
 from typing import Union
 from dataclasses import dataclass
 
 
+from .cli_docs import init_doc, run_doc
 from ..common.errors import *
 
 
@@ -58,27 +59,20 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
 
     """
     cli_props = CliProperties()
-    exec_path = args_list[0]
-    mode = args_list[1]
-
-    # checking if executable path
-    exec_check = shutil.which(exec_check)
-    if len(exec_check) > 1:
-        raise InvalidCytoPipeExec("More than one cytopipe executables are found")
-    elif exec_check == exec_path:
-        raise InvalidCytoPipeExec(
-            "Different cytopipe executable path found: called != found"
-        )
 
     # checking if arguments were passed
     if len(args_list) == 0:
         raise NoArgumentsException(
-            "No arguemnts were passed. Please provide a mode and required arguments"
+            "No Arguments were passed. Please provide a mode and required arguments"
         )
 
     # checking if supported mode was passed
+    mode = args_list[1]
     if mode not in cli_props.modes:
         raise InvalidWorkflowException(f"{mode} is not a supported mode")
+
+    # checking if help message was called
+    _check_mode_help_arg(args_list)
 
     # checking if multiple modes were provided
     m_bool_mask = [param in cli_props.modes for param in args_list]
@@ -91,7 +85,7 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
         workflow = args_list[1]
 
         # checking if workflow exists
-        if workflow in cli_props.workflows:
+        if workflow not in cli_props.workflows:
             raise InvalidWorkflowException(f"{workflow} is not a valid workflow")
 
         # checking for multiple workflows
@@ -103,3 +97,30 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
             )
 
     return True
+
+
+def _check_mode_help_arg(args_list: list[Union[str, int, bool]]) -> None:
+    """Checks if help documentation is called in the arguments
+
+    Parameters
+    ----------
+    args_list : list[Union[str, int, bool]]
+        list of user provided arguments
+    """
+    mode_opt = args_list[1]
+    help_opt = args_list[2]
+
+    # checking if help was called
+    if help_opt.lower() == "help":
+
+        match mode_opt.lower():
+            case "init":
+                print(init_doc)
+            case "run":
+                print(run_doc)
+            case _:
+                raise RuntimeError("Unexpected Error")
+        sys.exit(0)
+
+    else:
+        return

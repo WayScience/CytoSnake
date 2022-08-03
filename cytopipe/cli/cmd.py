@@ -10,6 +10,7 @@ from pathlib import Path
 from .args import *
 from .cli_checker import cli_check
 from .exec.workflow_exec import exec_preprocessing
+from .cli_docs import init_doc, cli_docs, run_doc
 
 
 def run_cmd() -> None:
@@ -77,6 +78,7 @@ def run_cmd() -> None:
 
     elif mode_type == "help":
         # display documentation of all modes
+        print(cli_docs)
         pass
 
 
