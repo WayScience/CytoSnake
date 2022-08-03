@@ -33,7 +33,7 @@ Usage:
 Required Arguments:
     -d, --data          List of plate data files           
     -m, --metadata      Path to metadata directory
-    -b, --bardcode      Path to file containing barcode labeling
+    -b, --barcode      Path to file containing barcode labeling
     -p, --platemap      Path to platemap file
 
 Help Arguments:
