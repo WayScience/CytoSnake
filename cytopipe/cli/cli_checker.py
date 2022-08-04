@@ -1,9 +1,12 @@
-# ------------------------------------------------------------
-# cli_checker.py
-#
-# Argument checking module that checks and validates user input
-# arguments from cytopipe's cli interface,
-# ------------------------------------------------------------
+"""
+Documentation
+-------------
+
+cli_checker.py Module
+
+Argument checking module that checks and validates user input
+arguments from cytopipe's cli interface,
+"""
 import sys
 from typing import Union
 from dataclasses import dataclass

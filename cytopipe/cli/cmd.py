@@ -1,8 +1,10 @@
-# ------------------------------------------------------------
-# cmd.py
-#
-# Generates CLI interface in order to interact with cytopipe.
-# ------------------------------------------------------------
+"""
+Documentation
+
+cmd.py Module
+
+Generates CLI interface in order to interact with cytopipe.
+"""
 import sys
 import shutil
 from pathlib import Path

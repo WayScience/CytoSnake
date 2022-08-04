@@ -1,11 +1,14 @@
-# ------------------------------------------------------------
-# args.py
-#
-# Responsible for centralizing and handling all user inputted
-# parameters for cytopipe.
-#
-# Contains different modes with their respected parameters
-# ------------------------------------------------------------
+"""
+Documentation
+
+args.py Module
+
+Responsible for centralizing and handling all user inputted
+parameters for cytopipe.
+
+Contains different modes with their respected parameters
+"""
+
 import argparse
 
 
