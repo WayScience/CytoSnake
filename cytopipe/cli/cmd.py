@@ -1,7 +1,7 @@
 # ------------------------------------------------------------
 # cmd.py
 #
-# Generates CLI interfaces in order to interact with cytopipe.
+# Generates CLI interface in order to interact with cytopipe.
 # ------------------------------------------------------------
 import sys
 import shutil
@@ -39,7 +39,6 @@ def run_cmd() -> None:
         init_args = parse_init_args(params)
 
         # setting up file paths
-        platemap_path = str(Path(init_args.platemap).absolute())
         barcode_path = str(Path(init_args.barcode).absolute())
         metadata_path = str(Path(init_args.metadata).absolute())
 
@@ -54,7 +53,6 @@ def run_cmd() -> None:
             f_path = str(Path(data_file).absolute())
             shutil.move(f_path, data_dir_path)
 
-        shutil.move(platemap_path, data_dir_path)
         shutil.move(barcode_path, data_dir_path)
         shutil.move(metadata_path, data_dir_path)
 
@@ -68,7 +66,7 @@ def run_cmd() -> None:
             cp_process_args = parse_cp_process_args(params)
 
             print("executing cell profiler preprocessing")
-            status = exec_preprocessing(cores=cp_process_args.max_cores)
+            status = exec_preprocessing(n_cores=cp_process_args.max_cores)
 
             # CLI exit based on status
             if status:

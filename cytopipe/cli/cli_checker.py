@@ -82,7 +82,7 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
 
     # checking arguments based on mode
     if mode == "run":
-        workflow = args_list[1]
+        workflow = args_list[2]
 
         # checking if workflow exists
         if workflow not in cli_props.workflows:

@@ -53,9 +53,6 @@ def parse_init_args(args_list: list) -> argparse.Namespace:
     parser.add_argument(
         "-b", "--barcode", type=str, required=True, help="path to barcodes file"
     )
-    parser.add_argument(
-        "-p", "--platemap", type=str, required=True, help="path to platemaps file"
-    )
     args = parser.parse_args(args_list)
 
     return args

@@ -84,9 +84,14 @@ def aggregate(
     barcode_platemap_df = pd.read_csv(barcode_path)
 
     logging.info("Selecting associated plate map")
-    platemap = barcode_platemap_df.query(
-        "Assay_Plate_Barcode == @plate"
-    ).Plate_Map_Name.values[0]
+    try:
+        platemap = barcode_platemap_df.query(
+            "Assay_Plate_Barcode == @plate"
+        ).Plate_Map_Name.values[0]
+    except IndexError as e:
+        logging.error(
+            f"{e} raised. Unable to find associated platemap name with given plate barcode"
+        )
 
     logging.info(f"Identified plate map: {platemap}")
     platemap_file = os.path.join(metadata_dir, "platemap", "{}.csv".format(platemap))
