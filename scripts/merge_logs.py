@@ -121,7 +121,7 @@ def combine_logs(logs: list[str], outname: str) -> None:
     # -- using month-day-year and hour-min-sec as and id
     id_tag = datetime.now().strftime("%m%d%y-%H%M%S")
     dir_path = f"logs/{id_tag}-archived_logs"
-    
+
     # -- creating directory for archiving logs
     archive_dir_obj = Path(dir_path)
     archive_dir_obj.mkdir(exist_ok=False)

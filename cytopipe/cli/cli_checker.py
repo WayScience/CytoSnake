@@ -64,7 +64,7 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
     cli_props = CliProperties()
 
     # checking if arguments were passed
-    if len(args_list) == 0:
+    if len(args_list) == 1:
         raise NoArgumentsException(
             "No Arguments were passed. Please provide a mode and required arguments"
         )
@@ -126,6 +126,8 @@ def _check_mode_help_arg(args_list: list[Union[str, int, bool]]) -> None:
                 print(init_doc)
             case "run":
                 print(run_doc)
+            case "test":
+                raise NotImplementedError("Documentation is not implemented yet")
             case _:
                 raise RuntimeError("Unexpected Error")
         sys.exit(0)

@@ -27,6 +27,7 @@ def run_cmd() -> None:
     -------
     None
     """
+
     # checking provided cli arguments
     cli_check(args_list=sys.argv)
 
