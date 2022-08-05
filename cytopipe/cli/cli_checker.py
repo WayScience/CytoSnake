@@ -12,7 +12,7 @@ from typing import Union
 from dataclasses import dataclass
 
 
-from .cli_docs import init_doc, run_doc
+from .cli_docs import init_doc, run_doc, cli_docs
 from ..common.errors import *
 
 
@@ -110,11 +110,16 @@ def _check_mode_help_arg(args_list: list[Union[str, int, bool]]) -> None:
     args_list : list[Union[str, int, bool]]
         list of user provided arguments
     """
-    mode_opt = args_list[1]
-    help_opt = args_list[2]
+    mode_opt = args_list[1].lower()
 
-    # checking if help was called
-    if help_opt.lower() == "help":
+    # display cli documentation and exit
+    if mode_opt == "help":
+        print(cli_docs)
+        sys.exit(0)
+
+    # display mode help documentation and exit
+    mode_help_opt = args_list[2]
+    if mode_help_opt.lower() == "help":
 
         match mode_opt.lower():
             case "init":
