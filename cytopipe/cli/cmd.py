@@ -36,51 +36,50 @@ def run_cmd() -> None:
     mode_type = params[0]
 
     # parsing arguments based on modes
-    if mode_type == "init":
+    match mode_type:
+        case "init":
 
-        # parsing inputs
-        init_args = parse_init_args(params)
+            # parsing inputs
+            init_args = parse_init_args(params)
 
-        # setting up file paths
-        barcode_path = str(Path(init_args.barcode).absolute())
-        metadata_path = str(Path(init_args.metadata).absolute())
+            # setting up file paths
+            barcode_path = str(Path(init_args.barcode).absolute())
+            metadata_path = str(Path(init_args.metadata).absolute())
 
-        # create data folder
-        # raises error if data directory exists (prevents overwriting)
-        data_dir_obj = Path("data")
-        data_dir_obj.mkdir(exist_ok=False)
-        data_dir_path = str(data_dir_obj.absolute())
+            # create data folder
+            # raises error if data directory exists (prevents overwriting)
+            data_dir_obj = Path("data")
+            data_dir_obj.mkdir(exist_ok=False)
+            data_dir_path = str(data_dir_obj.absolute())
 
-        # moving all input files
-        for data_file in init_args.data:
-            f_path = str(Path(data_file).absolute())
-            shutil.move(f_path, data_dir_path)
+            # moving all input files
+            for data_file in init_args.data:
+                f_path = str(Path(data_file).absolute())
+                shutil.move(f_path, data_dir_path)
 
-        shutil.move(barcode_path, data_dir_path)
-        shutil.move(metadata_path, data_dir_path)
+            shutil.move(barcode_path, data_dir_path)
+            shutil.move(metadata_path, data_dir_path)
 
-    elif mode_type == "run":
+        case "run":
+            # selecting workflow process
+            proc_sel = params[1]
 
-        # selecting workflow process
-        proc_sel = params[1]
+            # executing process
+            if proc_sel == "cp_process":
+                cp_process_args = parse_cp_process_args(params)
 
-        # executing process
-        if proc_sel == "cp_process":
-            cp_process_args = parse_cp_process_args(params)
+                print("executing cell profiler preprocessing")
+                status = exec_preprocessing(n_cores=cp_process_args.max_cores)
 
-            print("executing cell profiler preprocessing")
-            status = exec_preprocessing(n_cores=cp_process_args.max_cores)
+                # CLI exit based on status
+                if status:
+                    sys.exit(0)
+                else:
+                    sys.exit("Workflow unsuccessful")
 
-            # CLI exit based on status
-            if status:
-                sys.exit(0)
-            else:
-                sys.exit("Workflow unsuccessful")
-
-    elif mode_type == "help":
         # display documentation of all modes
-        print(cli_docs)
-        pass
+        case "help":
+            print(cli_docs)
 
 
 if __name__ == "__main__":

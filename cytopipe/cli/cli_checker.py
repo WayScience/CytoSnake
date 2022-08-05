@@ -111,7 +111,7 @@ def _check_mode_help_arg(args_list: list[Union[str, int, bool]]) -> None:
         list of user provided arguments
     """
     mode_opt = args_list[1].lower()
-
+    
     # display cli documentation and exit
     if mode_opt == "help":
         print(cli_docs)
