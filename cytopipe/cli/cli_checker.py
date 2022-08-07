@@ -74,18 +74,25 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
     if mode not in cli_props.modes:
         raise InvalidWorkflowException(f"{mode} is not a supported mode")
 
-    # checking if help message was called
-    _check_mode_help_arg(args_list)
+    # # checking if help message was called
+    # _check_mode_help_arg(args_list)
 
     # checking if multiple modes were provided
-    m_bool_mask = [param in cli_props.modes for param in args_list]
+    m_bool_mask = [
+        param.lower() in cli_props.modes
+        for param in args_list
+        if param.lower() != "help"
+    ]
     check = len([_bool for _bool in m_bool_mask if _bool == True])
     if check > 1:
         raise MultipleModesException("Multiple modes were declared, please select one")
 
     # checking arguments based on mode
     if mode == "run":
-        workflow = args_list[2]
+        workflow = args_list[2].lower()
+
+        if workflow == "help":
+            _check_mode_help_arg(args_list)
 
         # checking if workflow exists
         if workflow not in cli_props.workflows:
@@ -110,27 +117,27 @@ def _check_mode_help_arg(args_list: list[Union[str, int, bool]]) -> None:
     args_list : list[Union[str, int, bool]]
         list of user provided arguments
     """
-    mode_opt = args_list[1].lower()
-    
+    mode_opt = args_list[0].lower()
+
     # display cli documentation and exit
     if mode_opt == "help":
         print(cli_docs)
         sys.exit(0)
 
     # display mode help documentation and exit
-    mode_help_opt = args_list[2]
-    if mode_help_opt.lower() == "help":
-
-        match mode_opt.lower():
-            case "init":
-                print(init_doc)
-            case "run":
-                print(run_doc)
-            case "test":
-                raise NotImplementedError("Documentation is not implemented yet")
-            case _:
-                raise RuntimeError("Unexpected Error")
-        sys.exit(0)
-
+    if len(args_list) == 2:
+        mode_help = args_list[1]
+        if mode_help == "help":
+            match mode_opt.lower():
+                case "init":
+                    print(init_doc)
+                    sys.exit(0)
+                case "run":
+                    print(run_doc)
+                    sys.exit(0)
+                case "test":
+                    raise NotImplementedError("Documentation is not implemented yet")
+                case _:
+                    raise RuntimeError("Unexpected Error")
     else:
         return
