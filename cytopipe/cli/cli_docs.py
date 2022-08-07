@@ -32,7 +32,6 @@ Required Arguments:
     -d, --data          List of plate data files
     -m, --metadata      Path to metadata directory
     -b, --barcode       Path to file containing barcode labeling
-    -p, --platemap      Path to platemap file
 
 Help Arguments:
     help                Displays cytopipe's init mode documentation

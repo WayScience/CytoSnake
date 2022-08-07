@@ -188,11 +188,7 @@ class CliControlPanel:
             self.cli_help = True
 
             # checking any arguments after help
-            extra_args = self.param_list[2:]
-            if len(extra_args) != 0:
-                raise InvalidArgumentException(
-                    f"Unknown help parameters provided: {extra_args}"
-                )
+            self.__check_extra_help_args(help_flag_pos=1)
 
         # setting mode
         self.mode = mode
@@ -204,11 +200,11 @@ class CliControlPanel:
         try:
             mode_help = self.param_list[2]
             if mode == "init" and mode_help == "help":
-                self.__check_extra_help_args(help_flag_pos=3)
+                self.__check_extra_help_args(help_flag_pos=2)
                 self.mode_help = True
 
             elif mode == "run" and mode_help == "help":
-                self.__check_extra_help_args(help_flag_pos=3)
+                self.__check_extra_help_args(help_flag_pos=2)
                 self.mode_help = True
 
             # checking if workflow exists
@@ -321,7 +317,7 @@ class CliControlPanel:
         InvalidArgumentException
             Raised if additional arguments are added after the help flag
         """
-        extra_args = self.param_list[help_flag_pos:]
+        extra_args = self.param_list[help_flag_pos+1:]
         if len(self.param_list) < help_flag_pos:
             raise IndexError(
                 "Size of parameter inputs is smaller than the position of the help flag"
