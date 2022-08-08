@@ -14,6 +14,15 @@ Required Arguments:
 Optional Arguments:
     -c, --max_cores     Maximum number of cores to use for the workflow
                         default=1
+    --conda_env         Enables workflow to use conda environment, default=True
+    --lock              Enable auto unlocking mechanism for snakemake workflows.
+                        Directory becomes locked when workflow is executed. if 
+                        any interruptions has occurred, if True, the directory
+                        will be automatically unlocked, else, it will remain
+                        locked. Default is False.
+    --force             Force re-run of the workflow. This means generated files
+                        will be over-written with the outputs produced from the
+                        forced re-run
 
 Help Arguments:
     help                Displays cytopipe's Run mode documentation

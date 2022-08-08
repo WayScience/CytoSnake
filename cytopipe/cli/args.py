@@ -276,7 +276,7 @@ class CliControlPanel:
             help="Execute conda envs when running workflow",
         )
         cli_configs.add_argument(
-            "--unlock",
+            "--lock",
             action="store_true",
             default=False,
             required=False,
