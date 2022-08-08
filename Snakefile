@@ -28,4 +28,3 @@ rule all:
             plate_id=PLATE_IDS,
         ),
         "results/preprocessing/consensus.tsv.gz",
-        "logs/CytoPipe_preprocess.log",
