@@ -12,8 +12,9 @@ include: "rules/feature_select.smk"
 
 
 # appending logs
-LOG_NAMES = glob_wildcards("logs/{log_name}.log").log_name
-include: "rules/merge_logs.smk"
+# work in progress update on issue #9
+# LOG_NAMES = glob_wildcards("logs/{log_name}.log").log_name
+# include: "rules/merge_logs.smk"
 
 
 rule all:
