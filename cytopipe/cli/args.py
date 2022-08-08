@@ -252,14 +252,12 @@ class CliControlPanel:
             "mode",
             choices=["run"],
             type=str,
-            Required=True,
             help="Run mode executes specific workflows",
         )
         required.add_argument(
             "workflow",
-            choices=self.workflow,
+            choices=self.workflows,
             type=str,
-            required=True,
             help="Name of desired workflow",
         )
         cli_configs.add_argument(
@@ -272,7 +270,6 @@ class CliControlPanel:
         )
         cli_configs.add_argument(
             "--conda_env",
-            type=bool,
             action="store_false",
             default=True,
             required=False,
@@ -280,7 +277,6 @@ class CliControlPanel:
         )
         cli_configs.add_argument(
             "--unlock",
-            type=bool,
             action="store_true",
             default=False,
             required=False,
@@ -288,7 +284,6 @@ class CliControlPanel:
         )
         cli_configs.add_argument(
             "--force",
-            type=bool,
             action="store_true",
             default=False,
             required=False,

@@ -44,7 +44,6 @@ def __base_exec(
     # execute
     status = snakemake.snakemake(
         snakefile,
-        use_conda=True,
         cores=n_cores,
         use_conda=use_conda_env,
         unlock=unlock,
