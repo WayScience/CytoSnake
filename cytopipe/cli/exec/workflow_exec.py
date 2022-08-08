@@ -11,7 +11,7 @@ import snakemake
 
 def __base_exec(
     n_cores: Optional[int] = 1,
-    use_conda_env: Optional[bool] = True,
+    use_conda: Optional[bool] = True,
     unlock: Optional[bool] = False,
     force: Optional[bool] = False,
 ) -> int:
@@ -45,7 +45,7 @@ def __base_exec(
     status = snakemake.snakemake(
         snakefile,
         cores=n_cores,
-        use_conda=use_conda_env,
+        use_conda=use_conda,
         unlock=unlock,
         forceall=force,
     )
