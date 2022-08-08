@@ -85,7 +85,7 @@ def run_cmd() -> None:
                 n_cores=wf_params.max_cores,
                 use_conda_env=wf_params.conda_env,
                 allow_unlock=wf_params.lock,
-                force_run=wf_params.force
+                force_run=wf_params.force,
             )
             if not wf_executor:
                 raise WorkflowFailedException(

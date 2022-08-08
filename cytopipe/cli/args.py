@@ -312,7 +312,7 @@ class CliControlPanel:
         InvalidArgumentException
             Raised if additional arguments are added after the help flag
         """
-        extra_args = self.param_list[help_flag_pos+1:]
+        extra_args = self.param_list[help_flag_pos + 1 :]
         if len(self.param_list) < help_flag_pos:
             raise IndexError(
                 "Size of parameter inputs is smaller than the position of the help flag"
