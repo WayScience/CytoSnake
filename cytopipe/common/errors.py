@@ -16,16 +16,24 @@
 # Base Exceptions
 # ------------------------------
 class BaseValueError(ValueError):
-    """Based Exception if incorrect values are passed"""
+    """Base exception if incorrect values are passed"""
 
 
 class BaseExecutorException(RuntimeError):
-    """Based exception related to cytopipe execution"""
+    """Base exception related to cytopipe execution"""
+
+
+class BaseWorkflowException(RuntimeError):
+    """Base exception related to cytopipe's workflow errors in runtime"""
 
 
 # ------------------------------
 # Cytopipe specific errors
 # ------------------------------
+class InvalidArgumentException(BaseValueError):
+    """Raised when arguments requirements are not met"""
+
+
 class InvalidCytoPipeExec(BaseExecutorException):
     """Raised if invalid cytopipe executable is being called"""
 
@@ -48,3 +56,11 @@ class NoArgumentsException(BaseValueError):
 
 class MultipleWorkflowsException(BaseValueError):
     """Raised if multiple workflows are declared"""
+
+
+class InvalidExecutableException(BaseExecutorException):
+    """Raised if any executables"""
+
+
+class WorkflowFailedException(BaseWorkflowException):
+    """Raised if a workflow fails during runtime"""
