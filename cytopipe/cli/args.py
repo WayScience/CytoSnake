@@ -269,13 +269,6 @@ class CliControlPanel:
             help="maximum number of cores to run the workflow",
         )
         cli_configs.add_argument(
-            "--conda_env",
-            action="store_false",
-            default=True,
-            required=False,
-            help="Execute conda envs when running workflow",
-        )
-        cli_configs.add_argument(
             "--lock",
             action="store_true",
             default=False,
