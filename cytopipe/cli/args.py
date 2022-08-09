@@ -220,7 +220,7 @@ class CliControlPanel:
             self.workflow = False
 
     def __workflow_args_parser(self) -> argparse.Namespace:
-        """Parses user inputs for cell profiler processing.`
+        """Parses user inputs for CellProfiler processing.`
 
         Parameters
         ----------
