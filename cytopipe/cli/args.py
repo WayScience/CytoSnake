@@ -145,20 +145,14 @@ class CliControlPanel:
     # Private formatting functions
     # ----------------------------------------
 
-    def __setup_args(self) -> bool:
-        """Checks the input params list to see
+    def __setup_args(self):
+        """Checks the input parameter list and updates parameter states
 
-        Returns
-        -------
-        bool
-            _description_
 
         Raises
         ------
         InvalidExecutableException
-            _description_
-        InvalidExecutableException
-            _description_
+            Raised when issues in regards to the executable paths
         """
 
         # ------------------------------
