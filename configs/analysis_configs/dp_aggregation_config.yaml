@@ -1,0 +1,8 @@
+deep_profiler_aggregation_configs:
+  params:
+    aggregate_operation: median
+    aggregate_on: well
+deep_profiler_data_configs:
+  params:
+    filename_delimiter: _
+    file_extension: .npz
