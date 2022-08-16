@@ -16,7 +16,7 @@
 # Base Exceptions
 # ------------------------------
 class BaseValueError(ValueError):
-    """Base  exception if incorrect values are passed"""
+    """Base exception if incorrect values are passed"""
 
 
 class BaseExecutorException(RuntimeError):

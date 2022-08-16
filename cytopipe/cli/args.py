@@ -145,20 +145,14 @@ class CliControlPanel:
     # Private formatting functions
     # ----------------------------------------
 
-    def __setup_args(self) -> bool:
-        """Checks the input params list to see
+    def __setup_args(self):
+        """Checks the input parameter list and updates parameter states
 
-        Returns
-        -------
-        bool
-            _description_
 
         Raises
         ------
         InvalidExecutableException
-            _description_
-        InvalidExecutableException
-            _description_
+            Raised when issues in regards to the executable paths
         """
 
         # ------------------------------
@@ -220,7 +214,7 @@ class CliControlPanel:
             self.workflow = False
 
     def __workflow_args_parser(self) -> argparse.Namespace:
-        """Parses user inputs for cell profiler processing.`
+        """Parses user inputs for CellProfiler processing.`
 
         Parameters
         ----------
@@ -267,13 +261,6 @@ class CliControlPanel:
             default=1,
             required=False,
             help="maximum number of cores to run the workflow",
-        )
-        cli_configs.add_argument(
-            "--conda_env",
-            action="store_false",
-            default=True,
-            required=False,
-            help="Execute conda envs when running workflow",
         )
         cli_configs.add_argument(
             "--lock",
