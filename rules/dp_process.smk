@@ -6,13 +6,14 @@ This workflow focuses in processing dp profiler features.
 configfile: "configs/configuration.yaml"
 
 
-rule dp_aggregate:
+rule dp_aggregate_profiles:
     input:
-        # expand("data/metadata/{index}.csv", index=IDX_NAME),
-        dp_features_dir="data/{dp_name}",
+        idx_file = IDX_FILE,
+        dp_features_dir="data/{dp_name}_dp",
     output:
-        # expand("data/metadata/{index}.csv", index=IDX_NAME),
-        "results/processing/{dp_name}_dp_aggregated.csv.gz"
+        agg_out="results/processing/{dp_name}_dp_aggregated.csv.gz",
+    conda:
+        "../envs/dp_process.yaml"
     params:
         dp_data_config=config["config_paths"]["dp_data"],
         dp_agg_config=config["config_paths"]["dp_aggregation"],
@@ -25,6 +26,8 @@ rule normalize_aggregate:
         "results/processing/{dp_name}_dp_aggregated.csv.gz",
     output:
         "results/processing/{dp_name}_dp_normalized_aggregated.csv.gz",
+    conda:
+        "../envs/dp_process.yaml"
     params:
         normalize_config=config["config_paths"]["normalize"],
     script:
@@ -36,6 +39,8 @@ rule build_consensus:
         "results/processing/{dp_name}_dp_normalized_aggregated.csv.gz",
     output:
         "results/processing/{dp_name}_dp_consensus.csv.gz"
+    conda:
+        "../envs/dp_process.yaml"
     params:
         consensus_config=config["config_paths"]["consensus_config"],
     script:
