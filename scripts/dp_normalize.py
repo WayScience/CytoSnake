@@ -3,9 +3,67 @@ from pathlib import Path
 import yaml
 
 import pandas as pd
-from pycytominer.cyto_utils.DeepProfiler_processing import AggregateDeepProfiler
 from pycytominer import normalize
-from cytopipe.utils.feature_utils import infer_dp_features
+
+
+def infer_dp_features(dp_profile) -> list[str]:
+    """Returns a list of Deep profiler features found within the single cell 
+    dataframe
+
+    Parameters
+    ----------
+    dp_profile : pd.DataFrame
+        dataframe features captured from deep profiler
+
+    Returns
+    -------
+    list[str]
+        list of deep profiler features
+
+    Raises
+    ------
+    ValueError
+        Raised if no Deep profiler features are found within the given DataFrame
+    """
+    dp_features = []
+    metadata_model = dp_profile["Metadata_Model"]
+    for column in dp_profile.columns.tolist():
+        if any([column.startswith(f"{meta_model}_") for meta_model in metadata_model]):
+            dp_features.append(column)
+
+    if len(dp_features) <= 0:
+        raise ValueError("No DP features found, Are you sure that this dataframe is from DeepProfiler?")
+
+    return dp_features
+
+def load_configs(config: str) -> dict:
+    """Returns a dictionary of given configurations
+
+    Parameters
+    ----------
+    config : str
+        path to config file
+
+    Returns
+    -------
+    dict
+        configuration dictionary
+
+    Raises
+    ------
+    FileNotFoundError
+        raised if provided config file paths is invalid
+    """
+    config_path_obj = Path(config)
+    if not config_path_obj.is_file():
+        e_msg = "Unable to find Deep Profiler aggregation configuration file"
+        raise FileNotFoundError(e_msg)
+
+    config_path = config_path_obj.absolute()
+    with open(config_path, "r") as yaml_contents:
+        loaded_configs = yaml.safe_load(yaml_contents)
+
+    return loaded_configs
 
 
 def normalize_aggregate_dp_profiles(
@@ -25,19 +83,8 @@ def normalize_aggregate_dp_profiles(
     """
 
     # loading config file
-    # -- loading normalize config
-    normalization_path_obj = Path(config)
-    if not normalization_path_obj.is_file():
-        e_msg = "Unable to find consensus configuration file"
-        logging.error(e_msg)
-        raise FileNotFoundError(e_msg)
-
-    dp_normalization_config_path = normalization_path_obj.absolute()
-    with open(dp_normalization_config_path, "r") as yaml_contents:
-        normalization_config = yaml.safe_load(yaml_contents)["normalize_configs"][
-            "params"
-        ]
-        logging.info("Normalization configuration loaded")
+    normalization_config = load_configs(config)
+    normalization_params = normalization_config["normalize_configs"]["params"]
 
     # load in aggregated dataset
     dp_agg_df = pd.read_csv(dp_aggregate_profile)
@@ -45,25 +92,25 @@ def normalize_aggregate_dp_profiles(
     # normalizing aggregated dataset
     # -- this is to provide support for DeepProfiler aggregated datasets.
     # -- Currently pycytominer cannot infer DeepProfiler features
-    if normalization_config["features"] == "infer":
+    if normalization_params["features"] == "infer":
         dp_features = infer_dp_features(dp_agg_df)
     else:
-        dp_features = normalization_config["features"]
+        dp_features = normalization_params["features"]
 
     # executing  normalization
     normalize(
         profiles=dp_agg_df,
         features=dp_features,
-        image_features=normalization_config["features"],
-        meta_features=normalization_config["meta_features"],
-        samples=normalization_config["samples"],
-        method=normalization_config["method"],
-        compression_options=normalization_config["compression_options"],
-        float_format=normalization_config["float_format"],
-        mad_robustize_epsilon=normalization_config["mad_robustize_epsilon"],
-        spherize_center=normalization_config["spherize_center"],
-        spherize_method=normalization_config["spherize_method"],
-        spherize_epsilon=normalization_config["spherize_epsilon"],
+        image_features=normalization_params["features"],
+        meta_features=normalization_params["meta_features"],
+        samples=normalization_params["samples"],
+        method=normalization_params["method"],
+        compression_options=normalization_params["compression_options"],
+        float_format=normalization_params["float_format"],
+        mad_robustize_epsilon=normalization_params["mad_robustize_epsilon"],
+        spherize_center=normalization_params["spherize_center"],
+        spherize_method=normalization_params["spherize_method"],
+        spherize_epsilon=normalization_params["spherize_epsilon"],
         output_file=outname,
     )
 

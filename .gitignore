@@ -7,7 +7,10 @@ tests/test_multiprocessing/.snakemake/
 *.csv.gz
 *.csv
 *.tsv
-
+*egg*
 .vscode
 configs.bak
 *.ipynb
+*.pyc
+*.log
+prototypes

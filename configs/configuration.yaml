@@ -9,6 +9,6 @@ config_paths:
   feature_select: "configs/analysis_configs/feature_select_configs.yaml"
   aggregate: "configs/analysis_configs/aggregate_configs.yaml"
   consensus_config: "configs/analysis_configs/consensus_configs.yaml"
-  dp_data: "configs/analysis_configs/dp_aggregation_config.yaml"
-  dp_aggregation: "configs/analysis_configs/dp_aggregation_config.yaml"
+  dp_data: "configs/analysis_configs/dp_data_configs.yaml"
+  dp_aggregator: "configs/analysis_configs/dp_aggregator_config.yaml"
   dp_normalization: "configs/analysis_configs/dp_normalization_config.yaml"
