@@ -60,7 +60,9 @@ def run_cmd() -> None:
                 case "deep_profiler":
                     init_dp_data(data_fp=init_args.data, metadata_fp=init_args.metadata)
                 case _:
-                    raise RuntimeError("Unexpected error in identifying datatype")
+                    raise RuntimeError(
+                        "Unexpected error in identifying datatype. Did you specify `cell_profiler` or `deep_profiler`datatype?"
+                    )
 
             print("INFO: Formatting complete!")
 
