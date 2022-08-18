@@ -22,6 +22,13 @@ Optional Arguments:
     --force             Force re-run of the workflow. This means generated files
                         will be over-written with the outputs produced from the
                         forced re-run
+Available Workflows:
+
+cp_process              Workflow for analyzing cell morphology reads
+                        obtained from CellProfiler
+dp_timelapse_process    Workflow that analyzes morphological read outs from time
+                        lapse images that was extracted by using Deep Profiler.
+
 
 Help Arguments:
     help                Displays cytopipe's Run mode documentation
@@ -39,7 +46,15 @@ Usage:
 Required Arguments:
     -d, --data          List of plate data files
     -m, --metadata      Path to metadata directory
-    -b, --barcode       Path to file containing barcode labeling
+
+Optional Arguments:
+    -b, --barcode       Path to file containing barcode labeling. This is used
+                        for cell morphology reads obtained by Cell Profiler. 
+                        [Default=None]
+    --datatype          Datatype flag helps cytopipe in how to setup the input
+                        files for processing.
+                        [Choices = "cell_profiler", "deep_profiler"] 
+                        [Default="cell_profiler"]
 
 Help Arguments:
     help                Displays cytopipe's init mode documentation
