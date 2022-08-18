@@ -18,6 +18,8 @@
 class BaseValueError(ValueError):
     """Base exception if incorrect values are passed"""
 
+class BaseFileNotFound(FileNotFoundError):
+    """Raised if a requested file is not found in cytopipe"""
 
 class BaseExecutorException(RuntimeError):
     """Base exception related to cytopipe execution"""
@@ -61,6 +63,7 @@ class MultipleWorkflowsException(BaseValueError):
 class InvalidExecutableException(BaseExecutorException):
     """Raised if any executables"""
 
-
+class WorkflowNotFoundError(BaseFileNotFound):
+    """Raised if workflow file is not found"""
 class WorkflowFailedException(BaseWorkflowException):
     """Raised if a workflow fails during runtime"""
