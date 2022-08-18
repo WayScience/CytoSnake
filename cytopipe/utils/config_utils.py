@@ -24,7 +24,7 @@ def load_configs(config: str) -> dict:
     """
     config_path_obj = Path(config)
     if not config_path_obj.is_file():
-        e_msg = "Unable to find Deep Profiler aggregation configuration file"
+        e_msg = f"Unable to find configuration file: {config_path_obj.name}"
         raise FileNotFoundError(e_msg)
 
     config_path = str(config_path_obj)
