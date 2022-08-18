@@ -10,7 +10,6 @@ import shutil
 from pathlib import Path
 
 from .args import CliControlPanel
-from .cli_checker import cli_check, _check_mode_help_arg
 from .exec.workflow_exec import workflow_executor
 from .cli_docs import init_doc, cli_docs, run_doc
 from ..common.errors import WorkflowFailedException
@@ -65,7 +64,7 @@ def run_cmd() -> None:
                 f_path = str(Path(data_file).absolute())
                 shutil.move(f_path, data_dir_path)
 
-            # user provided barcode file and metadata directory is 
+            # user provided barcode file and metadata directory is
             # moved to the data folder
             shutil.move(barcode_path, data_dir_path)
             shutil.move(metadata_path, data_dir_path)
