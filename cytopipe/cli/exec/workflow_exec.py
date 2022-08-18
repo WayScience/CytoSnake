@@ -8,16 +8,21 @@ from typing import Optional
 from pathlib import Path
 import snakemake
 
+from cytopipe.utils.config_utils import load_workflow_path
+
 
 def __base_exec(
+    workflow_file: str,
     n_cores: Optional[int] = 1,
     unlock: Optional[bool] = False,
     force: Optional[bool] = False,
-) -> int:
+) -> bool:
     """Executes the cell profiler workflow
 
     Parameters
     ----------
+    workflow_file : str
+        Workflow file path
     params_list : list
         list of par
     n_cores : int, optional
@@ -35,15 +40,13 @@ def __base_exec(
         True for successful execution, otherwise False
     """
 
-    # get workflow path
-    snakefile = str(Path("Snakefile").absolute())
-
     # execute
     status = snakemake.snakemake(
-        snakefile,
+        workflow_file,
         cores=n_cores,
         unlock=unlock,
         forceall=force,
+        use_conda=True
     )
     return status
 
@@ -69,9 +72,16 @@ def workflow_executor(
         start from the beginning. If False, the workflow will
         start where it last stopped. by default False
     """
+
+    # loading desired workflow path
+    workflow_path = load_workflow_path(wf_name=workflow)
+
+    # executing workflow
     job = __base_exec(
-        n_cores=n_cores, unlock=allow_unlock, force=force_run
+        workflow_file=workflow_path, n_cores=n_cores, unlock=allow_unlock, force=force_run
     )
+
+    # checking workflow job status.
     if job is False:
         print(f"WARNING: {workflow} workflow failed")
         return 1

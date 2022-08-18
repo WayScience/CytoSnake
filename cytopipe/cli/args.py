@@ -48,8 +48,9 @@ class CliControlPanel:
     workflow_check = False
     cli_help = False
     mode_help = False
+    data_type: tuple[str] = ("cell_profiler", "deep_profiler")
     modes: tuple[str] = ("init", "run", "test", "help")
-    workflows: tuple[str] = ("cp_process", "dp_process", "help")
+    workflows: tuple[str] = ("cp_process", "dp_timelapse_process", "help")
     __exec_name: str = "cytopipe"
 
     # ----------------------------------------
@@ -120,8 +121,15 @@ class CliControlPanel:
             "--metadata",
             type=str,
             help="path to metadata directory",
+            required=True,
         )
         parser.add_argument("-b", "--barcode", type=str, help="path to barcodes file")
+        parser.add_argument(
+            "--datatype",
+            choices=list(self.data_type),
+            default="cell_profiler",
+            help="datatype used for processing",
+        )
         args = parser.parse_args(params)
 
         return args

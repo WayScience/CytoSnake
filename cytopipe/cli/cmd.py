@@ -74,7 +74,6 @@ def run_cmd() -> None:
             wf_executor = workflow_executor(
                 workflow=wf_params.workflow,
                 n_cores=wf_params.max_cores,
-                use_conda_env=wf_params.conda_env,
                 allow_unlock=wf_params.lock,
                 force_run=wf_params.force,
             )
