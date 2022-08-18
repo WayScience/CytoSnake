@@ -6,8 +6,6 @@ cmd.py Module
 Generates CLI interface in order to interact with cytopipe.
 """
 import sys
-import shutil
-from pathlib import Path
 
 from .args import CliControlPanel
 from .exec.workflow_exec import workflow_executor
