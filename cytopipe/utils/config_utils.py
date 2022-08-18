@@ -27,10 +27,10 @@ def load_configs(config: str) -> dict:
         e_msg = "Unable to find Deep Profiler aggregation configuration file"
         raise FileNotFoundError(e_msg)
 
-    config_path = config_path_obj.absolute()
+    # config_path = config_path_obj.absolute()
+    config_path = str(config_path_obj)
     with open(config_path, "r") as yaml_contents:
         loaded_configs = yaml.safe_load(yaml_contents)
-
     return loaded_configs
 
 
@@ -54,8 +54,8 @@ def load_workflow_path(wf_name: str) -> str:
         Raised if the desired workflow is not found.
     """
     # loading loading workflow paths
-    general_config = load_configs("../../configs/configuration.yaml")
-    workflows = general_config["workflow_paths"]
+    general_config = load_configs("configs/configuration.yaml")
+    workflows = general_config["workflows"]
 
     # checking if the workflow exists
     if wf_name not in workflows.keys():
