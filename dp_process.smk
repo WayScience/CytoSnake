@@ -1,5 +1,5 @@
 """
-Analyzing time laps data captured in deep profiler features
+Analyzing morphological fetures extracted from DeepProfiler
 """
 from pathlib import Path
 
