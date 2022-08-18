@@ -5,7 +5,6 @@ Module containing functions to execute workflows via cytopipe's
 CLI interface
 """
 from typing import Optional
-from pathlib import Path
 import snakemake
 
 from cytopipe.utils.config_utils import load_workflow_path
@@ -82,6 +81,6 @@ def workflow_executor(
 
     # checking workflow job status.
     if job is False:
-        print(f"WARNING: {workflow} workflow failed")
+        print(f"ERROR: {workflow} workflow failed")
         return 1
     return 0

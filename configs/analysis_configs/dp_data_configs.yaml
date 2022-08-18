@@ -1,4 +1,4 @@
 deep_profiler_data_configs:
   params:
-    filename_delimiter: _
+    filename_delimiter: /
     file_extension: .npz

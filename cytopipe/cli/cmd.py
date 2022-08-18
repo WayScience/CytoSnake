@@ -82,7 +82,8 @@ def run_cmd() -> None:
                 allow_unlock=wf_params.lock,
                 force_run=wf_params.force,
             )
-            if not wf_executor:
+
+            if wf_executor != 0:
                 raise WorkflowFailedException(
                     f"Workflow encounter and error, please refer to the logs"
                 )
