@@ -14,4 +14,4 @@ config_paths:
   dp_normalization: "configs/analysis_configs/dp_normalization_config.yaml"
 workflows:
   cp_process: "./Snakefile"
-  dp_timelapse_process: "./dp_timelapse_process.smk"
+  dp_process: "./dp_process.smk"

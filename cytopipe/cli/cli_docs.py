@@ -15,7 +15,7 @@ Optional Arguments:
     -c, --max_cores     Maximum number of cores to use for the workflow
                         default=1
     --lock              Enable auto unlocking mechanism for snakemake workflows.
-                        Directory becomes locked when workflow is executed. if 
+                        Directory becomes locked when workflow is executed. if
                         any interruptions has occurred, if True, the directory
                         will be automatically unlocked, else, it will remain
                         locked. Default is False.
@@ -26,8 +26,8 @@ Available Workflows:
 
 cp_process              Workflow for analyzing cell morphology reads
                         obtained from CellProfiler
-dp_timelapse_process    Workflow that analyzes morphological read outs from time
-                        lapse images that was extracted by using Deep Profiler.
+dp_process              Workflow that analyzes morphological read obtained from
+                        Deep Profiler
 
 
 Help Arguments:
@@ -49,11 +49,11 @@ Required Arguments:
 
 Optional Arguments:
     -b, --barcode       Path to file containing barcode labeling. This is used
-                        for cell morphology reads obtained by Cell Profiler. 
+                        for cell morphology reads obtained by Cell Profiler.
                         [Default=None]
     --datatype          Datatype flag helps cytopipe in how to setup the input
                         files for processing.
-                        [Choices = "cell_profiler", "deep_profiler"] 
+                        [Choices = "cell_profiler", "deep_profiler"]
                         [Default="cell_profiler"]
 
 Help Arguments:

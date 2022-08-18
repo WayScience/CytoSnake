@@ -50,7 +50,7 @@ class CliControlPanel:
     mode_help = False
     data_type: tuple[str] = ("cell_profiler", "deep_profiler")
     modes: tuple[str] = ("init", "run", "test", "help")
-    workflows: tuple[str] = ("cp_process", "dp_timelapse_process", "help")
+    workflows: tuple[str] = ("cp_process", "dp_process", "help")
     __exec_name: str = "cytopipe"
 
     # ----------------------------------------
