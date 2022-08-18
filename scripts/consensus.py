@@ -53,7 +53,6 @@ def build_consensus(
         consensus_config = yaml.safe_load(yaml_contents)["consensus_config"]["params"]
         logging.info("Consensus configuration loaded")
 
-    #
     concat_df = pd.concat(
         [pd.read_csv(profile_path) for profile_path in profile_list], sort=True
     ).rename(

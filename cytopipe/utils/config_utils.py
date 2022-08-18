@@ -27,7 +27,6 @@ def load_configs(config: str) -> dict:
         e_msg = "Unable to find Deep Profiler aggregation configuration file"
         raise FileNotFoundError(e_msg)
 
-    # config_path = config_path_obj.absolute()
     config_path = str(config_path_obj)
     with open(config_path, "r") as yaml_contents:
         loaded_configs = yaml.safe_load(yaml_contents)

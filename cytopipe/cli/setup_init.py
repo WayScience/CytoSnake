@@ -1,6 +1,6 @@
 """setup_init.py
 
-Contains function of different variation of initializing data files
+Contains functions for initializing different data structures 
 for processing
 """
 
