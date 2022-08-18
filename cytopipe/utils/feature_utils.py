@@ -1,5 +1,5 @@
 def infer_dp_features(dp_profile) -> list[str]:
-    """Returns a list of Deep profiler features found within the single cell 
+    """Returns a list of Deep profiler features found within the single cell
     dataframe
 
     Parameters
@@ -24,6 +24,8 @@ def infer_dp_features(dp_profile) -> list[str]:
             dp_features.append(column)
 
     if len(dp_features) <= 0:
-        raise ValueError("No DP features found, Are you sure that this dataframe is from DeepProfiler?")
+        raise ValueError(
+            "No DP features found, Are you sure that this dataframe is from DeepProfiler?"
+        )
 
     return dp_features

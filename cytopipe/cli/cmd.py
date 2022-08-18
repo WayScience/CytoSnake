@@ -15,6 +15,7 @@ from .setup_init import init_cp_data, init_dp_data
 from .cli_docs import init_doc, cli_docs, run_doc
 from ..common.errors import WorkflowFailedException
 
+
 def run_cmd() -> None:
     """obtains all parameters and executes workflows
 
@@ -53,7 +54,11 @@ def run_cmd() -> None:
             # identifying which data type was added and how to set it up
             match init_args.datatype:
                 case "cell_profiler":
-                    init_cp_data(data_fp=init_args.data, metadata_fp=init_args.metadata, barcode_fp=init_args.barcode)
+                    init_cp_data(
+                        data_fp=init_args.data,
+                        metadata_fp=init_args.metadata,
+                        barcode_fp=init_args.barcode,
+                    )
                 case "deep_profiler":
                     init_dp_data(data_fp=init_args.data, metadata_fp=init_args.metadata)
                 case _:

@@ -6,6 +6,7 @@ from pycytominer.cyto_utils.DeepProfiler_processing import (
     AggregateDeepProfiler,
 )
 
+
 def load_configs(config: str) -> dict:
     """Returns a dictionary of given configurations
 
@@ -34,6 +35,7 @@ def load_configs(config: str) -> dict:
         loaded_configs = yaml.safe_load(yaml_contents)
 
     return loaded_configs
+
 
 def aggregate_dp_profiles(
     dp_dir_path: str,
@@ -78,10 +80,11 @@ def aggregate_dp_profiles(
         aggregate_operation=aggregator_params["aggregate_operation"],
         aggregate_on=aggregator_params["aggregate_on"],
     )
-    
+
     # -- aggregate singel cell and save it
     dp_agg_df = aggregator.aggregate_deep()
     dp_agg_df.to_csv(outname)
+
 
 if __name__ == "__main__":
 
@@ -98,5 +101,5 @@ if __name__ == "__main__":
         index_file=index_file_path,
         dp_data_config=dp_data_config_path,
         aggregator_config=aggregator_config_path,
-        outname=out_name
+        outname=out_name,
     )

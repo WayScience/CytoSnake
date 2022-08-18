@@ -42,11 +42,7 @@ def __base_exec(
 
     # execute
     status = snakemake.snakemake(
-        workflow_file,
-        cores=n_cores,
-        unlock=unlock,
-        forceall=force,
-        use_conda=True
+        workflow_file, cores=n_cores, unlock=unlock, forceall=force, use_conda=True
     )
     return status
 
@@ -78,7 +74,10 @@ def workflow_executor(
 
     # executing workflow
     job = __base_exec(
-        workflow_file=workflow_path, n_cores=n_cores, unlock=allow_unlock, force=force_run
+        workflow_file=workflow_path,
+        n_cores=n_cores,
+        unlock=allow_unlock,
+        force=force_run,
     )
 
     # checking workflow job status.

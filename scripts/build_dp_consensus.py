@@ -6,8 +6,9 @@ import pandas as pd
 from pycytominer.operations import get_na_columns
 from pycytominer import consensus
 
+
 def infer_dp_features(dp_profile) -> list[str]:
-    """Returns a list of Deep profiler features found within the single cell 
+    """Returns a list of Deep profiler features found within the single cell
     dataframe
 
     Parameters
@@ -32,7 +33,9 @@ def infer_dp_features(dp_profile) -> list[str]:
             dp_features.append(column)
 
     if len(dp_features) <= 0:
-        raise ValueError("No DP features found, Are you sure that this dataframe is from DeepProfiler?")
+        raise ValueError(
+            "No DP features found, Are you sure that this dataframe is from DeepProfiler?"
+        )
 
     return dp_features
 
@@ -66,6 +69,7 @@ def load_configs(config: str) -> dict:
 
     return loaded_configs
 
+
 def build_dp_consensus(
     profiles: Union[list[str], str], outname: str, config: str
 ) -> None:
@@ -84,7 +88,7 @@ def build_dp_consensus(
     # loading in configurations
     consensus_config = load_configs(config)
     consensus_params = consensus_config["consensus_config"]["params"]
-    
+
     # type checking of profiles
     # -- if it is a list of normalized aggregate dp profiles, concatenate
     if isinstance(profiles, list):
@@ -112,9 +116,8 @@ def build_dp_consensus(
     else:
         norm_agg_df = pd.read_csv(profiles)
 
-
     # check if fetures are infer, if so, extract deep profiler features
-    if consensus_params["features"] == "infer": 
+    if consensus_params["features"] == "infer":
         dp_features = infer_dp_features(norm_agg_df)
     else:
         dp_features = consensus_params["features"]
@@ -122,7 +125,6 @@ def build_dp_consensus(
     # dropping columns with NA values
     na_cols = get_na_columns(norm_agg_df, cutoff=0, features=dp_features)
     norm_agg_df = norm_agg_df.drop(na_cols, axis="columns")
-
 
     # generating consensus profile
     dp_consensus_profile = consensus(
@@ -138,6 +140,7 @@ def build_dp_consensus(
     # saving consensus profile
     dp_consensus_profile.to_csv(outname, sep="\t", index=False)
 
+
 if __name__ == "__main__":
 
     # snakemake inputs
@@ -146,4 +149,6 @@ if __name__ == "__main__":
     consensus_config_path = str(snakemake.params["consensus_config"])
 
     # executing consensus function
-    build_dp_consensus(profiles=norm_agg_data, outname=out_name, config=consensus_config_path)
+    build_dp_consensus(
+        profiles=norm_agg_data, outname=out_name, config=consensus_config_path
+    )

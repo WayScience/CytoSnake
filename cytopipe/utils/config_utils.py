@@ -63,5 +63,3 @@ def load_workflow_path(wf_name: str) -> str:
 
     # returning workflow path
     return workflows[wf_name]
-
-
