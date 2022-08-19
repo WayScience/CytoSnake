@@ -23,24 +23,29 @@ def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: s
     """
 
     # setting up paths
-    barcode_path = str(Path(barcode_fp).absolute())
-    metadata_path = str(Path(metadata_fp).absolute())
+    barcode_path_obj = Path(barcode_fp).absolute()
+    metadata_path_obj = Path(metadata_fp).absolute()
 
     # create data folder on working directory
     # raises error if data directory exists (prevents overwriting)
-    data_dir_obj = Path("data")
+    data_dir_obj = Path("data").absolute()
     data_dir_obj.mkdir(exist_ok=False)
-    data_dir_path = str(data_dir_obj.absolute())
 
-    # moving all user provided plate data files into data folder
+    # generating symlinks 
     for data_file in data_fp:
-        f_path = str(Path(data_file).absolute())
-        shutil.move(f_path, data_dir_path)
+        data_file_obj = Path(data_file)
+        target_file = Path(f"../{data_file}")
+        sym_link = Path(f"./{str(data_dir_obj)}/{data_file_obj.name}")
+        sym_link.symlink_to(target_file)
 
-    # user provided barcode file and metadata directory is
-    # moved to the data folder
-    shutil.move(barcode_path, data_dir_path)
-    shutil.move(metadata_path, data_dir_path)
+    # generating symlinks of provided barcode file and metadata directory is
+    barcode_target = Path(f"../{barcode_path_obj}")
+    barcode_symlink = Path(f"./{str(data_dir_obj)}/{barcode_path_obj.name}")
+    barcode_symlink.symlink_to(barcode_target)
+
+    metadata_target = Path(f"../{metadata_path_obj}")
+    metadata_symlink = Path(f"./{str(metadata_path_obj)}/{metadata_path_obj.name}")
+    metadata_symlink.symlink_to(metadata_target)
 
 
 def init_dp_data(data_fp: Union[list[str], str], metadata_fp: str):
@@ -60,25 +65,22 @@ def init_dp_data(data_fp: Union[list[str], str], metadata_fp: str):
     """
 
     # setting up files
-    metadata_path = str(Path(metadata_fp).absolute())
+    metadata_path_obj = Path(metadata_fp).absolute()
 
     # create data folder on working directory
     # raises error if data directory exists (prevents overwriting)
-    data_dir_obj = Path("data")
+    data_dir_obj = Path("data").absolute()
     data_dir_obj.mkdir(exist_ok=False)
-    data_dir_path = str(data_dir_obj.absolute())
 
-    # moving all user provided plate data files into data folder
+    # generating symlink of input data files
     for data_file in data_fp:
+        data_file_obj = Path(data_file)
+        data_file_target = Path(f"../{data_file}")
+        data_file_symlink = Path(f"./{str(data_dir_obj)}/{data_file_obj.name}")
+        data_file_symlink.symlink_to(data_file_target)
 
-        # adding 'dp' suffix to the directory containing deep profiler datasets
-        f_path_obj = Path(data_file).absolute()
-        renamed_dirpath = f"{f_path_obj.parent}/{f_path_obj.name}_dp"
 
-        # rename and move to data directory
-        f_path_obj.rename(renamed_dirpath)
-        shutil.move(renamed_dirpath, data_dir_path)
-
-    # user metadata directory is
-    # moved to the data folder
-    shutil.move(metadata_path, data_dir_path)
+    # creating symlink of metadata dir to data directory
+    metadata_target = Path(f"../{metadata_path_obj}")
+    metadata_symlink = Path(f"./{str(metadata_path_obj)}/{metadata_path_obj.name}")
+    metadata_symlink.symlink_to(metadata_target)
