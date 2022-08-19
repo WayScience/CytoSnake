@@ -1,17 +1,28 @@
 config_name: cytopipe_defaults
+
+# computation configs
 analysis_configs:
   preprocessing:
     threads: 4
+
+# Analysis configuration file paths
 config_paths:
+  # CellProfiler Specific analysis configurations
   single_cell: "configs/analysis_configs/single_cell_configs.yaml"
-  annotate: "configs/analysis_configs/annotate_configs.yaml"
   normalize: "configs/analysis_configs/normalize_configs.yaml"
   feature_select: "configs/analysis_configs/feature_select_configs.yaml"
   aggregate: "configs/analysis_configs/aggregate_configs.yaml"
-  consensus_config: "configs/analysis_configs/consensus_configs.yaml"
+
+  # DeepProfiler Specific analysis configurations
   dp_data: "configs/analysis_configs/dp_data_configs.yaml"
   dp_aggregator: "configs/analysis_configs/dp_aggregator_config.yaml"
   dp_normalization: "configs/analysis_configs/dp_normalization_config.yaml"
+
+  # non datatype specific analysis configurations
+  consensus_config: "configs/analysis_configs/consensus_configs.yaml"
+  annotate: "configs/analysis_configs/annotate_configs.yaml"
+
+# work flow specific paths
 workflows:
-  cp_process: "./Snakefile"
-  dp_process: "./dp_process.smk"
+  cp_process: "./cp_process"
+  dp_process: "./dp_process"
