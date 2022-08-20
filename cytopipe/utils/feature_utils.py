@@ -18,7 +18,7 @@ def infer_dp_features(dp_profile) -> list[str]:
         Raised if no Deep profiler features are found within the given DataFrame
     """
     dp_features = []
-    metadata_model = dp_profile["Metadata_Model"]
+    metadata_model = dp_profile["Metadata_Model"].unique().tolist()
     for column in dp_profile.columns.tolist():
         if any([column.startswith(f"{meta_model}_") for meta_model in metadata_model]):
             dp_features.append(column)
