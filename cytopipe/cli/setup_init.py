@@ -4,7 +4,6 @@ Contains functions for initializing different data structures
 for processing
 """
 
-import shutil
 from typing import Union
 from pathlib import Path
 
@@ -22,16 +21,22 @@ def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: s
         barcode file associated with plate data
     """
 
+    # checking that none are NoneTypes
+    if not any([data_fp, metadata_fp, barcode_fp]):
+        raise ValueError(
+            "Inputs required do not much match cell_profiler datatype, please make sure to provide data plates, barcode and metadata"
+        )
+
     # setting up paths
-    barcode_path_obj = Path(barcode_fp).absolute()
-    metadata_path_obj = Path(metadata_fp).absolute()
+    barcode_path_obj = Path(barcode_fp)
+    metadata_path_obj = Path(metadata_fp)
 
     # create data folder on working directory
     # raises error if data directory exists (prevents overwriting)
-    data_dir_obj = Path("data").absolute()
+    data_dir_obj = Path("data")
     data_dir_obj.mkdir(exist_ok=False)
 
-    # generating symlinks 
+    # generating symlinks
     for data_file in data_fp:
         data_file_obj = Path(data_file)
         target_file = Path(f"../{data_file}")
@@ -44,7 +49,7 @@ def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: s
     barcode_symlink.symlink_to(barcode_target)
 
     metadata_target = Path(f"../{metadata_path_obj}")
-    metadata_symlink = Path(f"./{str(metadata_path_obj)}/{metadata_path_obj.name}")
+    metadata_symlink = Path(f"./{str(data_dir_obj)}/{metadata_path_obj.name}")
     metadata_symlink.symlink_to(metadata_target)
 
 
@@ -65,22 +70,21 @@ def init_dp_data(data_fp: Union[list[str], str], metadata_fp: str):
     """
 
     # setting up files
-    metadata_path_obj = Path(metadata_fp).absolute()
+    metadata_path_obj = Path(metadata_fp)
 
     # create data folder on working directory
     # raises error if data directory exists (prevents overwriting)
-    data_dir_obj = Path("data").absolute()
+    data_dir_obj = Path("data")
     data_dir_obj.mkdir(exist_ok=False)
 
     # generating symlink of input data files
     for data_file in data_fp:
         data_file_obj = Path(data_file)
         data_file_target = Path(f"../{data_file}")
-        data_file_symlink = Path(f"./{str(data_dir_obj)}/{data_file_obj.name}")
+        data_file_symlink = Path(f"./{str(data_dir_obj)}/{data_file_obj.name}_dp")
         data_file_symlink.symlink_to(data_file_target)
-
 
     # creating symlink of metadata dir to data directory
     metadata_target = Path(f"../{metadata_path_obj}")
-    metadata_symlink = Path(f"./{str(metadata_path_obj)}/{metadata_path_obj.name}")
+    metadata_symlink = Path(f"./{str(data_dir_obj)}/{metadata_path_obj.name}")
     metadata_symlink.symlink_to(metadata_target)
