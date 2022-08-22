@@ -9,7 +9,8 @@ from pathlib import Path
 
 
 def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: str):
-    """Sets up directory for Cell Profiler datasets
+    """Sets up directory for CellProfiler datasets. Symlinks are created by taking
+    the path of the inputs files and storing them into the "data" directory.
 
     Parameters
     ----------
@@ -54,19 +55,20 @@ def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: s
 
 
 def init_dp_data(data_fp: Union[list[str], str], metadata_fp: str):
-    """Sets up directory for Deep Profiler datasets
+    """Sets up directory for CellProfiler datasets. Symlinks are created by
+    taking the path of the inputs files and storing them into the "data" directory.
 
     Parameters
     ----------
     data_fp : Union[list[str], str]
-        directory containing extracted Deep Profiler features
+        directory containing extracted DeepProfiler features
     metadata_fp : str
-        metadata directory associated with Deep Profiler data
+        metadata directory associated with DeepProfiler data
 
     Returns
     -------
     None
-        Generates a directory containing Deep Profiler Datasets
+        Generates a directory containing DeepProfiler Datasets
     """
 
     # setting up files

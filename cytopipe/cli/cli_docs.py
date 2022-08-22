@@ -26,8 +26,8 @@ Available Workflows:
 
 cp_process              Workflow for analyzing cell morphology reads
                         obtained from CellProfiler
-dp_process              Workflow that analyzes morphological read obtained from
-                        Deep Profiler
+dp_process              Workflow for analyzing cell morphology reads 
+                        obtained from DeepProfiler
 
 
 Help Arguments:
