@@ -9,9 +9,9 @@ configfile: "configs/configuration.yaml"
 rule dp_aggregate_profiles:
     input:
         index_file=INDEX_FILE,
-        dp_features_dir="data/{dp_name}_dp",
+        dp_features_dir="data/{deep_profiler_dir_name}_dp",
     output:
-        "results/processing/{dp_name}_dp_aggregated.csv.gz",
+        "results/processing/{deep_profiler_dir_name}_dp_aggregated.csv.gz",
     conda:
         "../envs/dp_process.yaml"
     params:
@@ -23,9 +23,9 @@ rule dp_aggregate_profiles:
 
 rule normalize_aggregate:
     input:
-        "results/processing/{dp_name}_dp_aggregated.csv.gz",
+        "results/processing/{deep_profiler_dir_name}_dp_aggregated.csv.gz",
     output:
-        "results/processing/{dp_name}_dp_normalized_aggregated.csv.gz",
+        "results/processing/{deep_profiler_dir_name}_dp_normalized_aggregated.csv.gz",
     conda:
         "../envs/dp_process.yaml"
     params:
@@ -36,9 +36,9 @@ rule normalize_aggregate:
 
 rule build_consensus:
     input:
-        "results/processing/{dp_name}_dp_normalized_aggregated.csv.gz",
+        "results/processing/{deep_profiler_dir_name}_dp_normalized_aggregated.csv.gz",
     output:
-        "results/processing/{dp_name}_dp_consensus.csv.gz",
+        "results/processing/{deep_profiler_dir_name}_dp_consensus.csv.gz",
     conda:
         "../envs/dp_process.yaml"
     params:

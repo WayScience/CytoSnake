@@ -12,7 +12,7 @@ IDX_FILE_NAME = IDX_FILE_NAME[0]
 INDEX_FILE = f"data/metadata/{IDX_FILE_NAME}.csv"
 
 # generating wildcard for directories containing dp features
-DP_DIR = glob_wildcards("data/{dp_dir}_dp").dp_dir
+DP_DIR = glob_wildcards("data/{deep_profiler_dir}_dp").deep_profiler_dir
 
 
 # including processing modules
@@ -22,9 +22,15 @@ include: "rules/dp_process.smk"
 # # expected output files
 rule all:
     input:
-        expand("results/processing/{dp_name}_dp_aggregated.csv.gz", dp_name=DP_DIR),
         expand(
-            "results/processing/{dp_name}_dp_normalized_aggregated.csv.gz",
-            dp_name=DP_DIR,
+            "results/processing/{deep_profiler_dir_name}_dp_aggregated.csv.gz",
+            deep_profiler_dir_name=DP_DIR,
         ),
-        expand("results/processing/{dp_name}_dp_consensus.csv.gz", dp_name=DP_DIR),
+        expand(
+            "results/processing/{deep_profiler_dir_name}_dp_normalized_aggregated.csv.gz",
+            deep_profiler_dir_name=DP_DIR,
+        ),
+        expand(
+            "results/processing/{deep_profiler_dir_name}_dp_consensus.csv.gz",
+            deep_profiler_dir_name=DP_DIR,
+        ),
