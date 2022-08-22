@@ -49,7 +49,7 @@ Required Arguments:
 
 Optional Arguments:
     -b, --barcode       Path to file containing barcode labeling. This is used
-                        for cell morphology reads obtained by Cell Profiler.
+                        for cell morphology reads obtained by CellProfiler.
                         [Default=None]
     --datatype          Datatype flag helps cytopipe in how to setup the input
                         files for processing.
