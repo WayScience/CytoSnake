@@ -1,4 +1,4 @@
-from pathlib import Path
+import pathlib
 import yaml
 
 from ..common.errors import WorkflowNotFoundError
@@ -22,7 +22,7 @@ def load_configs(config: str) -> dict:
     FileNotFoundError
         raised if provided config file paths is invalid
     """
-    config_path_obj = Path(config)
+    config_path_obj = pathlib.Path(config)
     if not config_path_obj.is_file():
         e_msg = f"Unable to find configuration file: {config_path_obj.name}"
         raise FileNotFoundError(e_msg)
@@ -33,7 +33,7 @@ def load_configs(config: str) -> dict:
     return loaded_configs
 
 
-def load_workflow_path(wf_name: str) -> str:
+def load_workflow_path(wf_name: str) -> pathlib.PosixPath:
     """Loads in configurations and returns path pointing to
     workflow
 
@@ -44,7 +44,7 @@ def load_workflow_path(wf_name: str) -> str:
 
     Returns
     -------
-    str
+    pathlib.PosixPath
         Path to workflow
 
     Raises
@@ -61,4 +61,4 @@ def load_workflow_path(wf_name: str) -> str:
         raise WorkflowNotFoundError(f"Unable to find {wf_name} workflow")
 
     # returning workflow path
-    return workflows[wf_name]
+    return pathlib.Path(workflows[wf_name])

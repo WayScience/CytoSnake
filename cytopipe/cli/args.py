@@ -32,7 +32,7 @@ class CliControlPanel:
     Raises
     ------
     InvalidExecutableException
-        Raised if mismatching executable paths dound
+        Raised if mismatching executable paths do not match
     InvalidArgumentException
         Raised if invalid arguments are provided
     InvalidModeException
