@@ -9,7 +9,7 @@ parameters for cytopipe.
 Contains different modes with their respected parameters
 """
 
-import sys
+from typing import Union
 import shutil
 import argparse
 from dataclasses import dataclass
@@ -32,7 +32,7 @@ class CliControlPanel:
     Raises
     ------
     InvalidExecutableException
-        Raised if mismatching executable paths dound
+        Raised if mismatching executable paths do not match
     InvalidArgumentException
         Raised if invalid arguments are provided
     InvalidModeException
@@ -40,13 +40,15 @@ class CliControlPanel:
     """
 
     param_list: list[str]
-    exec_path: str = None
-    mode: str = None
-    workflow: str = None
+    exec_path: Union[None, str] = None
+    mode: Union[None, str] = None
+    data_type: Union[None, str] = None
+    workflow: Union[None, str] = None
     mode_check = False
     workflow_check = False
     cli_help = False
     mode_help = False
+    data_type: tuple[str] = ("cell_profiler", "deep_profiler")
     modes: tuple[str] = ("init", "run", "test", "help")
     workflows: tuple[str] = ("cp_process", "dp_process", "help")
     __exec_name: str = "cytopipe"
@@ -61,9 +63,7 @@ class CliControlPanel:
 
     # Class representation
     def __repr__(self) -> str:
-        exec_mode_workflow = (
-            f"exec_path={self.exec_path}, mode={self.mode}, workflow={self.workflow}"
-        )
+        exec_mode_workflow = f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}, workflow={self.workflow}"
         help_checks = f"cli_help={self.cli_help}, mode_help={self.mode_help}"
         param_states = (
             f"mode_check={self.mode_check}, workflow_check={self.workflow_check}"
@@ -120,11 +120,15 @@ class CliControlPanel:
             "-m",
             "--metadata",
             type=str,
-            required=True,
             help="path to metadata directory",
+            required=True,
         )
+        parser.add_argument("-b", "--barcode", type=str, help="path to barcodes file")
         parser.add_argument(
-            "-b", "--barcode", type=str, required=True, help="path to barcodes file"
+            "--datatype",
+            choices=list(self.data_type),
+            default="cell_profiler",
+            help="datatype used for processing",
         )
         args = parser.parse_args(params)
 

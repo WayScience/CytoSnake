@@ -1,9 +1,9 @@
-import os
-import yaml
 import logging
+import os
 from pathlib import Path
 
 import pandas as pd
+import yaml
 from pycytominer.cyto_utils.cells import SingleCells
 
 

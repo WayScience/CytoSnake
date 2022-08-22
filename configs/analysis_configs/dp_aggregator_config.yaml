@@ -1,0 +1,4 @@
+AggregatorDeepProfiler_configs:
+  params:
+    aggregate_operation: median
+    aggregate_on: well
