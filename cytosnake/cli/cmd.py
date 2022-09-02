@@ -3,7 +3,7 @@ Documentation
 
 cmd.py Module
 
-Generates CLI interface in order to interact with cytopipe.
+Generates CLI interface in order to interact with CytoSnake.
 """
 import sys
 
@@ -20,8 +20,7 @@ def run_cmd() -> None:
     Parameters
     ----------
     params : list
-        list of user provided parameters
-
+        list of user provided parametersCytoSnake
     Returns
     -------
     None
@@ -45,7 +44,7 @@ def run_cmd() -> None:
                 print(init_doc)
                 sys.exit(0)
 
-            # setting up input files for cytopipe
+            # setting up input files for cytosnake
             print("INFO: Formatting input files")
             init_args = args_handler.parse_init_args()
 
@@ -75,7 +74,6 @@ def run_cmd() -> None:
             # parsing workflow parameters
             print(f"INFO: Executing {args_handler.workflow} workflow")
             wf_params = args_handler.parse_workflow_args()
-
             wf_executor = workflow_executor(
                 workflow=wf_params.workflow,
                 n_cores=wf_params.max_cores,

@@ -2,11 +2,11 @@ run_doc = """
 Command line::
 Run Documentation
 
-Cytopipe's run mode allows users to execute Cytopipes available workflows
+CytoSnake's run mode allows users to execute CytoSnake's available workflows
 
 Usage:
-    cytopipe run workflow [-c]
-    cytopipe run help
+    cytosnake run workflow [-c]
+    cytosnake run help
 
 Required Arguments:
     workflow            Name of the workflow to execute
@@ -26,22 +26,22 @@ Available Workflows:
 
 cp_process              Workflow for analyzing cell morphology reads
                         obtained from CellProfiler
-dp_process              Workflow for analyzing cell morphology reads 
+dp_process              Workflow for analyzing cell morphology reads
                         obtained from DeepProfiler
 
 
 Help Arguments:
-    help                Displays cytopipe's Run mode documentation
+    help                Displays CytoSnake's Run mode documentation
 """
 
 init_doc = """
 Command line::
 Init mode Documentation
 
-Cytopipe's init mode allows user to setup up the require files for processing.
+CytoSnake's init mode allows user to setup up the require files for processing.
 
 Usage:
-    cytopipe init [-d] [-m] [-b] [-p]
+    cytosnake init [-d] [-m] [-b] [-p]
 
 Required Arguments:
     -d, --data          List of plate data files
@@ -51,31 +51,31 @@ Optional Arguments:
     -b, --barcode       Path to file containing barcode labeling. This is used
                         for cell morphology reads obtained by CellProfiler.
                         [Default=None]
-    --datatype          Datatype flag helps cytopipe in how to setup the input
+    --datatype          Datatype flag helps CytoSnake in how to setup the input
                         files for processing.
                         [Choices = "cell_profiler", "deep_profiler"]
                         [Default="cell_profiler"]
 
 Help Arguments:
-    help                Displays cytopipe's init mode documentation
+    help                Displays CytoSnake's init mode documentation
 """
 
 cli_docs = f"""
-Cytopipe Documentation
+CytoSnake Documentation
 
-Cytpipe's command line interface
+CytoSnake's command line interface
 
 Usage:
-    cytopipe [mode] [ mode options]
-    cytopipe help
+    cytosnake [mode] [ mode options]
+    cyotsnake help
 
 Required Arguments:
-    mode                Cytopipe cli instruction on what to execute. There are
+    mode                CytoSnake cli instruction on what to execute. There are
                         3 modes [init, run, help]. Init setups ups the required
-                        files for processing. Run executes cytopipe's workflows.
+                        files for processing. Run executes CytoSnake's workflows.
                         Help displays the help message documentation.
 Help Argument:
-    help                Displays cytopipe's CLI help and mode documentation
+    help                Displays CytoSnake's CLI help and mode documentation
 
 Mode Documentations:
 {init_doc.replace("Command line::", "")}

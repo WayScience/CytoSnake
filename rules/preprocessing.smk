@@ -1,26 +1,27 @@
-# Documentation:
-# Workflow that involves preprocessing raw single-cell plate data and
-# transforming it into normalized aggregate profiles.
-#
-# Parameters
-# ----------
-# sql_files : List[str]
-#   List of SQL files containing plate data
-# barcodes : str
-#   path pointing to the barcode file storing platemap IDs
-# metadata : str
-#   path pointing to plate metadata
-#
-# Generates
-# ---------
-# cell_counts: .csv file
-#   csv file containing n_cells per well
-# augmented: csv.gz file
-#   Annotated aggregated profiles
-# normalized: csv.gz file
-#   Normalized annotated aggregate profiles
-# --------------------
+"""
+Documentation:
+Workflow that involves preprocessing raw single-cell plate data and
+transforming it into normalized aggregate profiles.
 
+Parameters
+----------
+sql_files : List[str]
+  List of SQL files containing plate data
+barcodes : str
+  path pointing to the barcode file storing platemap IDs
+metadata : str
+  path pointing to plate metadata
+
+Generates
+---------
+cell_counts: .csv file
+  csv file containing n_cells per well
+augmented: csv.gz file
+  Annotated aggregated profiles
+normalized: csv.gz file
+  Normalized annotated aggregate profiles
+# --------------------
+"""
 
 # collecting all unique IDs from plate
 configfile: "configs/configuration.yaml"

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="cytopipe",
+    name="CytoSnake",
     version="0.0.1",
     url="https://github.com/WayScience/CytoPipe",
     author="Way Lab",
@@ -9,7 +9,7 @@ setup(
     python_requires=">=3.10",
     entry_points={
         "console_scripts": [
-            "cytopipe=cytopipe.cli.cmd:run_cmd",
+            "cytosnake=cytosnake.cli.cmd:run_cmd",
         ]
     },
 )
