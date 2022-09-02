@@ -7,7 +7,7 @@ CLI interface
 from typing import Optional
 import snakemake
 
-from cytopipe.utils.config_utils import load_workflow_path
+from cytosnake.utils.config_utils import load_workflow_path
 
 
 def __base_exec(
