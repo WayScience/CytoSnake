@@ -5,7 +5,7 @@ Documentation
 cli_checker.py Module
 
 Argument checking module that checks and validates user input
-arguments from cytopipe's cli interface,
+arguments from CytoSnake's cli interface,
 """
 import sys
 from typing import Union
@@ -19,14 +19,14 @@ from ..common.errors import *
 @dataclass
 class CliProperties:
     """Struct object that contains information of all arguments in
-    cytopipe's cli interface
+    CytoSnake's cli interface
 
     Attributes
     -----------
     modes : tuple[str]
-        Supported modes in CytoPipe's CLI
+        Supported modes in CytoSnake's CLI
     workflows : tuple[str]
-        Available cytopipe workflows
+        Available CytoSnake workflows
     """
 
     modes: tuple[str] = ("init", "run", "test", "help")
@@ -39,7 +39,7 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
     Parameters
     ----------
     mode : str
-        cytopipe mode
+        CytoSnake mode
     args_list : list[Union[str, int, bool]]
         list of user inputted arguments
 
@@ -54,7 +54,7 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
     NoArgumentsException
         Raised if the user provides no arguments
     InvalidModeException
-        Raised if user inputs an invalid cytopipe mode
+        Raised if user inputs an invalid CytoSnake mode
     InvalidWorkflowException
         Raised if user inputs an invalid workflow name
     MultipleModesException

@@ -4,7 +4,7 @@ Documentation
 args.py Module
 
 Responsible for centralizing and handling all user inputted
-parameters for cytopipe.
+parameters for cytosnake.
 
 Contains different modes with their respected parameters
 """
@@ -51,7 +51,7 @@ class CliControlPanel:
     data_type: tuple[str] = ("cell_profiler", "deep_profiler")
     modes: tuple[str] = ("init", "run", "test", "help")
     workflows: tuple[str] = ("cp_process", "dp_process", "help")
-    __exec_name: str = "cytopipe"
+    __exec_name: str = "cytosnake"
 
     # ----------------------------------------
     # Metaclass class methods
@@ -111,7 +111,7 @@ class CliControlPanel:
         parser.add_argument(
             "mode",
             choices=["init"],
-            help="Init mode sets up the all files for cytopipe processing",
+            help="Init mode sets up the all files for cytosnake processing",
         )
         parser.add_argument(
             "-d", "--data", nargs="+", required=True, help="list of plate data files"
