@@ -10,8 +10,8 @@ This tutorial assumes that you have follows the installation steps and
 you are ready to start taking off with CytoSnake!
 
 Cytosnake is a command line interface (CLI) tool that contains a
-multiude of workflows for analyzing morhpological features obtained from
-micrscropy images of cels.
+multitude of workflows for analyzing morphological features obtained
+from microscopy images of cells.
 
 **********
  Concepts
@@ -23,7 +23,7 @@ Modes
 =====
 
 Modes provide options on how the user can change the functionality of
-CytoSnake. For example, if you would like to initalize your files for a
+CytoSnake. For example, if you would like to initialize your files for a
 specific workflow, you can simply type:
 
 using the `init` mode
@@ -33,7 +33,7 @@ using the `init` mode
    cytosnake init <DATAFILES> <METADATA> <DATATYPE>
 
 -  `DATAFILE` will refer to the raw data that you are going to analyze,
--  `METADATA` refers to the associated metdata data directory that was
+-  `METADATA` refers to the associated metadata data directory that was
    generated along with the dataset
 -  `DATATYPE` flag tells cytosnake weather these morphology feature
    datasets were obtained from CellProfiler or DeepProfiler
@@ -70,7 +70,7 @@ Download data
 
 .. _barcode: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/blob/master/1.generate-profiles/data/metadata/barcode_platemap.csv
 
-.. _metdata_folder: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/tree/master/1.generate-profiles/data/metadata/platemap](https://minhaskamal.github.io/DownGit/
+.. _metadata_folder: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/tree/master/1.generate-profiles/data/metadata/platemap](https://minhaskamal.github.io/DownGit/
 
 .. _plate_data_1: https://nih.figshare.com/ndownloader/files/18506036
 
@@ -82,7 +82,7 @@ You can download these datasets (quite large files):
 
 -  plate_data_1_: (10GB download)
 -  plate_data_2_: (11GB download)
--  metdata_folder_: Contains all associated pertubations per well
+-  metadata_folder_: Contains all associated perturbations per well
 -  barcode_: Maps plate id with plate names
 
 You can also use your dataset but some of the tasks that are being done
@@ -105,7 +105,7 @@ wildcard variables.
 
    cytosnake init -d *.sqlite -d metadata -b barcode_platemap.csv
 
-If there is an instances were you are going to use morhpological
+If there is an instances were you are going to use morphological
 datasets obtained from DeepProfiler, then you must explicitly state the
 datatype flag when using `init`:
 
@@ -158,7 +158,7 @@ This indicates that all tasks within the workflow is complete.
 Accessing data
 ==============
 
-In your directory, a `results` folder will be producedm which contains
+In your directory, a `results` folder will be produced which contains
 all the outputs generated from the workflow. To visualize those outputs,
 simply type:
 
@@ -166,7 +166,7 @@ simply type:
 
    cd results/preprocessing/ && ls
 
-This will take you to the directory where the generated ouputs are and
+This will take you to the directory where the generated outputs are and
 lists all the files.
 
 .. code::
@@ -186,9 +186,9 @@ their suffix:
 -  `_aggregate`: Refers to the aggregated dataset. Single cell dataset
    (your inputs) are aggregated into the “well” level.
 
--  `_agumented`: Agumented datasets contains metadata infromation in a
-   per well level. For example, types of metadata can be: well
-   postiion, treatments, controls, etc
+-  `_augmented`: A datasets contains metadata information in a per well
+   level. For example, types of metadata can be: well position,
+   treatments, controls, etc
 
 -  `_feature_select`: contains the selected morphological features that
    will be used to generate consensus profiles
