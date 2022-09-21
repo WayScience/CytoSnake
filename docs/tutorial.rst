@@ -17,7 +17,7 @@ micrscropy images of cels.
  Concepts
 **********
 
-.. image:: Cytopipe-cli.png
+.. image:: images/Cytopipe-cli_0.drawio.png
 
 Modes
 =====
@@ -61,10 +61,138 @@ files involved within the workflow.
 Users can easily find and change parameter values by accessing those
 configurational files.
 
-
-
-**********
+*******
  Usage
-**********
+*******
 
-To follow along
+Download data
+=============
+
+.. _barcode: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/blob/master/1.generate-profiles/data/metadata/barcode_platemap.csv
+
+.. _metdata_folder: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/tree/master/1.generate-profiles/data/metadata/platemap](https://minhaskamal.github.io/DownGit/
+
+.. _plate_data_1: https://nih.figshare.com/ndownloader/files/18506036
+
+.. _plate_data_2: https://nih.figshare.com/ndownloader/files/18031619
+
+In this usage tutorial, we will be using data cell health datasets.
+
+You can download these datasets (quite large files):
+
+-  plate_data_1_: (10GB download)
+-  plate_data_2_: (11GB download)
+-  metdata_folder_: Contains all associated pertubations per well
+-  barcode_: Maps plate id with plate names
+
+You can also use your dataset but some of the tasks that are being done
+here are specific to the files downloaded.
+
+Setting up files
+================
+
+The first step it to prepare your files for analysis, this is simply
+executed by typing:
+
+.. code::
+
+   cytosnake init -d SQ00014613.sqlite SQ00014613.sqlite -d metadata -b barcode_platemap.csv
+
+In instances where you may have a lot of data, CytoSnake supports
+wildcard variables.
+
+.. code::
+
+   cytosnake init -d *.sqlite -d metadata -b barcode_platemap.csv
+
+If there is an instances were you are going to use morhpological
+datasets obtained from DeepProfiler, then you must explicitly state the
+datatype flag when using `init`:
+
+.. code::
+
+   cytosnake init -d *.sqlite -d metadata -b barcode_platemap.csv --datatype deep_profiler
+
+Once entering the command, your out put should look like this:
+
+.. code::
+
+   INFO: Formatting input files
+   INFO: Formatting complete!
+
+Running Workflow
+================
+
+In your current working directory, a new folder ./data should appear in
+your current directory. Inside the directory, it should contain symbolic
+links of your data files that you have provided in the init mode. This
+directory serves as centralized location of data for the workflows to
+have access too. Now that you have your data folder, you can simply
+select which workflow to execute by using the run mode. Since the
+cell-health dataset contains data extracted from CellProfiler, when we
+will used the cp_process workflow.
+
+.. code::
+
+   cytosnake run cp_process
+
+If your data contains features that were extracted by using
+DeepProfiler, then the dp_process workflow must be executed
+
+.. code::
+
+   cytosnake run dp_process
+
+These workflows contain their own environments, therefore there is not
+need to download the dependencies that our workflows require. When the
+the job is done, the last message you should see is:
+
+.. code::
+
+   [Mon Sep 19 14:29:07 2022]
+   Finished job 0.
+   2 of 2 steps (100%) done
+
+This indicates that all tasks within the workflow is complete.
+
+Accessing data
+==============
+
+In your directory, a `results` folder will be producedm which contains
+all the outputs generated from the workflow. To visualize those outputs,
+simply type:
+
+.. code::
+
+   cd results/preprocessing/ && ls
+
+This will take you to the directory where the generated ouputs are and
+lists all the files.
+
+.. code::
+
+   consensus.tsv.gz                  SQ00014614_aggregate.csv.gz
+   SQ00014613_aggregate.csv.gz       SQ00014614_augmented.csv.gz
+   SQ00014613_augmented.csv.gz       SQ00014614_cell_counts.tsv
+   SQ00014613_cell_counts.tsv        SQ00014614_feature_select.csv.gz
+   SQ00014613_feature_select.csv.gz  SQ00014614_normalized.csv.gz
+   SQ00014613_normalized.csv.gz
+
+These files contain different types of information that is denoted by
+their suffix:
+
+-  `_cell_counts.tsv`: Number of cells in the dataset
+
+-  `_aggregate`: Refers to the aggregated dataset. Single cell dataset
+   (your inputs) are aggregated into the “well” level.
+
+-  `_agumented`: Agumented datasets contains metadata infromation in a
+   per well level. For example, types of metadata can be: well
+   postiion, treatments, controls, etc
+
+-  `_feature_select`: contains the selected morphological features that
+   will be used to generate consensus profiles
+
+-  `_consensus`: is the consensus profile contains unique morphological
+   signatures associated with a specific external treatment (drug,
+   perturbations, controls (pos/neg), etc)
