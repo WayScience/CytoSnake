@@ -39,13 +39,13 @@ using the `init` mode
    datasets were obtained from CellProfiler or DeepProfiler
 
 The init mode setups the provided input files into its appropriate file
-structure that accommodates all the workflows available in Cat Snake
+structure that accommodates all the workflows available in CytoSnake
 
-Currently, cytosnake supports three different types of modes, which are:
+CytoSnake currently has three different types of modes, which are:
 
-   #. inti: setups up input files for workflows
-   #. run: execute a specific
-   #. help: executes CytoSnake's CLI help documentation.
+   #. **inti:** setups up input files for workflows
+   #. **run:** execute a specific workflow
+   #. **help:** executes CytoSnake's CLI help documentation.
 
 Configurations
 ==============
@@ -57,6 +57,30 @@ The configuration files are written in `.yaml` files, which contains all
 the functions and its parameters used within the workflow. The
 workflow's documentation provides information about the configuration
 files involved within the workflow.
+
+.. _aggregate_docs: https://pycytominer.readthedocs.io/en/latest/pycytominer.html#module-pycytominer.aggregate
+
+.. _annotate_docs: https://pycytominer.readthedocs.io/en/latest/pycytominer.html?highlight=annotate#pycytominer.annotate.annotate
+
+.. _consensus_docs: https://pycytominer.readthedocs.io/en/latest/search.html?q=consensus&check_keywords=yes&area=default
+
+.. _feature_select_docs: https://pycytominer.readthedocs.io/en/latest/pycytominer.html?highlight=feature%20select#pycytominer.feature_select.feature_select
+
+.. _normalize_docs: https://pycytominer.readthedocs.io/en/latest/pycytominer.html?highlight=normalize#pycytominer.normalize.normalize
+
++-----------------+-------------------------------------------------------------------+-----------------------+
+| Steps           | Path to config                                                    | Documentation         |
++=================+===================================================================+=======================+
+| aggregate       | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml       | aggregate_docs_       |
++-----------------+-------------------------------------------------------------------+-----------------------+
+| annotate        | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml       | annotate_docs_        |
++-----------------+-------------------------------------------------------------------+-----------------------+
+| normalize       | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml       | normalize_docs_       |
++-----------------+-------------------------------------------------------------------+-----------------------+
+| feature_select  | ./CytoSnake/configs/analysis_configs/feature_select_configs.yaml  | feature_select_docs_  |
++-----------------+-------------------------------------------------------------------+-----------------------+
+| consensus       | ./CytoSnake/configs/analysis_configs/consensus_configs.yaml       | consensus_docs_       |
++-----------------+-------------------------------------------------------------------+-----------------------+
 
 Users can easily find and change parameter values by accessing those
 configurational files.
@@ -70,7 +94,7 @@ Download data
 
 .. _barcode: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/blob/master/1.generate-profiles/data/metadata/barcode_platemap.csv
 
-.. _metadata_folder: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/tree/master/1.generate-profiles/data/metadata/platemap](https://minhaskamal.github.io/DownGit/
+.. _metadata_folder: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/tree/master/1.generate-profiles/data/metadata
 
 .. _plate_data_1: https://nih.figshare.com/ndownloader/files/18506036
 
@@ -90,6 +114,13 @@ here are specific to the files downloaded.
 
 Setting up files
 ================
+
+If you are using the downloaded dataset. unzip the zip files in the
+directory where the CytoSnake source is.
+
+.. code::
+
+   unzip metadata.zip && unzip barcode_platemap.csv.zip
 
 The first step it to prepare your files for analysis, this is simply
 executed by typing:
