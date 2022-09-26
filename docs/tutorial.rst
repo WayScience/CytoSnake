@@ -30,13 +30,14 @@ using the `init` mode
 
 .. code::
 
-   cytosnake init <DATAFILES> <METADATA> <DATATYPE>
+   cytosnake init -d [<DATAFILES>] -m <METADATA> --data_type <DATATYPE>
 
--  `DATAFILE` will refer to the raw data that you are going to analyze,
+-  `DATAFILE` will refer to the raw data file(s) that you are going to
+   analyze.
 -  `METADATA` refers to the associated metadata data directory that was
    generated along with the dataset
 -  `DATATYPE` flag tells cytosnake weather these morphology feature
-   datasets were obtained from CellProfiler or DeepProfiler
+   datasets were obtained from CellProfiler or DeepProfiler.
 
 The init mode setups the provided input files into its appropriate file
 structure that accommodates all the workflows available in CytoSnake
@@ -58,7 +59,11 @@ the functions and its parameters used within the workflow. The
 workflow's documentation provides information about the configuration
 files involved within the workflow.
 
+Below are the two currently aviaible workflows and the config files it
+access in order to condcut its processes.
+
 **cp_process workflow docs**
+----------------------------
 
 .. _aggregate_docs: https://pycytominer.readthedocs.io/en/latest/pycytominer.html#module-pycytominer.aggregate
 
@@ -84,8 +89,10 @@ files involved within the workflow.
 | consensus       | ./CytoSnake/configs/analysis_configs/consensus_configs.yaml       | consensus_docs_       |
 +-----------------+-------------------------------------------------------------------+-----------------------+
 
-**dp_process workflow** (Currently under development, may change in the
-future)
+**dp_process workflow**
+-----------------------
+
+**NOTE**: Currently under development, may change in the future
 
 .. _aggregatedeepprofiler_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L123-L156
 
@@ -109,6 +116,72 @@ configurational files.
 -  `steps`: instructions that the workflows
 -  `Path to config` Location of the configurational files
 -  `Documentation` Relevant pycytominer documentation of
+
+***************
+ Documentation
+***************
+
+To visualize CytoSnake's documentation, simply type:
+
+.. code::
+
+   cytosnake help
+
+This will display a large output into your terminal exaplining all modes
+and its parameters. If you are only interested in one, you can use the
+`help` under any mode:
+
+.. code::
+
+   # display help for run mode
+   cytosnake run help
+
+   # display help for init mode
+   cytosnake init run
+
+`init` mode documentation
+=========================
+
+Here are the list of paramters that CytoSnake's `init` mode currently
+supports
+
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Parameters          | Documentation                                                                                                                                        |
++=====================+======================================================================================================================================================+
+| Required Arguments  |                                                                                                                                                      |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-d` `-\-data`      | List of plate data files                                                                                                                             |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-m` `-\-metadata`  | Path to metadata directory                                                                                                                           |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Optional Arguments  |                                                                                                                                                      |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-b` `-\-barcode`   | Path to file containing barcode labeling. This is used for cell morphology reads obtained by CellProfiler. [Default=None]                            |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-\-datatype`       | Datatype flag helps CytoSnake in how to setup the input files for processing. [Choices = "cell_profiler" "deep_profiler"] [Default="cell_profiler"]  |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+`run` mode documentation
+========================
+
+Here are the list of paramters that CytoSnake's `run` mode currently
+supports
+
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Parameters            | Documentation                                                                                                                                                                                   |
++=======================+=================================================================================================================================================================================================+
+| Required Arguments    |                                                                                                                                                                                                 |
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| workflow              | Name of the workflow to execute                                                                                                                                                                 |
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Optional Arguments    |                                                                                                                                                                                                 |
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-c` `-\-max_core`    | Maximum number of cores to use for the workflow default=1                                                                                                                                       |
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-\-lock`             | Directory becomes locked when workflow is executed. if any interruptions has occurred, if True, the directory will be automatically unlocked, else, it will remain locked. Default is False.    |
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-\-force`            | Force re-run of the workflow. This means generated files will be over-written with the outputs produced from the forced re-run                                                                  |
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 *******
  Usage
