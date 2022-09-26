@@ -58,6 +58,8 @@ the functions and its parameters used within the workflow. The
 workflow's documentation provides information about the configuration
 files involved within the workflow.
 
+**cp_process workflow docs**
+
 .. _aggregate_docs: https://pycytominer.readthedocs.io/en/latest/pycytominer.html#module-pycytominer.aggregate
 
 .. _annotate_docs: https://pycytominer.readthedocs.io/en/latest/pycytominer.html?highlight=annotate#pycytominer.annotate.annotate
@@ -82,8 +84,31 @@ files involved within the workflow.
 | consensus       | ./CytoSnake/configs/analysis_configs/consensus_configs.yaml       | consensus_docs_       |
 +-----------------+-------------------------------------------------------------------+-----------------------+
 
+**dp_process workflow** (Currently under development, may change in the
+future)
+
+.. _aggregatedeepprofiler_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L123-L156
+
+.. _deepprofiler_data_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L19-L43
+
++----------------+--------------------------------------------------------------+------------------------------+
+| Steps          | Path to config                                               | Documentation                |
++================+==============================================================+==============================+
+| dp_data        | ./CytoSnake/configs/analysis_configs/dp_data_configs.yaml    | DeepProfiler_data_docs_      |
++----------------+--------------------------------------------------------------+------------------------------+
+| dp_aggregator  | ./CytoSnake/configs/analysis_configs/dp_aggregator.yaml      | AggregateDeepProfiler_docs_  |
++----------------+--------------------------------------------------------------+------------------------------+
+| normalize      | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml  | normalize_docs_              |
++----------------+--------------------------------------------------------------+------------------------------+
+| consensus      | /CytoSnake/configs/analysis_configs/consensus_configs.yaml   | consensus_docs_              |
++----------------+--------------------------------------------------------------+------------------------------+
+
 Users can easily find and change parameter values by accessing those
 configurational files.
+
+-  `steps`: instructions that the workflows
+-  `Path to config` Location of the configurational files
+-  `Documentation` Relevant pycytominer documentation of
 
 *******
  Usage
