@@ -59,8 +59,8 @@ the functions and its parameters used within the workflow. The
 workflow's documentation provides information about the configuration
 files involved within the workflow.
 
-Below are the two currently aviaible workflows and the config files it
-access in order to condcut its processes.
+Below are the two currently available workflows and the config files it
+access in order to conduct its processes.
 
 **cp_process workflow docs**
 ----------------------------
@@ -94,9 +94,9 @@ access in order to condcut its processes.
 
 **NOTE**: Currently under development, may change in the future
 
-.. _aggregatedeepprofiler_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L123-L156
+.. _aggregateDeepProfiler_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L123-L156
 
-.. _deepprofiler_data_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L19-L43
+.. _DeepProfiler_data_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L19-L43
 
 +----------------+--------------------------------------------------------------+------------------------------+
 | Steps          | Path to config                                               | Documentation                |
@@ -127,7 +127,7 @@ To visualize CytoSnake's documentation, simply type:
 
    cytosnake help
 
-This will display a large output into your terminal exaplining all modes
+This will display a large output into your terminal explaining all modes
 and its parameters. If you are only interested in one, you can use the
 `help` under any mode:
 
@@ -142,7 +142,7 @@ and its parameters. If you are only interested in one, you can use the
 `init` mode documentation
 =========================
 
-Here are the list of paramters that CytoSnake's `init` mode currently
+Here are the list of parameters that CytoSnake's `init` mode currently
 supports
 
 +---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -164,7 +164,7 @@ supports
 `run` mode documentation
 ========================
 
-Here are the list of paramters that CytoSnake's `run` mode currently
+Here are the list of parameters that CytoSnake's `run` mode currently
 supports
 
 +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cytosnake.common package &mdash; CytoSnake 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> CytoSnake
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">CytoSnake Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">CytoSnake Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CytoSnake</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>cytosnake.common package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cytosnake.common.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cytosnake-common-package">
+<h1>cytosnake.common package<a class="headerlink" href="#cytosnake-common-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-cytosnake.common.errors">
+<span id="cytosnake-common-errors-module"></span><h2>cytosnake.common.errors module<a class="headerlink" href="#module-cytosnake.common.errors" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.BaseExecutorException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">BaseExecutorException</span></span><a class="headerlink" href="#cytosnake.common.errors.BaseExecutorException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Base exception related to cytopipe execution</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.BaseFileNotFound">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">BaseFileNotFound</span></span><a class="headerlink" href="#cytosnake.common.errors.BaseFileNotFound" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></p>
+<p>Raised if a requested file is not found in cytopipe</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.BaseValueError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">BaseValueError</span></span><a class="headerlink" href="#cytosnake.common.errors.BaseValueError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></p>
+<p>Base exception if incorrect values are passed</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.BaseWorkflowException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">BaseWorkflowException</span></span><a class="headerlink" href="#cytosnake.common.errors.BaseWorkflowException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Base exception related to cytopipe’s workflow errors in runtime</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.InvalidArgumentException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidArgumentException</span></span><a class="headerlink" href="#cytosnake.common.errors.InvalidArgumentException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseValueError" title="cytosnake.common.errors.BaseValueError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseValueError</span></code></a></p>
+<p>Raised when arguments requirements are not met</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.InvalidCytoPipeExec">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidCytoPipeExec</span></span><a class="headerlink" href="#cytosnake.common.errors.InvalidCytoPipeExec" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseExecutorException" title="cytosnake.common.errors.BaseExecutorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExecutorException</span></code></a></p>
+<p>Raised if invalid cytopipe executable is being called</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.InvalidExecutableException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidExecutableException</span></span><a class="headerlink" href="#cytosnake.common.errors.InvalidExecutableException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseExecutorException" title="cytosnake.common.errors.BaseExecutorException"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseExecutorException</span></code></a></p>
+<p>Raised if any executables</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.InvalidModeException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidModeException</span></span><a class="headerlink" href="#cytosnake.common.errors.InvalidModeException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseValueError" title="cytosnake.common.errors.BaseValueError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseValueError</span></code></a></p>
+<p>Raised if in unsupported mode was passed</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.InvalidWorkflowException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidWorkflowException</span></span><a class="headerlink" href="#cytosnake.common.errors.InvalidWorkflowException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseValueError" title="cytosnake.common.errors.BaseValueError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseValueError</span></code></a></p>
+<p>Raised if invalid workflows were specified</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.MultipleModesException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">MultipleModesException</span></span><a class="headerlink" href="#cytosnake.common.errors.MultipleModesException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseValueError" title="cytosnake.common.errors.BaseValueError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseValueError</span></code></a></p>
+<p>Raised if multiple modes were provided</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.MultipleWorkflowsException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">MultipleWorkflowsException</span></span><a class="headerlink" href="#cytosnake.common.errors.MultipleWorkflowsException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseValueError" title="cytosnake.common.errors.BaseValueError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseValueError</span></code></a></p>
+<p>Raised if multiple workflows are declared</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.NoArgumentsException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">NoArgumentsException</span></span><a class="headerlink" href="#cytosnake.common.errors.NoArgumentsException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseValueError" title="cytosnake.common.errors.BaseValueError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseValueError</span></code></a></p>
+<p>Raised if no arguments were passed in the CLI interface</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.WorkflowFailedException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">WorkflowFailedException</span></span><a class="headerlink" href="#cytosnake.common.errors.WorkflowFailedException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseWorkflowException" title="cytosnake.common.errors.BaseWorkflowException"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseWorkflowException</span></code></a></p>
+<p>Raised if a workflow fails during runtime</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cytosnake.common.errors.WorkflowNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cytosnake.common.errors.</span></span><span class="sig-name descname"><span class="pre">WorkflowNotFoundError</span></span><a class="headerlink" href="#cytosnake.common.errors.WorkflowNotFoundError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cytosnake.common.errors.BaseFileNotFound" title="cytosnake.common.errors.BaseFileNotFound"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFileNotFound</span></code></a></p>
+<p>Raised if workflow file is not found</p>
+</dd></dl>
+
+</section>
+<section id="module-cytosnake.common">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cytosnake.common" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Way Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

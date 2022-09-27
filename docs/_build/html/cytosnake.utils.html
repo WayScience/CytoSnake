@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cytosnake.utils package &mdash; CytoSnake 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> CytoSnake
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">CytoSnake Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">CytoSnake Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CytoSnake</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>cytosnake.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cytosnake.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cytosnake-utils-package">
+<h1>cytosnake.utils package<a class="headerlink" href="#cytosnake-utils-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-cytosnake.utils.config_utils">
+<span id="cytosnake-utils-config-utils-module"></span><h2>cytosnake.utils.config_utils module<a class="headerlink" href="#module-cytosnake.utils.config_utils" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cytosnake.utils.config_utils.load_configs">
+<span class="sig-prename descclassname"><span class="pre">cytosnake.utils.config_utils.</span></span><span class="sig-name descname"><span class="pre">load_configs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#cytosnake.utils.config_utils.load_configs" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a dictionary of given configurations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>str</em>) – path to config file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>configuration dictionary</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>FileNotFoundError</strong> – raised if provided config file paths is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cytosnake.utils.config_utils.load_workflow_path">
+<span class="sig-prename descclassname"><span class="pre">cytosnake.utils.config_utils.</span></span><span class="sig-name descname"><span class="pre">load_workflow_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wf_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PosixPath</span></span></span><a class="headerlink" href="#cytosnake.utils.config_utils.load_workflow_path" title="Permalink to this definition"></a></dt>
+<dd><p>Loads in configurations and returns path pointing to
+workflow</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wf_name</strong> (<em>str</em>) – workflow name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Path to workflow</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pathlib.PosixPath</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>WorkFlowNotFound</strong> – Raised if the desired workflow is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cytosnake.utils.cyto_paths">
+<span id="cytosnake-utils-cyto-paths-module"></span><h2>cytosnake.utils.cyto_paths module<a class="headerlink" href="#module-cytosnake.utils.cyto_paths" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-cytosnake.utils.feature_utils">
+<span id="cytosnake-utils-feature-utils-module"></span><h2>cytosnake.utils.feature_utils module<a class="headerlink" href="#module-cytosnake.utils.feature_utils" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cytosnake.utils.feature_utils.infer_dp_features">
+<span class="sig-prename descclassname"><span class="pre">cytosnake.utils.feature_utils.</span></span><span class="sig-name descname"><span class="pre">infer_dp_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dp_profile</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cytosnake.utils.feature_utils.infer_dp_features" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of Deep profiler features found within the single cell
+dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dp_profile</strong> (<em>pd.DataFrame</em>) – dataframe features captured from deep profiler</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of deep profiler features</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Raised if no Deep profiler features are found within the given DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cytosnake.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cytosnake.utils" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Way Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

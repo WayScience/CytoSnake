@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CytoSnake Tutorial &mdash; CytoSnake 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="CytoSnake Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> CytoSnake
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">CytoSnake Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CytoSnake Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#about">About</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#concepts">Concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modes">Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configurations">Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#download-data">Download data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-files">Setting up files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-workflow">Running Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-data">Accessing data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CytoSnake</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>CytoSnake Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cytosnake-tutorial">
+<h1>CytoSnake Tutorial<a class="headerlink" href="#cytosnake-tutorial" title="Permalink to this heading"></a></h1>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this heading"></a></h2>
+<p>This tutorial assumes that you have follows the installation steps and
+you are ready to start taking off with CytoSnake!</p>
+<p>Cytosnake is a command line interface (CLI) tool that contains a
+multitude of workflows for analyzing morphological features obtained
+from microscopy images of cells.</p>
+</section>
+<section id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading"></a></h2>
+<img alt="_images/Cytopipe-cli_0.drawio.png" src="_images/Cytopipe-cli_0.drawio.png" />
+<section id="modes">
+<h3>Modes<a class="headerlink" href="#modes" title="Permalink to this heading"></a></h3>
+<p>Modes provide options on how the user can change the functionality of
+CytoSnake. For example, if you would like to initialize your files for a
+specific workflow, you can simply type:</p>
+<p>using the <cite>init</cite> mode</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cytosnake</span> <span class="n">init</span> <span class="o">&lt;</span><span class="n">DATAFILES</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">METADATA</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">DATATYPE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>DATAFILE</cite> will refer to the raw data that you are going to analyze,</p></li>
+<li><p><cite>METADATA</cite> refers to the associated metadata data directory that was
+generated along with the dataset</p></li>
+<li><p><cite>DATATYPE</cite> flag tells cytosnake weather these morphology feature
+datasets were obtained from CellProfiler or DeepProfiler</p></li>
+</ul>
+<p>The init mode setups the provided input files into its appropriate file
+structure that accommodates all the workflows available in Cat Snake</p>
+<p>Currently, cytosnake supports three different types of modes, which are:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>inti: setups up input files for workflows</p></li>
+<li><p>run: execute a specific</p></li>
+<li><p>help: executes CytoSnake’s CLI help documentation.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="configurations">
+<h3>Configurations<a class="headerlink" href="#configurations" title="Permalink to this heading"></a></h3>
+<p>CytoSnake has configurational directory that allows users to change the
+configurations for their specified workflows.</p>
+<p>The configuration files are written in <cite>.yaml</cite> files, which contains all
+the functions and its parameters used within the workflow. The
+workflow’s documentation provides information about the configuration
+files involved within the workflow.</p>
+<p>Users can easily find and change parameter values by accessing those
+configurational files.</p>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<section id="download-data">
+<h3>Download data<a class="headerlink" href="#download-data" title="Permalink to this heading"></a></h3>
+<p>In this usage tutorial, we will be using data cell health datasets.</p>
+<p>You can download these datasets (quite large files):</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://nih.figshare.com/ndownloader/files/18506036">plate_data_1</a>: (10GB download)</p></li>
+<li><p><a class="reference external" href="https://nih.figshare.com/ndownloader/files/18031619">plate_data_2</a>: (11GB download)</p></li>
+<li><p><a class="reference external" href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/tree/master/1.generate-profiles/data/metadata/platemap](https://minhaskamal.github.io/DownGit/">metadata_folder</a>: Contains all associated perturbations per well</p></li>
+<li><p><a class="reference external" href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/blob/master/1.generate-profiles/data/metadata/barcode_platemap.csv">barcode</a>: Maps plate id with plate names</p></li>
+</ul>
+<p>You can also use your dataset but some of the tasks that are being done
+here are specific to the files downloaded.</p>
+</section>
+<section id="setting-up-files">
+<h3>Setting up files<a class="headerlink" href="#setting-up-files" title="Permalink to this heading"></a></h3>
+<p>The first step it to prepare your files for analysis, this is simply
+executed by typing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cytosnake</span> <span class="n">init</span> <span class="o">-</span><span class="n">d</span> <span class="n">SQ00014613</span><span class="o">.</span><span class="n">sqlite</span> <span class="n">SQ00014613</span><span class="o">.</span><span class="n">sqlite</span> <span class="o">-</span><span class="n">d</span> <span class="n">metadata</span> <span class="o">-</span><span class="n">b</span> <span class="n">barcode_platemap</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p>In instances where you may have a lot of data, CytoSnake supports
+wildcard variables.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cytosnake</span> <span class="n">init</span> <span class="o">-</span><span class="n">d</span> <span class="o">*.</span><span class="n">sqlite</span> <span class="o">-</span><span class="n">d</span> <span class="n">metadata</span> <span class="o">-</span><span class="n">b</span> <span class="n">barcode_platemap</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p>If there is an instances were you are going to use morphological
+datasets obtained from DeepProfiler, then you must explicitly state the
+datatype flag when using <cite>init</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cytosnake</span> <span class="n">init</span> <span class="o">-</span><span class="n">d</span> <span class="o">*.</span><span class="n">sqlite</span> <span class="o">-</span><span class="n">d</span> <span class="n">metadata</span> <span class="o">-</span><span class="n">b</span> <span class="n">barcode_platemap</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">datatype</span> <span class="n">deep_profiler</span>
+</pre></div>
+</div>
+<p>Once entering the command, your out put should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INFO: Formatting input files
+INFO: Formatting complete!
+</pre></div>
+</div>
+</section>
+<section id="running-workflow">
+<h3>Running Workflow<a class="headerlink" href="#running-workflow" title="Permalink to this heading"></a></h3>
+<p>In your current working directory, a new folder ./data should appear in
+your current directory. Inside the directory, it should contain symbolic
+links of your data files that you have provided in the init mode. This
+directory serves as centralized location of data for the workflows to
+have access too. Now that you have your data folder, you can simply
+select which workflow to execute by using the run mode. Since the
+cell-health dataset contains data extracted from CellProfiler, when we
+will used the cp_process workflow.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cytosnake</span> <span class="n">run</span> <span class="n">cp_process</span>
+</pre></div>
+</div>
+<p>If your data contains features that were extracted by using
+DeepProfiler, then the dp_process workflow must be executed</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cytosnake</span> <span class="n">run</span> <span class="n">dp_process</span>
+</pre></div>
+</div>
+<p>These workflows contain their own environments, therefore there is not
+need to download the dependencies that our workflows require. When the
+the job is done, the last message you should see is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Mon</span> <span class="n">Sep</span> <span class="mi">19</span> <span class="mi">14</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">07</span> <span class="mi">2022</span><span class="p">]</span>
+<span class="n">Finished</span> <span class="n">job</span> <span class="mf">0.</span>
+<span class="mi">2</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">steps</span> <span class="p">(</span><span class="mi">100</span><span class="o">%</span><span class="p">)</span> <span class="n">done</span>
+</pre></div>
+</div>
+<p>This indicates that all tasks within the workflow is complete.</p>
+</section>
+<section id="accessing-data">
+<h3>Accessing data<a class="headerlink" href="#accessing-data" title="Permalink to this heading"></a></h3>
+<p>In your directory, a <cite>results</cite> folder will be produced which contains
+all the outputs generated from the workflow. To visualize those outputs,
+simply type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">results</span><span class="o">/</span><span class="n">preprocessing</span><span class="o">/</span> <span class="o">&amp;&amp;</span> <span class="n">ls</span>
+</pre></div>
+</div>
+<p>This will take you to the directory where the generated outputs are and
+lists all the files.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">consensus</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span><span class="n">gz</span>                  <span class="n">SQ00014614_aggregate</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">SQ00014613_aggregate</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">gz</span>       <span class="n">SQ00014614_augmented</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">SQ00014613_augmented</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">gz</span>       <span class="n">SQ00014614_cell_counts</span><span class="o">.</span><span class="n">tsv</span>
+<span class="n">SQ00014613_cell_counts</span><span class="o">.</span><span class="n">tsv</span>        <span class="n">SQ00014614_feature_select</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">SQ00014613_feature_select</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">gz</span>  <span class="n">SQ00014614_normalized</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">SQ00014613_normalized</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<p>These files contain different types of information that is denoted by
+their suffix:</p>
+<ul class="simple">
+<li><p><cite>_cell_counts.tsv</cite>: Number of cells in the dataset</p></li>
+<li><p><cite>_aggregate</cite>: Refers to the aggregated dataset. Single cell dataset
+(your inputs) are aggregated into the “well” level.</p></li>
+<li><p><cite>_augmented</cite>: A datasets contains metadata information in a per well
+level. For example, types of metadata can be: well position,
+treatments, controls, etc</p></li>
+<li><p><cite>_feature_select</cite>: contains the selected morphological features that
+will be used to generate consensus profiles</p></li>
+<li><p><cite>_consensus</cite>: is the consensus profile contains unique morphological
+signatures associated with a specific external treatment (drug,
+perturbations, controls (pos/neg), etc)</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="CytoSnake Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Way Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
