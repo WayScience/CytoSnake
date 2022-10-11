@@ -43,7 +43,7 @@ structure that accommodates all the workflows available in CytoSnake
 
 Currently, cytosnake supports three different types of modes, which are:
 
-   #. inti: setups up input files for workflows
+   #. init: setups up input files for workflows
    #. run: execute a specific
    #. help: executes CytoSnake's CLI help documentation.
 
