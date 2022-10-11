@@ -6,7 +6,7 @@
  About
 *******
 
-This tutorial assumes that you have follows the installation steps and
+This tutorial assumes that you have followed the installation steps and
 you are ready to start taking off with CytoSnake!
 
 Cytosnake is a command line interface (CLI) tool that contains a
