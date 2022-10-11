@@ -157,7 +157,7 @@ Accessing data
 ==============
 
 In your directory, a `results` folder will be produced which contains
-all the outputs generated from the workflow. To visualize those outputs,
+all the outputs generated from the workflow. To list those outputs,
 simply type:
 
 .. code::
