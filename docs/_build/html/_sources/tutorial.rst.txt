@@ -190,7 +190,7 @@ their suffix:
    level. For example, types of metadata can be: well position,
    treatments, controls, etc
 
--  `_feature_select`: contains the selected morphological features that
+-  `_feature_select`: contains the profiles with only selected morphological features
    will be used to generate consensus profiles
 
 -  `_consensus`: is the consensus profile contains unique morphological
