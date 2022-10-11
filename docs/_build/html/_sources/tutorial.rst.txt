@@ -10,7 +10,7 @@ This tutorial assumes that you have follows the installation steps and
 you are ready to start taking off with CytoSnake!
 
 Cytosnake is a command line interface (CLI) tool that contains a
-multitude of workflows for analyzing morphological features obtained
+multitude of workflows for processing morphological features obtained
 from microscopy images of cells.
 
 **********
