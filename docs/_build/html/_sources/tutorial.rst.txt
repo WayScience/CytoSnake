@@ -134,7 +134,7 @@ will used the cp_process workflow.
 
    cytosnake run cp_process
 
-If your data contains features that were extracted by using
+If your data contains features that were extracted by
 DeepProfiler, then the dp_process workflow must be executed
 
 .. code::
