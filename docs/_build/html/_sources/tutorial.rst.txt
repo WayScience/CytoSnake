@@ -156,7 +156,7 @@ This indicates that all tasks within the workflow is complete.
 Accessing data
 ==============
 
-In your directory, a `results` folder will be produced which contains
+In your directory, cytosnake produces a `results` folder, which contains
 all the outputs generated from the workflow. To list those outputs,
 simply type:
 
