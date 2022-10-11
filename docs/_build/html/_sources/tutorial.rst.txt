@@ -38,7 +38,7 @@ using the `init` mode
 -  `DATATYPE` flag tells cytosnake the origin of these morphology feature
    datasets (currently either CellProfiler or DeepProfiler)
 
-The init mode setups the provided input files into its appropriate file
+The init mode initializes the provided input files into the appropriate file
 structure that accommodates all the workflows available in Cat Snake
 
 Currently, cytosnake supports three different types of modes, which are:
