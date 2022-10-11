@@ -36,7 +36,7 @@ using the `init` mode
 -  `METADATA` refers to the associated metadata data directory that was
    generated along with the dataset
 -  `DATATYPE` flag tells cytosnake the origin of these morphology feature
-   datasets were obtained from CellProfiler or DeepProfiler
+   datasets (currently either CellProfiler or DeepProfiler)
 
 The init mode setups the provided input files into its appropriate file
 structure that accommodates all the workflows available in Cat Snake
