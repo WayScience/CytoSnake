@@ -35,7 +35,7 @@ using the `init` mode
 -  `DATAFILE` will refer to the raw data that you are going to analyze,
 -  `METADATA` refers to the associated metadata data directory that was
    generated along with the dataset
--  `DATATYPE` flag tells cytosnake weather these morphology feature
+-  `DATATYPE` flag tells cytosnake the origin of these morphology feature
    datasets were obtained from CellProfiler or DeepProfiler
 
 The init mode setups the provided input files into its appropriate file
