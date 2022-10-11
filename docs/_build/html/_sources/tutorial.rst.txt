@@ -111,7 +111,7 @@ datatype flag when using `init`:
 
    cytosnake init -d *.sqlite -d metadata -b barcode_platemap.csv --datatype deep_profiler
 
-Once entering the command, your out put should look like this:
+Once entering the command, your output should look like this:
 
 .. code::
 
