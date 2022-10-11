@@ -50,16 +50,14 @@ Currently, cytosnake supports three different types of modes, which are:
 Configurations
 ==============
 
-CytoSnake has configurational directory that allows users to change the
-configurations for their specified workflows.
+CytoSnake has a config directory which stores config files.
+Users can modify these configs for their custom workflows.
 
-The configuration files are written in `.yaml` files, which contains all
-the functions and its parameters used within the workflow. The
-workflow's documentation provides information about the configuration
+The config files are written in `.yaml` , and they contain all functions and  parameters used in data processing workflows.
+ Each file provides documentation about the configuration
 files involved within the workflow.
 
-Users can easily find and change parameter values by accessing those
-configurational files.
+Users can easily find and change parameter values by modifying config files.
 
 *******
  Usage
