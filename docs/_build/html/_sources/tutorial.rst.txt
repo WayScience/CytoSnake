@@ -39,7 +39,7 @@ using the `init` mode
    datasets (currently either CellProfiler or DeepProfiler)
 
 The init mode initializes the provided input files into the appropriate file
-structure that accommodates all the workflows available in Cat Snake
+structure that accommodates all the workflows available in CytoSnake
 
 Currently, cytosnake supports three different types of modes, which are:
 
