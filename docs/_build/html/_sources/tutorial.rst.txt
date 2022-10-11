@@ -141,7 +141,7 @@ DeepProfiler, then the dp_process workflow must be executed
 
    cytosnake run dp_process
 
-These workflows contain their own environments, therefore there is not
+These workflows contain their own environments, therefore there is no
 need to download the dependencies that our workflows require. When the
 the job is done, the last message you should see is:
 
