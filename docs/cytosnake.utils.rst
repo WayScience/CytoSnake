@@ -1,35 +1,41 @@
-cytosnake.utils package
-=======================
+#########################
+ cytosnake.utils package
+#########################
 
-Submodules
-----------
+************
+ Submodules
+************
 
-cytosnake.utils.config\_utils module
-------------------------------------
+*************************************
+ cytosnake.utils.config_utils module
+*************************************
 
 .. automodule:: cytosnake.utils.config_utils
    :members:
    :undoc-members:
    :show-inheritance:
 
-cytosnake.utils.cyto\_paths module
-----------------------------------
+***********************************
+ cytosnake.utils.cyto_paths module
+***********************************
 
 .. automodule:: cytosnake.utils.cyto_paths
    :members:
    :undoc-members:
    :show-inheritance:
 
-cytosnake.utils.feature\_utils module
--------------------------------------
+**************************************
+ cytosnake.utils.feature_utils module
+**************************************
 
 .. automodule:: cytosnake.utils.feature_utils
    :members:
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+*****************
+ Module contents
+*****************
 
 .. automodule:: cytosnake.utils
    :members:

@@ -1,8 +1,10 @@
-cytosnake package
-=================
+###################
+ cytosnake package
+###################
 
-Subpackages
------------
+*************
+ Subpackages
+*************
 
 .. toctree::
    :maxdepth: 4
@@ -11,8 +13,9 @@ Subpackages
    cytosnake.common
    cytosnake.utils
 
-Module contents
----------------
+*****************
+ Module contents
+*****************
 
 .. automodule:: cytosnake
    :members:

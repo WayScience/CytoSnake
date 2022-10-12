@@ -1,19 +1,23 @@
-cytosnake.cli.exec package
-==========================
+############################
+ cytosnake.cli.exec package
+############################
 
-Submodules
-----------
+************
+ Submodules
+************
 
-cytosnake.cli.exec.workflow\_exec module
-----------------------------------------
+*****************************************
+ cytosnake.cli.exec.workflow_exec module
+*****************************************
 
 .. automodule:: cytosnake.cli.exec.workflow_exec
    :members:
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+*****************
+ Module contents
+*****************
 
 .. automodule:: cytosnake.cli.exec
    :members:

@@ -1,5 +1,6 @@
-cytosnake
-=========
+###########
+ cytosnake
+###########
 
 .. toctree::
    :maxdepth: 4

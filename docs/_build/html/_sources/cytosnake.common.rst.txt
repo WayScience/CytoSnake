@@ -1,19 +1,23 @@
-cytosnake.common package
-========================
+##########################
+ cytosnake.common package
+##########################
 
-Submodules
-----------
+************
+ Submodules
+************
 
-cytosnake.common.errors module
-------------------------------
+********************************
+ cytosnake.common.errors module
+********************************
 
 .. automodule:: cytosnake.common.errors
    :members:
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+*****************
+ Module contents
+*****************
 
 .. automodule:: cytosnake.common
    :members:

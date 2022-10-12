@@ -6,7 +6,7 @@
  About
 *******
 
-This tutorial assumes that you have follows the installation steps and
+This tutorial assumes that you have followed the installation steps and
 you are ready to start taking off with CytoSnake!
 
 Cytosnake is a command line interface (CLI) tool that contains a
@@ -26,7 +26,7 @@ Modes provide options on how the user can change the functionality of
 CytoSnake. For example, if you would like to initialize your files for a
 specific workflow, you can simply type:
 
-using the `init` mode
+using the ``init`` mode
 
 .. code::
 
@@ -36,17 +36,21 @@ using the `init` mode
    analyze.
 -  `METADATA` refers to the associated metadata data directory that was
    generated along with the dataset
--  `DATATYPE` flag tells cytosnake weather these morphology feature
-   datasets were obtained from CellProfiler or DeepProfiler.
+-  `DATATYPE` flag tells cytosnake the origin of these morphology
+   feature datasets (currently either CellProfiler or DeepProfiler).
 
-The init mode setups the provided input files into its appropriate file
-structure that accommodates all the workflows available in CytoSnake
+The init mode initalizes the provided input files into the appropriate
+file structure that accommodates all the workflows available in
+CytoSnake
 
 CytoSnake currently has three different types of modes, which are:
 
-   #. **inti:** setups up input files for workflows
-   #. **run:** execute a specific workflow
-   #. **help:** executes CytoSnake's CLI help documentation.
+   #. ``init``: setups up input files for workflows
+   #. ``run``: execute a specific workflow
+   #. ``help``: executes CytoSnake's CLI help documentation.
+
+Example of using CytoSnake and its modes is added in the **usage**
+section.
 
 Configurations
 ==============
@@ -54,8 +58,8 @@ Configurations
 CytoSnake has configurational directory that allows users to change the
 configurations for their specified workflows.
 
-The configuration files are written in `.yaml` files, which contains all
-the functions and its parameters used within the workflow. The
+The configuration files are written in ``.yaml`` files, which contains
+all the functions and its parameters used within the workflow. The
 workflow's documentation provides information about the configuration
 files involved within the workflow.
 
@@ -94,9 +98,9 @@ access in order to conduct its processes.
 
 **NOTE**: Currently under development, may change in the future
 
-.. _aggregateDeepProfiler_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L123-L156
+.. _aggregatedeepprofiler_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L123-L156
 
-.. _DeepProfiler_data_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L19-L43
+.. _deepprofiler_data_docs: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L19-L43
 
 +----------------+--------------------------------------------------------------+------------------------------+
 | Steps          | Path to config                                               | Documentation                |
@@ -113,9 +117,9 @@ access in order to conduct its processes.
 Users can easily find and change parameter values by accessing those
 configurational files.
 
--  `steps`: instructions that the workflows
--  `Path to config` Location of the configurational files
--  `Documentation` Relevant pycytominer documentation of
+-  **Steps** : instructions that the workflows
+-  **Path to config** : Location of the configurational files
+-  **Documentation** : Relevant pycytominer documentation of
 
 ***************
  Documentation
@@ -139,8 +143,8 @@ and its parameters. If you are only interested in one, you can use the
    # display help for init mode
    cytosnake init run
 
-`init` mode documentation
-=========================
+``init`` mode documentation
+===========================
 
 Here are the list of parameters that CytoSnake's `init` mode currently
 supports
@@ -150,19 +154,19 @@ supports
 +=====================+======================================================================================================================================================+
 | Required Arguments  |                                                                                                                                                      |
 +---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `-d` `-\-data`      | List of plate data files                                                                                                                             |
+| `-d` `--data`       | List of plate data files                                                                                                                             |
 +---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `-m` `-\-metadata`  | Path to metadata directory                                                                                                                           |
+| `-m` `--metadata`   | Path to metadata directory                                                                                                                           |
 +---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Optional Arguments  |                                                                                                                                                      |
 +---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `-b` `-\-barcode`   | Path to file containing barcode labeling. This is used for cell morphology reads obtained by CellProfiler. [Default=None]                            |
+| `-b` `--barcode`    | Path to file containing barcode labeling. This is used for cell morphology reads obtained by CellProfiler. [Default=None]                            |
 +---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `-\-datatype`       | Datatype flag helps CytoSnake in how to setup the input files for processing. [Choices = "cell_profiler" "deep_profiler"] [Default="cell_profiler"]  |
+| `--datatype`        | Datatype flag helps CytoSnake in how to setup the input files for processing. [Choices = "cell_profiler" "deep_profiler"] [Default="cell_profiler"]  |
 +---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-`run` mode documentation
-========================
+``run`` mode documentation
+==========================
 
 Here are the list of parameters that CytoSnake's `run` mode currently
 supports
@@ -176,11 +180,11 @@ supports
 +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Optional Arguments    |                                                                                                                                                                                                 |
 +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `-c` `-\-max_core`    | Maximum number of cores to use for the workflow default=1                                                                                                                                       |
+| `-c` `--max_core`     | Maximum number of cores to use for the workflow default=1                                                                                                                                       |
 +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `-\-lock`             | Directory becomes locked when workflow is executed. if any interruptions has occurred, if True, the directory will be automatically unlocked, else, it will remain locked. Default is False.    |
+| `--lock`              | Directory becomes locked when workflow is executed. if any interruptions has occurred, if True, the directory will be automatically unlocked, else, it will remain locked. Default is False.    |
 +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `-\-force`            | Force re-run of the workflow. This means generated files will be over-written with the outputs produced from the forced re-run                                                                  |
+| `--force`             | Force re-run of the workflow. This means generated files will be over-written with the outputs produced from the forced re-run                                                                  |
 +-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 *******
@@ -265,14 +269,14 @@ will used the cp_process workflow.
 
    cytosnake run cp_process
 
-If your data contains features that were extracted by using
-DeepProfiler, then the dp_process workflow must be executed
+If your data contains features that were extracted by DeepProfiler, then
+the dp_process workflow must be executed
 
 .. code::
 
    cytosnake run dp_process
 
-These workflows contain their own environments, therefore there is not
+These workflows contain their own environments, therefore there is no
 need to download the dependencies that our workflows require. When the
 the job is done, the last message you should see is:
 
@@ -287,9 +291,9 @@ This indicates that all tasks within the workflow is complete.
 Accessing data
 ==============
 
-In your directory, a `results` folder will be produced which contains
-all the outputs generated from the workflow. To visualize those outputs,
-simply type:
+In your directory, CytoSnake produces a ``results`` folder will, which
+contains all the outputs generated from the workflow. To list those
+outputs, simply type:
 
 .. code::
 
@@ -318,6 +322,9 @@ their suffix:
 -  `_augmented`: A datasets contains metadata information in a per well
    level. For example, types of metadata can be: well position,
    treatments, controls, etc
+
+-  `_normalized` : noramlized augmented dataset useful for feature
+   selection.
 
 -  `_feature_select`: contains the selected morphological features that
    will be used to generate consensus profiles
