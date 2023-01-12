@@ -1,6 +1,4 @@
-import os
 from pathlib import Path
-import shutil
 from random import randint
 
 if __name__ == "__main__":

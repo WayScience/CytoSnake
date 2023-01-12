@@ -13,8 +13,8 @@ from typing import Union
 import shutil
 import argparse
 from dataclasses import dataclass
-from .cli_docs import *
-from ..common.errors import *
+from cytosnake.cli.cli_docs import *
+from cytosnake.common.errors import *
 
 
 @dataclass(repr=True)
