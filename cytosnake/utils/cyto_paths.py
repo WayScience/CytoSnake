@@ -14,7 +14,12 @@ def get_cytosnake_package_path() -> Path:
     Return
     ------
     Path
-        Returns absolute path to
+        Returns absolute path of where the package is installed
+
+    Raises
+    ------
+    FileNotFoundError
+        Raised if the `.git` folder is not found.
     """
 
     # get location of this file
@@ -30,12 +35,24 @@ def get_cytosnake_package_path() -> Path:
 def get_project_root() -> Path:
     """Returns complete path where the analysis is taken place. The function
     will check if `.cytosnake` folder exists, if not an error will be raised.
+
+    Return
+    ------
+    Path
+        Returns absolute path of the project folder
+
+    Raises
+    ------
+    FileNotFoundError
+        Raised with the current directory is not a project folder
     """
 
     # get current working directory
-    cwd = Path().absolute()
+    project_dir = Path().absolute()
 
     # check if the `.cytosnake` folder exist
-    project_folder = cwd / ".cytosnake"
-    if not project_folder.exist():
-        raise FileNotFoundError("Current directory is not ")
+    project_folder = project_dir / ".cytosnake"
+    if not project_folder.exists():
+        raise FileNotFoundError("Current directory is not a project folder")
+
+    return project_dir
