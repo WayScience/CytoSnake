@@ -4,7 +4,7 @@ setup(
     name="CytoSnake",
     version="0.0.1",
     url="https://github.com/WayScience/CytoPipe",
-    author="Way Lab",
+    author="Erik Serrano",
     packages=find_packages(),
     python_requires=">=3.10",
     entry_points={
