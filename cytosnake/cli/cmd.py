@@ -10,9 +10,10 @@ import sys
 # cytosnake imports
 from cytosnake.cli.args import CliControlPanel
 from cytosnake.cli.exec.workflow_exec import workflow_executor
+from cytosnake.utils.cyto_paths import get_project_root
 from cytosnake.cli.setup_init import init_cp_data, init_dp_data
 from cytosnake.cli.cli_docs import init_doc, cli_docs, run_doc
-from cytosnake.common.errors import WorkflowFailedException
+from cytosnake.common.errors import WorkflowFailedException, ProjectExistsError
 from cytosnake.utils.cytosnake_setup import setup_cytosnake_env
 
 
@@ -48,6 +49,13 @@ def run_cmd() -> None:
             # setting up input files for cytosnake
             print("INFO: Formatting input files")
             init_args = args_handler.parse_init_args()
+
+            # checking if `.cytosnake` directory exists, if so raise error
+            project_dir = get_project_root() / ".cytosnake"
+            if project_dir.exists():
+                raise ProjectExistsError(
+                    "This directory already has been initialized"
+                )
 
             # identifying which data type was added and how to set it up
             match init_args.datatype:
