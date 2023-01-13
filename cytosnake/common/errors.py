@@ -24,6 +24,9 @@ class BaseValueError(ValueError):
 class BaseFileNotFound(FileNotFoundError):
     """Raised if a requested file is not found in cytopipe"""
 
+class BaseFileExistsError(FileExistsError):
+    """Raised if an existing file or directory is found in a directory"""
+
 
 class BaseExecutorException(RuntimeError):
     """Base exception related to cytopipe execution"""
@@ -74,6 +77,11 @@ class WorkflowNotFoundError(BaseFileNotFound):
 
 class WorkflowFailedException(BaseWorkflowException):
     """Raised if a workflow fails during runtime"""
+
+
+class ProjectExistsError(BaseFileExistsError):
+    """Raised when `.cytosnake` file is found within a directory indicating
+    that the current directory has already been set up for cytosnake analysis"""
 
 
 # -----------------------
