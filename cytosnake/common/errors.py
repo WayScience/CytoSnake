@@ -99,11 +99,11 @@ def display_error(
         [default=None]
     exit_code : int
         Exit code when error is raised. Cannot be lower than 1. [Default=1]
-    
+
     Return
     ------
         None
-    
+
     Raises
     ------
     TypeError
@@ -113,7 +113,7 @@ def display_error(
 
     ValueError
         Raised if exit_code is a negative number or is equal to 0
-    
+
     """
 
     # type checking (should learn more about tpye guards)

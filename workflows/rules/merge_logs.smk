@@ -10,6 +10,7 @@ The archive file is taged with (Month-day-year)-(hour-min-sec)
 Example: 072922-083033_archived_logs
 """
 
+
 rule merge_logs:
     input:
         expand("logs/{logname}.log", logname=LOG_NAMES),
