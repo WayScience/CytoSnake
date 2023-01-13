@@ -49,7 +49,8 @@ def create_cytosnake_dir() -> None:
         display_error(e, msg=msg)
 
 
-# NOTE: This should be in the `file_utils` module, may trigger circular imports
+# TODO: This should be in the `file_utils` module, may trigger circular imports
+# -- this is a temporary solution
 def transport_project_files() -> None:
     """obtains the necessary files from software package and transport them into
     current working directory"""
@@ -75,7 +76,6 @@ def transport_project_files() -> None:
         shutil.copytree(src_path, proj_path)
 
 
-# todo: finish this after figuring out on how to search for files in directories
 def generate_meta_path_configs() -> None:
     """constructs a `_paths.yaml` file that contains the necessary path
     information for file handling. this allows `cytosnake` to know which folders
