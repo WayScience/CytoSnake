@@ -69,11 +69,12 @@ def transport_project_files() -> None:
 
         # construct source directory path
         src_path = pkg_path / target_dir
+        target_dst = proj_path / target_dir
         if not src_path.exists():
             raise FileNotFoundError(f"{src_path} does not exist")
 
         # move to dest: working project directory
-        shutil.copytree(src_path, proj_path)
+        shutil.copytree(src_path, target_dst)
 
 
 def generate_meta_path_configs() -> None:
