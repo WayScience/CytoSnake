@@ -28,7 +28,7 @@ def get_cytosnake_package_path() -> Path:
 
     # get location of this file
     # -- check if he ".git" folder exists
-    project_path = Path(cytosnake.__file__)
+    project_path = Path(cytosnake.__path__[0]).parent
     git_path = project_path / ".git"
     if not git_path.exists:
         raise FileNotFoundError("Unable to find cytosnake package path")
