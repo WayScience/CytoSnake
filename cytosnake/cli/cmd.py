@@ -49,7 +49,7 @@ def run_cmd() -> None:
             # checking if current directory is a project folder
             # -- if True, raise error
             if is_cytosnake_dir():
-                raise FileExistsError(
+                raise ProjectExistsError(
                     "This directory is already a cytosnake project directory"
                 )
 
