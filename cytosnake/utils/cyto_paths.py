@@ -13,6 +13,23 @@ from cytosnake.utils.file_utils import file_search
 from cytosnake.guards.path_guards import is_valid_path
 
 
+def get_meta_path() -> Path:
+    """returns meta path configurational file path.
+
+    Returns
+    -------
+    Path
+        Path object pointing to `_paths.yaml` config file
+    """
+
+    # getting project directory
+    proj_dir = get_project_root() / ".cytosnake"
+    if not proj_dir.exists():
+        raise FileNotFoundError("Current directory is not a project folder")
+
+    return proj_dir.absolute()
+
+
 def is_cytosnake_dir(dir_path: Optional[str | Path] = None) -> bool:
     """Checks if the current directory has been set up for cytosnake. Searches
     for the `.cytosnake` file in current or specified directory.

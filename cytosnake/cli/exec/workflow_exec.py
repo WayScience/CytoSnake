@@ -68,10 +68,10 @@ def workflow_executor(
         start where it last stopped. by default False
     """
 
-    # loading desired workflow path
+    # loading configurations that contains all workflow paths
     workflow_path = load_workflow_path(wf_name=workflow)
-
-    # executing workflow
+    
+    # executing selected workflow
     job = __base_exec(
         workflow_file=workflow_path,
         n_cores=n_cores,
