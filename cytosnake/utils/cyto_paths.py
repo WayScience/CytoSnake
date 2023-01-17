@@ -4,12 +4,47 @@ module: cyto_paths.py
 This module will contain functions that handles `cytosnake's` pathing
 """
 
+from typing import Optional
 from pathlib import Path
 import cytosnake
 
 # cytosnake imports
 from cytosnake.utils.file_utils import file_search
 from cytosnake.guards.path_guards import is_valid_path
+
+
+def is_cytosnake_dir(dir_path: Optional[str | Path] = None) -> bool:
+    """Checks if the current directory has been set up for cytosnake. Searches
+    for the `.cytosnake` file in current or specified directory.
+
+    Parameters
+    ----------
+    dir_path : Optional[str | Path]
+        Path to directory. If None, current directory will be used.
+        [Default=None]
+
+    Returns
+    -------
+    bool
+        True if directory has been initialized for cytosnake, else False
+    """
+
+    # setting to current directory if not path is specified
+    if dir_path is None:
+        dir_path = Path().absolute()
+
+    # type checking
+    if not is_valid_path(dir_path):
+        _type = type(dir_path)
+        raise ValueError(
+            f"dir_path must be either str or Path type, not: {_type}"
+        )
+    elif isinstance(dir_path, str):
+        dir_path = Path(str).absolute()
+
+    # get project older
+    cyto_proj_dir = dir_path / ".cytosnake"
+    return bool(cyto_proj_dir.exists())
 
 
 def get_cytosnake_package_path() -> Path:

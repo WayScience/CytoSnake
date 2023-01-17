@@ -10,7 +10,7 @@ import sys
 # cytosnake imports
 from cytosnake.cli.args import CliControlPanel
 from cytosnake.cli.exec.workflow_exec import workflow_executor
-from cytosnake.utils.cyto_paths import get_project_root
+from cytosnake.utils.cyto_paths import get_project_root, is_cytosnake_dir
 from cytosnake.cli.setup_init import init_cp_data, init_dp_data
 from cytosnake.cli.cli_docs import init_doc, cli_docs, run_doc
 from cytosnake.common.errors import WorkflowFailedException, ProjectExistsError
@@ -38,7 +38,7 @@ def run_cmd() -> None:
         print(cli_docs)
         sys.exit(0)
 
-    # Main mode selection function. Each mactch
+    # Main mode selection function. Each match
     match args_handler.mode:
         case "init":
             # if mode help flag is shown, show cli help doc
@@ -46,16 +46,16 @@ def run_cmd() -> None:
                 print(init_doc)
                 sys.exit(0)
 
+            # checking if current directory is a project folder
+            # -- if True, raise error
+            if is_cytosnake_dir():
+                raise FileExistsError(
+                    "This directory is already a cytosnake project directory"
+                )
+
             # setting up input files for cytosnake
             print("INFO: Formatting input files")
             init_args = args_handler.parse_init_args()
-
-            # checking if `.cytosnake` directory exists, if so raise error
-            project_dir = get_project_root() / ".cytosnake"
-            if project_dir.exists():
-                raise ProjectExistsError(
-                    "This directory already has been initialized"
-                )
 
             # identifying which data type was added and how to set it up
             match init_args.datatype:
