@@ -22,7 +22,7 @@ specific workflow, you can simply type:
 
 using the `init` mode
 
-```
+```text
 cytosnake init -d [<DATAFILES>] -m <METADATA> --data_type <DATATYPE>
 ```
 
@@ -91,7 +91,7 @@ configurational files.
 
 To visualize CytoSnake's documentation, simply type:
 
-```
+```text
 cytosnake help
 ```
 
@@ -99,7 +99,7 @@ This will display a large output into your terminal explaining all modes
 and its parameters. If you are only interested in one, you can use the
 `help` under any mode:
 
-```
+```text
 # display help for run mode
 cytosnake run help
 
@@ -156,21 +156,21 @@ here are specific to the files downloaded.
 If you are using the downloaded dataset. unzip the zip files in the
 directory where the CytoSnake source is.
 
-```
+```text
 unzip metadata.zip && unzip barcode_platemap.csv.zip
 ```
 
 The first step it to prepare your files for analysis, this is simply
 executed by typing:
 
-```
+```text
 cytosnake init -d SQ00014613.sqlite SQ00014613.sqlite -d metadata -b barcode_platemap.csv
 ```
 
 In instances where you may have a lot of data, CytoSnake supports
 wildcard variables.
 
-```
+```text
 cytosnake init -d *.sqlite -d metadata -b barcode_platemap.csv
 ```
 
@@ -178,13 +178,13 @@ If there is an instances were you are going to use morphological
 datasets obtained from DeepProfiler, then you must explicitly state the
 datatype flag when using `init`:
 
-```
+```text
 cytosnake init -d *.sqlite -d metadata -b barcode_platemap.csv --datatype deep_profiler
 ```
 
 Once entering the command, your out put should look like this:
 
-```
+```text
 INFO: Formatting input files
 INFO: Formatting complete!
 ```
@@ -200,14 +200,14 @@ select which workflow to execute by using the run mode. Since the
 cell-health dataset contains data extracted from CellProfiler, when we
 will used the cp_process workflow.
 
-```
+```text
 cytosnake run cp_process
 ```
 
 If your data contains features that were extracted by DeepProfiler, then
 the dp_process workflow must be executed
 
-```
+```text
 cytosnake run dp_process
 ```
 
@@ -215,7 +215,7 @@ These workflows contain their own environments, therefore there is no
 need to download the dependencies that our workflows require. When the
 the job is done, the last message you should see is:
 
-```
+```text
 [Mon Sep 19 14:29:07 2022]
 Finished job 0.
 2 of 2 steps (100%) done
@@ -229,7 +229,7 @@ In your directory, CytoSnake produces a `results` folder will, which
 contains all the outputs generated from the workflow. To list those
 outputs, simply type:
 
-```
+```text
 cd results/preprocessing/ && ls
 ```
 
