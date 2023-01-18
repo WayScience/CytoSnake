@@ -14,7 +14,6 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -55,10 +54,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>cytosnake.cli package</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">cytosnake.cli package</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/cytosnake.cli.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/cytosnake.cli.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -67,9 +66,9 @@
            <div itemprop="articleBody">
              
   <section id="cytosnake-cli-package">
-<h1>cytosnake.cli package<a class="headerlink" href="#cytosnake-cli-package" title="Permalink to this heading"></a></h1>
+<h1>cytosnake.cli package<a class="headerlink" href="#cytosnake-cli-package" title="Permalink to this headline"></a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cytosnake.cli.exec.html">cytosnake.cli.exec package</a><ul>
@@ -82,10 +81,10 @@
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
 </section>
 <section id="module-cytosnake.cli.args">
-<span id="cytosnake-cli-args-module"></span><h2>cytosnake.cli.args module<a class="headerlink" href="#module-cytosnake.cli.args" title="Permalink to this heading"></a></h2>
+<span id="cytosnake-cli-args-module"></span><h2>cytosnake.cli.args module<a class="headerlink" href="#module-cytosnake.cli.args" title="Permalink to this headline"></a></h2>
 <p>Documentation</p>
 <p>args.py Module</p>
 <p>Responsible for centralizing and handling all user inputted
@@ -107,9 +106,9 @@ provides and provides easy logic flow for the CLI to work with.</p>
 </dd>
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="cytosnake.common.html#cytosnake.common.errors.InvalidExecutableException" title="cytosnake.common.errors.InvalidExecutableException"><strong>InvalidExecutableException</strong></a> – Raised if mismatching executable paths do not match</p></li>
-<li><p><a class="reference internal" href="cytosnake.common.html#cytosnake.common.errors.InvalidArgumentException" title="cytosnake.common.errors.InvalidArgumentException"><strong>InvalidArgumentException</strong></a> – Raised if invalid arguments are provided</p></li>
-<li><p><a class="reference internal" href="cytosnake.common.html#cytosnake.common.errors.InvalidModeException" title="cytosnake.common.errors.InvalidModeException"><strong>InvalidModeException</strong></a> – Raised if an invalid mode is provided</p></li>
+<li><p><a class="reference internal" href="old/cytosnake.common.html#cytosnake.common.errors.InvalidExecutableException" title="cytosnake.common.errors.InvalidExecutableException"><strong>InvalidExecutableException</strong></a> – Raised if mismatching executable paths do not match</p></li>
+<li><p><a class="reference internal" href="old/cytosnake.common.html#cytosnake.common.errors.InvalidArgumentException" title="cytosnake.common.errors.InvalidArgumentException"><strong>InvalidArgumentException</strong></a> – Raised if invalid arguments are provided</p></li>
+<li><p><a class="reference internal" href="old/cytosnake.common.html#cytosnake.common.errors.InvalidModeException" title="cytosnake.common.errors.InvalidModeException"><strong>InvalidModeException</strong></a> – Raised if an invalid mode is provided</p></li>
 </ul>
 </dd>
 </dl>
@@ -155,7 +154,7 @@ provides and provides easy logic flow for the CLI to work with.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cytosnake.cli.args.CliControlPanel.parse_init_args">
-<span class="sig-name descname"><span class="pre">parse_init_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Namespace</span></span></span><a class="headerlink" href="#cytosnake.cli.args.CliControlPanel.parse_init_args" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parse_init_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">argparse.Namespace</span></span></span><a class="headerlink" href="#cytosnake.cli.args.CliControlPanel.parse_init_args" title="Permalink to this definition"></a></dt>
 <dd><p>Parses user inputs for setting up files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -179,7 +178,7 @@ provides and provides easy logic flow for the CLI to work with.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cytosnake.cli.args.CliControlPanel.parse_workflow_args">
-<span class="sig-name descname"><span class="pre">parse_workflow_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Namespace</span></span></span><a class="headerlink" href="#cytosnake.cli.args.CliControlPanel.parse_workflow_args" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parse_workflow_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">argparse.Namespace</span></span></span><a class="headerlink" href="#cytosnake.cli.args.CliControlPanel.parse_workflow_args" title="Permalink to this definition"></a></dt>
 <dd><p>Wrapper for parsing workflow parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -210,9 +209,9 @@ provides and provides easy logic flow for the CLI to work with.</p>
 
 </section>
 <section id="module-cytosnake.cli.cli_checker">
-<span id="cytosnake-cli-cli-checker-module"></span><h2>cytosnake.cli.cli_checker module<a class="headerlink" href="#module-cytosnake.cli.cli_checker" title="Permalink to this heading"></a></h2>
+<span id="cytosnake-cli-cli-checker-module"></span><h2>cytosnake.cli.cli_checker module<a class="headerlink" href="#module-cytosnake.cli.cli_checker" title="Permalink to this headline"></a></h2>
 <section id="documentation">
-<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h3>
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline"></a></h3>
 <p>cli_checker.py Module</p>
 <p>Argument checking module that checks and validates user input
 arguments from CytoSnake’s cli interface,</p>
@@ -276,10 +275,10 @@ arguments are passed.</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="cytosnake.common.html#cytosnake.common.errors.NoArgumentsException" title="cytosnake.common.errors.NoArgumentsException"><strong>NoArgumentsException</strong></a> – Raised if the user provides no arguments</p></li>
-<li><p><a class="reference internal" href="cytosnake.common.html#cytosnake.common.errors.InvalidModeException" title="cytosnake.common.errors.InvalidModeException"><strong>InvalidModeException</strong></a> – Raised if user inputs an invalid CytoSnake mode</p></li>
-<li><p><a class="reference internal" href="cytosnake.common.html#cytosnake.common.errors.InvalidWorkflowException" title="cytosnake.common.errors.InvalidWorkflowException"><strong>InvalidWorkflowException</strong></a> – Raised if user inputs an invalid workflow name</p></li>
-<li><p><a class="reference internal" href="cytosnake.common.html#cytosnake.common.errors.MultipleModesException" title="cytosnake.common.errors.MultipleModesException"><strong>MultipleModesException</strong></a> – Raised if user provides multiple modes</p></li>
+<li><p><a class="reference internal" href="old/cytosnake.common.html#cytosnake.common.errors.NoArgumentsException" title="cytosnake.common.errors.NoArgumentsException"><strong>NoArgumentsException</strong></a> – Raised if the user provides no arguments</p></li>
+<li><p><a class="reference internal" href="old/cytosnake.common.html#cytosnake.common.errors.InvalidModeException" title="cytosnake.common.errors.InvalidModeException"><strong>InvalidModeException</strong></a> – Raised if user inputs an invalid CytoSnake mode</p></li>
+<li><p><a class="reference internal" href="old/cytosnake.common.html#cytosnake.common.errors.InvalidWorkflowException" title="cytosnake.common.errors.InvalidWorkflowException"><strong>InvalidWorkflowException</strong></a> – Raised if user inputs an invalid workflow name</p></li>
+<li><p><a class="reference internal" href="old/cytosnake.common.html#cytosnake.common.errors.MultipleModesException" title="cytosnake.common.errors.MultipleModesException"><strong>MultipleModesException</strong></a> – Raised if user provides multiple modes</p></li>
 </ul>
 </dd>
 </dl>
@@ -288,10 +287,10 @@ arguments are passed.</p>
 </section>
 </section>
 <section id="module-cytosnake.cli.cli_docs">
-<span id="cytosnake-cli-cli-docs-module"></span><h2>cytosnake.cli.cli_docs module<a class="headerlink" href="#module-cytosnake.cli.cli_docs" title="Permalink to this heading"></a></h2>
+<span id="cytosnake-cli-cli-docs-module"></span><h2>cytosnake.cli.cli_docs module<a class="headerlink" href="#module-cytosnake.cli.cli_docs" title="Permalink to this headline"></a></h2>
 </section>
 <section id="module-cytosnake.cli.cmd">
-<span id="cytosnake-cli-cmd-module"></span><h2>cytosnake.cli.cmd module<a class="headerlink" href="#module-cytosnake.cli.cmd" title="Permalink to this heading"></a></h2>
+<span id="cytosnake-cli-cmd-module"></span><h2>cytosnake.cli.cmd module<a class="headerlink" href="#module-cytosnake.cli.cmd" title="Permalink to this headline"></a></h2>
 <p>Documentation</p>
 <p>cmd.py Module</p>
 <p>Generates CLI interface in order to interact with CytoSnake.</p>
@@ -311,7 +310,7 @@ arguments are passed.</p>
 
 </section>
 <section id="module-cytosnake.cli.setup_init">
-<span id="cytosnake-cli-setup-init-module"></span><h2>cytosnake.cli.setup_init module<a class="headerlink" href="#module-cytosnake.cli.setup_init" title="Permalink to this heading"></a></h2>
+<span id="cytosnake-cli-setup-init-module"></span><h2>cytosnake.cli.setup_init module<a class="headerlink" href="#module-cytosnake.cli.setup_init" title="Permalink to this headline"></a></h2>
 <p>setup_init.py</p>
 <p>Contains functions for initializing different data structures
 for processing</p>
@@ -354,7 +353,7 @@ taking the path of the inputs files and storing them into the “data” directo
 
 </section>
 <section id="module-cytosnake.cli">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cytosnake.cli" title="Permalink to this heading"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cytosnake.cli" title="Permalink to this headline"></a></h2>
 </section>
 </section>
 

@@ -14,7 +14,6 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -80,10 +79,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>CytoSnake Tutorial</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">CytoSnake Tutorial</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/tutorial.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -92,9 +91,9 @@
            <div itemprop="articleBody">
              
   <section id="cytosnake-tutorial">
-<h1>CytoSnake Tutorial<a class="headerlink" href="#cytosnake-tutorial" title="Permalink to this heading"></a></h1>
+<h1>CytoSnake Tutorial<a class="headerlink" href="#cytosnake-tutorial" title="Permalink to this headline"></a></h1>
 <section id="about">
-<h2>About<a class="headerlink" href="#about" title="Permalink to this heading"></a></h2>
+<h2>About<a class="headerlink" href="#about" title="Permalink to this headline"></a></h2>
 <p>This tutorial assumes that you have followed the installation steps and
 you are ready to start taking off with CytoSnake!</p>
 <p>Cytosnake is a command line interface (CLI) tool that contains a
@@ -102,10 +101,10 @@ multitude of workflows for analyzing morphological features obtained
 from microscopy images of cells.</p>
 </section>
 <section id="concepts">
-<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading"></a></h2>
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline"></a></h2>
 <img alt="_images/Cytopipe-cli_0.drawio.png" src="_images/Cytopipe-cli_0.drawio.png" />
 <section id="modes">
-<h3>Modes<a class="headerlink" href="#modes" title="Permalink to this heading"></a></h3>
+<h3>Modes<a class="headerlink" href="#modes" title="Permalink to this headline"></a></h3>
 <p>Modes provide options on how the user can change the functionality of
 CytoSnake. For example, if you would like to initialize your files for a
 specific workflow, you can simply type:</p>
@@ -114,11 +113,11 @@ specific workflow, you can simply type:</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><cite>DATAFILE</cite> will refer to the raw data file(s) that you are going to
+<li><p><code class="docutils literal notranslate"><span class="pre">DATAFILE</span></code> will refer to the raw data file(s) that you are going to
 analyze.</p></li>
-<li><p><cite>METADATA</cite> refers to the associated metadata data directory that was
+<li><p><code class="docutils literal notranslate"><span class="pre">METADATA</span></code> refers to the associated metadata data directory that was
 generated along with the dataset</p></li>
-<li><p><cite>DATATYPE</cite> flag tells cytosnake the origin of these morphology
+<li><p><code class="docutils literal notranslate"><span class="pre">DATATYPE</span></code> flag tells cytosnake the origin of these morphology
 feature datasets (currently either CellProfiler or DeepProfiler).</p></li>
 </ul>
 <p>The init mode initalizes the provided input files into the appropriate
@@ -136,7 +135,7 @@ CytoSnake</p>
 section.</p>
 </section>
 <section id="configurations">
-<h3>Configurations<a class="headerlink" href="#configurations" title="Permalink to this heading"></a></h3>
+<h3>Configurations<a class="headerlink" href="#configurations" title="Permalink to this headline"></a></h3>
 <p>CytoSnake has configurational directory that allows users to change the
 configurations for their specified workflows.</p>
 <p>The configuration files are written in <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> files, which contains
@@ -146,13 +145,8 @@ files involved within the workflow.</p>
 <p>Below are the two currently available workflows and the config files it
 access in order to conduct its processes.</p>
 <section id="cp-process-workflow-docs">
-<h4><strong>cp_process workflow docs</strong><a class="headerlink" href="#cp-process-workflow-docs" title="Permalink to this heading"></a></h4>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 16%" />
-<col style="width: 63%" />
-<col style="width: 21%" />
-</colgroup>
+<h4><strong>cp_process workflow docs</strong><a class="headerlink" href="#cp-process-workflow-docs" title="Permalink to this headline"></a></h4>
+<table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Steps</p></th>
 <th class="head"><p>Path to config</p></th>
@@ -184,14 +178,9 @@ access in order to conduct its processes.</p>
 </table>
 </section>
 <section id="dp-process-workflow">
-<h4><strong>dp_process workflow</strong><a class="headerlink" href="#dp-process-workflow" title="Permalink to this heading"></a></h4>
+<h4><strong>dp_process workflow</strong><a class="headerlink" href="#dp-process-workflow" title="Permalink to this headline"></a></h4>
 <p><strong>NOTE</strong>: Currently under development, may change in the future</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 15%" />
-<col style="width: 57%" />
-<col style="width: 28%" />
-</colgroup>
+<table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Steps</p></th>
 <th class="head"><p>Path to config</p></th>
@@ -228,14 +217,14 @@ configurational files.</p>
 </section>
 </section>
 <section id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h2>
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline"></a></h2>
 <p>To visualize CytoSnake’s documentation, simply type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cytosnake</span> <span class="n">help</span>
 </pre></div>
 </div>
 <p>This will display a large output into your terminal explaining all modes
 and its parameters. If you are only interested in one, you can use the
-<cite>help</cite> under any mode:</p>
+<code class="docutils literal notranslate"><span class="pre">help</span></code> under any mode:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># display help for run mode</span>
 <span class="n">cytosnake</span> <span class="n">run</span> <span class="n">help</span>
 
@@ -244,14 +233,10 @@ and its parameters. If you are only interested in one, you can use the
 </pre></div>
 </div>
 <section id="init-mode-documentation">
-<h3><code class="docutils literal notranslate"><span class="pre">init</span></code> mode documentation<a class="headerlink" href="#init-mode-documentation" title="Permalink to this heading"></a></h3>
-<p>Here are the list of parameters that CytoSnake’s <cite>init</cite> mode currently
+<h3><code class="docutils literal notranslate"><span class="pre">init</span></code> mode documentation<a class="headerlink" href="#init-mode-documentation" title="Permalink to this headline"></a></h3>
+<p>Here are the list of parameters that CytoSnake’s <code class="docutils literal notranslate"><span class="pre">init</span></code> mode currently
 supports</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 88%" />
-</colgroup>
+<table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameters</p></th>
 <th class="head"><p>Documentation</p></th>
@@ -259,35 +244,31 @@ supports</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Required Arguments</p></td>
-<td></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><cite>-d</cite> <cite>–data</cite></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-d</span></code> <code class="docutils literal notranslate"><span class="pre">--data</span></code></p></td>
 <td><p>List of plate data files</p></td>
 </tr>
-<tr class="row-even"><td><p><cite>-m</cite> <cite>–metadata</cite></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-m</span></code> <code class="docutils literal notranslate"><span class="pre">--metadata</span></code></p></td>
 <td><p>Path to metadata directory</p></td>
 </tr>
 <tr class="row-odd"><td><p>Optional Arguments</p></td>
-<td></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><cite>-b</cite> <cite>–barcode</cite></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-b</span></code> <code class="docutils literal notranslate"><span class="pre">--barcode</span></code></p></td>
 <td><p>Path to file containing barcode labeling. This is used for cell morphology reads obtained by CellProfiler. [Default=None]</p></td>
 </tr>
-<tr class="row-odd"><td><p><cite>–datatype</cite></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--datatype</span></code></p></td>
 <td><p>Datatype flag helps CytoSnake in how to setup the input files for processing. [Choices = “cell_profiler” “deep_profiler”] [Default=”cell_profiler”]</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="run-mode-documentation">
-<h3><code class="docutils literal notranslate"><span class="pre">run</span></code> mode documentation<a class="headerlink" href="#run-mode-documentation" title="Permalink to this heading"></a></h3>
-<p>Here are the list of parameters that CytoSnake’s <cite>run</cite> mode currently
+<h3><code class="docutils literal notranslate"><span class="pre">run</span></code> mode documentation<a class="headerlink" href="#run-mode-documentation" title="Permalink to this headline"></a></h3>
+<p>Here are the list of parameters that CytoSnake’s <code class="docutils literal notranslate"><span class="pre">run</span></code> mode currently
 supports</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 11%" />
-<col style="width: 89%" />
-</colgroup>
+<table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameters</p></th>
 <th class="head"><p>Documentation</p></th>
@@ -295,21 +276,21 @@ supports</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Required Arguments</p></td>
-<td></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>workflow</p></td>
 <td><p>Name of the workflow to execute</p></td>
 </tr>
 <tr class="row-even"><td><p>Optional Arguments</p></td>
-<td></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><cite>-c</cite> <cite>–max_core</cite></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-c</span></code> <code class="docutils literal notranslate"><span class="pre">--max_core</span></code></p></td>
 <td><p>Maximum number of cores to use for the workflow default=1</p></td>
 </tr>
-<tr class="row-even"><td><p><cite>–lock</cite></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--lock</span></code></p></td>
 <td><p>Directory becomes locked when workflow is executed. if any interruptions has occurred, if True, the directory will be automatically unlocked, else, it will remain locked. Default is False.</p></td>
 </tr>
-<tr class="row-odd"><td><p><cite>–force</cite></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--force</span></code></p></td>
 <td><p>Force re-run of the workflow. This means generated files will be over-written with the outputs produced from the forced re-run</p></td>
 </tr>
 </tbody>
@@ -317,9 +298,9 @@ supports</p>
 </section>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <section id="download-data">
-<h3>Download data<a class="headerlink" href="#download-data" title="Permalink to this heading"></a></h3>
+<h3>Download data<a class="headerlink" href="#download-data" title="Permalink to this headline"></a></h3>
 <p>In this usage tutorial, we will be using data cell health datasets.</p>
 <p>You can download these datasets (quite large files):</p>
 <ul class="simple">
@@ -332,7 +313,7 @@ supports</p>
 here are specific to the files downloaded.</p>
 </section>
 <section id="setting-up-files">
-<h3>Setting up files<a class="headerlink" href="#setting-up-files" title="Permalink to this heading"></a></h3>
+<h3>Setting up files<a class="headerlink" href="#setting-up-files" title="Permalink to this headline"></a></h3>
 <p>If you are using the downloaded dataset. unzip the zip files in the
 directory where the CytoSnake source is.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unzip</span> <span class="n">metadata</span><span class="o">.</span><span class="n">zip</span> <span class="o">&amp;&amp;</span> <span class="n">unzip</span> <span class="n">barcode_platemap</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">zip</span>
@@ -350,7 +331,7 @@ wildcard variables.</p>
 </div>
 <p>If there is an instances were you are going to use morphological
 datasets obtained from DeepProfiler, then you must explicitly state the
-datatype flag when using <cite>init</cite>:</p>
+datatype flag when using <code class="docutils literal notranslate"><span class="pre">init</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cytosnake</span> <span class="n">init</span> <span class="o">-</span><span class="n">d</span> <span class="o">*.</span><span class="n">sqlite</span> <span class="o">-</span><span class="n">d</span> <span class="n">metadata</span> <span class="o">-</span><span class="n">b</span> <span class="n">barcode_platemap</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">datatype</span> <span class="n">deep_profiler</span>
 </pre></div>
 </div>
@@ -361,7 +342,7 @@ INFO: Formatting complete!
 </div>
 </section>
 <section id="running-workflow">
-<h3>Running Workflow<a class="headerlink" href="#running-workflow" title="Permalink to this heading"></a></h3>
+<h3>Running Workflow<a class="headerlink" href="#running-workflow" title="Permalink to this headline"></a></h3>
 <p>In your current working directory, a new folder ./data should appear in
 your current directory. Inside the directory, it should contain symbolic
 links of your data files that you have provided in the init mode. This
@@ -389,7 +370,7 @@ the job is done, the last message you should see is:</p>
 <p>This indicates that all tasks within the workflow is complete.</p>
 </section>
 <section id="accessing-data">
-<h3>Accessing data<a class="headerlink" href="#accessing-data" title="Permalink to this heading"></a></h3>
+<h3>Accessing data<a class="headerlink" href="#accessing-data" title="Permalink to this headline"></a></h3>
 <p>In your directory, CytoSnake produces a <code class="docutils literal notranslate"><span class="pre">results</span></code> folder will, which
 contains all the outputs generated from the workflow. To list those
 outputs, simply type:</p>
@@ -409,15 +390,17 @@ lists all the files.</p>
 <p>These files contain different types of information that is denoted by
 their suffix:</p>
 <ul class="simple">
-<li><p><cite>_cell_counts.tsv</cite>: Number of cells in the dataset</p></li>
-<li><p><cite>_aggregate</cite>: Refers to the aggregated dataset. Single cell dataset
+<li><p><code class="docutils literal notranslate"><span class="pre">_cell_counts.tsv</span></code>: Number of cells in the dataset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_aggregate</span></code>: Refers to the aggregated dataset. Single cell dataset
 (your inputs) are aggregated into the “well” level.</p></li>
-<li><p><cite>_augmented</cite>: A datasets contains metadata information in a per well
+<li><p><code class="docutils literal notranslate"><span class="pre">_augmented</span></code>: A datasets contains metadata information in a per well
 level. For example, types of metadata can be: well position,
 treatments, controls, etc</p></li>
-<li><p><cite>_feature_select</cite>: contains the selected morphological features that
+<li><p><code class="docutils literal notranslate"><span class="pre">_normalized</span></code> : noramlized augmented dataset useful for feature
+selection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_feature_select</span></code>: contains the selected morphological features that
 will be used to generate consensus profiles</p></li>
-<li><p><cite>_consensus</cite>: is the consensus profile contains unique morphological
+<li><p><code class="docutils literal notranslate"><span class="pre">_consensus</span></code>: is the consensus profile contains unique morphological
 signatures associated with a specific external treatment (drug,
 perturbations, controls (pos/neg), etc)</p></li>
 </ul>
