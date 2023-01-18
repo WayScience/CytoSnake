@@ -183,3 +183,16 @@ def get_project_dirpaths() -> dict:
             all_dirs[_file.name] = str(_file.absolute())
 
     return all_dirs
+
+
+def get_data_path() -> Path:
+    """Returns path pointing where the data folder is
+
+    Returns
+    -------
+    Path
+        Path to data folder in project directory
+    """
+
+    # load in `_paths.yaml` meta data
+    
