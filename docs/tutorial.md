@@ -47,7 +47,7 @@ section.
 
 ### Configurations
 
-CytoSnake has configurational directory that allows users to change the
+CytoSnake has a configuration directory that allows users to change the
 configurations for their specified workflows.
 
 The configuration files are written in `.yaml` files, which contains
