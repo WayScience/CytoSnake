@@ -169,8 +169,14 @@ In instances where you may have a lot of data, CytoSnake supports
 wildcard variables.
 
 ```text
-cytosnake init -d *.sqlite -d metadata -b barcode_platemap.csv
+cytosnake init -d *.sqlite -d metadata -b barcode_platemap..csv
 ```
+
+Note that the data files under the `-d` parameter uses the wildcard `*` to
+select all the `sqlite` files and places them into a single list of datafile
+entries.
+
+Wildcards are mainly suitable for selecting multiple files.
 
 If there is an instance where you are going to use morphological
 datasets obtained from DeepProfiler, then you must explicitly state the
@@ -272,4 +278,3 @@ their suffix:
 [plate_data_1]: https://nih.figshare.com/ndownloader/files/18506036
 [plate_data_2]: https://nih.figshare.com/ndownloader/files/18031619
 [source]: https://doi.org/10.1091/mbc.E20-12-0784
-[cell-health-data]: https://nih.figshare.com/articles/dataset/Cell_Health_-_Cell_Painting_Single_Cell_Profiles/9995672/5
