@@ -159,7 +159,7 @@ directory where the CytoSnake source is.
 unzip metadata.zip && unzip barcode_platemap.csv.zip
 ```
 
-The first step it to prepare your files for analysis, this is simply
+The first step is to prepare your files for analysis. This is simply
 executed by typing:
 
 ```text
