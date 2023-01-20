@@ -34,7 +34,7 @@ cytosnake init -d [<DATAFILES>] -m <METADATA> --data_type <DATATYPE>
 
 The init mode initalizes the provided input files into the appropriate
 file structure that accommodates all the workflows available in
-CytoSnake
+CytoSnake.
 
 CytoSnake currently has three different types of modes, which are:
 
