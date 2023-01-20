@@ -41,7 +41,7 @@ CytoSnake currently has three different types of modes, which are:
 > 2. `run`: execute a specific workflow
 > 3. `help`: executes CytoSnake's CLI help documentation.
 
-Example of using CytoSnake and its modes is added in the [Usage](usage)
+Example of using CytoSnake and its modes is added in the [Usage]
 section.
 
 ### Configurations
@@ -137,7 +137,7 @@ supports
 
 ### Download data
 
-In this usage tutorial, we will be using cell health datasets.
+In this usage tutorial, we will be using cell health datasets. (Way, 2021 [source], [cell-health-data])
 
 You can download these datasets (quite large files):
 
@@ -271,3 +271,5 @@ their suffix:
 [normalize_docs]: https://pycytominer.readthedocs.io/en/latest/pycytominer.html?highlight=normalize#pycytominer.normalize.normalize
 [plate_data_1]: https://nih.figshare.com/ndownloader/files/18506036
 [plate_data_2]: https://nih.figshare.com/ndownloader/files/18031619
+[source]: https://doi.org/10.1091/mbc.E20-12-0784
+[cell-health-data]: https://nih.figshare.com/articles/dataset/Cell_Health_-_Cell_Painting_Single_Cell_Profiles/9995672/5
