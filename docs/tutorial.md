@@ -138,7 +138,7 @@ supports
 
 ### Download data
 
-In this usage tutorial, we will be using data cell health datasets.
+In this usage tutorial, we will be using cell health datasets.
 
 You can download these datasets (quite large files):
 
