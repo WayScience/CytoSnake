@@ -11,7 +11,7 @@ from microscopy images of cells.
 
 ## Concepts
 
-```{image} images/Cytopipe-cli_0.drawio.png
+```{image} images/CytoSnake-cli_0.drawio.png
 ```
 
 ### Modes
