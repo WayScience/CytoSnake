@@ -173,7 +173,7 @@ wildcard variables.
 cytosnake init -d *.sqlite -d metadata -b barcode_platemap.csv
 ```
 
-If there is an instances were you are going to use morphological
+If there is an instance where you are going to use morphological
 datasets obtained from DeepProfiler, then you must explicitly state the
 datatype flag when using `init`:
 
