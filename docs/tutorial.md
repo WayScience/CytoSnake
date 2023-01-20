@@ -18,9 +18,8 @@ from microscopy images of cells.
 
 Modes provide options on how the user can change the functionality of
 CytoSnake. For example, if you would like to initialize your files for a
-specific workflow, you can simply type:
+specific workflow, you can use the `init` mode:
 
-using the `init` mode
 
 ```text
 cytosnake init -d [<DATAFILES>] -m <METADATA> --data_type <DATATYPE>
