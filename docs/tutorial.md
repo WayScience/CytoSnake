@@ -152,7 +152,7 @@ here are specific to the files downloaded.
 
 ### Setting up files
 
-If you are using the downloaded dataset. unzip the zip files in the
+If you are using the downloaded datasets unzip the zip files in the
 directory where the CytoSnake source is.
 
 ```text
