@@ -20,7 +20,6 @@ Modes provide options on how the user can change the functionality of
 CytoSnake. For example, if you would like to initialize your files for a
 specific workflow, you can use the `init` mode:
 
-
 ```console
 cytosnake init -d [<DATAFILES>] -m <METADATA> --data_type <DATATYPE>
 ```
@@ -32,7 +31,7 @@ cytosnake init -d [<DATAFILES>] -m <METADATA> --data_type <DATATYPE>
 - `DATATYPE` flag tells cytosnake the origin of these morphology
   feature datasets (currently either CellProfiler or DeepProfiler).
 
-The init mode initalizes the provided input files into the appropriate
+The init mode initializes the provided input files into the appropriate
 file structure that accommodates all the workflows available in
 CytoSnake.
 
@@ -42,7 +41,7 @@ CytoSnake currently has three different types of modes, which are:
 > 2. `run`: execute a specific workflow
 > 3. `help`: executes CytoSnake's CLI help documentation.
 
-Example of using CytoSnake and its modes is added in the **usage**
+Example of using CytoSnake and its modes is added in the [Usage](usage)
 section.
 
 ### Configurations
