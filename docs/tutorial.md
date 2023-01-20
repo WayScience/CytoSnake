@@ -88,7 +88,7 @@ configurational files.
 
 ## Documentation
 
-To visualize CytoSnake's documentation, simply type:
+To see CytoSnake's documentation, simply type:
 
 ```text
 cytosnake help
