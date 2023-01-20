@@ -236,7 +236,7 @@ cd results/preprocessing/ && ls
 This will take you to the directory where the generated outputs are and
 lists all the files.
 
-```
+```text
 consensus.tsv.gz                  SQ00014614_aggregate.csv.gz
 SQ00014613_aggregate.csv.gz       SQ00014614_augmented.csv.gz
 SQ00014613_augmented.csv.gz       SQ00014614_cell_counts.tsv
