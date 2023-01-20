@@ -38,7 +38,7 @@ CytoSnake
 
 CytoSnake currently has three different types of modes, which are:
 
-> 1. `init`: setups up input files for workflows
+> 1. `init`: setup input files for workflows
 > 2. `run`: execute a specific workflow
 > 3. `help`: executes CytoSnake's CLI help documentation.
 
