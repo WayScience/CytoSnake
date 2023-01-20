@@ -56,7 +56,7 @@ workflow's documentation provides information about the configuration
 files involved within the workflow.
 
 Below are the two currently available workflows and the config files it
-access in order to conduct its processes.
+accesses in order to conduct its processes.
 
 #### **cp_process workflow docs**
 
