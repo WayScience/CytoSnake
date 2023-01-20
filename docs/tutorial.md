@@ -21,7 +21,7 @@ CytoSnake. For example, if you would like to initialize your files for a
 specific workflow, you can use the `init` mode:
 
 
-```text
+```console
 cytosnake init -d [<DATAFILES>] -m <METADATA> --data_type <DATATYPE>
 ```
 
