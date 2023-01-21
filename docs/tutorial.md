@@ -193,6 +193,9 @@ INFO: Formatting input files
 INFO: Formatting complete!
 ```
 
+if you are not receiving these messages, please refer to the [install.md] to see
+if the installation process was do correctly.
+
 ### Running Workflow
 
 In your current working directory, a new folder ./data should appear in
@@ -278,3 +281,4 @@ their suffix:
 [plate_data_1]: https://nih.figshare.com/ndownloader/files/18506036
 [plate_data_2]: https://nih.figshare.com/ndownloader/files/18031619
 [source]: https://doi.org/10.1091/mbc.E20-12-0784
+[install.md]: install.md
