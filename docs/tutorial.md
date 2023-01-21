@@ -258,7 +258,7 @@ their suffix:
 - `_augmented`: A datasets contains metadata information in a per well
   level. For example, types of metadata can be: well position,
   treatments, controls, etc
-- `_normalized` : noramlized augmented dataset useful for feature
+- `_normalized` : normalized augmented dataset useful for feature
   selection.
 - `_feature_select`: contains the selected morphological features that
   will be used to generate consensus profiles
