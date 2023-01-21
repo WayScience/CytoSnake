@@ -11,6 +11,7 @@
 
 install
 tutorial
+modules
 ```
 
 # Indices and tables

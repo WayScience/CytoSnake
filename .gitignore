@@ -1,0 +1,5 @@
+*.pyc
+.snakemake
+_build
+_static
+.DS_Store
