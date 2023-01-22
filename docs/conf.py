@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.abspath(".."))
 
 project = 'CytoSnake'
 copyright = '2022, Way Lab'
-author = 'Erik Serrano, Way Lab'
+author = 'Erik Serrano'
 release = '0.0.1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
