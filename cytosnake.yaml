@@ -7,7 +7,7 @@ dependencies:
   - python>=3.10
   - pip
   - snakemake
+  - myst-parser
+  - sphinx_rtd_theme
   - pip:
-    - myst-parser
     - rst-to-myst
-    - sphinx_rtd_theme

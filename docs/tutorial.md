@@ -182,10 +182,6 @@ If there is an instance where you are going to use morphological
 datasets obtained from DeepProfiler, then you must explicitly state the
 datatype flag when using `init`:
 
-```text
-cytosnake init -d *.sqlite -d metadata -b barcode_platemap.csv --datatype deep_profiler
-```
-
 Once entering the command, your out put should look like this:
 
 ```text
@@ -280,6 +276,6 @@ their suffix:
 [normalize_docs]: https://pycytominer.readthedocs.io/en/latest/pycytominer.html?highlight=normalize#pycytominer.normalize.normalize
 [plate_data_1]: https://nih.figshare.com/ndownloader/files/18506036
 [plate_data_2]: https://nih.figshare.com/ndownloader/files/18031619
-[source]: https://doi.org/10.1091/mbc.E20-12-0784
+[source]: https://doi.org/10.1091/mbc.e20-12-0784
 [install.md]: install.md
 [Usage]: ##usage
