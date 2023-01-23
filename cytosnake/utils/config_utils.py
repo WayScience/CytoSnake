@@ -40,14 +40,18 @@ def load_configs(config_path: str | Path) -> dict:
     return loaded_configs
 
 
+def load_meta_path_configs() -> dict:
+    """Loads the metadata path from `.cytosnake/_paths.yaml` file
 
-def load_data_path_configs() -> dict:
+    Returns
+    -------
+    dict
+        meta path contents from the `_paths.yaml` file
+    """
 
     # construct path to `.cytosnake/_paths.yaml` file
     meta_path = get_meta_path() / "_paths.yaml"
-
-    # load yaml file and only select the `data` folder
-
+    return load_configs(meta_path)
 
 
 def load_workflow_path(wf_name: str) -> Path:

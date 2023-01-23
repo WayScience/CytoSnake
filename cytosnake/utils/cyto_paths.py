@@ -11,6 +11,7 @@ import cytosnake
 # cytosnake imports
 from cytosnake.utils.file_utils import file_search
 from cytosnake.guards.path_guards import is_valid_path
+from cytosnake.utils.config_utils import load_meta_path_configs
 
 
 def get_meta_path() -> Path:
@@ -195,4 +196,7 @@ def get_data_path() -> Path:
     """
 
     # load in `_paths.yaml` meta data
+    loaded_meta_paths = load_meta_path_configs()
+    return Path(loaded_meta_paths["project_dir"]["data"])
+
     
