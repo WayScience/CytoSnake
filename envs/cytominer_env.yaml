@@ -5,5 +5,7 @@ channels:
   - defaults
 dependencies:
   - python>=3.7.0
-  - conda-forge::pycytominer=0.1
   - pyyaml
+  - pip
+  - pip:
+      - git+https://github.com/cytomining/pycytominer.git@afac3ea16818ad25f37318ecd5c5090c0eff5806
