@@ -15,4 +15,3 @@ configs.bak
 *.log
 prototypes
 _build
-_static

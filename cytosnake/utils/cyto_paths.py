@@ -11,7 +11,6 @@ import cytosnake
 # cytosnake imports
 from cytosnake.utils.file_utils import file_search
 from cytosnake.guards.path_guards import is_valid_path
-from cytosnake.utils.config_utils import load_meta_path_configs
 
 
 def get_meta_path() -> Path:
@@ -31,6 +30,7 @@ def get_meta_path() -> Path:
     return proj_dir.absolute()
 
 
+# TODO: this should be placed in the guards module
 def is_cytosnake_dir(dir_path: Optional[str | Path] = None) -> bool:
     """Checks if the current directory has been set up for cytosnake. Searches
     for the `.cytosnake` file in current or specified directory.
@@ -184,19 +184,3 @@ def get_project_dirpaths() -> dict:
             all_dirs[_file.name] = str(_file.absolute())
 
     return all_dirs
-
-
-def get_data_path() -> Path:
-    """Returns path pointing where the data folder is
-
-    Returns
-    -------
-    Path
-        Path to data folder in project directory
-    """
-
-    # load in `_paths.yaml` meta data
-    loaded_meta_paths = load_meta_path_configs()
-    return Path(loaded_meta_paths["project_dir"]["data"])
-
-    

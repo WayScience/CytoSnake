@@ -1,7 +1,7 @@
 from pathlib import Path 
 import yaml
 
-from cytosnake.utils.cyto_paths import get_meta_path
+import cytosnake.utils.cyto_paths as cp
 from cytosnake.guards.path_guards import is_valid_path
 from cytosnake.common.errors import WorkflowNotFoundError
 
@@ -50,7 +50,7 @@ def load_meta_path_configs() -> dict:
     """
 
     # construct path to `.cytosnake/_paths.yaml` file
-    meta_path = get_meta_path() / "_paths.yaml"
+    meta_path = cp.get_meta_path() / "_paths.yaml"
     return load_configs(meta_path)
 
 
@@ -74,7 +74,7 @@ def load_workflow_path(wf_name: str) -> Path:
         Raised if the desired workflow is not found.
     """
     # load configurations from `.cytosnake`
-    meta_path = get_meta_path() / "_paths.yaml"
+    meta_path = cp.get_meta_path() / "_paths.yaml"
 
     # loading loading workflow paths
     general_config = load_configs(meta_path)
@@ -86,3 +86,17 @@ def load_workflow_path(wf_name: str) -> Path:
 
     # returning workflow path
     return Path(workflows[wf_name])
+
+def load_data_path_configs():
+    """Returns path pointing where the data folder is
+
+    Returns
+    -------
+    Path
+        Path to data folder in project directory
+    """
+
+    # load in `_paths.yaml` meta data
+    loaded_meta_paths = load_meta_path_configs()
+    return Path(loaded_meta_paths["project_dir"]["data"])
+

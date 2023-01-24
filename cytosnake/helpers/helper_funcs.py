@@ -17,4 +17,4 @@ def get_data() -> str:
     return str(data_path) + "/{plate_name}.sqlite"
 
 
-def get_metadata_dir 
+# def get_metadata_dir 
