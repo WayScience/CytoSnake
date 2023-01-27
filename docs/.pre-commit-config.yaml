@@ -24,7 +24,7 @@ repos:
 
     # fast linter written in rust
     - repo: https://github.com/charliermarsh/ruff-pre-commit
-    # Ruff version.
+      # Ruff version.
       rev: v0.0.218
       hooks:
           - id: ruff
