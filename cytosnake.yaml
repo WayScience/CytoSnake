@@ -9,5 +9,6 @@ dependencies:
   - snakemake
   - myst-parser
   - sphinx_rtd_theme
+  - pre-commit
   - pip:
     - rst-to-myst
