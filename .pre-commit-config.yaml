@@ -1,0 +1,46 @@
+---
+repos:
+  # import formatter with black configurations
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        name: isort (python)
+        args: [--profile, black, --filter-files]
+
+  # Code formatter for both python files and jupyter notebooks
+  - repo: https://github.com/psf/black
+    rev: 22.10.0
+    hooks:
+      - id: black-jupyter
+      - id: black
+        language_version: python3.10
+
+  # snakemake formatting
+  - repo: https://github.com/snakemake/snakefmt
+    rev: v0.8.0
+    hooks:
+      - id: snakefmt
+
+  # fast linter written in rust
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.0.218
+    hooks:
+      - id: ruff
+        # Respect `exclude` and `extend-exclude` settings.
+        args: [--force-exclude]
+
+  # additional hooks found with in the pre-commit lib
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: trailing-whitespace # removes trailing white spaces
+      - id: mixed-line-ending # removes mixed end of line
+        args:
+          - --fix=lf
+      - id: pretty-format-json # JSON Formatter
+        args:
+          - --autofix
+          - --indent=4
+          - --no-sort-keys
