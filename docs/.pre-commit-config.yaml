@@ -8,7 +8,7 @@ repos:
             name: isort (python)
             args: [--profile, black, --filter-files]
 
-  # Code formatter for both python files and jupyter notebooks
+    # Code formatter for both python files and jupyter notebooks
     - repo: https://github.com/psf/black
       rev: 22.10.0
       hooks:
