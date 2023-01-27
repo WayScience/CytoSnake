@@ -1,6 +1,6 @@
 ---
 repos:
-  # import formatter with black configurations
+    # import formatter with black configurations
     - repo: https://github.com/pycqa/isort
       rev: 5.11.4
       hooks:
