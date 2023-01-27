@@ -28,7 +28,7 @@ repos:
       rev: v0.0.218
       hooks:
           - id: ruff
-        # Respect `exclude` and `extend-exclude` settings.
+            # Respect `exclude` and `extend-exclude` settings.
             args: [--force-exclude]
 
     # additional hooks found with in the pre-commit lib
