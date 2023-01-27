@@ -93,13 +93,10 @@ def generate_meta_path_configs() -> None:
     dir_paths = {"project_dir": get_project_dirpaths()}
     config_fpaths = {"config_dir": get_config_fpaths()}
     workflow_fpath = {"workflow_dir": get_workflow_fpaths()}
+    proj_dir_path = {"project_dir_path": str(get_project_root())}
 
     # merge all path dictionaries into one
-    all_paths_dict = dir_paths | config_fpaths | workflow_fpath
-
-    # now add the current directory into the all_paths_dic
-    # -- this will write the project directory in the `_paths.yaml` config
-    all_paths_dict["project_dir"] = {"project_dir": get_project_root()}
+    all_paths_dict = proj_dir_path | dir_paths | config_fpaths | workflow_fpath
 
     # write dict into yaml file
     save_path = get_project_root() / ".cytosnake" / "_paths.yaml"
