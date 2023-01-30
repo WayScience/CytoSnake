@@ -98,12 +98,10 @@ class CliControlPanel:
     data_type: Union[None, str] = None
     workflow: Union[None, str] = None
     mode_check = False
-    workflow_check = False
     cli_help = False
     mode_help = False
     data_type: tuple[str] = ("cell_profiler", "deep_profiler")
     modes: tuple[str] = ("init", "run", "test", "help")
-    workflows: tuple[str] = supported_workflows()
     __exec_name: str = "cytosnake"
 
     # ----------------------------------------
@@ -116,10 +114,9 @@ class CliControlPanel:
 
     # Class representation
     def __repr__(self) -> str:
-        exec_mode_workflow = f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}, workflow={self.workflow}"
+        exec_mode_workflow = f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}"  # , workflow={self.workflow}"
         help_checks = f"cli_help={self.cli_help}, mode_help={self.mode_help}"
-        param_states = f"mode_check={self.mode_check}, workflow_check={self.workflow_check}"
-        return f"CliArgsHandler({exec_mode_workflow}, {help_checks}, {param_states})"
+        return f"CliArgsHandler({exec_mode_workflow}, {help_checks}"  # {param_states})"
 
     # making class printable
     def __str__(self) -> str:
@@ -261,13 +258,6 @@ class CliControlPanel:
             elif mode == "run" and mode_help == "help":
                 self.__check_extra_help_args(help_flag_pos=2)
                 self.mode_help = True
-
-            # checking if workflow exists
-            workflow = self.param_list[2]
-            if workflow in self.workflows:
-                self.workflow_check = True
-
-            self.workflow = workflow
 
         # indicates that the user only placed a mode
         except IndexError:
