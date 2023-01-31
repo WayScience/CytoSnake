@@ -57,7 +57,7 @@ def transport_project_files() -> None:
     current working directory"""
 
     # project directory
-    proj_path = get_project_root()
+    proj_path = Path().absolute() 
 
     # find software package directory path
     pkg_path = get_cytosnake_package_path()

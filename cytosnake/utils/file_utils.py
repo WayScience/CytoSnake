@@ -8,6 +8,7 @@ Contains functions that involves file manipulations like:
     - creating and deleting files
 """
 from pathlib import Path
+from typing import Optional
 from cytosnake.guards.path_guards import is_valid_path
 
 
@@ -52,6 +53,49 @@ def file_search(fpath: str | Path) -> dict:
             # collected_files[name].append(str(_file.absolute()))
             collected_files[name] = str(_file.absolute())
         else:
-            raise RuntimeError("Unexpected error captured: Non-path entry captured ")
+            raise RuntimeError(
+                "Unexpected error captured: Non-path entry captured "
+            )
 
     return collected_files
+
+
+def find_project_dir(steps: Optional[int] = 10) -> Path:
+    """Recursively searches for `.cytosnake` directory
+
+    steps: Optional[int]
+        number of recursive steps for searching. [default=10]
+
+    Returns
+    -------
+    Path
+        returns path that contains the `.cytosnake`
+
+    Raises
+    ------
+    FileNotFoundError
+        When recursive steps are exceeded and is unable to find `.cytosnake`
+        folder
+    """
+
+    # type checking
+    if not isinstance(steps, int):
+        raise TypeError(f"'steps' must be an integer type. Not {type(steps)}")
+
+    # using current working directory as starting pointg
+    start_point = Path().absolute()
+    for step in range(steps):
+        # if the number of recursive steps is exceeded, raise error
+        if step > 10:
+            raise FileNotFoundError("unable to find project folder")
+
+        # grab all files in directory
+        all_files = start_point.glob("*")
+        for _file in all_files:
+
+            # check if the file is a directory and has the name `cytosnake`
+            # -- if true, return the complete path
+            if _file.is_dir() and _file.name == ".cytosnake":
+                return _file.absolute()
+
+        start_point = start_point.parent

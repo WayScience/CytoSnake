@@ -6,10 +6,9 @@ This module will contain functions that handles `cytosnake's` pathing
 
 from typing import Optional
 from pathlib import Path
-import cytosnake
 
 # cytosnake imports
-from cytosnake.utils.file_utils import file_search
+from cytosnake.utils.file_utils import file_search, find_project_dir
 from cytosnake.guards.path_guards import is_valid_path
 
 
@@ -23,7 +22,7 @@ def get_meta_path() -> Path:
     """
 
     # getting project directory
-    proj_dir = get_project_root() / ".cytosnake"
+    proj_dir = find_project_dir()
     if not proj_dir.exists():
         raise FileNotFoundError("Current directory is not a project folder")
 
@@ -105,7 +104,7 @@ def get_project_root() -> Path:
     """
 
     # get current working directory
-    project_dir = Path().absolute()
+    project_dir = Path().absolute() # this is where the major bug comes from
 
     # check if the `.cytosnake` folder exist
     project_folder = project_dir / ".cytosnake"
