@@ -24,6 +24,7 @@ class BaseValueError(ValueError):
 class BaseFileNotFound(FileNotFoundError):
     """Raised if a requested file is not found in cytopipe"""
 
+
 class BaseFileExistsError(FileExistsError):
     """Raised if an existing file or directory is found in a directory"""
 

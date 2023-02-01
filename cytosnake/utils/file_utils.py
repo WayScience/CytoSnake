@@ -50,7 +50,6 @@ def file_search(fpath: str | Path) -> dict:
             nested_files = file_search(_file)
             collected_files[name] = nested_files
         elif _file.is_file():
-            # collected_files[name].append(str(_file.absolute()))
             collected_files[name] = str(_file.absolute())
         else:
             raise RuntimeError(
@@ -61,7 +60,7 @@ def file_search(fpath: str | Path) -> dict:
 
 
 def find_project_dir(steps: Optional[int] = 10) -> Path:
-    """Recursively searches for `.cytosnake` directory
+    """Recursively searches for project directory`.cytosnake` directory
 
     steps: Optional[int]
         number of recursive steps for searching. [default=10]
@@ -69,7 +68,7 @@ def find_project_dir(steps: Optional[int] = 10) -> Path:
     Returns
     -------
     Path
-        returns path that contains the `.cytosnake`
+        returns path to project folder
 
     Raises
     ------
@@ -82,7 +81,7 @@ def find_project_dir(steps: Optional[int] = 10) -> Path:
     if not isinstance(steps, int):
         raise TypeError(f"'steps' must be an integer type. Not {type(steps)}")
 
-    # using current working directory as starting pointg
+    # using current working directory as starting point
     start_point = Path().absolute()
     for step in range(steps):
         # if the number of recursive steps is exceeded, raise error
@@ -96,6 +95,6 @@ def find_project_dir(steps: Optional[int] = 10) -> Path:
             # check if the file is a directory and has the name `cytosnake`
             # -- if true, return the complete path
             if _file.is_dir() and _file.name == ".cytosnake":
-                return _file.absolute()
+                return _file.parent.absolute()
 
         start_point = start_point.parent

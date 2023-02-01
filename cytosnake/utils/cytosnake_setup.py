@@ -12,7 +12,6 @@ import shutil
 
 from pathlib import Path
 from cytosnake.utils.cyto_paths import (
-    get_project_root,
     get_cytosnake_package_path,
     get_project_root,
     get_config_fpaths,
@@ -57,7 +56,7 @@ def transport_project_files() -> None:
     current working directory"""
 
     # project directory
-    proj_path = Path().absolute() 
+    proj_path = Path().absolute()
 
     # find software package directory path
     pkg_path = get_cytosnake_package_path()
@@ -90,10 +89,11 @@ def generate_meta_path_configs() -> None:
     """
 
     # get all pathing info
+    cwd_str = str(Path().absolute())
     dir_paths = {"project_dir": get_project_dirpaths()}
     config_fpaths = {"config_dir": get_config_fpaths()}
     workflow_fpath = {"workflow_dir": get_workflow_fpaths()}
-    proj_dir_path = {"project_dir_path": str(get_project_root())}
+    proj_dir_path = {"project_dir_path": cwd_str}
 
     # merge all path dictionaries into one
     all_paths_dict = proj_dir_path | dir_paths | config_fpaths | workflow_fpath
