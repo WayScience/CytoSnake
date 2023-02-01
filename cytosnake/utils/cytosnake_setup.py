@@ -1,10 +1,9 @@
 """
 Module: cytosnake_setup.py
 
-This modele is responsible for setting up and recording file paths where analysis
-are being conducted.
-
-It will be in charge of setting up path config files in order for cytosnake
+This modules sets up the current directory as a project directory. Project
+directories are dictated by the presence of `.cytosnake`, which contains 
+meta data for cytosnake to use. 
 
 """
 import json
@@ -13,7 +12,6 @@ import shutil
 from pathlib import Path
 from cytosnake.utils.cyto_paths import (
     get_cytosnake_package_path,
-    get_project_root,
     get_config_fpaths,
     get_workflow_fpaths,
     get_project_dirpaths,
@@ -89,7 +87,8 @@ def generate_meta_path_configs() -> None:
     """
 
     # get all pathing info
-    cwd_str = str(Path().absolute())
+    cwd_path = Path().absolute()
+    cwd_str = str(cwd_path)
     dir_paths = {"project_dir": get_project_dirpaths()}
     config_fpaths = {"config_dir": get_config_fpaths()}
     workflow_fpath = {"workflow_dir": get_workflow_fpaths()}
@@ -99,7 +98,8 @@ def generate_meta_path_configs() -> None:
     all_paths_dict = proj_dir_path | dir_paths | config_fpaths | workflow_fpath
 
     # write dict into yaml file
-    save_path = get_project_root() / ".cytosnake" / "_paths.yaml"
+    # -- this steps generates the `_paths.yaml`
+    save_path =  cwd_path / ".cytosnake" / "_paths.yaml"
     with open(save_path, "w") as stream:
         json.dump(all_paths_dict, stream, indent=4)
 
