@@ -8,6 +8,7 @@ from typing import Optional
 from pathlib import Path
 
 # cytosnake imports
+import cytosnake
 from cytosnake.utils.file_utils import file_search, find_project_dir
 from cytosnake.guards.path_guards import is_valid_path
 
@@ -53,9 +54,7 @@ def is_cytosnake_dir(dir_path: Optional[str | Path] = None) -> bool:
     # type checking
     if not is_valid_path(dir_path):
         _type = type(dir_path)
-        raise ValueError(
-            f"dir_path must be either str or Path type, not: {_type}"
-        )
+        raise ValueError(f"dir_path must be either str or Path type, not: {_type}")
     elif isinstance(dir_path, str):
         dir_path = Path(str).absolute()
 
@@ -120,7 +119,7 @@ def get_workflow_fpaths() -> dict:
     Returns
     -------
     dict
-        Structured dictioanry containing directory names and paths are key value
+        Structured dictionary containing directory names and paths are key value
         pairs
 
     Raises

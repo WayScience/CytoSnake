@@ -1,15 +1,16 @@
-# ------------------------------------------------------------
-# errors.py
-#
-# Modules containing CytoPipe specific exceptions
-#
-# Base Exceptions:
-# Focuses on basic error types like incorrect values or invalid
-# operations.
-#
-# Cytopipe Specific Errors:
-# Exceptions that specific to Cytopipe
-# ------------------------------------------------------------
+"""
+Module: errors.py
+
+Modules containing CytoSnake specific exceptions
+
+Base Exceptions:
+Focuses on basic error types like incorrect values or invalid
+operations.
+
+CytoSnake Specific Errors:
+Exceptions that are specific to CytoSnake
+
+"""
 
 import sys
 from typing import Union, Optional
@@ -22,7 +23,7 @@ class BaseValueError(ValueError):
 
 
 class BaseFileNotFound(FileNotFoundError):
-    """Raised if a requested file is not found in cytopipe"""
+    """Raised if a requested file is not found in cytosnake"""
 
 
 class BaseFileExistsError(FileExistsError):
@@ -30,22 +31,22 @@ class BaseFileExistsError(FileExistsError):
 
 
 class BaseExecutorException(RuntimeError):
-    """Base exception related to cytopipe execution"""
+    """Base exception related to cytosnake execution"""
 
 
 class BaseWorkflowException(RuntimeError):
-    """Base exception related to cytopipe's workflow errors in runtime"""
+    """Base exception related to cytosnake's workflow errors in runtime"""
 
 
 # ------------------------------
-# Cytopipe specific errors
+# cytosnake specific errors
 # ------------------------------
 class InvalidArgumentException(BaseValueError):
     """Raised when arguments requirements are not met"""
 
 
-class InvalidCytoPipeExec(BaseExecutorException):
-    """Raised if invalid cytopipe executable is being called"""
+class InvalidcytosnakeExec(BaseExecutorException):
+    """Raised if invalid cytosnake executable is being called"""
 
 
 class InvalidModeException(BaseValueError):
@@ -144,7 +145,7 @@ def display_error(
     # formatting error message
     error_type = f"{error.__class__.__name__}:"
 
-    # if no custom message provided, default to exception default mesasge
+    # if no custom message provided, default to exception default message
     if e_msg is None:
         e_msg = str(error)
 
