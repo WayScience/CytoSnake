@@ -33,7 +33,7 @@ def create_cytosnake_dir() -> None:
 
     Raises:
     FileExistsError
-        Raised by pathlib.Path if `.cytosnake' exists in cur
+        Raised by pathlib.Path if `.cytosnake' already exists
     ."""
 
     # create the `.cytosnake` folder in where `cytosnake init` mode was executed
