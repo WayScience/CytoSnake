@@ -148,7 +148,7 @@ def get_config_fpaths() -> dict:
     proj_root_path = get_project_root()
     config_path = proj_root_path / "configs"
     if not is_valid_path(config_path):
-        raise FileNotFoundError("Unable to find workflow directory")
+        raise FileNotFoundError("Unable to find config directory")
 
     return file_search(config_path)
 
