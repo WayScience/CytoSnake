@@ -44,7 +44,7 @@ def supported_workflows() -> tuple[str]:
 class WorkflowSearchPath(argparse.Action):
     """This class provides more functionality
 
-    User provided workflow names are checked to see if they exists. If found,
+    User provided workflow names are checked to see if they exist. If found,
     the parameter will return the absolute path to the workflow. If the name
     does not exists, and error will be raised indicating that the provided
     workflow name does not exists within cytosnake
