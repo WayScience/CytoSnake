@@ -75,7 +75,7 @@ def run_cmd() -> None:
                         "Did you specify `cell_profiler` or `deep_profiler`datatype?"
                     )
 
-            # now that the data is created, let set up the current directory
+            # now that the data is created, set up the current directory
             # into a project directory
             setup_cytosnake_env()
             print("INFO: Initialization complete!")
