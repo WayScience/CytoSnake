@@ -45,7 +45,7 @@ class InvalidArgumentException(BaseValueError):
     """Raised when arguments requirements are not met"""
 
 
-class InvalidcytosnakeExec(BaseExecutorException):
+class InvalidCytosnakeExec(BaseExecutorException):
     """Raised if invalid cytosnake executable is being called"""
 
 
