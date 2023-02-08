@@ -15,8 +15,11 @@ import argparse
 from dataclasses import dataclass
 
 # cytosnake imports
-from cytosnake.cli.cli_docs import *
-from cytosnake.common.errors import *
+from cytosnake.common.errors import (
+    InvalidWorkflowException,
+    InvalidArgumentException,
+    InvalidExecutableException,
+)
 from cytosnake.utils.config_utils import (
     load_workflow_path,
     load_workflow_paths_config,
@@ -114,9 +117,9 @@ class CliControlPanel:
 
     # Class representation
     def __repr__(self) -> str:
-        exec_mode_workflow = f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}"  # , workflow={self.workflow}"
+        exec_mode_workflow = f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}"
         help_checks = f"cli_help={self.cli_help}, mode_help={self.mode_help}"
-        return f"CliArgsHandler({exec_mode_workflow}, {help_checks}"  # {param_states})"
+        return f"CliArgsHandler({exec_mode_workflow}, {help_checks}"
 
     # making class printable
     def __str__(self) -> str:
