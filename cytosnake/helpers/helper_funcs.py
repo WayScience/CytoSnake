@@ -32,7 +32,7 @@ def get_data_folder() -> Path:
     return data_dir_path
 
 def get_plate_data() -> str:
-    """Returns absolute path were the data is located
+    """Returns absolute path were the data are located
 
     Returns
     -------
