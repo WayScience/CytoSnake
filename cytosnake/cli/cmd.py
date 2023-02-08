@@ -6,6 +6,7 @@ cmd.py Module
 Generates CLI interface in order to interact with CytoSnake.
 """
 import sys
+from logging import Logger
 
 # cytosnake imports
 from cytosnake.cli.args import CliControlPanel
@@ -54,7 +55,7 @@ def run_cmd() -> None:
                 )
 
             # setting up input files for cytosnake
-            print("INFO: Formatting input files")
+            Logger.info("Formatting input files")
             init_args = args_handler.parse_init_args()
 
             # identifying which data type was added and how to set it up
@@ -71,14 +72,14 @@ def run_cmd() -> None:
                     )
                 case _:
                     raise RuntimeError(
-                        "Unexpected error in identifying datatype"
-                        "Did you specify `cell_profiler` or `deep_profiler`datatype?"
+                        "Unsupported datatype. Supported datatypes:"
+                        "`cell_profiler` or `deep_profiler`datatype?"
                     )
 
             # now that the data is created, set up the current directory
             # into a project directory
             setup_cytosnake_env()
-            print("INFO: Initialization complete!")
+            Logger.info("Initialization complete")
 
         # Executed if the user is using the `run` mode. This will execute the
         # workflow that are found within the `workflows` folder
