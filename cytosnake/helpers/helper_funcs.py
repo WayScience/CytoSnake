@@ -27,7 +27,7 @@ def get_data_folder() -> Path:
     try:
         data_dir_path = Path(meta_configs["project_dir"]["data"])
     except KeyError:
-        raise KeyError("Unable to find data folder path")
+        raise KeyError("Unable to find data folder path in project_dir config")
 
     return data_dir_path
 
