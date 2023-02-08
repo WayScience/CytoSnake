@@ -47,7 +47,7 @@ class WorkflowSearchPath(argparse.Action):
     User provided workflow names are checked to see if they exist. If found,
     the parameter will return the absolute path to the workflow. If the name
     does not exists, and error will be raised indicating that the provided
-    workflow name does not exists within cytosnake
+    workflow name does not exist within cytosnake
     """
 
     def __call__(self, parser, args, values, option_string=None):
