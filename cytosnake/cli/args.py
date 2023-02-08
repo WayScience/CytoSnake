@@ -56,7 +56,7 @@ class WorkflowSearchPath(argparse.Action):
         supported_wf = supported_workflows()
         if values not in supported_wf:
             raise InvalidWorkflowException(
-                f"Unable to find '{values}'. Supported workflows: {supported_wf}"
+                f"Unable to find '{values}'. Please specify a supported workflow: {supported_wf}"
             )
 
         # grabbing workflow path from `_paths.yaml`
