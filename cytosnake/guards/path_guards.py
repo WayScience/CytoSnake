@@ -2,8 +2,7 @@
 Module: path_guards.py
 
 
-Contains functions that ensures that types that are considered paths are
-checked. 
+Functions for checking paths. 
 
 This includes:
     - existing paths 
