@@ -1,7 +1,7 @@
 """
 Module: helper_funcs.py
 
-This module contains helper functions for snakemake workflows to access with. 
+This module contains helper functions for snakemake workflows. 
 
 """
 
