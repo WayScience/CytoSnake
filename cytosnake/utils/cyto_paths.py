@@ -88,7 +88,7 @@ def get_cytosnake_package_path() -> Path:
 
 
 def get_project_root() -> Path:
-    """Returns complete path where the analysis is taken place. The function
+    """Returns complete path where cytosnake performs the analysis. The function
     will check if `.cytosnake` folder exists, if not an error will be raised.
 
     Return
