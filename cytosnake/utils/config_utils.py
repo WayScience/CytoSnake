@@ -11,7 +11,7 @@ def load_configs(config_path: str | Path) -> dict:
 
     Parameters
     ----------
-    config_path : Union[str, Path]
+    config_path : str | Path
         path to config file
 
     Returns
