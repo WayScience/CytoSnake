@@ -100,7 +100,7 @@ def generate_meta_path_configs() -> None:
     # write dict into yaml file
     # -- this steps generates the `_paths.yaml`
     save_path = cwd_path / ".cytosnake" / "_paths.yaml"
-    with open(save_path, "w") as stream:
+    with open(save_path, mode="w", encoding="utf-8") as stream:
         json.dump(all_paths_dict, stream, indent=4)
 
 

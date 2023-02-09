@@ -10,12 +10,12 @@ from pathlib import Path
 from cytosnake.utils.config_utils import load_meta_path_configs
 
 def get_data_folder() -> Path:
-    """_summary_
+    """Returns absolute path that points to the data folder.
 
     Returns
     -------
     Path
-        _description_
+        path to data folder
 
     Raises
     ------
@@ -64,7 +64,7 @@ def get_metadata_dir() -> str:
     Returns
     -------
     str
-        returns tring that contains metdata wildcard
+        returns string that contains metadata wildcard
     """
     data_dir_path = get_data_folder()
     return str(data_dir_path / "{metadata}")

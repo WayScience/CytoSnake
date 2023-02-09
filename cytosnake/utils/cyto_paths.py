@@ -166,19 +166,16 @@ def get_project_dirpaths() -> dict:
     # getting project root folder
     proj_root_path = get_project_root()
 
-    # finding all files
-    list_of_files = proj_root_path.glob("*")
-
     # creating dict containing {dir_name : dir_path}
     # -- ignore unwanted directories
     ignore_dirs = [".vscode", ".git", "CytoSnake.egg-info"]
 
     # -- collect dir names and paths
     all_dirs = {}
-    for _file in list_of_files:
+    for _file in proj_root_path.glob("*"):
         if _file.name in ignore_dirs:
             continue
-        elif _file.is_dir():
+        if _file.is_dir():
             all_dirs[_file.name] = str(_file.absolute())
 
     return all_dirs

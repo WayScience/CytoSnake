@@ -117,9 +117,9 @@ def display_error(
     Raises
     ------
     TypeError
-        Raised if error object is not an error type\n
-        Raised if e_msg is not a string type\n
-        Raised if exit_code is not an integer type\n
+        Raised if error object is not an error type
+        Raised if e_msg is not a string type
+        Raised if exit_code is not an integer type
 
     ValueError
         Raised if exit_code is a negative number or is equal to 0
