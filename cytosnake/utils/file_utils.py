@@ -52,13 +52,16 @@ def file_search(fpath: str | Path) -> dict:
         elif _file.is_file():
             collected_files[name] = str(_file.absolute())
         else:
-            raise RuntimeError("Unexpected error captured: Non-path entry captured ")
+            raise RuntimeError(
+                "Unexpected error captured: Non-path entry captured "
+            )
 
     return collected_files
 
 
-def find_project_dir(steps: Optional[int] = 10) -> Path:
-    """Recursively searches for project directory`.cytosnake` directory
+def find_project_dir(steps: Optional[int] = 10) -> Path | None:
+    """Recursively searches for project directory`.cytosnake` directory. If the
+    directory is not found, None is returned.
 
     steps: Optional[int]
         number of recursive steps for searching. [default=10]
@@ -67,6 +70,8 @@ def find_project_dir(steps: Optional[int] = 10) -> Path:
     -------
     Path
         returns path to project folder
+    None
+        if the paths is unable to be found
 
     Raises
     ------
@@ -96,3 +101,6 @@ def find_project_dir(steps: Optional[int] = 10) -> Path:
                 return _file.parent.absolute()
 
         start_point = start_point.parent
+
+    # if nothing is found, return None
+    return None
