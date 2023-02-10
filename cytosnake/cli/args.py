@@ -61,12 +61,8 @@ class WorkflowSearchPath(argparse.Action):
             raise InvalidWorkflowException(
                 f"Unable to find '{values}'. Please specify a supported workflow: {supported_wf}"
             )
-
-        # grabbing workflow path from `_paths.yaml`
-        workflow_paths = load_workflow_path(values)
-
-        # set the new value with the extracted path
-        values = workflow_paths
+        # grabbing and setting the new value with the extracted path
+        values = load_workflow_path(values)
 
         # return new attributes of the `workflow` parameter
         setattr(args, self.dest, values)

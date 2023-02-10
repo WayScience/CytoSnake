@@ -103,7 +103,7 @@ def get_project_root() -> Path:
     """
 
     # get current working directory
-    project_dir = Path().absolute()  # this is where the major bug comes from
+    project_dir = Path().absolute()  
 
     # check if the `.cytosnake` folder exist
     project_folder = project_dir / ".cytosnake"
