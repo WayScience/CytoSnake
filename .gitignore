@@ -1,5 +1,7 @@
 *.pyc
 *.log
+.snakemake
+.cytosnake
 prototypes
 _build
 testing
