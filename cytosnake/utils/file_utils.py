@@ -71,7 +71,7 @@ def find_project_dir(steps: Optional[int] = 10) -> Path | None:
     Path
         returns path to project folder
     None
-        if the paths is unable to be found
+        if the path is unable to be found
 
     Raises
     ------
