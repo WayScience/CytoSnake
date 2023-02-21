@@ -6,12 +6,16 @@ cmd.py Module
 Generates CLI interface in order to interact with CytoSnake.
 """
 import sys
+from logging import Logger
 
-from .args import CliControlPanel
-from .exec.workflow_exec import workflow_executor
-from .setup_init import init_cp_data, init_dp_data
-from .cli_docs import init_doc, cli_docs, run_doc
-from ..common.errors import WorkflowFailedException
+# cytosnake imports
+from cytosnake.cli.args import CliControlPanel
+from cytosnake.cli.exec.workflow_exec import workflow_executor
+from cytosnake.utils.cyto_paths import is_cytosnake_dir
+from cytosnake.cli.setup_init import init_cp_data, init_dp_data
+from cytosnake.cli.cli_docs import init_doc, cli_docs, run_doc
+from cytosnake.common.errors import WorkflowFailedException, ProjectExistsError
+from cytosnake.utils.cytosnake_setup import setup_cytosnake_env
 
 
 def run_cmd() -> None:
@@ -35,17 +39,23 @@ def run_cmd() -> None:
         print(cli_docs)
         sys.exit(0)
 
+    # Main mode selection function. Each match
     match args_handler.mode:
-
         case "init":
-
             # if mode help flag is shown, show cli help doc
             if args_handler.mode_help is True:
                 print(init_doc)
                 sys.exit(0)
 
+            # checking if current directory is a project folder
+            # -- if True, raise error
+            if is_cytosnake_dir():
+                raise ProjectExistsError(
+                    "This directory is already a cytosnake project directory"
+                )
+
             # setting up input files for cytosnake
-            print("INFO: Formatting input files")
+            Logger.info("Formatting input files")
             init_args = args_handler.parse_init_args()
 
             # identifying which data type was added and how to set it up
@@ -57,15 +67,24 @@ def run_cmd() -> None:
                         barcode_fp=init_args.barcode,
                     )
                 case "deep_profiler":
-                    init_dp_data(data_fp=init_args.data, metadata_fp=init_args.metadata)
+                    init_dp_data(
+                        data_fp=init_args.data, metadata_fp=init_args.metadata
+                    )
                 case _:
                     raise RuntimeError(
-                        "Unexpected error in identifying datatype. Did you specify `cell_profiler` or `deep_profiler`datatype?"
+                        "Unsupported datatype. Supported datatypes:"
+                        "`cell_profiler` or `deep_profiler`datatype?"
                     )
 
-            print("INFO: Formatting complete!")
+            # now that the data is created, set up the current directory
+            # into a project directory
+            setup_cytosnake_env()
+            Logger.info("Initialization complete")
 
+        # Executed if the user is using the `run` mode. This will execute the
+        # workflow that are found within the `workflows` folder
         case "run":
+
             # display run help documentation
             if args_handler.mode_help is True:
                 print(run_doc)
@@ -81,14 +100,17 @@ def run_cmd() -> None:
                 force_run=wf_params.force,
             )
 
+            # exception error if the workflow failed
             if wf_executor != 0:
                 raise WorkflowFailedException(
-                    f"Workflow encounter and error, please refer to the logs"
+                    "Workflow encounter and error, please refer to the logs"
                 )
 
+        # if user execute `help` help mode. CLI documentation will appear.
         case "help":
             print(cli_docs)
 
+        # Raise an error if an invalid mode is provided
         case _:
             raise RuntimeError("Unexpected error captured in mode selection")
 

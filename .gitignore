@@ -1,5 +1,8 @@
 *.pyc
+*.log
 .snakemake
+.cytosnake
+prototypes
 _build
-_static
-.DS_Store
+testing
+CytoSnake.egg-info

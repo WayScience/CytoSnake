@@ -1,15 +1,17 @@
-import pathlib
+from pathlib import Path
 import yaml
 
-from ..common.errors import WorkflowNotFoundError
+import cytosnake.utils.cyto_paths as cp
+from cytosnake.guards.path_guards import is_valid_path
+from cytosnake.common.errors import WorkflowNotFoundError
 
 
-def load_configs(config: str) -> dict:
+def load_configs(config_path: str | Path) -> dict:
     """Returns a dictionary of given configurations
 
     Parameters
     ----------
-    config : str
+    config_path : str | Path
         path to config file
 
     Returns
@@ -22,18 +24,37 @@ def load_configs(config: str) -> dict:
     FileNotFoundError
         raised if provided config file paths is invalid
     """
-    config_path_obj = pathlib.Path(config)
-    if not config_path_obj.is_file():
-        e_msg = f"Unable to find configuration file: {config_path_obj.name}"
-        raise FileNotFoundError(e_msg)
 
-    config_path = str(config_path_obj)
+    # check if config path is a valid path
+    if not is_valid_path(config_path):
+        raise FileNotFoundError("Invalid config path provided")
+    if isinstance(config_path, str):
+        config_path = Path(config_path).absolute()
+    if not config_path.is_absolute():
+        config_path = config_path.absolute()
+
+    # loading in config_path
     with open(config_path, "r") as yaml_contents:
         loaded_configs = yaml.safe_load(yaml_contents)
+
     return loaded_configs
 
 
-def load_workflow_path(wf_name: str) -> pathlib.PosixPath:
+def load_meta_path_configs() -> dict:
+    """Loads the metadata path from `.cytosnake/_paths.yaml` file
+
+    Returns
+    -------
+    dict
+        meta path contents from the `_paths.yaml` file
+    """
+
+    # construct path to `.cytosnake/_paths.yaml` file
+    meta_path = cp.get_meta_path() / "_paths.yaml"
+    return load_configs(meta_path)
+
+
+def load_workflow_path(wf_name: str) -> Path:
     """Loads in configurations and returns path pointing to
     workflow
 
@@ -52,13 +73,37 @@ def load_workflow_path(wf_name: str) -> pathlib.PosixPath:
     WorkFlowNotFound
         Raised if the desired workflow is not found.
     """
+    # load configurations from `.cytosnake`
+    meta_path = cp.get_meta_path() / "_paths.yaml"
+
     # loading loading workflow paths
-    general_config = load_configs("configs/configuration.yaml")
-    workflows = general_config["workflows"]
+    general_config = load_configs(meta_path)
+    workflows = general_config["workflow_dir"]["workflow"]
 
     # checking if the workflow exists
     if wf_name not in workflows.keys():
         raise WorkflowNotFoundError(f"Unable to find {wf_name} workflow")
 
     # returning workflow path
-    return pathlib.Path(workflows[wf_name])
+    return Path(workflows[wf_name])
+
+
+def load_data_path_configs():
+    """Returns path pointing where the data folder is
+
+    Returns
+    -------
+    Path
+        Path to data folder in project directory
+    """
+
+    # load in `_paths.yaml` meta data
+    loaded_meta_paths = load_meta_path_configs()
+    return Path(loaded_meta_paths["project_dir"]["data"])
+
+
+def load_workflow_paths_config() -> dict:
+
+    # load in _path.yaml and select key where all workflow paths are
+    loaded_meta_paths = load_meta_path_configs()
+    return loaded_meta_paths["workflow_dir"]["workflow"]

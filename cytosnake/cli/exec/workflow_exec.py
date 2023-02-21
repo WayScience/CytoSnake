@@ -67,13 +67,10 @@ def workflow_executor(
         start from the beginning. If False, the workflow will
         start where it last stopped. by default False
     """
-
-    # loading desired workflow path
-    workflow_path = load_workflow_path(wf_name=workflow)
-
-    # executing workflow
+    
+    # executing selected workflow
     job = __base_exec(
-        workflow_file=workflow_path,
+        workflow_file=workflow,
         n_cores=n_cores,
         unlock=allow_unlock,
         force=force_run,

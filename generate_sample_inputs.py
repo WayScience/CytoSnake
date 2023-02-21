@@ -1,6 +1,9 @@
-import os
+"""
+script: generate_sample_inputs.py
+
+small scripts that generates empty files in order to test CytoSnake `init` mode
+"""
 from pathlib import Path
-import shutil
 from random import randint
 
 if __name__ == "__main__":

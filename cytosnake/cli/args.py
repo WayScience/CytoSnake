@@ -13,10 +13,62 @@ from typing import Union
 import shutil
 import argparse
 from dataclasses import dataclass
-from .cli_docs import *
-from ..common.errors import *
+
+# cytosnake imports
+from cytosnake.common.errors import (
+    InvalidWorkflowException,
+    InvalidArgumentException,
+    InvalidExecutableException,
+)
+from cytosnake.utils.config_utils import (
+    load_workflow_path,
+    load_workflow_paths_config,
+)
+
+# CLI helper functions
+def supported_workflows() -> tuple[str]:
+    """Returns a tuple of supported workflows that `run` supports.
+
+    Returns
+    -------
+    tuple[str]
+        tuple containing the names of the workflow names
+    """
+
+    # load in workflow path config
+    # -- only grab keys and add "help" into the supported workflows
+    workflow_paths = list(load_workflow_paths_config().keys()) + ["help"]
+
+    # returns as a tuple, we do not want to edit these names
+    return tuple(workflow_paths)
 
 
+# custom argparse actions
+class WorkflowSearchPath(argparse.Action):
+    """This class provides more functionality
+
+    User provided workflow names are checked to see if they exist. If found,
+    the parameter will return the absolute path to the workflow. If the name
+    does not exist, raise an error indicating that the provided
+    workflow name does not exist within cytosnake
+    """
+
+    def __call__(self, parser, args, values, option_string=None):
+
+        # checking if user provided workflow exists
+        supported_wf = supported_workflows()
+        if values not in supported_wf:
+            raise InvalidWorkflowException(
+                f"Unable to find '{values}'. Please specify a supported workflow: {supported_wf}"
+            )
+        # grabbing and setting the new value with the extracted path
+        values = load_workflow_path(values)
+
+        # return new attributes of the `workflow` parameter
+        setattr(args, self.dest, values)
+
+
+# CLI Control Panel, controls all user inputs
 @dataclass(repr=True)
 class CliControlPanel:
     """
@@ -45,12 +97,10 @@ class CliControlPanel:
     data_type: Union[None, str] = None
     workflow: Union[None, str] = None
     mode_check = False
-    workflow_check = False
     cli_help = False
     mode_help = False
     data_type: tuple[str] = ("cell_profiler", "deep_profiler")
     modes: tuple[str] = ("init", "run", "test", "help")
-    workflows: tuple[str] = ("cp_process", "dp_process", "help")
     __exec_name: str = "cytosnake"
 
     # ----------------------------------------
@@ -63,12 +113,9 @@ class CliControlPanel:
 
     # Class representation
     def __repr__(self) -> str:
-        exec_mode_workflow = f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}, workflow={self.workflow}"
+        exec_mode_workflow = f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}"
         help_checks = f"cli_help={self.cli_help}, mode_help={self.mode_help}"
-        param_states = (
-            f"mode_check={self.mode_check}, workflow_check={self.workflow_check}"
-        )
-        return f"CliArgsHandler({exec_mode_workflow}, {help_checks}, {param_states})"
+        return f"CliArgsHandler({exec_mode_workflow}, {help_checks}"
 
     # making class printable
     def __str__(self) -> str:
@@ -114,7 +161,11 @@ class CliControlPanel:
             help="Init mode sets up the all files for cytosnake processing",
         )
         parser.add_argument(
-            "-d", "--data", nargs="+", required=True, help="list of plate data files"
+            "-d",
+            "--data",
+            nargs="+",
+            required=True,
+            help="list of plate data files",
         )
         parser.add_argument(
             "-m",
@@ -123,7 +174,9 @@ class CliControlPanel:
             help="path to metadata directory",
             required=True,
         )
-        parser.add_argument("-b", "--barcode", type=str, help="path to barcodes file")
+        parser.add_argument(
+            "-b", "--barcode", type=str, help="path to barcodes file"
+        )
         parser.add_argument(
             "--datatype",
             choices=list(self.data_type),
@@ -205,13 +258,6 @@ class CliControlPanel:
                 self.__check_extra_help_args(help_flag_pos=2)
                 self.mode_help = True
 
-            # checking if workflow exists
-            workflow = self.param_list[2]
-            if workflow in self.workflows:
-                self.workflow_check = True
-
-            self.workflow = workflow
-
         # indicates that the user only placed a mode
         except IndexError:
             self.mode_help = False
@@ -254,7 +300,7 @@ class CliControlPanel:
         )
         required.add_argument(
             "workflow",
-            choices=self.workflows,
+            action=WorkflowSearchPath,
             type=str,
             help="Name of desired workflow",
         )

@@ -1,4 +1,3 @@
-from pathlib import Path
 import glob
 
 
@@ -12,7 +11,6 @@ include: "rules/feature_select.smk"
 
 
 # appending logs
-# work in progress update on issue #9
 # LOG_NAMES = glob_wildcards("logs/{log_name}.log").log_name
 # include: "rules/merge_logs.smk"
 
