@@ -67,7 +67,7 @@ def workflow_executor(
         start from the beginning. If False, the workflow will
         start where it last stopped. by default False
     """
-    
+
     # executing selected workflow
     job = __base_exec(
         workflow_file=workflow,

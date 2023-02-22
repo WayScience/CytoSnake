@@ -2,9 +2,9 @@
 Module: file_utils.py
 
 Contains functions that involves file manipulations like:
-    - searching 
-    - transferring 
-    - creating symbolic links 
+    - searching
+    - transferring
+    - creating symbolic links
     - creating and deleting files
 """
 from pathlib import Path
@@ -52,9 +52,7 @@ def file_search(fpath: str | Path) -> dict:
         elif _file.is_file():
             collected_files[name] = str(_file.absolute())
         else:
-            raise RuntimeError(
-                "Unexpected error captured: Non-path entry captured "
-            )
+            raise RuntimeError("Unexpected error captured: Non-path entry captured ")
 
     return collected_files
 

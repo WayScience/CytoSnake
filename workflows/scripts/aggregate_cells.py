@@ -2,6 +2,7 @@ import logging
 import os
 from pathlib import Path
 
+import snakemake
 import pandas as pd
 import yaml
 from pycytominer.cyto_utils.cells import SingleCells
@@ -59,7 +60,7 @@ def aggregate(
     config_check = Path(aggregate_config_path).is_file()
 
     if not config_check:
-        e_msg = f"Unable to find aggregation configuration file"
+        e_msg = "Unable to find aggregation configuration file"
         logging.error(e_msg)
         raise FileNotFoundError(e_msg)
 

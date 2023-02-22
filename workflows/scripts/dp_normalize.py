@@ -1,7 +1,7 @@
-import logging
 from pathlib import Path
 import yaml
 
+import snakemake
 import pandas as pd
 from pycytominer import normalize
 

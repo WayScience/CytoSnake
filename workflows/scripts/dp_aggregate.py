@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import snakemake
 import yaml
 from pycytominer.cyto_utils.DeepProfiler_processing import (
     DeepProfilerData,

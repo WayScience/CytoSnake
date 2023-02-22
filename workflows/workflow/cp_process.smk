@@ -13,8 +13,6 @@ include: "rules/feature_select.smk"
 # appending logs
 # LOG_NAMES = glob_wildcards("logs/{log_name}.log").log_name
 # include: "rules/merge_logs.smk"
-
-
 rule all:
     input:
         expand("results/preprocessing/{plate_id}_aggregate.csv.gz", plate_id=PLATE_IDS),  # expected outputs from the first DAG "Preprocessing"

@@ -2,6 +2,7 @@ import yaml
 from pathlib import Path
 from typing import Union
 
+import snakemake
 import pandas as pd
 from pycytominer.operations import get_na_columns
 from pycytominer import consensus
@@ -34,7 +35,7 @@ def infer_dp_features(dp_profile) -> list[str]:
 
     if len(dp_features) <= 0:
         raise ValueError(
-            "No DP features found, Are you sure that this dataframe is from DeepProfiler?"
+            "No DP features found, Are you sure that these are DeepProfiler features?"
         )
 
     return dp_features

@@ -113,7 +113,9 @@ class CliControlPanel:
 
     # Class representation
     def __repr__(self) -> str:
-        exec_mode_workflow = f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}"
+        exec_mode_workflow = (
+            f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}"
+        )
         help_checks = f"cli_help={self.cli_help}, mode_help={self.mode_help}"
         return f"CliArgsHandler({exec_mode_workflow}, {help_checks}"
 
@@ -174,9 +176,7 @@ class CliControlPanel:
             help="path to metadata directory",
             required=True,
         )
-        parser.add_argument(
-            "-b", "--barcode", type=str, help="path to barcodes file"
-        )
+        parser.add_argument("-b", "--barcode", type=str, help="path to barcodes file")
         parser.add_argument(
             "--datatype",
             choices=list(self.data_type),

@@ -1,6 +1,6 @@
 """setup_init.py
 
-Contains functions for initializing different data structures 
+Contains functions for initializing different data structures
 for processing
 """
 
@@ -25,7 +25,8 @@ def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: s
     # checking that none are NoneTypes
     if not any([data_fp, metadata_fp, barcode_fp]):
         raise ValueError(
-            "Inputs required do not much match cell_profiler datatype, please make sure to provide data plates, barcode and metadata"
+            "Inputs required do not much match cell_profiler datatype,"
+            "please make sure to provide data plates, barcode and metadata"
         )
 
     # setting up paths

@@ -2,11 +2,11 @@
 Module: path_guards.py
 
 
-Functions for checking paths. 
+Functions for checking paths.
 
 This includes:
-    - existing paths 
-    - valid path strings 
+    - existing paths
+    - valid path strings
 """
 
 from typing import TypeGuard

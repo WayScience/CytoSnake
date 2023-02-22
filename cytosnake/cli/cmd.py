@@ -67,9 +67,7 @@ def run_cmd() -> None:
                         barcode_fp=init_args.barcode,
                     )
                 case "deep_profiler":
-                    init_dp_data(
-                        data_fp=init_args.data, metadata_fp=init_args.metadata
-                    )
+                    init_dp_data(data_fp=init_args.data, metadata_fp=init_args.metadata)
                 case _:
                     raise RuntimeError(
                         "Unsupported datatype. Supported datatypes:"

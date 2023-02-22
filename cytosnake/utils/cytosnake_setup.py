@@ -2,8 +2,8 @@
 Module: cytosnake_setup.py
 
 This modules sets up the current directory as a project directory. Project
-directories are dictated by the presence of `.cytosnake`, which contains 
-meta data for cytosnake to use. 
+directories are dictated by the presence of `.cytosnake`, which contains
+meta data for cytosnake to use.
 
 """
 import json

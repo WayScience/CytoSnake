@@ -1,7 +1,7 @@
 import yaml
 from pathlib import Path
 
-import pandas as pd
+import snakemake
 from pycytominer.operations import get_na_columns
 from pycytominer import consensus
 
