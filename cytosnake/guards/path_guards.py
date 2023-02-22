@@ -9,8 +9,8 @@ This includes:
     - valid path strings
 """
 
-from typing import TypeGuard
 from pathlib import Path
+from typing import TypeGuard
 
 
 def is_valid_path(val: object) -> TypeGuard[Path]:

@@ -2,8 +2,8 @@ import logging
 import os
 from pathlib import Path
 
-import snakemake
 import pandas as pd
+import snakemake
 import yaml
 from pycytominer.cyto_utils.cells import SingleCells
 

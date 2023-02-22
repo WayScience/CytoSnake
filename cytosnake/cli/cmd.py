@@ -10,11 +10,11 @@ from logging import Logger
 
 # cytosnake imports
 from cytosnake.cli.args import CliControlPanel
+from cytosnake.cli.cli_docs import cli_docs, init_doc, run_doc
 from cytosnake.cli.exec.workflow_exec import workflow_executor
-from cytosnake.utils.cyto_paths import is_cytosnake_dir
 from cytosnake.cli.setup_init import init_cp_data, init_dp_data
-from cytosnake.cli.cli_docs import init_doc, cli_docs, run_doc
-from cytosnake.common.errors import WorkflowFailedException, ProjectExistsError
+from cytosnake.common.errors import ProjectExistsError, WorkflowFailedException
+from cytosnake.utils.cyto_paths import is_cytosnake_dir
 from cytosnake.utils.cytosnake_setup import setup_cytosnake_env
 
 

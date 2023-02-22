@@ -1,9 +1,9 @@
-import yaml
 from pathlib import Path
 
 import snakemake
-from pycytominer.operations import get_na_columns
+import yaml
 from pycytominer import consensus
+from pycytominer.operations import get_na_columns
 
 
 def build_dp_consensus(dp_profile: str, outname: str, config: str):

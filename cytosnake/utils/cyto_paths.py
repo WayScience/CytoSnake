@@ -4,13 +4,13 @@ module: cyto_paths.py
 This module will contain functions that handles `cytosnake's` pathing
 """
 
-from typing import Optional
 from pathlib import Path
+from typing import Optional
 
 # cytosnake imports
 import cytosnake
-from cytosnake.utils.file_utils import file_search, find_project_dir
 from cytosnake.guards.path_guards import is_valid_path
+from cytosnake.utils.file_utils import file_search, find_project_dir
 
 
 def get_meta_path() -> Path:

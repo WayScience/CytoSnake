@@ -8,12 +8,11 @@ Argument checking module that checks and validates user input
 arguments from CytoSnake's cli interface,
 """
 import sys
-from typing import Union
 from dataclasses import dataclass
+from typing import Union
 
-
-from .cli_docs import init_doc, run_doc, cli_docs
 from ..common.errors import *
+from .cli_docs import cli_docs, init_doc, run_doc
 
 
 @dataclass

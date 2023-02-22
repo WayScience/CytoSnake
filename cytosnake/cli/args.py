@@ -9,21 +9,19 @@ parameters for cytosnake.
 Contains different modes with their respected parameters
 """
 
-from typing import Union
-import shutil
 import argparse
+import shutil
 from dataclasses import dataclass
+from typing import Union
 
 # cytosnake imports
 from cytosnake.common.errors import (
-    InvalidWorkflowException,
     InvalidArgumentException,
     InvalidExecutableException,
+    InvalidWorkflowException,
 )
-from cytosnake.utils.config_utils import (
-    load_workflow_path,
-    load_workflow_paths_config,
-)
+from cytosnake.utils.config_utils import load_workflow_path, load_workflow_paths_config
+
 
 # CLI helper functions
 def supported_workflows() -> tuple[str]:

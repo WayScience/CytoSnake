@@ -1,11 +1,11 @@
-import yaml
 from pathlib import Path
 from typing import Union
 
-import snakemake
 import pandas as pd
-from pycytominer.operations import get_na_columns
+import snakemake
+import yaml
 from pycytominer import consensus
+from pycytominer.operations import get_na_columns
 
 
 def infer_dp_features(dp_profile) -> list[str]:

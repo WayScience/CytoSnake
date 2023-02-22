@@ -4,8 +4,8 @@ Contains functions for initializing different data structures
 for processing
 """
 
-from typing import Union
 from pathlib import Path
+from typing import Union
 
 
 def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: str):

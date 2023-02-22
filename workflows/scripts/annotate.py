@@ -1,10 +1,10 @@
-import os
 import logging
-import yaml
+import os
 from pathlib import Path
 
-import snakemake
 import pandas as pd
+import snakemake
+import yaml
 from pycytominer.annotate import annotate
 
 

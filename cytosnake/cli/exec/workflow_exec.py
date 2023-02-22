@@ -5,6 +5,7 @@ Module containing functions to execute workflows via cytopipe's
 CLI interface
 """
 from typing import Optional
+
 import snakemake
 
 from cytosnake.utils.config_utils import load_workflow_path

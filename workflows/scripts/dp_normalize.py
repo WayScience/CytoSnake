@@ -1,8 +1,8 @@
 from pathlib import Path
-import yaml
 
-import snakemake
 import pandas as pd
+import snakemake
+import yaml
 from pycytominer import normalize
 
 

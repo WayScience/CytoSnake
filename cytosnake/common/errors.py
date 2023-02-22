@@ -13,7 +13,8 @@ Exceptions that are specific to CytoSnake
 """
 
 import sys
-from typing import Union, Optional
+from typing import Optional, Union
+
 
 # ------------------------------
 # Base Exceptions
