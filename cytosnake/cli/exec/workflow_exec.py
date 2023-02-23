@@ -5,6 +5,7 @@ Module containing functions to execute workflows via cytopipe's
 CLI interface
 """
 from typing import Optional
+
 import snakemake
 
 from cytosnake.utils.config_utils import load_workflow_path
@@ -67,7 +68,7 @@ def workflow_executor(
         start from the beginning. If False, the workflow will
         start where it last stopped. by default False
     """
-    
+
     # executing selected workflow
     job = __base_exec(
         workflow_file=workflow,

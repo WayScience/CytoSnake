@@ -2,22 +2,21 @@
 Module: cytosnake_setup.py
 
 This modules sets up the current directory as a project directory. Project
-directories are dictated by the presence of `.cytosnake`, which contains 
-meta data for cytosnake to use. 
+directories are dictated by the presence of `.cytosnake`, which contains
+meta data for cytosnake to use.
 
 """
 import json
 import shutil
-
 from pathlib import Path
-from cytosnake.utils.cyto_paths import (
-    get_cytosnake_package_path,
-    get_config_fpaths,
-    get_workflow_fpaths,
-    get_project_dirpaths,
-)
 
 from cytosnake.common.errors import display_error
+from cytosnake.utils.cyto_paths import (
+    get_config_fpaths,
+    get_cytosnake_package_path,
+    get_project_dirpaths,
+    get_workflow_fpaths,
+)
 
 
 def create_cytosnake_dir() -> None:

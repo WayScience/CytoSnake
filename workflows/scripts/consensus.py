@@ -1,10 +1,11 @@
 import logging
-import yaml
 from pathlib import Path
 
 import pandas as pd
-from pycytominer.operations import get_na_columns
+import snakemake
+import yaml
 from pycytominer import consensus
+from pycytominer.operations import get_na_columns
 
 
 def build_consensus(

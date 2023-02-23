@@ -1,9 +1,10 @@
 from pathlib import Path
+
 import yaml
 
 import cytosnake.utils.cyto_paths as cp
-from cytosnake.guards.path_guards import is_valid_path
 from cytosnake.common.errors import WorkflowNotFoundError
+from cytosnake.guards.path_guards import is_valid_path
 
 
 def load_configs(config_path: str | Path) -> dict:

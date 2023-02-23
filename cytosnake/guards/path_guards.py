@@ -2,15 +2,15 @@
 Module: path_guards.py
 
 
-Functions for checking paths. 
+Functions for checking paths.
 
 This includes:
-    - existing paths 
-    - valid path strings 
+    - existing paths
+    - valid path strings
 """
 
-from typing import TypeGuard
 from pathlib import Path
+from typing import TypeGuard
 
 
 def is_valid_path(val: object) -> TypeGuard[Path]:

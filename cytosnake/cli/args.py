@@ -9,21 +9,19 @@ parameters for cytosnake.
 Contains different modes with their respected parameters
 """
 
-from typing import Union
-import shutil
 import argparse
+import shutil
 from dataclasses import dataclass
+from typing import Union
 
 # cytosnake imports
 from cytosnake.common.errors import (
-    InvalidWorkflowException,
     InvalidArgumentException,
     InvalidExecutableException,
+    InvalidWorkflowException,
 )
-from cytosnake.utils.config_utils import (
-    load_workflow_path,
-    load_workflow_paths_config,
-)
+from cytosnake.utils.config_utils import load_workflow_path, load_workflow_paths_config
+
 
 # CLI helper functions
 def supported_workflows() -> tuple[str]:
@@ -113,7 +111,9 @@ class CliControlPanel:
 
     # Class representation
     def __repr__(self) -> str:
-        exec_mode_workflow = f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}"
+        exec_mode_workflow = (
+            f"exec_path={self.exec_path}, mode={self.mode}, data_type={self.data_type}"
+        )
         help_checks = f"cli_help={self.cli_help}, mode_help={self.mode_help}"
         return f"CliArgsHandler({exec_mode_workflow}, {help_checks}"
 
@@ -174,9 +174,7 @@ class CliControlPanel:
             help="path to metadata directory",
             required=True,
         )
-        parser.add_argument(
-            "-b", "--barcode", type=str, help="path to barcodes file"
-        )
+        parser.add_argument("-b", "--barcode", type=str, help="path to barcodes file")
         parser.add_argument(
             "--datatype",
             choices=list(self.data_type),
