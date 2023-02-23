@@ -6,7 +6,7 @@ cmd.py Module
 Generates CLI interface in order to interact with CytoSnake.
 """
 import sys
-from logging import Logger
+import logging
 
 # cytosnake imports
 from cytosnake.cli.args import CliControlPanel
@@ -29,6 +29,10 @@ def run_cmd() -> None:
     -------
     None
     """
+
+    # set logging configurations
+    logging.basicConfig(level="DEBUG")
+
     # create args handler
     # -- Cli Control Panel
     args_handler = CliControlPanel(sys.argv)
@@ -55,7 +59,7 @@ def run_cmd() -> None:
                 )
 
             # setting up input files for cytosnake
-            Logger.info("Formatting input files")
+            logging.info(msg="Formatting input files")
             init_args = args_handler.parse_init_args()
 
             # identifying which data type was added and how to set it up
@@ -77,7 +81,7 @@ def run_cmd() -> None:
             # now that the data is created, set up the current directory
             # into a project directory
             setup_cytosnake_env()
-            Logger.info("Initialization complete")
+            logging.info("Initialization complete")
 
         # Executed if the user is using the `run` mode. This will execute the
         # workflow that are found within the `workflows` folder
