@@ -24,7 +24,7 @@ def get_meta_path() -> Path:
 
     # getting project directory
     proj_dir = find_project_dir()
-    if not proj_dir.exists():
+    if proj_dir is None:
         raise FileNotFoundError("Current directory is not a project folder")
 
     return proj_dir.absolute()
