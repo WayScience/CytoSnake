@@ -10,7 +10,14 @@ from pathlib import Path
 
 from cytosnake.utils.config_utils import load_meta_path_configs
 
+# loading in config as global variables
+PATHS = load_meta_path_configs()
+RESULTS_DIR = "../results"
 
+
+# ------------------------------
+# Inputs helper functions
+# ------------------------------
 def get_data_folder() -> Path:
     """Returns absolute path that points to the data folder.
 
@@ -72,3 +79,22 @@ def get_metadata_dir() -> str:
     """
     data_dir_path = get_data_folder()
     return str(data_dir_path / "{metadata}")
+
+
+# ------------------------------
+# Output helper functions
+# ------------------------------
+def cell_count_output() -> str:
+    """Generates output path for cell counts;
+
+    Returns
+    -------
+    Path
+        path were the cell count data will be produced.
+    """
+    results_path = Path(PATHS["projet_dir_path"]) / "results"
+    output_name = "cell_counts"
+    ext = ".csv"
+
+    # building the string
+    return str(results_path / f"{output_name}.{ext}")
