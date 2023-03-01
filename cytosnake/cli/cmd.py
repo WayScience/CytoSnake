@@ -80,7 +80,7 @@ def run_cmd() -> None:
 
             # now that the data is created, set up the current directory
             # into a project directory
-            setup_cytosnake_env()
+            setup_cytosnake_env(args=init_args)
             logging.info("Initialization complete")
 
         # Executed if the user is using the `run` mode. This will execute the

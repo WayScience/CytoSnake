@@ -9,6 +9,7 @@ meta data for cytosnake to use.
 import json
 import shutil
 from pathlib import Path
+from typing import TypeVar
 
 from cytosnake.common.errors import display_error
 from cytosnake.utils.cyto_paths import (
@@ -17,6 +18,10 @@ from cytosnake.utils.cyto_paths import (
     get_project_dirpaths,
     get_workflow_fpaths,
 )
+
+# creating type hints without importing the modules
+# -- user defined generic types
+Namespace = TypeVar("Namespace")
 
 
 def create_cytosnake_dir() -> None:
@@ -68,13 +73,14 @@ def transport_project_files() -> None:
         src_path = pkg_path / target_dir
         target_dst = proj_path / target_dir
         if not src_path.exists():
+            print("DEBUGG:", str(src_path))
             raise FileNotFoundError(f"{src_path} does not exist")
 
         # move to dest: working project directory
         shutil.copytree(src_path, target_dst)
 
 
-def generate_meta_path_configs() -> None:
+def generate_meta_path_configs(args: Namespace) -> None:
     """constructs a `_paths.yaml` file that contains the necessary path
     information for file handling. this allows `cytosnake` to know which folders
     to look for when performing tasks.
@@ -88,7 +94,7 @@ def generate_meta_path_configs() -> None:
     # get all pathing info
     cwd_path = Path().absolute()
     cwd_str = str(cwd_path)
-    dir_paths = {"project_dir": get_project_dirpaths()}
+    dir_paths = {"project_dir": get_project_dirpaths(args=args)}
     config_fpaths = {"config_dir": get_config_fpaths()}
     workflow_fpath = {"workflow_dir": get_workflow_fpaths()}
     proj_dir_path = {"project_dir_path": cwd_str}
@@ -103,7 +109,7 @@ def generate_meta_path_configs() -> None:
         json.dump(all_paths_dict, stream, indent=4)
 
 
-def setup_cytosnake_env() -> None:
+def setup_cytosnake_env(args: Namespace) -> None:
     """main wrapper function that sets up current directory into a `cytosnake`
     project directory. this means that all the analysis being conducted within
     the current directory will allow
@@ -116,4 +122,4 @@ def setup_cytosnake_env() -> None:
     transport_project_files()
 
     # create `_paths.yaml` path meta data in `.cytosnake` project dir
-    generate_meta_path_configs()
+    generate_meta_path_configs(args=args)

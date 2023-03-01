@@ -5,12 +5,15 @@ This module will contain functions that handles `cytosnake's` pathing
 """
 
 from pathlib import Path
-from typing import Optional
+from typing import Optional, TypeVar
 
 # cytosnake imports
 import cytosnake
 from cytosnake.guards.path_guards import is_valid_path
 from cytosnake.utils.file_utils import file_search, find_project_dir
+
+# user defined types without importing module
+Namespace = TypeVar("Namespace")
 
 
 def get_meta_path() -> Path:
@@ -23,9 +26,13 @@ def get_meta_path() -> Path:
     """
 
     # getting project directory
-    proj_dir = find_project_dir()
+    proj_dir = find_project_dir() / ".cytosnake"
     if proj_dir is None:
         raise FileNotFoundError("Current directory is not a project folder")
+
+    # # checking if it is a valid path
+    # if not is_cytosnake_dir():
+    #     raise FileNotFoundError("Unable to find project ")
 
     return proj_dir.absolute()
 
@@ -153,9 +160,15 @@ def get_config_fpaths() -> dict:
     return file_search(config_path)
 
 
-def get_project_dirpaths() -> dict:
+def get_project_dirpaths(args: Namespace) -> dict:
     """returns a dictionary containing directory name and path as key value
     pairs.
+
+    Parameters
+    ----------
+    args : Namespace
+        Uses argparse's  Namespace object to add additional information into the
+        data section in `_path.yaml`
 
     Returns
     -------
@@ -176,6 +189,20 @@ def get_project_dirpaths() -> dict:
         if _file.name in ignore_dirs:
             continue
         if _file.is_dir():
-            all_dirs[_file.name] = str(_file.absolute())
+            abs_path = str(_file.absolute())
+            all_dirs[_file.name] = abs_path
+
+            # use the name space arguments to write _paths.yaml
+            if _file.name.lower() == "data":
+
+                # creating  dictionary for the plate data
+                data_dir_conts = {}
+                for platename in args.data:
+                    name = platename.split(".")[0]
+                    platedata_path = Path(abs_path) / platename
+                    data_dir_conts[name] = str(platedata_path)
+
+                data_dir_conts["data"] = abs_path
+                all_dirs["data_dir_conts"] = data_dir_conts
 
     return all_dirs
