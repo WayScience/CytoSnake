@@ -7,6 +7,7 @@ Generates CLI interface in order to interact with CytoSnake.
 """
 import sys
 import logging
+from pathlib import Path
 
 # cytosnake imports
 from cytosnake.cli.args import CliControlPanel
@@ -93,8 +94,9 @@ def run_cmd() -> None:
                 sys.exit(0)
 
             # parsing workflow parameters
-            print(f"INFO: Executing {args_handler.workflow} workflow")
             wf_params = args_handler.parse_workflow_args()
+            wf_name = Path(wf_params.workflow).name
+            print(f"Executing {wf_name} workflow")
             wf_executor = workflow_executor(
                 workflow=wf_params.workflow,
                 n_cores=wf_params.max_cores,
