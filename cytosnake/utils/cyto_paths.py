@@ -3,7 +3,6 @@ module: cyto_paths.py
 
 This module will contain functions that handles `cytosnake's` pathing
 """
-
 from pathlib import Path
 from typing import Optional, TypeVar
 
@@ -194,15 +193,19 @@ def get_project_dirpaths(args: Namespace) -> dict:
 
             # use the name space arguments to write _paths.yaml
             if _file.name.lower() == "data":
+                abs_data_path = Path(abs_path)
 
                 # creating  dictionary for the plate data
                 data_dir_conts = {}
                 for platename in args.data:
                     name = platename.split(".")[0]
-                    platedata_path = Path(abs_path) / platename
+                    platedata_path = abs_data_path / platename
                     data_dir_conts[name] = str(platedata_path)
 
+                # adding single files paths
                 data_dir_conts["data"] = abs_path
+                data_dir_conts["barcode"] = str(abs_data_path / args.barcode)
+                data_dir_conts["metadata"] = str(abs_data_path / args.metadata)
                 all_dirs["data_dir_conts"] = data_dir_conts
 
     return all_dirs
