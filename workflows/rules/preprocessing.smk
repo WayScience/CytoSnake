@@ -30,49 +30,47 @@ configfile: "configs/configuration.yaml"
 
 rule aggregate:
     input:
-        sql_files="data/{plate_id}.sqlite",
-        barcodes="data/barcode_platemap.csv",
-        metadata="data/metadata",
+        sql_files=PLATE_DATA,
+        barcodes=BARCODES,
+        metadata=METADATA_DIR,
     output:
-        cell_counts="results/preprocessing/{plate_id}_cell_counts.tsv",
-        aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
+        aggregate_profile=AGGREGATE_OUTPUT,
+        cell_counts=CELL_COUNTS,
+    log:
+        "logs/aggregate_{file_name}.log",
     conda:
         "../envs/cytominer_env.yaml"
-    log:
-        "logs/aggregate_{plate_id}.log",
     params:
         aggregate_config=config["config_paths"]["single_cell"],
     script:
         "../scripts/aggregate_cells.py"
 
 
-rule annotate:
-    input:
-        barcodes="data/barcode_platemap.csv",
-        aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
-        metadata="data/metadata",
-    output:
-        "results/preprocessing/{plate_id}_augmented.csv.gz",
-    conda:
-        "../envs/cytominer_env.yaml"
-    log:
-        "logs/annotate_{plate_id}.log",
-    params:
-        annotate_config=config["config_paths"]["annotate"],
-    script:
-        "../scripts/annotate.py"
-
-
-rule normalize:
-    input:
-        "results/preprocessing/{plate_id}_augmented.csv.gz",
-    output:
-        "results/preprocessing/{plate_id}_normalized.csv.gz",
-    conda:
-        "../envs/cytominer_env.yaml"
-    log:
-        "logs/normalized_{plate_id}.log",
-    params:
-        normalize_config=config["config_paths"]["normalize"],
-    script:
-        "../scripts/normalize.py"
+# rule annotate:
+#     input:
+#         barcodes="data/barcode_platemap.csv",
+#         aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
+#         metadata="data/metadata",
+#     output:
+#         "results/preprocessing/{plate_id}_augmented.csv.gz",
+#     conda:
+#         "../envs/cytominer_env.yaml"
+#     log:
+#         "logs/annotate_{plate_id}.log",
+#     params:
+#         annotate_config=config["config_paths"]["annotate"],
+#     script:
+#         "../scripts/annotate.py"
+# rule normalize:
+#     input:
+#         "results/preprocessing/{plate_id}_augmented.csv.gz",
+#     output:
+#         "results/preprocessing/{plate_id}_normalized.csv.gz",
+#     conda:
+#         "../envs/cytominer_env.yaml"
+#     log:
+#         "logs/normalized_{plate_id}.log",
+#     params:
+#         normalize_config=config["config_paths"]["normalize"],
+#     script:
+#         "../scripts/normalize.py"
