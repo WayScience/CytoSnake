@@ -117,18 +117,12 @@ def cell_count_output() -> str:
 
 
 def aggregate_output() -> str:
-    """Generates output path for cell counts;
-
-    Parameters
-    ----------
-    wildcards list[str]
-        names that point to a unique file
+    """Generates output path for cell counts.
 
     Returns
     -------
     list[str], str
-        path to aggregate output file. If multiple outputs, a list of paths are
-        returned
+        path to aggregate output file.
     """
 
     # components of output string
@@ -137,8 +131,78 @@ def aggregate_output() -> str:
     ext = "csv.gz"
 
     # constructing file output string
-    output_string = str(results_path / f"{output_name}.{ext}")
-    return output_string
+    return str(results_path / f"{output_name}.{ext}")
+
+
+def annotated_output() -> str:
+    """Generates output path for annotated dataset
+
+    Returns
+    -------
+    str
+        path to annotated output file
+    """
+    # components of output string for annotated profile
+    results_path = Path(PATHS["project_dir_path"]) / "results"
+    output_name = "{file_name}_annotated"
+    ext = "csv.gz"
+
+    # constructing file output string
+    return str(results_path / f"{output_name}.{ext}")
+
+
+def normalized_output() -> str:
+
+    """Generates output path for normalized dataset
+
+    Returns
+    -------
+    str
+        path to normalized output file
+    """
+    # components of output string for annotated profile
+    results_path = Path(PATHS["project_dir_path"]) / "results"
+    output_name = "{file_name}_normalized"
+    ext = "csv.gz"
+
+    # constructing file output string
+    return str(results_path / f"{output_name}.{ext}")
+
+
+def selected_features_output() -> str:
+
+    """Generates output path for selected features dataset
+
+    Returns
+    -------
+    str
+        path to selected features output file
+    """
+    # components of output string for annotated profile
+    results_path = Path(PATHS["project_dir_path"]) / "results"
+    output_name = "{file_name}_features"
+    ext = "csv.gz"
+
+    # constructing file output string
+    return str(results_path / f"{output_name}.{ext}")
+
+
+def consensus_output() -> str:
+
+    """Generates output path for consensus  dataset
+
+    Returns
+    -------
+    str
+        path to selected features output file
+    """
+    # components of output string for annotated profile
+    results_path = Path(PATHS["project_dir_path"]) / "results"
+    output_name = "consensus_profile"
+    ext = "csv.gz"
+
+    # constructing file output string
+    return str(results_path / f"{output_name}.{ext}")
 
 
 # ------------------------------

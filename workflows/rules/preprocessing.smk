@@ -34,7 +34,7 @@ rule aggregate:
         barcodes=BARCODES,
         metadata=METADATA_DIR,
     output:
-        aggregate_profile=AGGREGATE_OUTPUT,
+        aggregate_profile=AGGREGATE_DATA,
         cell_counts=CELL_COUNTS,
     log:
         "logs/aggregate_{file_name}.log",
@@ -46,31 +46,33 @@ rule aggregate:
         "../scripts/aggregate_cells.py"
 
 
-# rule annotate:
-#     input:
-#         barcodes="data/barcode_platemap.csv",
-#         aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
-#         metadata="data/metadata",
-#     output:
-#         "results/preprocessing/{plate_id}_augmented.csv.gz",
-#     conda:
-#         "../envs/cytominer_env.yaml"
-#     log:
-#         "logs/annotate_{plate_id}.log",
-#     params:
-#         annotate_config=config["config_paths"]["annotate"],
-#     script:
-#         "../scripts/annotate.py"
-# rule normalize:
-#     input:
-#         "results/preprocessing/{plate_id}_augmented.csv.gz",
-#     output:
-#         "results/preprocessing/{plate_id}_normalized.csv.gz",
-#     conda:
-#         "../envs/cytominer_env.yaml"
-#     log:
-#         "logs/normalized_{plate_id}.log",
-#     params:
-#         normalize_config=config["config_paths"]["normalize"],
-#     script:
-#         "../scripts/normalize.py"
+rule annotate:
+    input:
+        aggregate_profile=AGGREGATE_DATA,
+        barcodes=BARCODES,
+        metadata=METADATA_DIR,
+    output:
+        ANNOTATED_DATA,
+    conda:
+        "../envs/cytominer_env.yaml"
+    log:
+        "logs/annotate_{file_name}.log",
+    params:
+        annotate_config=config["config_paths"]["annotate"],
+    script:
+        "../scripts/annotate.py"
+
+
+rule normalize:
+    input:
+        ANNOTATED_DATA,
+    output:
+        NORMALIZED_DATA,
+    conda:
+        "../envs/cytominer_env.yaml"
+    log:
+        "logs/normalized_{file_name}.log",
+    params:
+        normalize_config=config["config_paths"]["normalize"],
+    script:
+        "../scripts/normalize.py"

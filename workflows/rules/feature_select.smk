@@ -3,12 +3,9 @@ configfile: "configs/configuration.yaml"
 
 rule feature_select:
     input:
-        expand("results/preprocessing/{plate_id}_normalized.csv.gz", plate_id=PLATE_IDS),
+        NORMALIZED_DATA_EXPAND,
     output:
-        expand(
-            "results/preprocessing/{plate_id}_feature_select.csv.gz",
-            plate_id=PLATE_IDS,
-        ),
+        SELECTED_FEATURE_DATA_EXPAND,
     params:
         feature_select_config=config["config_paths"]["feature_select"],
     log:
@@ -21,12 +18,9 @@ rule feature_select:
 
 rule create_consensus:
     input:
-        expand(
-            "results/preprocessing/{plate_id}_feature_select.csv.gz",
-            plate_id=PLATE_IDS,
-        ),
+        SELECTED_FEATURE_DATA_EXPAND,
     output:
-        "results/preprocessing/consensus.tsv.gz",
+        CONSENSUS_DATA,
     params:
         consensus_configs=config["config_paths"]["consensus_config"],
     log:

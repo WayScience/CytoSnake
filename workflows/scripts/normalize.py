@@ -1,7 +1,6 @@
 import logging
 from pathlib import Path
 
-import snakemake
 import yaml
 from pycytominer.normalize import normalize
 
