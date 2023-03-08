@@ -29,10 +29,6 @@ def get_meta_path() -> Path:
     if proj_dir is None:
         raise FileNotFoundError("Current directory is not a project folder")
 
-    # # checking if it is a valid path
-    # if not is_cytosnake_dir():
-    #     raise FileNotFoundError("Unable to find project ")
-
     return proj_dir.absolute()
 
 
@@ -187,6 +183,9 @@ def get_project_dirpaths(args: Namespace) -> dict:
     for _file in proj_root_path.glob("*"):
         if _file.name in ignore_dirs:
             continue
+
+        # if the file is a directory, get paths of individual files
+        # -- this is done recursively.
         if _file.is_dir():
             abs_path = str(_file.absolute())
             all_dirs[_file.name] = abs_path

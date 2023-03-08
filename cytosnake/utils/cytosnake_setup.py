@@ -73,7 +73,6 @@ def transport_project_files() -> None:
         src_path = pkg_path / target_dir
         target_dst = proj_path / target_dir
         if not src_path.exists():
-            print("DEBUGG:", str(src_path))
             raise FileNotFoundError(f"{src_path} does not exist")
 
         # move to dest: working project directory

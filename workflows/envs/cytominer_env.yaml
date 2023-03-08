@@ -4,9 +4,8 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - python>=3.10.0
+  - python=3.9
   - pyyaml
   - pip
   - pip:
       - git+https://github.com/cytomining/pycytominer.git@b2c6cc4580cf9e1c040a7370b99976916a22e756
-      

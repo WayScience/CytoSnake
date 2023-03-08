@@ -14,7 +14,6 @@ from cytosnake.guards.path_guards import is_valid_path
 
 # loading in config as global variables
 PATHS = load_meta_path_configs()
-RESULTS_DIR = "../results"
 
 
 # ------------------------------
