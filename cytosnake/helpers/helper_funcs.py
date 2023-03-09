@@ -85,7 +85,7 @@ def get_metadata_dir() -> str:
     """
 
     try:
-        metadata_dir = PATHS["project_dir"]["data_dir_conts"]["metadata"]
+        metadata_dir = PATHS["project_dir"]["data_directory_contents"]["metadata"]
     except KeyError:
         raise KeyError("Unable to find Metadata folder")
 
