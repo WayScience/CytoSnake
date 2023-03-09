@@ -1,17 +1,14 @@
 import glob
 from cytosnake.helpers import helper_funcs as hf
 
-# obtaining plate_ids
-PLATE_IDS = glob_wildcards("data/{id}.sqlite").id
 
-
-# importing DAGs
+# importing Modules
 include: "../rules/common.smk"
 include: "../rules/preprocessing.smk"
 include: "../rules/feature_select.smk"
 
 
-# appending logs
+# expected outputs from workflow
 rule all:
     input:
         AGGREGATE_DATA_EXPAND,
