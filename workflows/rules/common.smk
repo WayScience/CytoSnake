@@ -17,7 +17,7 @@ DATA_DIR = str(load_data_path_configs())
 # -- generating a wild card list (just the file base names)
 plate_name = hf.get_file_basenames(DATA_DIR, ext_target="sqlite")
 
-# -- getting rest input paths from helper funcitons
+# -- getting the rest of the input paths from helper functions
 PLATE_DATA = hf.get_plate_data()
 BARCODES = hf.get_barcodes()
 METADATA_DIR = hf.get_metadata_dir()
