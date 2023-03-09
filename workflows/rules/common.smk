@@ -1,7 +1,7 @@
 """
 rule module: common.smk
 
-common.smk is a workflow module that setups the expected input and output paths
+common.smk is a workflow module that sets up the expected input and output paths
 for the main analytical workflow.
 """
 from snakemake.io import expand
