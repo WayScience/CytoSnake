@@ -203,7 +203,10 @@ def get_project_dirpaths(args: Namespace) -> dict:
 
                 # adding single files paths
                 data_dir_conts["data"] = abs_path
-                data_dir_conts["barcode"] = str(abs_data_path / args.barcode)
+                if args.barcode is None:
+                    data_dir_conts["barcode"] = None
+                else:
+                    data_dir_conts["barcode"] = str(abs_data_path / args.barcode)
                 data_dir_conts["metadata"] = str(abs_data_path / args.metadata)
                 all_dirs["data_directory_contents"] = data_dir_conts
 
