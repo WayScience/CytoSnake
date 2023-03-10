@@ -3,14 +3,16 @@ module: cyto_paths.py
 
 This module will contain functions that handles `cytosnake's` pathing
 """
-
 from pathlib import Path
-from typing import Optional
+from typing import Optional, TypeVar
 
 # cytosnake imports
 import cytosnake
 from cytosnake.guards.path_guards import is_valid_path
 from cytosnake.utils.file_utils import file_search, find_project_dir
+
+# user defined types without importing module
+Namespace = TypeVar("Namespace")
 
 
 def get_meta_path() -> Path:
@@ -23,8 +25,8 @@ def get_meta_path() -> Path:
     """
 
     # getting project directory
-    proj_dir = find_project_dir()
-    if not proj_dir.exists():
+    proj_dir = find_project_dir() / ".cytosnake"
+    if proj_dir is None:
         raise FileNotFoundError("Current directory is not a project folder")
 
     return proj_dir.absolute()
@@ -153,9 +155,15 @@ def get_config_fpaths() -> dict:
     return file_search(config_path)
 
 
-def get_project_dirpaths() -> dict:
+def get_project_dirpaths(args: Namespace) -> dict:
     """returns a dictionary containing directory name and path as key value
     pairs.
+
+    Parameters
+    ----------
+    args : Namespace
+        Uses argparse's  Namespace object to add additional information into the
+        data section in `_path.yaml`
 
     Returns
     -------
@@ -175,7 +183,31 @@ def get_project_dirpaths() -> dict:
     for _file in proj_root_path.glob("*"):
         if _file.name in ignore_dirs:
             continue
+
+        # if the file is a directory, get paths of individual files
+        # -- this is done recursively.
         if _file.is_dir():
-            all_dirs[_file.name] = str(_file.absolute())
+            abs_path = str(_file.absolute())
+            all_dirs[_file.name] = abs_path
+
+            # use the namespace arguments to write _paths.yaml
+            if _file.name.lower() == "data":
+                abs_data_path = Path(abs_path)
+
+                # creating  dictionary for the plate data
+                data_dir_conts = {}
+                for platename in args.data:
+                    name = platename.split(".")[0]
+                    platedata_path = abs_data_path / platename
+                    data_dir_conts[name] = str(platedata_path)
+
+                # adding single files paths
+                data_dir_conts["data"] = abs_path
+                if args.barcode is None:
+                    data_dir_conts["barcode"] = None
+                else:
+                    data_dir_conts["barcode"] = str(abs_data_path / args.barcode)
+                data_dir_conts["metadata"] = str(abs_data_path / args.metadata)
+                all_dirs["data_directory_contents"] = data_dir_conts
 
     return all_dirs

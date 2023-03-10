@@ -174,7 +174,14 @@ class CliControlPanel:
             help="path to metadata directory",
             required=True,
         )
-        parser.add_argument("-b", "--barcode", type=str, help="path to barcodes file")
+        parser.add_argument(
+            "-b",
+            "--barcode",
+            type=str,
+            required=False,
+            default=None,
+            help="path to barcodes file",
+        )
         parser.add_argument(
             "--datatype",
             choices=list(self.data_type),

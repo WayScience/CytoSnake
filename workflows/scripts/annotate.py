@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 
 import pandas as pd
-import snakemake
 import yaml
 from pycytominer.annotate import annotate
 

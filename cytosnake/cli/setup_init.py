@@ -30,7 +30,12 @@ def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: s
         )
 
     # setting up paths
-    barcode_path_obj = Path(barcode_fp)
+    # -- barcode
+    barcode_path_obj = barcode_fp
+    if barcode_fp is not None:
+        barcode_path_obj = Path(barcode_fp)
+
+    # -- metadata_path
     metadata_path_obj = Path(metadata_fp)
 
     # create data folder on working directory
@@ -46,9 +51,10 @@ def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: s
         sym_link.symlink_to(target_file)
 
     # generating symlinks of provided barcode file and metadata directory is
-    barcode_target = Path(f"../{barcode_path_obj}")
-    barcode_symlink = Path(f"./{str(data_dir_obj)}/{barcode_path_obj.name}")
-    barcode_symlink.symlink_to(barcode_target)
+    if barcode_fp is not None:
+        barcode_target = Path(f"../{barcode_path_obj}")
+        barcode_symlink = Path(f"./{str(data_dir_obj)}/{barcode_path_obj.name}")
+        barcode_symlink.symlink_to(barcode_target)
 
     metadata_target = Path(f"../{metadata_path_obj}")
     metadata_symlink = Path(f"./{str(data_dir_obj)}/{metadata_path_obj.name}")

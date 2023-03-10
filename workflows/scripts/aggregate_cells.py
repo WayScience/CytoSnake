@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 import pandas as pd
-import snakemake
+from snakemake.script import Snakemake
 import yaml
 from pycytominer.cyto_utils.cells import SingleCells
 

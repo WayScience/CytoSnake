@@ -30,16 +30,16 @@ configfile: "configs/configuration.yaml"
 
 rule aggregate:
     input:
-        sql_files="data/{plate_id}.sqlite",
-        barcodes="data/barcode_platemap.csv",
-        metadata="data/metadata",
+        sql_files=PLATE_DATA,
+        barcodes=BARCODES,
+        metadata=METADATA_DIR,
     output:
-        cell_counts="results/preprocessing/{plate_id}_cell_counts.tsv",
-        aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
+        aggregate_profile=AGGREGATE_DATA,
+        cell_counts=CELL_COUNTS,
+    log:
+        "logs/aggregate_{file_name}.log",
     conda:
         "../envs/cytominer_env.yaml"
-    log:
-        "logs/aggregate_{plate_id}.log",
     params:
         aggregate_config=config["config_paths"]["single_cell"],
     script:
@@ -48,15 +48,15 @@ rule aggregate:
 
 rule annotate:
     input:
-        barcodes="data/barcode_platemap.csv",
-        aggregate_profile="results/preprocessing/{plate_id}_aggregate.csv.gz",
-        metadata="data/metadata",
+        aggregate_profile=AGGREGATE_DATA,
+        barcodes=BARCODES,
+        metadata=METADATA_DIR,
     output:
-        "results/preprocessing/{plate_id}_augmented.csv.gz",
+        ANNOTATED_DATA,
     conda:
         "../envs/cytominer_env.yaml"
     log:
-        "logs/annotate_{plate_id}.log",
+        "logs/annotate_{file_name}.log",
     params:
         annotate_config=config["config_paths"]["annotate"],
     script:
@@ -65,13 +65,13 @@ rule annotate:
 
 rule normalize:
     input:
-        "results/preprocessing/{plate_id}_augmented.csv.gz",
+        ANNOTATED_DATA,
     output:
-        "results/preprocessing/{plate_id}_normalized.csv.gz",
+        NORMALIZED_DATA,
     conda:
         "../envs/cytominer_env.yaml"
     log:
-        "logs/normalized_{plate_id}.log",
+        "logs/normalized_{file_name}.log",
     params:
         normalize_config=config["config_paths"]["normalize"],
     script:

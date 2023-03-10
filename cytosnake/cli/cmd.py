@@ -6,7 +6,8 @@ cmd.py Module
 Generates CLI interface in order to interact with CytoSnake.
 """
 import sys
-from logging import Logger
+import logging
+from pathlib import Path
 
 # cytosnake imports
 from cytosnake.cli.args import CliControlPanel
@@ -29,6 +30,10 @@ def run_cmd() -> None:
     -------
     None
     """
+
+    # set logging configurations
+    logging.basicConfig(level="DEBUG")
+
     # create args handler
     # -- Cli Control Panel
     args_handler = CliControlPanel(sys.argv)
@@ -55,7 +60,7 @@ def run_cmd() -> None:
                 )
 
             # setting up input files for cytosnake
-            Logger.info("Formatting input files")
+            logging.info(msg="Formatting input files")
             init_args = args_handler.parse_init_args()
 
             # identifying which data type was added and how to set it up
@@ -76,8 +81,8 @@ def run_cmd() -> None:
 
             # now that the data is created, set up the current directory
             # into a project directory
-            setup_cytosnake_env()
-            Logger.info("Initialization complete")
+            setup_cytosnake_env(args=init_args)
+            logging.info("Initialization complete")
 
         # Executed if the user is using the `run` mode. This will execute the
         # workflow that are found within the `workflows` folder
@@ -89,8 +94,9 @@ def run_cmd() -> None:
                 sys.exit(0)
 
             # parsing workflow parameters
-            print(f"INFO: Executing {args_handler.workflow} workflow")
             wf_params = args_handler.parse_workflow_args()
+            wf_name = Path(wf_params.workflow).name
+            print(f"Executing {wf_name} workflow")
             wf_executor = workflow_executor(
                 workflow=wf_params.workflow,
                 n_cores=wf_params.max_cores,
