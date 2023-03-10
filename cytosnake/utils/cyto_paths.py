@@ -190,7 +190,7 @@ def get_project_dirpaths(args: Namespace) -> dict:
             abs_path = str(_file.absolute())
             all_dirs[_file.name] = abs_path
 
-            # use the name space arguments to write _paths.yaml
+            # use the namespace arguments to write _paths.yaml
             if _file.name.lower() == "data":
                 abs_data_path = Path(abs_path)
 
