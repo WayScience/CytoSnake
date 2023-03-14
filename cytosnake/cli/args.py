@@ -60,7 +60,7 @@ class WorkflowSearchPath(argparse.Action):
                 f"Unable to find '{values}'. Please specify a supported workflow: {supported_wf}"
             )
         # grabbing and setting the new value with the extracted path
-        values = load_workflow_path(values)
+        values = str(load_workflow_path(values))
 
         # return new attributes of the `workflow` parameter
         setattr(args, self.dest, values)

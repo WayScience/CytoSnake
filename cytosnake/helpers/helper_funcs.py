@@ -68,7 +68,7 @@ def get_barcodes() -> str:
     """
     # Barcodes are optional. If not added, set to "None"
     try:
-        barcode_path = PATHS["project_dir"]["data_dir_conts"]["barcode"]
+        barcode_path = PATHS["project_dir"]["data_directory_contents"]["barcode"]
     except KeyError:
         barcode_path = None
 

@@ -2,7 +2,6 @@ import logging
 from pathlib import Path
 
 import pandas as pd
-import snakemake
 import yaml
 from pycytominer import consensus
 from pycytominer.operations import get_na_columns
