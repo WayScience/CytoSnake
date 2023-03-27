@@ -22,6 +22,9 @@ Output
 """
 
 
+configfile: "configs/configuration.yaml"
+
+
 rule normalize:
     input:
         ANNOTATED_DATA,

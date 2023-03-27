@@ -2,7 +2,7 @@
 rule module: annotate.smk
 
 Utlizes pycytominer's annotate module:
-https://github.com/cytomining/pycytominer/blob/c90438fd7c11ad8b1689c21db16dab1a5280de6c/pycytominer/annotate.py
+https://github.com/cytomining/pycytominer/blob/master/pycytominer/annotate.py
 
 Annotates profiles with given metadata.
 
@@ -24,6 +24,9 @@ Returns:
 --------
     Generates an annotated profile stored in the `results/` directory
 """
+
+
+configfile: "configs/configuration.yaml"
 
 
 rule annotate:

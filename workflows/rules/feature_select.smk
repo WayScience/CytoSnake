@@ -1,3 +1,26 @@
+"""
+rule module: feature_select.smk
+
+Utlizes pycytominer's feature select module:
+https://github.com/cytomining/pycytominer/blob/master/pycytominer/feature_select.py
+
+Performs feature selection based on this given profiles. PyCytominer contains
+different operations to conduct its feature selection: varaince_threshold,
+correlation_threshold, drop_na_columns, drop_outliers, and noise_removal.
+
+Parameters:
+-----------
+Input:
+    Cell morphology profiles
+Output:
+    Selected features from profiles
+
+Returns
+-------
+    CSV file containing selected features. Stored in the `results/` directory.
+"""
+
+
 configfile: "configs/configuration.yaml"
 
 
@@ -14,18 +37,3 @@ rule feature_select:
         "../envs/cytominer_env.yaml"
     script:
         "../scripts/feature_select.py"
-
-
-rule create_consensus:
-    input:
-        SELECTED_FEATURE_DATA_EXPAND,
-    output:
-        CONSENSUS_DATA,
-    params:
-        consensus_configs=config["config_paths"]["consensus_config"],
-    log:
-        "logs/create_consensus.log",
-    conda:
-        "../envs/cytominer_env.yaml"
-    script:
-        "../scripts/consensus.py"
