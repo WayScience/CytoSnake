@@ -1,11 +1,11 @@
 """
 rule module: feature_select.smk
 
-Utlizes pycytominer's feature select module:
+Utilizes pycytominer's feature select module:
 https://github.com/cytomining/pycytominer/blob/master/pycytominer/feature_select.py
 
 Performs feature selection based on this given profiles. PyCytominer contains
-different operations to conduct its feature selection: varaince_threshold,
+different operations to conduct its feature selection: variance_threshold,
 correlation_threshold, drop_na_columns, drop_outliers, and noise_removal.
 
 Parameters:

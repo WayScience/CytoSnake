@@ -4,7 +4,7 @@ rule module: generate_consensus.smk
 Utilize's pycytominer's consensus module:
 https://github.com/cytomining/pycytominer/blob/master/pycytominer/consensus.py
 
-Creates consensus profies that reflects unique signatures associated with
+Creates consensus profiles that reflects unique signatures associated with
 external factors.
 
 Parameters:

@@ -7,7 +7,7 @@ one log file
 The log file is tagged with (Month-day-year)-(hour-min-sec)
 Example: 072922-083033_archived_logs
 
-Paramters:
+Parameters:
 Inputs:
     No user defined outputs, searches individual logs in the `logs/` folder
 Output:

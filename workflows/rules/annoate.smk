@@ -1,7 +1,7 @@
 """
 rule module: annotate.smk
 
-Utlizes pycytominer's annotate module:
+Utilizes pycytominer's annotate module:
 https://github.com/cytomining/pycytominer/blob/master/pycytominer/annotate.py
 
 Annotates profiles with given metadata.
