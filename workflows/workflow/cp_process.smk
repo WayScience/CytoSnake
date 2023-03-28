@@ -4,8 +4,11 @@ from cytosnake.helpers import helper_funcs as hf
 
 # importing rule modules
 include: "../rules/common.smk"
-include: "../rules/preprocessing.smk"
+include: "../rules/aggregate.smk"
+include: "../rules/annotate.smk"
+include: "../rules/normalize.smk"
 include: "../rules/feature_select.smk"
+include: "../rules/generate_consensus.smk"
 
 
 # expected outputs from workflow

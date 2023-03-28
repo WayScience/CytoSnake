@@ -1,13 +1,21 @@
 """
-Documentation:
-Rule collects all generated logs from all porcessess and merges
-them into a single log file.
+rule module: merge_logs.smk
 
-individual log files are stored into an archive file along with
-the generated merged log.
+Collects all log files generated within each rule module and merges it into
+one log file
 
-The archive file is taged with (Month-day-year)-(hour-min-sec)
+The log file is tagged with (Month-day-year)-(hour-min-sec)
 Example: 072922-083033_archived_logs
+
+Parameters:
+Inputs:
+    No user defined outputs, searches individual logs in the `logs/` folder
+Output:
+    Merged log file
+
+
+Returns
+    Merged log file stored in the `logs/` directory
 """
 
 
