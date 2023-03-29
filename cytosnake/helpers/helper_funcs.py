@@ -151,7 +151,6 @@ def annotated_output() -> str:
 
 
 def normalized_output() -> str:
-
     """Generates output path for normalized dataset
 
     Returns
@@ -169,7 +168,6 @@ def normalized_output() -> str:
 
 
 def selected_features_output() -> str:
-
     """Generates output path for selected features dataset
 
     Returns
@@ -187,7 +185,6 @@ def selected_features_output() -> str:
 
 
 def consensus_output() -> str:
-
     """Generates output path for consensus  dataset
 
     Returns
@@ -202,6 +199,23 @@ def consensus_output() -> str:
 
     # constructing file output string
     return str(results_path / f"{output_name}.{ext}")
+
+
+def converted_output():
+    """Generates output path for parquet profiles
+
+    Returns
+    -------
+    str
+        path to generated parquet files
+
+    """
+    data_path = Path(PATHS["project_dir_path"]) / "data"
+    output_name = "{file_name}"
+    ext = ".parquet"
+
+    # constructing file output string
+    return str(data_path / f"{output_name}.{ext}")
 
 
 # ------------------------------
