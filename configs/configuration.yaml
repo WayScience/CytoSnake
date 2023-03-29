@@ -12,6 +12,7 @@ config_paths:
   normalize: "configs/analysis_configs/normalize_configs.yaml"
   feature_select: "configs/analysis_configs/feature_select_configs.yaml"
   aggregate: "configs/analysis_configs/aggregate_configs.yaml"
+  cytotable_config: "configs/analysis_configs/cytotable_convert.yaml"
 
   # DeepProfiler Specific analysis configurations
   dp_data: "configs/analysis_configs/dp_data_configs.yaml"
