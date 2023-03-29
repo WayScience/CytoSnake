@@ -15,12 +15,15 @@ Returns:
 """
 
 
+configfile: "configs/configuration.yaml"
+
+
 rule convert:
     input:
         PLATE_DATA,
-        METADATA_DIR,
-        BARCODES,
     output:
         OUTPUTS,
+    params:
+        cytotable_config=config["config_paths"]["cytotable_config"],
     script:
         "../scripts/"
