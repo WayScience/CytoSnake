@@ -29,10 +29,10 @@ METADATA_DIR = hf.get_metadata_dir()
 CONVERTED_DATA = hf.converted_output()
 CONVERTED_DATA_EXTENDED = expand(CONVERTED_DATA, file_name=plate_name)
 
-AGGREGATE_DATA = hf.aggregate_output()
 CELL_COUNTS = hf.cell_count_output()
-
 CELL_COUNTS_EXPANDED = expand(CELL_COUNTS, file_name=plate_name)
+
+AGGREGATE_DATA = hf.aggregate_output()
 AGGREGATE_DATA_EXPAND = expand(AGGREGATE_DATA, file_name=plate_name)
 
 ANNOTATED_DATA = hf.annotated_output()
