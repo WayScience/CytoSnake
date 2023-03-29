@@ -26,6 +26,9 @@ METADATA_DIR = hf.get_metadata_dir()
 # OUTPUTS
 # -------
 # -- extended = list of the file names with a given wildcard
+CONVERTED_DATA = hf.converted_output()
+CONVERTED_DATA_EXTENDED = expand(CONVERTED_DATA, file_name=plate_name)
+
 AGGREGATE_DATA = hf.aggregate_output()
 CELL_COUNTS = hf.cell_count_output()
 
