@@ -212,7 +212,7 @@ def converted_output():
     """
     data_path = Path(PATHS["project_dir_path"]) / "data"
     output_name = "{file_name}"
-    ext = ".parquet"
+    ext = "parquet"
 
     # constructing file output string
     return str(data_path / f"{output_name}.{ext}")
