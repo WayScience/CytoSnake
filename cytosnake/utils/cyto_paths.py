@@ -139,6 +139,23 @@ def get_workflow_fpaths() -> dict:
     return file_search(workflow_path)
 
 
+def get_config_dir_path() -> Path:
+    """Returns path to configuration folder
+
+    Returns
+    -------
+    Path
+        Path to config directory
+    """
+
+    proj_root_path = get_project_root()
+    config_path = proj_root_path / "configs"
+    if not is_valid_path(config_path):
+        raise FileNotFoundError("Unable to find config directory")
+
+    return config_path
+
+
 def get_config_fpaths() -> dict:
     """Obtains all file paths located in the `configs` folder as a dictionary.
 
@@ -147,12 +164,7 @@ def get_config_fpaths() -> dict:
     dict
         structured dictionary directory name and file paths as key value pairs
     """
-    proj_root_path = get_project_root()
-    config_path = proj_root_path / "configs"
-    if not is_valid_path(config_path):
-        raise FileNotFoundError("Unable to find config directory")
-
-    return file_search(config_path)
+    return file_search(get_config_dir_path())
 
 
 def get_project_dirpaths(args: Namespace) -> dict:

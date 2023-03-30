@@ -41,6 +41,18 @@ def load_configs(config_path: str | Path) -> dict:
     return loaded_configs
 
 
+def load_general_configs() -> dict:
+    """Loads cytosnake's general configurations
+
+    Returns:
+    -------
+    dict
+        dictionary containing the cytosnake general configs
+    """
+    config_dir_path = cp.get_config_dir_path() / "configurational.yaml"
+    return load_configs(config_dir_path)
+
+
 def load_meta_path_configs() -> dict:
     """Loads the metadata path from `.cytosnake/_paths.yaml` file
 
