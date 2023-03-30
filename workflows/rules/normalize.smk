@@ -27,7 +27,7 @@ configfile: "configs/configuration.yaml"
 
 rule normalize:
     input:
-        ANNOTATED_DATA,
+        CONVERTED_DATA,
     output:
         NORMALIZED_DATA,
     conda:

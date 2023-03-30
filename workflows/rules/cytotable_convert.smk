@@ -23,7 +23,10 @@ rule convert:
         PLATE_DATA,
     output:
         CONVERTED_DATA,
+    conda:
+        "../envs/cytotable.yaml"
     params:
+        data_configs=config["data_configs"]["plate_data_format"],
         cytotable_config=config["config_paths"]["cytotable_config"],
     script:
         "../scripts/convert.py"

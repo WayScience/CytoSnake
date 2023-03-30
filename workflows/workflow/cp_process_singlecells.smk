@@ -9,13 +9,11 @@ include: "../rules/cytotable_convert.smk"
 include: "../rules/normalize.smk"
 include: "../rules/feature_select.smk"
 
-
 # checking if configs if the users wants to generate consensus profiles
-if config["consensus"]:
-
-    include: "../rules/generate_consensus.smk"
+# if config["consensus"]:
 
 
+#     include: "../rules/generate_consensus.smk"
 rule all:
     input:
         CONVERTED_DATA_EXTENDED,

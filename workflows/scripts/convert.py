@@ -4,28 +4,26 @@ script: covert.py
 converts sqlite (or other formats) into parquet files
 """
 import pathlib
-from typing import Union
+from typing import Union, List
 
+import yaml
 import cytotable
-
-from cytosnake.guards.ext_guards import has_sqlite_ext
-from cytosnake.utils.config_utils import load_configs, load_general_configs
-from cytosnake.common.errors import ExtensionError
 
 
 def sqlite_to_parquet(
-    sqlite_file: Union[str, list[str]],
+    sqlite_file: Union[str, List[str]],
     out_path: str,
-    config_file: Union[str, pathlib.Path],
+    target_ext: str,
+    convert_config_path: str,
 ):
     # loading config files and only selecting the parameters
-    general_configs = load_general_configs()
-    cytotable_config = load_configs(config_file)["params"]
+    convert_config_path = pathlib.Path(convert_config_path).resolve(strict=True)
+    with open(convert_config_path, "r") as yaml_contents:
+        cytotable_config = yaml.safe_load(yaml_contents["cytotable_convert"]["params"])
 
     # type checking, making sure that a sqlite file is passed.
-    target_ext = general_configs["data_configs"]["plate_data_format"]
-    if target_ext == ".parquet" and not has_sqlite_ext(sqlite_file):
-        raise ExtensionError(
+    if target_ext == ".parquet" and pathlib.Path(sqlite_file).suffix != ".sqlite":
+        raise ValueError(
             "Converting to parquet files requires sqlite file."
             f"File provided: {target_ext}"
         )
@@ -51,11 +49,15 @@ def main():
     # grabbing snakemake inputs
     plate_data = snakemake.input
     output_path = snakemake.output
+    general_configs = snakemake.params["data_configs"]
     config_path = snakemake.params["cytotable_config"]
 
     # executing conversion input file to parquet
     sqlite_to_parquet(
-        source_path=plate_data, dest_path=output_path, config_path=config_path
+        source_path=plate_data,
+        dest_path=output_path,
+        config_path=config_path,
+        target_ext=general_configs["plate_data_format"],
     )
 
 
