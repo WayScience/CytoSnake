@@ -24,7 +24,7 @@ def feature_selection(
 
     Returns
     -------
-    Generates output
+        Generates a file containing the selected features.
     """
 
     # initiating logger
@@ -54,10 +54,10 @@ def feature_selection(
         feature_select_config = yaml.safe_load(yaml_contents)["feature_select_configs"][
             "params"
         ]
-        logging.info(f"Feature Selection configuration loaded")
+        logging.info("Feature Selection configuration loaded")
 
     # Feature selection
-    logging.info(f"Conducting feature selection")
+    logging.info("Conducting feature selection")
     feature_select(
         normalized_profile,
         features=feature_select_config["features"],
