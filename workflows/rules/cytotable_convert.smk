@@ -22,8 +22,8 @@ rule convert:
     input:
         PLATE_DATA,
     output:
-        OUTPUTS,
+        CONVERTED_DATA,
     params:
         cytotable_config=config["config_paths"]["cytotable_config"],
     script:
-        "../scripts/"
+        "../scripts/convert.py"
