@@ -9,20 +9,19 @@ This includes:
     - valid path strings
 """
 
-from pathlib import Path
+import pathlib
 from typing import TypeGuard
 
 
-def is_valid_path(val: object) -> TypeGuard[Path]:
+def is_valid_path(val: object) -> TypeGuard[pathlib.Path]:
     """checks if provided value is a valid path"""
 
-    # check if the val is valid type
-    # -- if string, convert to Path
-    accepted_types = (str, Path)
-    if not isinstance(val, accepted_types):
+    # type checking
+    if not isinstance(val, (str, pathlib.Path)):
         return False
+    # convert to pathlib.Path
     if isinstance(val, str):
-        val = Path(val)
+        file_name = pathlib.Path(val).resolve()
 
     # check if the path exists
-    return bool(val.exists())
+    return file_name.exists()
