@@ -8,7 +8,9 @@ from typing import Union
 
 import cytotable
 
-from cytosnake.utils.config_utils import load_configs
+from cytosnake.guards.ext_guards import has_sqlite_ext
+from cytosnake.utils.config_utils import load_configs, load_general_configs
+from cytosnake.common.errors import ExtensionError
 
 
 def sqlite_to_parquet(
@@ -17,7 +19,16 @@ def sqlite_to_parquet(
     config_file: Union[str, pathlib.Path],
 ):
     # loading config files and only selecting the parameters
+    general_configs = load_general_configs()
     cytotable_config = load_configs(config_file)["params"]
+
+    # type checking, making sure that a sqlite file is passed.
+    target_ext = general_configs["data_configs"]["plate_data_format"]
+    if target_ext == ".parquet" and not has_sqlite_ext(sqlite_file):
+        raise ExtensionError(
+            "Converting to parquet files requires sqlite file."
+            f"File provided: {target_ext}"
+        )
 
     # convert sqlite file into parquet
     cytotable.convert(
