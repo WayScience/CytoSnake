@@ -11,7 +11,7 @@ import cytotable
 
 
 def sqlite_to_parquet(
-    sqlite_file: Union[str, List[str]],
+    input_file: Union[str, List[str]],
     out_path: str,
     target_ext: str,
     convert_config_path: str,
@@ -19,10 +19,10 @@ def sqlite_to_parquet(
     # loading config files and only selecting the parameters
     convert_config_path = pathlib.Path(convert_config_path).resolve(strict=True)
     with open(convert_config_path, "r") as yaml_contents:
-        cytotable_config = yaml.safe_load(yaml_contents["cytotable_convert"]["params"])
+        cytotable_config = yaml.safe_load(yaml_contents)["cytotable_convert"]["params"]
 
     # type checking, making sure that a sqlite file is passed.
-    if target_ext == ".parquet" and pathlib.Path(sqlite_file).suffix != ".sqlite":
+    if target_ext == ".parquet" and pathlib.Path(input_file).suffix != ".sqlite":
         raise ValueError(
             "Converting to parquet files requires sqlite file."
             f"File provided: {target_ext}"
@@ -30,7 +30,7 @@ def sqlite_to_parquet(
 
     # convert sqlite file into parquet
     cytotable.convert(
-        source_path=sqlite_file,
+        source_path=input_file,
         dest_path=out_path,
         dest_datatype=cytotable_config["dest_datatype"],
         source_datatype=cytotable_config["source_datatype"],
@@ -54,10 +54,10 @@ def main():
 
     # executing conversion input file to parquet
     sqlite_to_parquet(
-        source_path=plate_data,
-        dest_path=output_path,
-        config_path=config_path,
-        target_ext=general_configs["plate_data_format"],
+        input_file=plate_data,
+        out_path=output_path,
+        convert_config_path=config_path,
+        target_ext=general_configs,
     )
 
 
