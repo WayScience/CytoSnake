@@ -52,16 +52,17 @@ def normalization(
         normalize_config = yaml.safe_load(yaml_contents)["normalize_configs"]["params"]
         logging.info("Annotation configuration loaded")
 
-    meta_features = [
-        "Metadata_Plate",
-        "Metadata_Well",
-        "Metadata_WellRow",
-        "Metadata_WellCol",
-        "Metadata_gene_name",
-        "Metadata_pert_name",
-        "Metadata_broad_sample",
-        "Metadata_cell_line",
-    ]
+    # -- this is form old version of CellProfiler
+    # meta_features = [
+    #     "Metadata_Plate",
+    #     "Metadata_Well",
+    #     "Metadata_WellRow",
+    #     "Metadata_WellCol",
+    #     "Metadata_gene_name",
+    #     "Metadata_pert_name",
+    #     "Metadata_broad_sample",
+    #     "Metadata_cell_line",
+    # ]
 
     # normalizing annotated aggregated profiles
     logging.info(f"Normalizing annotated aggregated profiles: {anno_file}")
@@ -69,7 +70,7 @@ def normalization(
         anno_file,
         features=normalize_config["features"],
         image_features=normalize_config["image_features"],
-        meta_features=meta_features,
+        meta_features=normalize_config["meta_features"],
         samples=normalize_config["samples"],
         method=normalize_config["method"],
         output_file=norm_outfile,

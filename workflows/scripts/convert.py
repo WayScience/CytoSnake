@@ -47,8 +47,8 @@ def main():
     """Execution of the main script"""
 
     # grabbing snakemake inputs
-    plate_data = snakemake.input
-    output_path = snakemake.output
+    plate_data = str(snakemake.input)
+    output_path = str(snakemake.output)
     general_configs = snakemake.params["data_configs"]
     config_path = snakemake.params["cytotable_config"]
 
