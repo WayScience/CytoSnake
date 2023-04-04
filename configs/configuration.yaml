@@ -1,5 +1,7 @@
 config_name: cytopipe_defaults
 
+env_manager: conda
+
 # computation configs
 analysis_configs:
   preprocessing:
