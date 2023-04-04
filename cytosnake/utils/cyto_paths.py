@@ -105,12 +105,9 @@ def get_project_root() -> Path:
     """
 
     # get current working directory
-    project_dir = Path().absolute()
-
-    # check if the `.cytosnake` folder exist
-    project_folder = project_dir / ".cytosnake"
-    if not project_folder.exists():
-        raise FileNotFoundError("Current directory is not a project folder")
+    project_dir = find_project_dir()
+    if project_dir is None:
+        raise FileNotFoundError("Unable to find project directory")
 
     return project_dir
 

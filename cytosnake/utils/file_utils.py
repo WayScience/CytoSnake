@@ -97,7 +97,7 @@ def find_project_dir(steps: Optional[int] = 10) -> Path | None:
             # check if the file is a directory and has the name `cytosnake`
             # -- if true, return the complete path
             if _file.is_dir() and _file.name == ".cytosnake":
-                return _file.parent.absolute()
+                return _file.parent.resolve(strict=True)
 
         start_point = start_point.parent
 

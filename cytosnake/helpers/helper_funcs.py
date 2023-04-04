@@ -9,11 +9,12 @@ This module contains helper functions for snakemake workflows.
 from typing import Optional
 from snakemake.io import expand
 from pathlib import Path
-from cytosnake.utils.config_utils import load_meta_path_configs
+from cytosnake.utils.config_utils import load_meta_path_configs, load_general_configs
 from cytosnake.guards.path_guards import is_valid_path
 
 # loading in config as global variables
 PATHS = load_meta_path_configs()
+CYTOSNAKE_CONFIGS = load_general_configs()
 
 
 # ------------------------------
@@ -201,7 +202,7 @@ def consensus_output() -> str:
     return str(results_path / f"{output_name}.{ext}")
 
 
-def converted_output():
+def parquet_output():
     """Generates output path for parquet profiles
 
     Returns
