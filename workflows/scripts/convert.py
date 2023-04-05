@@ -6,7 +6,6 @@ converts sqlite (or other formats) into parquet files
 import pathlib
 from typing import Union, List
 
-import yaml
 import cytotable
 
 
@@ -14,14 +13,9 @@ def sqlite_to_parquet(
     input_file: Union[str, List[str]],
     out_path: str,
     target_ext: str,
-    convert_config_path: str,
+    convert_configs: str,
 ):
-    # loading config files and only selecting the parameters
-    convert_config_path = pathlib.Path(convert_config_path).resolve(strict=True)
-    with open(convert_config_path, "r") as yaml_contents:
-        cytotable_config = yaml.safe_load(yaml_contents)["cytotable_convert"]["params"]
-
-    # type checking, making sure that a sqlite file is passed.
+    # checking if user has parquet file
     if target_ext == ".parquet" and pathlib.Path(input_file).suffix != ".sqlite":
         raise ValueError(
             "Converting to parquet files requires sqlite file."
@@ -29,6 +23,7 @@ def sqlite_to_parquet(
         )
 
     # convert sqlite file into parquet
+    cytotable_config = convert_configs["params"]
     cytotable.convert(
         source_path=input_file,
         dest_path=out_path,
@@ -50,13 +45,14 @@ def main():
     plate_data = str(snakemake.input)
     output_path = str(snakemake.output)
     general_configs = snakemake.params["data_configs"]
-    config_path = snakemake.params["cytotable_config"]
+    cytotable_configs = snakemake.params["cytotable_config"]
+    # config_path = snakemake.params["cytotable_config"]
 
     # executing conversion input file to parquet
     sqlite_to_parquet(
         input_file=plate_data,
         out_path=output_path,
-        convert_config_path=config_path,
+        convert_configs=cytotable_configs,
         target_ext=general_configs,
     )
 

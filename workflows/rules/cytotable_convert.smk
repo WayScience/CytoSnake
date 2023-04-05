@@ -27,6 +27,6 @@ rule convert:
         "../envs/cytotable.yaml"
     params:
         data_configs=config["data_configs"]["plate_data_format"],
-        cytotable_config=config["config_paths"]["cytotable_config"],
+        cytotable_config=config["cytotable_convert"],
     script:
         "../scripts/convert.py"
