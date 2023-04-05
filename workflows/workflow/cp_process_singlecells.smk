@@ -1,6 +1,26 @@
 """
 workflow: cp_process_singlecells.smk
+
+Description:
+------------
+Converts sqlite plate data into parquet and returns selected features in csv
+format
+
+Parameters:
+----------
+input:
+    Plate data in sqlite format
+output:
+    Selected features in csv format
+
+Returns
+-------
+    Selected morphological features
 """
+
+
+# importing workflow configs
+configfile: "./wf_configs/cp_process_singlecells.yaml"
 
 
 # importing modules
@@ -9,11 +29,7 @@ include: "../rules/cytotable_convert.smk"
 include: "../rules/normalize.smk"
 include: "../rules/feature_select.smk"
 
-# checking if configs if the users wants to generate consensus profiles
-# if config["consensus"]:
 
-
-#     include: "../rules/generate_consensus.smk"
 rule all:
     input:
         CONVERTED_DATA_EXTENDED,
