@@ -30,7 +30,7 @@ rule feature_select:
     output:
         SELECTED_FEATURE_DATA_EXPAND,
     params:
-        feature_select_config=config["config_paths"]["feature_select"],
+        feature_select_config=config["feature_select_configs"],
     log:
         "logs/feature_select.log",
     conda:
