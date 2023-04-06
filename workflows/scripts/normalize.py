@@ -40,17 +40,7 @@ def normalization(
 
     # loading parameters
     logging.info(f"Loading Annotation configuration from: {config}")
-
-    normalize_obj = Path(config)
-    normalize_config_path = normalize_obj.absolute()
-    if not normalize_obj.is_file():
-        e_msg = "Unable to find Normalization configuration file"
-        logging.error(e_msg)
-        raise FileNotFoundError(e_msg)
-
-    with open(normalize_config_path, "r") as yaml_contents:
-        normalize_config = yaml.safe_load(yaml_contents)["normalize_configs"]["params"]
-        logging.info("Annotation configuration loaded")
+    normalize_config = config["params"]
 
     # -- this is form old version of CellProfiler
     # meta_features = [
@@ -88,7 +78,7 @@ if __name__ == "__main__":
 
     # snakemake inputs
     annotated_data_path = str(snakemake.input)
-    config_path = str(snakemake.params["normalize_config"])
+    normalize_configs = snakemake.params["normalize_config"]
     normalized_data_output = str(snakemake.output)
     log_path = str(snakemake.log)
 
@@ -96,6 +86,6 @@ if __name__ == "__main__":
     normalization(
         anno_file=annotated_data_path,
         norm_outfile=normalized_data_output,
-        config=config_path,
+        config=normalize_configs,
         log_file=log_path,
     )

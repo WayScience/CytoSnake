@@ -20,7 +20,7 @@ Returns
 
 
 # importing workflow configs
-configfile: "./wf_configs/cp_process_singlecells.yaml"
+configfile: "./configs/wf_configs/cp_process_singlecells.yaml"
 
 
 # importing modules

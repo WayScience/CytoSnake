@@ -35,6 +35,6 @@ rule normalize:
     log:
         "logs/normalized_{file_name}.log",
     params:
-        normalize_config=config["config_paths"]["normalize"],
+        normalize_config=config["normalize_configs"],
     script:
         "../scripts/normalize.py"
