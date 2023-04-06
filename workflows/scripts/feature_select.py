@@ -1,7 +1,6 @@
 import logging
 from pathlib import Path
 
-import yaml
 from pycytominer.feature_select import feature_select
 
 
