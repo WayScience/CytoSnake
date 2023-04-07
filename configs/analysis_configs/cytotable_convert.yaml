@@ -1,7 +1,7 @@
 cytotable_convert:
   params:
     dest_datatype: parquet
-    source_datatype: null
+    source_datatype: sqlite
     concat: True
     join: True
     infer_common_schema: True

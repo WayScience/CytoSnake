@@ -1,4 +1,4 @@
-config_name: cytopipe_defaults
+config_name:
 
 env_manager: conda
 

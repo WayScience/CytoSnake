@@ -27,7 +27,7 @@ configfile: "configs/configuration.yaml"
 
 rule normalize:
     input:
-        CONVERTED_DATA,
+        CYTOTABLE_OUTPUT_DATA,
     output:
         NORMALIZED_DATA,
     conda:

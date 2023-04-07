@@ -21,7 +21,7 @@ def is_valid_path(val: object) -> TypeGuard[pathlib.Path]:
         return False
     # convert to pathlib.Path
     if isinstance(val, str):
-        val = pathlib.Path(val).resolve()
+        val = pathlib.Path(val).resolve(strict=True)
 
     # check if the path exists
     return val.exists()

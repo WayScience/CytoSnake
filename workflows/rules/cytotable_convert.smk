@@ -22,7 +22,7 @@ rule convert:
     input:
         PLATE_DATA,
     output:
-        CONVERTED_DATA,
+        CYTOTABLE_OUTPUT_DATA,
     conda:
         "../envs/cytotable.yaml"
     params:

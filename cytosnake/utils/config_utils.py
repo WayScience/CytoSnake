@@ -48,7 +48,6 @@ def load_general_configs() -> dict:
         dictionary containing the cytosnake general configs
     """
     config_dir_path = cp.get_config_dir_path() / "configuration.yaml"
-    print(config_dir_path)
     return load_configs(config_dir_path)
 
 

@@ -107,7 +107,7 @@ def get_project_root() -> Path:
     # get current working directory
     project_dir = find_project_dir()
     if project_dir is None:
-        raise FileNotFoundError("Unable to find project directory")
+        raise NotADirectoryError("Unable to find project directory")
 
     return project_dir
 

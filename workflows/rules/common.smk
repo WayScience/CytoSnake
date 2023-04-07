@@ -26,8 +26,10 @@ METADATA_DIR = hf.get_metadata_dir()
 # OUTPUTS
 # -------
 # -- extended = list of the file names with a given wildcard
-CONVERTED_DATA = hf.parquet_output()
-CONVERTED_DATA_EXTENDED = expand(CONVERTED_DATA, file_name=plate_name)
+
+# Contains file path of the parquet datasets that is obtained from Cytoa
+CYTOTABLE_OUTPUT_DATA = hf.parquet_output()
+CYTOTABLE_OUTPUT_DATA_EXTENDED = expand(CONVERTED_DATA, file_name=plate_name)
 
 CELL_COUNTS = hf.cell_count_output()
 CELL_COUNTS_EXPANDED = expand(CELL_COUNTS, file_name=plate_name)

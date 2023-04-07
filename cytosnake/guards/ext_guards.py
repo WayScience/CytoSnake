@@ -10,8 +10,7 @@ from typing import TypeGuard
 
 
 def has_parquet_ext(file_name: str | pathlib.Path) -> TypeGuard[str]:
-    """Checks if the provided path is a parquet file.
-
+    """Checks if the provided file path contains parquet file extension .
     Parameters
     ----------
     file_name : str | pathlib.Path
@@ -30,7 +29,7 @@ def has_parquet_ext(file_name: str | pathlib.Path) -> TypeGuard[str]:
 
 
 def has_sqlite_ext(file_name: str | pathlib.Path) -> TypeGuard[str]:
-    """Checks if the provided path is a parquet file.
+    """Checks if the provided file path contains parquet file extension .
 
     Parameters
     ----------
