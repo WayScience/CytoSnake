@@ -1,4 +1,36 @@
 name: cp_process_singlecells_configs
+
+# Documentation
+docs: |
+  Description:
+  ------------
+  Converts sqlite plate data into parquet and returns selected features in csv
+  format
+
+  Workflow Steps:
+  ---------------
+  Below the workflow steps are seperated in chunks.
+
+  cytotable_convert:
+    Takes in sqlite file and converts it into a parquet file.
+
+    Uses CytoTable's convert workflow which can be found in:
+    https://github.com/cytomining/CytoTable/blob/main/cytotable/convert.py
+
+  normalize_configs:
+    Noramlizes single cell morphological features
+
+    Uses Pycytominer normalization module:
+    https://github.com/cytomining/pycytominer/blob/master/pycytominer/normalize.py
+
+
+  feature_select_configs:
+    Selects morphological features from normalized dataset
+
+    Uses Pycytominer feature extraction module
+    https://github.com/cytomining/pycytominer/blob/master/pycytominer/feature_select.py
+
+
 cytotable_convert:
   params:
     dest_datatype: parquet
@@ -9,6 +41,7 @@ cytotable_convert:
     drop_null: True
     preset: cellprofiler_sqlite
     log_level: ERROR
+
 normalize_configs:
   params:
     features: infer
@@ -24,6 +57,7 @@ normalize_configs:
     spherize_center: True
     spherize_method: ZCA-cor
     spherize_epsilon: 1.0e-6
+
 feature_select_configs:
   params:
     features: infer
