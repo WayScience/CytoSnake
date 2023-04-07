@@ -9,7 +9,7 @@ docs: |
 
   Workflow Steps:
   ---------------
-  Below the workflow steps are seperated in chunks.
+  Below the workflow steps are separated in chunks.
 
   cytotable_convert:
     Takes in sqlite file and converts it into a parquet file.
