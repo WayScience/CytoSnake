@@ -23,7 +23,8 @@ def feature_selection(
 
     Returns
     -------
-        Generates a file containing the selected features.
+    None
+        Generates a csv file containing the selected features.
     """
 
     # initiating logger

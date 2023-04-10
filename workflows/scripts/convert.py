@@ -9,14 +9,38 @@ from typing import Union, List
 import cytotable
 
 
-def sqlite_to_parquet(
+def convert_to_parquet(
     input_file: Union[str, List[str]],
     out_path: str,
     target_ext: str,
     convert_configs: str,
 ):
+    """Takes in a file or a list of files that will be converted into parquet.
+
+
+
+    Parameters
+    ----------
+    input_file : Union[str, List[str]]
+        files or list of files converted into `.parquet` files
+    out_path : str
+        path where generated parquet files will be saved
+    target_ext : str
+        dictates which file format
+    convert_configs : dict
+        dictionary containing cytotable.convert() configs
+
+
+    Raises
+    ------
+    ValueError
+        raised if an unsupported file extension is provided
+    """
     # checking if user has parquet file
-    if target_ext == ".parquet" and pathlib.Path(input_file).suffix != ".sqlite":
+    if target_ext == ".parquet" and pathlib.Path(input_file).suffix not in [
+        ".sqlite",
+        ".csv",
+    ]:
         raise ValueError(
             "Converting to parquet files requires sqlite file."
             f"File provided: {target_ext}"
@@ -41,15 +65,14 @@ def sqlite_to_parquet(
 def main():
     """Execution of the main script"""
 
-    # grabbing snakemake inputs
+    # grabbing snakemake inputs from workflow
     plate_data = str(snakemake.input)
     output_path = str(snakemake.output)
     general_configs = snakemake.params["data_configs"]
     cytotable_configs = snakemake.params["cytotable_config"]
-    # config_path = snakemake.params["cytotable_config"]
 
     # executing conversion input file to parquet
-    sqlite_to_parquet(
+    convert_to_parquet(
         input_file=plate_data,
         out_path=output_path,
         convert_configs=cytotable_configs,
@@ -57,5 +80,6 @@ def main():
     )
 
 
+# executes the main function
 if __name__ == "__main__":
     main()
