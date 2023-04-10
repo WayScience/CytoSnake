@@ -159,7 +159,7 @@ def get_config_fpaths() -> dict:
     Returns
     -------
     dict
-        structured dictionary directory name and file paths as key value pairs
+        structured dictionary with directory name and file paths as key value pairs
     """
     return file_search(get_config_dir_path())
 
