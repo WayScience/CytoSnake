@@ -1,5 +1,5 @@
 """
-script: covert.py
+script: convert.py
 
 converts sqlite (or other formats) into parquet files
 """
