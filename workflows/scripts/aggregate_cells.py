@@ -3,9 +3,9 @@ import os
 from pathlib import Path
 
 import pandas as pd
-from snakemake.script import Snakemake
 import yaml
 from pycytominer.cyto_utils.cells import SingleCells
+from snakemake.script import Snakemake
 
 
 def aggregate(

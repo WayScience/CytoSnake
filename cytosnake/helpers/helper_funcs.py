@@ -6,11 +6,13 @@ This module contains helper functions for snakemake workflows.
 """
 
 
-from typing import Optional
-from snakemake.io import expand
 from pathlib import Path
-from cytosnake.utils.config_utils import load_meta_path_configs, load_general_configs
+from typing import Optional
+
+from snakemake.io import expand
+
 from cytosnake.guards.path_guards import is_valid_path
+from cytosnake.utils.config_utils import load_general_configs, load_meta_path_configs
 
 # loading in config as global variables
 PATHS = load_meta_path_configs()

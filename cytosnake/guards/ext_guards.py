@@ -5,8 +5,9 @@ Checks if the correct extensions are provided
 """
 
 import pathlib
-from cytosnake.guards.path_guards import is_valid_path
 from typing import TypeGuard
+
+from cytosnake.guards.path_guards import is_valid_path
 
 
 def has_parquet_ext(file_name: str | pathlib.Path) -> TypeGuard[str]:

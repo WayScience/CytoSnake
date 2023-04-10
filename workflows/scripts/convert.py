@@ -4,7 +4,7 @@ script: convert.py
 converts sqlite (or other formats) into parquet files
 """
 import pathlib
-from typing import Union, List
+from typing import List, Union
 
 import cytotable
 
