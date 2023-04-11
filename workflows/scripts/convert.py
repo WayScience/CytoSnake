@@ -17,8 +17,6 @@ def convert_to_parquet(
 ):
     """Takes in a file or a list of files that will be converted into parquet.
 
-
-
     Parameters
     ----------
     input_file : Union[str, List[str]]
@@ -29,7 +27,6 @@ def convert_to_parquet(
         dictates which file format
     convert_configs : dict
         dictionary containing cytotable.convert() configs
-
 
     Raises
     ------
