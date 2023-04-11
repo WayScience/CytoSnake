@@ -15,7 +15,7 @@ docs: |
     Takes in sqlite file and converts it into a parquet file.
 
     Uses CytoTable's convert workflow which can be found in:
-    https://github.com/cytomining/CytoTable/blob/main/cytotable/convert.py
+    https://cytomining.github.io/CytoTable/python-api.html#cytotable.convert.convert
 
   normalize_configs:
     Noramlizes single cell morphological features
@@ -34,7 +34,7 @@ docs: |
 cytotable_convert:
   params:
     dest_datatype: parquet
-    source_datatype: null
+    source_datatype: sqlite
     concat: True
     join: True
     infer_common_schema: True
