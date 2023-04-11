@@ -71,6 +71,10 @@ def feature_selection(
 
 
 if __name__ == "__main__":
+
+    # snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``
     all_norm_profile = [str(f_in) for f_in in snakemake.input]
     out_files = [str(f_out) for f_out in snakemake.output]
     config_path = snakemake.params["feature_select_config"]

@@ -66,6 +66,8 @@ def main():
     """Execution of the main script"""
 
     # grabbing snakemake inputs from workflow
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python
     plate_data = str(snakemake.input)
     output_path = str(snakemake.output)
     general_configs = snakemake.params["data_configs"]
@@ -80,6 +82,6 @@ def main():
     )
 
 
-# executes the main function
+# executes the main function for conversion
 if __name__ == "__main__":
     main()

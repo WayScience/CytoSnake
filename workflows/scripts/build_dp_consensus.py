@@ -145,6 +145,8 @@ def build_dp_consensus(
 if __name__ == "__main__":
 
     # snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``
     norm_agg_data = str(snakemake.input)
     out_name = str(snakemake.output)
     consensus_config_path = str(snakemake.params["consensus_config"])

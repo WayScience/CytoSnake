@@ -110,6 +110,8 @@ def annotate_cells(
 if __name__ == "__main__":
 
     # snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python
     aggregate_data_path = str(snakemake.input["aggregate_profile"])
     annotate_data_output = str(snakemake.output)
     barcode_path = str(snakemake.input["barcodes"])

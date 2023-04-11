@@ -65,6 +65,8 @@ def normalization(
 if __name__ == "__main__":
 
     # snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python
     annotated_data_path = str(snakemake.input)
     normalize_configs = snakemake.params["normalize_config"]
     normalized_data_output = str(snakemake.output)
