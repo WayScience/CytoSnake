@@ -62,6 +62,7 @@ def normalization(
     logging.info(f"Normalized aggregated profile saved: {norm_outfile}")
 
 
+# executes normalization protocol
 if __name__ == "__main__":
 
     # snakemake inputs

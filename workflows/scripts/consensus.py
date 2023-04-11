@@ -96,6 +96,7 @@ def build_consensus(
     x_consensus_df.to_csv(consensus_file_out, sep="\t", index=False)
 
 
+# build consensus profiles from CellProfile data
 if __name__ in "__main__":
 
     # loading inputs

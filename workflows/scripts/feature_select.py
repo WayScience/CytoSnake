@@ -70,6 +70,7 @@ def feature_selection(
     logging.info(f"Selected features saved: {out_file}")
 
 
+# conduct feature selection on datasets
 if __name__ == "__main__":
 
     # snakemake inputs

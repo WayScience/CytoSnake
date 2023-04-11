@@ -118,6 +118,7 @@ def normalize_aggregate_dp_profiles(
     )
 
 
+# normalize deep profiler datasets
 if __name__ == "__main__":
 
     # snakemake inputs

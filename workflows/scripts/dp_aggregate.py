@@ -87,6 +87,7 @@ def aggregate_dp_profiles(
     dp_agg_df.to_csv(outname)
 
 
+# aggregating DeepProfiler level 2 dataset
 if __name__ == "__main__":
 
     # collecting snakemake inputs

@@ -142,6 +142,7 @@ def build_dp_consensus(
     dp_consensus_profile.to_csv(outname, sep="\t", index=False)
 
 
+# building consensus from DeepProfiler datasets
 if __name__ == "__main__":
 
     # snakemake inputs

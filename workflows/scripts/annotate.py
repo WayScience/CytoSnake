@@ -107,6 +107,7 @@ def annotate_cells(
     logging.info(f"Annotated files saved: {annotate_file_out}")
 
 
+# annotates dataset with given metadata
 if __name__ == "__main__":
 
     # snakemake inputs
