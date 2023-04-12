@@ -3,9 +3,9 @@ import os
 from pathlib import Path
 
 import pandas as pd
-from snakemake.script import Snakemake
 import yaml
 from pycytominer.cyto_utils.cells import SingleCells
+from snakemake.script import Snakemake
 
 
 def aggregate(
@@ -136,9 +136,12 @@ def aggregate(
     logging.info(f"Aggregate profile saved in : {aggregate_file_out}")
 
 
+# execute main code for aggregation
 if __name__ == "__main__":
 
     # snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python
     plate_data = str(snakemake.input["sql_files"])
     barcode_path = str(snakemake.input["barcodes"])
     metadata_dir_path = str(snakemake.input["metadata"])
@@ -147,6 +150,7 @@ if __name__ == "__main__":
     config_path = str(snakemake.params["aggregate_config"])
     log_path = str(snakemake.log)
 
+    # execute aggregation function
     aggregate(
         sql_file=plate_data,
         metadata_dir=metadata_dir_path,

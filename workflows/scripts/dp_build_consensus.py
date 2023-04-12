@@ -48,13 +48,17 @@ def build_dp_consensus(dp_profile: str, outname: str, config: str):
     dp_consensus_profile.to_csv(outname, sep="\t", index=False)
 
 
+# building consensus profile from deep profiler features
 if __name__ == "__main__":
 
     # snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``
     norm_agg_dp_profile = str(snakemake.input)
     out_name = str(snakemake.output)
     config_path = str(snakemake.input)
 
+    # building consensus profiles
     build_dp_consensus(
         dp_profile=norm_agg_dp_profile, outname=out_name, config=config_path
     )

@@ -87,9 +87,12 @@ def aggregate_dp_profiles(
     dp_agg_df.to_csv(outname)
 
 
+# aggregating DeepProfiler level 2 dataset
 if __name__ == "__main__":
 
     # collecting snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``
     dp_path = str(snakemake.input["dp_features_dir"])
     index_file_path = str(snakemake.input["index_file"])
     out_name = str(snakemake.output)

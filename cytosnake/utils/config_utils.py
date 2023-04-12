@@ -30,15 +30,25 @@ def load_configs(config_path: str | Path) -> dict:
     if not is_valid_path(config_path):
         raise FileNotFoundError("Invalid config path provided")
     if isinstance(config_path, str):
-        config_path = Path(config_path).absolute()
-    if not config_path.is_absolute():
-        config_path = config_path.absolute()
+        config_path = Path(config_path).resolve(strict=True)
 
     # loading in config_path
     with open(config_path, "r") as yaml_contents:
         loaded_configs = yaml.safe_load(yaml_contents)
 
     return loaded_configs
+
+
+def load_general_configs() -> dict:
+    """Loads cytosnake's general configurations
+
+    Returns:
+    -------
+    dict
+        dictionary containing the cytosnake general configs
+    """
+    config_dir_path = cp.get_config_dir_path() / "configuration.yaml"
+    return load_configs(config_dir_path)
 
 
 def load_meta_path_configs() -> dict:

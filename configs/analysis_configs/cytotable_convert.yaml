@@ -1,0 +1,11 @@
+cytotable_convert:
+  params:
+    dest_datatype: parquet
+    source_datatype: sqlite
+    concat: True
+    join: True
+    infer_common_schema: True
+    drop_null: True
+    preset: cellprofiler_sqlite
+    log_level: ERROR
+

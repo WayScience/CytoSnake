@@ -40,28 +40,7 @@ def normalization(
 
     # loading parameters
     logging.info(f"Loading Annotation configuration from: {config}")
-
-    normalize_obj = Path(config)
-    normalize_config_path = normalize_obj.absolute()
-    if not normalize_obj.is_file():
-        e_msg = "Unable to find Normalization configuration file"
-        logging.error(e_msg)
-        raise FileNotFoundError(e_msg)
-
-    with open(normalize_config_path, "r") as yaml_contents:
-        normalize_config = yaml.safe_load(yaml_contents)["normalize_configs"]["params"]
-        logging.info("Annotation configuration loaded")
-
-    meta_features = [
-        "Metadata_Plate",
-        "Metadata_Well",
-        "Metadata_WellRow",
-        "Metadata_WellCol",
-        "Metadata_gene_name",
-        "Metadata_pert_name",
-        "Metadata_broad_sample",
-        "Metadata_cell_line",
-    ]
+    normalize_config = config["params"]
 
     # normalizing annotated aggregated profiles
     logging.info(f"Normalizing annotated aggregated profiles: {anno_file}")
@@ -69,7 +48,7 @@ def normalization(
         anno_file,
         features=normalize_config["features"],
         image_features=normalize_config["image_features"],
-        meta_features=meta_features,
+        meta_features=normalize_config["meta_features"],
         samples=normalize_config["samples"],
         method=normalize_config["method"],
         output_file=norm_outfile,
@@ -83,11 +62,14 @@ def normalization(
     logging.info(f"Normalized aggregated profile saved: {norm_outfile}")
 
 
+# executes normalization protocol
 if __name__ == "__main__":
 
     # snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python
     annotated_data_path = str(snakemake.input)
-    config_path = str(snakemake.params["normalize_config"])
+    normalize_configs = snakemake.params["normalize_config"]
     normalized_data_output = str(snakemake.output)
     log_path = str(snakemake.log)
 
@@ -95,6 +77,6 @@ if __name__ == "__main__":
     normalization(
         anno_file=annotated_data_path,
         norm_outfile=normalized_data_output,
-        config=config_path,
+        config=normalize_configs,
         log_file=log_path,
     )

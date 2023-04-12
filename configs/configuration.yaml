@@ -1,17 +1,27 @@
-config_name: cytopipe_defaults
+config_name:
+
+env_manager: conda
 
 # computation configs
 analysis_configs:
   preprocessing:
     threads: 4
 
+# data configurations
+data_configs:
+  plate_data_format: sqlite
+
 # Analysis configuration file paths
 config_paths:
+  # general configs
+  general_configs: "configs/configuration.yaml"
+
   # CellProfiler Specific analysis configurations
   single_cell: "configs/analysis_configs/single_cell_configs.yaml"
   normalize: "configs/analysis_configs/normalize_configs.yaml"
   feature_select: "configs/analysis_configs/feature_select_configs.yaml"
   aggregate: "configs/analysis_configs/aggregate_configs.yaml"
+  cytotable_config: "configs/analysis_configs/cytotable_convert.yaml"
 
   # DeepProfiler Specific analysis configurations
   dp_data: "configs/analysis_configs/dp_data_configs.yaml"

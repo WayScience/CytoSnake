@@ -131,9 +131,12 @@ def combine_logs(logs: list[str], outname: str) -> None:
     shutil.copy(outname, archive_dir_path)
 
 
+# merging all scripts into one single script file
 if __name__ == "__main__":
 
     # loading snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python
     log_files = list(snakemake.input)
     out_name = str(snakemake.output)
 
