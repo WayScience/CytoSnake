@@ -87,6 +87,10 @@ class ProjectExistsError(BaseFileExistsError):
     that the current directory has already been set up for cytosnake analysis"""
 
 
+class ExtensionError(BaseValueError):
+    """Raised when invalid extensions are captured"""
+
+
 # -----------------------
 # Error handling functions
 # -----------------------

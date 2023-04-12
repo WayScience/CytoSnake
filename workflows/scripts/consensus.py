@@ -96,9 +96,12 @@ def build_consensus(
     x_consensus_df.to_csv(consensus_file_out, sep="\t", index=False)
 
 
+# build consensus profiles from CellProfile data
 if __name__ in "__main__":
 
     # loading inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``
     inputs = [str(f_in) for f_in in snakemake.input]
     output = str(snakemake.output)
     config_path = str(snakemake.params["consensus_configs"])

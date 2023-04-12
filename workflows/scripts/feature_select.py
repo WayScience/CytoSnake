@@ -1,7 +1,6 @@
 import logging
 from pathlib import Path
 
-import yaml
 from pycytominer.feature_select import feature_select
 
 
@@ -24,7 +23,8 @@ def feature_selection(
 
     Returns
     -------
-    Generates output
+    None
+        Generates a csv file containing the selected features.
     """
 
     # initiating logger
@@ -41,23 +41,11 @@ def feature_selection(
     # loading configs
     logging.info(f"Loading feature selection configuration from: {config}")
 
-    # -- checking if the config file exists
-    feature_select_obj = Path(config)
-    if not feature_select_obj.is_file():
-        e_msg = "Unable to find Feature Selection configuration file"
-        logging.error(e_msg)
-        raise FileNotFoundError(e_msg)
-
-    # -- reading config parameters
-    feature_select_config_path = feature_select_obj.absolute()
-    with open(feature_select_config_path, "r") as yaml_contents:
-        feature_select_config = yaml.safe_load(yaml_contents)["feature_select_configs"][
-            "params"
-        ]
-        logging.info(f"Feature Selection configuration loaded")
+    feature_select_config = config["params"]
+    logging.info("Feature Selection configuration loaded")
 
     # Feature selection
-    logging.info(f"Conducting feature selection")
+    logging.info("Conducting feature selection")
     feature_select(
         normalized_profile,
         features=feature_select_config["features"],
@@ -82,10 +70,15 @@ def feature_selection(
     logging.info(f"Selected features saved: {out_file}")
 
 
+# conduct feature selection on datasets
 if __name__ == "__main__":
+
+    # snakemake inputs
+    # more information how snakemake transfers workflow variables to scripts:
+    # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``
     all_norm_profile = [str(f_in) for f_in in snakemake.input]
     out_files = [str(f_out) for f_out in snakemake.output]
-    config_path = str(snakemake.params["feature_select_config"])
+    config_path = snakemake.params["feature_select_config"]
     io_files = zip(all_norm_profile, out_files)
     log_path = str(snakemake.log)
 

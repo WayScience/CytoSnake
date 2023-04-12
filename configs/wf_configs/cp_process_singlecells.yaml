@@ -1,0 +1,84 @@
+name: cp_process_singlecells_configs
+
+# Documentation
+docs: |
+  Description:
+  ------------
+  Converts sqlite plate data into parquet and returns selected features in csv
+  format
+
+  Workflow Steps:
+  ---------------
+  Below the workflow steps are separated in chunks.
+
+  cytotable_convert:
+    Takes in sqlite file and converts it into a parquet file.
+
+    Uses CytoTable's convert workflow which can be found in:
+    https://cytomining.github.io/CytoTable/python-api.html#cytotable.convert.convert
+
+  normalize_configs:
+    Noramlizes single cell morphological features
+
+    Uses Pycytominer normalization module:
+    https://github.com/cytomining/pycytominer/blob/master/pycytominer/normalize.py
+
+
+  feature_select_configs:
+    Selects morphological features from normalized dataset
+
+    Uses Pycytominer feature extraction module
+    https://github.com/cytomining/pycytominer/blob/master/pycytominer/feature_select.py
+
+
+cytotable_convert:
+  params:
+    dest_datatype: parquet
+    source_datatype: sqlite
+    concat: True
+    join: True
+    infer_common_schema: True
+    drop_null: True
+    preset: cellprofiler_sqlite
+    log_level: ERROR
+
+normalize_configs:
+  params:
+    features: infer
+    image_features: False
+    meta_features: infer
+    samples: all
+    method: mad_robustize
+    compression_options:
+      method: gzip
+      mtime: 1
+    float_format: null
+    mad_robustize_epsilon: 1.0e-18
+    spherize_center: True
+    spherize_method: ZCA-cor
+    spherize_epsilon: 1.0e-6
+
+feature_select_configs:
+  params:
+    features: infer
+    image_features: False
+    samples: all
+    operation:
+      - variance_threshold
+      - drop_na_columns
+      - correlation_threshold
+      - drop_outliers
+      - blocklist
+    na_cutoff: 0.05
+    corr_threshold: 0.9
+    corr_method: pearson
+    freq_cut: 0.05
+    unique_cut: 0.1
+    compression_options:
+      method: gzip
+      mtime: 1
+    float_format: null
+    blocklist_file: null
+    outlier_cutoff: 15
+    noise_removal_perturb_groups: null
+    noise_removal_stdev_cutoff: null

@@ -5,8 +5,8 @@ cmd.py Module
 
 Generates CLI interface in order to interact with CytoSnake.
 """
-import sys
 import logging
+import sys
 from pathlib import Path
 
 # cytosnake imports
