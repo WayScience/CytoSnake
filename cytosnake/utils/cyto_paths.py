@@ -3,7 +3,7 @@ module: cyto_paths.py
 
 This module will contain functions that handles `cytosnake's` pathing
 """
-from pathlib import Path
+import pathlib
 from typing import Optional, TypeVar
 
 # cytosnake imports
@@ -15,7 +15,7 @@ from cytosnake.utils.file_utils import file_search, find_project_dir
 Namespace = TypeVar("Namespace")
 
 
-def get_meta_path() -> Path:
+def get_meta_path() -> pathlib.Path:
     """returns meta path configurational file path.
 
     Returns
@@ -33,7 +33,7 @@ def get_meta_path() -> Path:
 
 
 # TODO: this should be placed in the guards module
-def is_cytosnake_dir(dir_path: Optional[str | Path] = None) -> bool:
+def is_cytosnake_dir(dir_path: Optional[str | pathlib.Path] = None) -> bool:
     """Checks if the current directory has been set up for cytosnake. Searches
     for the `.cytosnake` file in current or specified directory.
 
@@ -51,21 +51,21 @@ def is_cytosnake_dir(dir_path: Optional[str | Path] = None) -> bool:
 
     # setting to current directory if not path is specified
     if dir_path is None:
-        dir_path = Path().absolute()
+        dir_path = pathlib.Path().absolute()
 
     # type checking
     if not is_valid_path(dir_path):
         _type = type(dir_path)
         raise ValueError(f"dir_path must be either str or Path type, not: {_type}")
     if isinstance(dir_path, str):
-        dir_path = Path(str).absolute()
+        dir_path = pathlib.Path(str).absolute()
 
     # get project older
     cyto_proj_dir = dir_path / ".cytosnake"
     return bool(cyto_proj_dir.exists())
 
 
-def get_cytosnake_package_path() -> Path:
+def get_cytosnake_package_path() -> pathlib.Path:
     """Returns paths where the package is installed
 
     Return
@@ -81,7 +81,7 @@ def get_cytosnake_package_path() -> Path:
 
     # get location of this file
     # -- check if he ".git" folder exists
-    project_path = Path(cytosnake.__path__[0]).parent
+    project_path = pathlib.Path(cytosnake.__path__[0]).parent
     git_path = project_path / ".git"
     if not git_path.exists:
         raise FileNotFoundError("Unable to find cytosnake package path")
@@ -89,7 +89,7 @@ def get_cytosnake_package_path() -> Path:
     return project_path
 
 
-def get_project_root() -> Path:
+def get_project_root() -> pathlib.Path:
     """Returns complete path where cytosnake performs the analysis. The function
     will check if `.cytosnake` folder exists, if not an error will be raised.
 
@@ -136,7 +136,7 @@ def get_workflow_fpaths() -> dict:
     return file_search(workflow_path)
 
 
-def get_config_dir_path() -> Path:
+def get_config_dir_path() -> pathlib.Path:
     """Returns path to configuration folder
 
     Returns
@@ -151,6 +151,21 @@ def get_config_dir_path() -> Path:
         raise FileNotFoundError("Unable to find config directory")
 
     return config_path
+
+
+def get_cytosnake_config_path() -> pathlib.Path:
+    """Returns absolute path to CytoSnake's general config file .
+
+    Returns
+    -------
+    pathlib.Path
+        path to cytosnake general config file
+    """
+    config_dir_path = get_config_dir_path() / "configuration.yaml"
+    if not is_valid_path(config_dir_path):
+        raise FileNotFoundError("Unable to find CytoSnake general config file")
+
+    return config_dir_path
 
 
 def get_config_fpaths() -> dict:
@@ -201,7 +216,7 @@ def get_project_dirpaths(args: Namespace) -> dict:
 
             # use the namespace arguments to write _paths.yaml
             if _file.name.lower() == "data":
-                abs_data_path = Path(abs_path)
+                abs_data_path = pathlib.Path(abs_path)
 
                 # creating  dictionary for the plate data
                 data_dir_conts = {}

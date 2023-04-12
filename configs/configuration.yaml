@@ -1,4 +1,4 @@
-config_name:
+config_name: cytosnake_configs
 
 env_manager: conda
 

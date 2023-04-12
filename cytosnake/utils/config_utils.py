@@ -118,3 +118,17 @@ def load_workflow_paths_config() -> dict:
     # load in _path.yaml and select key where all workflow paths are
     loaded_meta_paths = load_meta_path_configs()
     return loaded_meta_paths["workflow_dir"]["workflow"]
+
+
+def load_cytosnake_configs() -> dict:
+    """Loads in CytoSnake's general configuration
+
+    Returns
+    -------
+    dict
+        CytoSnake configs
+    """
+
+    # gets absolute path to cytosnake configs and load the configs
+    cytosnake_config_path = cp.get_cytosnake_config_path()
+    return load_configs(cytosnake_config_path)
