@@ -7,7 +7,6 @@ CLI interface
 from typing import Optional
 
 import snakemake
-from snakemake import shell
 
 from cytosnake.utils.config_utils import load_general_configs
 
