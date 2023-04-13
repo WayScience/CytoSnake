@@ -7,8 +7,9 @@ CLI interface
 from typing import Optional
 
 import snakemake
+from snakemake import shell
 
-from cytosnake.utils.config_utils import load_workflow_path
+from cytosnake.utils.config_utils import load_general_configs
 
 
 def __base_exec(
@@ -16,6 +17,7 @@ def __base_exec(
     n_cores: Optional[int] = 1,
     unlock: Optional[bool] = False,
     force: Optional[bool] = False,
+    env_manager: Optional[str] = "conda",
 ) -> bool:
     """Executes the cell profiler workflow
 
@@ -38,13 +40,31 @@ def __base_exec(
     -------
     bool
         True for successful execution, otherwise False
-    """
 
-    # execute
-    status = snakemake.snakemake(
-        workflow_file, cores=n_cores, unlock=unlock, forceall=force, use_conda=True
+    Raises
+    ------
+    TypeError
+        Raised if env_manager is not a string type
+    """
+    # type checking
+    if not isinstance(env_manager, str):
+        raise TypeError("`env_manager` must be a string type")
+    if env_manager not in ["conda", "mamba"]:
+        raise ValueError(
+            f"{env_manager} is invalid env_manager"
+            "Only `conda` or `mamba` is supported."
+        )
+
+    # execute workflow with given configs
+    return snakemake.snakemake(
+        workflow_file,
+        cores=n_cores,
+        unlock=unlock,
+        forceall=force,
+        use_conda=True,
+        conda_prefix=env_manager,
+        conda_frontend=env_manager,
     )
-    return status
 
 
 def workflow_executor(
@@ -69,12 +89,16 @@ def workflow_executor(
         start where it last stopped. by default False
     """
 
+    # load in general configs
+    cytosnake_configs = load_general_configs()
+
     # executing selected workflow
     job = __base_exec(
         workflow_file=workflow,
         n_cores=n_cores,
         unlock=allow_unlock,
         force=force_run,
+        env_manager=cytosnake_configs["env_manager"],
     )
 
     # checking workflow job status.
