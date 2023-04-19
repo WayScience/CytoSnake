@@ -104,7 +104,7 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
 
         # checking for multiple workflows
         wf_bool_mask = [param in cli_props.workflows for param in args_list]
-        check = len([_bool for _bool in wf_bool_mask if _bool is True])
+        check = len([_bool for _bool in wf_bool_mask if _bool])
         if check > 1:
             raise MultipleWorkflowsException(
                 "Multiple workflows were declared, please selected one."
