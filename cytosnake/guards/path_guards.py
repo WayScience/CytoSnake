@@ -19,7 +19,7 @@ def is_valid_path(val: object) -> TypeGuard[pathlib.Path]:
     Returns
     -------
     bool
-        True if the path exists, else it is a false
+        True if the path exists, else false
     """
     # type checking
     if not isinstance(val, (str, pathlib.Path)):
