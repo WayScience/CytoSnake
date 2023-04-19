@@ -87,7 +87,7 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
         for param in args_list
         if param.lower() != "help"
     ]
-    check = len([_bool for _bool in m_bool_mask if _bool is True])
+    check = len([_bool for _bool in m_bool_mask if _bool])
     if check > 1:
         raise MultipleModesException("Multiple modes were declared, please select one")
 
