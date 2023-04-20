@@ -2,9 +2,9 @@ from pathlib import Path
 
 import yaml
 
-import cytosnake.utils.cyto_paths as cp
 from cytosnake.common.errors import WorkflowNotFoundError
 from cytosnake.guards.path_guards import is_valid_path
+from cytosnake.utils import cyto_paths
 
 
 def load_configs(config_path: str | Path) -> dict:
@@ -47,7 +47,7 @@ def load_general_configs() -> dict:
     dict
         dictionary containing the cytosnake general configs
     """
-    config_dir_path = cp.get_config_dir_path() / "configuration.yaml"
+    config_dir_path = cyto_paths.get_config_dir_path() / "configuration.yaml"
     return load_configs(config_dir_path)
 
 
@@ -61,7 +61,7 @@ def load_meta_path_configs() -> dict:
     """
 
     # construct path to `.cytosnake/_paths.yaml` file
-    meta_path = cp.get_meta_path() / "_paths.yaml"
+    meta_path = cyto_paths.get_meta_path() / "_paths.yaml"
     return load_configs(meta_path)
 
 
@@ -85,7 +85,7 @@ def load_workflow_path(wf_name: str) -> Path:
         Raised if the desired workflow is not found.
     """
     # load configurations from `.cytosnake`
-    meta_path = cp.get_meta_path() / "_paths.yaml"
+    meta_path = cyto_paths.get_meta_path() / "_paths.yaml"
 
     # loading loading workflow paths
     general_config = load_configs(meta_path)
@@ -130,5 +130,5 @@ def load_cytosnake_configs() -> dict:
     """
 
     # gets absolute path to cytosnake configs and load the configs
-    cytosnake_config_path = cp.get_cytosnake_config_path()
+    cytosnake_config_path = cyto_paths.get_cytosnake_config_path()
     return load_configs(cytosnake_config_path)
