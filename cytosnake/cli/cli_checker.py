@@ -11,8 +11,13 @@ import sys
 from dataclasses import dataclass
 from typing import Union
 
-from ..common.errors import *
-from .cli_docs import cli_docs, init_doc, run_doc
+from cytosnake.cli.cli_docs import cli_docs, init_doc, run_doc
+from cytosnake.common.errors import (
+    InvalidWorkflowException,
+    MultipleModesException,
+    MultipleWorkflowsException,
+    NoArgumentsException,
+)
 
 
 @dataclass
@@ -82,7 +87,7 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
         for param in args_list
         if param.lower() != "help"
     ]
-    check = len([_bool for _bool in m_bool_mask if _bool == True])
+    check = len([_bool for _bool in m_bool_mask if _bool])
     if check > 1:
         raise MultipleModesException("Multiple modes were declared, please select one")
 
@@ -99,7 +104,7 @@ def cli_check(args_list: list[Union[str, int, bool]]) -> bool:
 
         # checking for multiple workflows
         wf_bool_mask = [param in cli_props.workflows for param in args_list]
-        check = len([_bool for _bool in wf_bool_mask if _bool == True])
+        check = len([_bool for _bool in wf_bool_mask if _bool])
         if check > 1:
             raise MultipleWorkflowsException(
                 "Multiple workflows were declared, please selected one."
