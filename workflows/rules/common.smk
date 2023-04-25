@@ -39,7 +39,7 @@ METADATA_DIR = hf.get_metadata_dir()
 
 # Level 2 data: converted into parquet format
 CYTOTABLE_OUTPUT_DATA = hf.parquet_output()
-CYTOTABLE_OUTPUT_DATA_EXTENDED = expand(CONVERTED_DATA, file_name=plate_name)
+CYTOTABLE_OUTPUT_DATA_EXTENDED = expand(CYTOTABLE_OUTPUT_DATA, file_name=plate_name)
 
 # level 2.5 data: annotated level 2 data based on given metadata (e.g treatments)
 ANNOTATED_DATA = hf.annotated_output()

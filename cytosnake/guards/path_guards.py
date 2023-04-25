@@ -14,11 +14,17 @@ from typing import TypeGuard
 
 
 def is_valid_path(val: object) -> TypeGuard[pathlib.Path]:
-    """checks if provided value is a valid path"""
+    """checks if provided value is a valid path
 
+    Returns
+    -------
+    bool
+        True if the path exists, else false
+    """
     # type checking
     if not isinstance(val, (str, pathlib.Path)):
         return False
+
     # convert to pathlib.Path
     if isinstance(val, str):
         val = pathlib.Path(val).resolve(strict=True)

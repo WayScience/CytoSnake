@@ -1,6 +1,6 @@
-config_name:
+config_name: cytosnake_configs
 
-env_manager: conda
+env_manager: mamba
 
 # computation configs
 analysis_configs:

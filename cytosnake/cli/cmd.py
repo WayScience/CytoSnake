@@ -15,7 +15,7 @@ from cytosnake.cli.cli_docs import cli_docs, init_doc, run_doc
 from cytosnake.cli.exec.workflow_exec import workflow_executor
 from cytosnake.cli.setup_init import init_cp_data, init_dp_data
 from cytosnake.common.errors import ProjectExistsError, WorkflowFailedException
-from cytosnake.utils.cyto_paths import is_cytosnake_dir
+from cytosnake.utils import cyto_paths
 from cytosnake.utils.cytosnake_setup import setup_cytosnake_env
 
 
@@ -54,7 +54,7 @@ def run_cmd() -> None:
 
             # checking if current directory is a project folder
             # -- if True, raise error
-            if is_cytosnake_dir():
+            if cyto_paths.is_cytosnake_dir():
                 raise ProjectExistsError(
                     "This directory is already a cytosnake project directory"
                 )
