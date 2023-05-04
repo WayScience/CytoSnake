@@ -19,7 +19,8 @@ Returns
 """
 
 
-# importing workflow configs
+# importing workflow configs [general + workflow config]
+configfile: "./configs/configuration.yaml"
 configfile: "./configs/wf_configs/cp_process_singlecells.yaml"
 
 

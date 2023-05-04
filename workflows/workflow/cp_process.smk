@@ -1,5 +1,11 @@
-import glob
-from cytosnake.helpers import helper_funcs as hf
+"""
+# TODO:
+[ Add docuemntation]
+"""
+
+
+# import workflow configurations
+configfile: "./configs/wf_configs/cp_process.yaml"
 
 
 # importing rule modules
@@ -11,7 +17,7 @@ include: "../rules/feature_select.smk"
 include: "../rules/generate_consensus.smk"
 
 
-# expected outputs from workflow
+# set expected outputs from workflow
 rule all:
     input:
         AGGREGATE_DATA_EXPAND,

@@ -30,9 +30,6 @@ Returns
 """
 
 
-configfile: "configs/configuration.yaml"
-
-
 rule aggregate:
     input:
         sql_files=PLATE_DATA,
