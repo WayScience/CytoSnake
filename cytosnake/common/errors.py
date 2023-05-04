@@ -91,6 +91,10 @@ class ExtensionError(BaseValueError):
     """Raised when invalid extensions are captured"""
 
 
+class BarcodeRequiredError(BaseFileNotFound):
+    """Raised when a barcode file is required"""
+
+
 # -----------------------
 # Error handling functions
 # -----------------------

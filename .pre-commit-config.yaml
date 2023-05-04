@@ -28,7 +28,7 @@ repos:
     rev: v1.1.0
     hooks:
       - id: sourcery
-        args: [--diff=git diff HEAD, --no-summary]
+        args: [--diff=git diff HEAD, --fix, --no-summary]
 
   # snakemake formatting
   - repo: https://github.com/snakemake/snakefmt
