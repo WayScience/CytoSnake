@@ -65,7 +65,7 @@ def run_cmd() -> None:
             logging.info(msg="Formatting input files")
             init_args = args_handler.parse_init_args()
 
-            # before setup up, check the logic of the input parameters
+            # before setup, check the logic of the input parameters
             check_init_parameter_inputs(user_params=init_args)
 
             # identifying which data type was added and how to set it up
