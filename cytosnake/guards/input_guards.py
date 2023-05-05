@@ -46,7 +46,7 @@ def check_init_parameter_inputs(user_params: NameSpace) -> bool:
 
     Parameters
     ----------
-    args : NameSpace
+    user_params : NameSpace
         Argparse.NameSpace object that contains all user provided parameters.
 
     Returns
