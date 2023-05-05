@@ -57,7 +57,7 @@ def check_init_parameter_inputs(user_params: NameSpace) -> bool:
     Raises
     ------
     BarcodeRequiredError
-        Raised if a multiple platemaps are found but not barcode file was provided
+        Raised if a multiple platemaps are found but no barcode file was provided
     """
 
     # checking if barcode is required
