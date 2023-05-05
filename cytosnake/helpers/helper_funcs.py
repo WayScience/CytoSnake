@@ -9,8 +9,6 @@ This module contains helper functions for snakemake workflows.
 from pathlib import Path
 from typing import Optional
 
-from snakemake.io import expand
-
 from cytosnake.guards.path_guards import is_valid_path
 from cytosnake.utils.config_utils import load_general_configs, load_meta_path_configs
 

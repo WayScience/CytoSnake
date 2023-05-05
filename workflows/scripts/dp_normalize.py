@@ -120,7 +120,6 @@ def normalize_aggregate_dp_profiles(
 
 # normalize deep profiler datasets
 if __name__ == "__main__":
-
     # snakemake inputs
     # more information how snakemake transfers workflow variables to scripts:
     # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``

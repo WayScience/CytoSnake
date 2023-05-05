@@ -93,7 +93,6 @@ def find_project_dir(steps: Optional[int] = 10) -> Path | None:
         # grab all files in directory
         all_files = start_point.glob("*")
         for _file in all_files:
-
             # check if the file is a directory and has the name `cytosnake`
             # -- if true, return the complete path
             if _file.is_dir() and _file.name == ".cytosnake":

@@ -114,7 +114,6 @@ def load_data_path_configs():
 
 
 def load_workflow_paths_config() -> dict:
-
     # load in _path.yaml and select key where all workflow paths are
     loaded_meta_paths = load_meta_path_configs()
     return loaded_meta_paths["workflow_dir"]["workflow"]

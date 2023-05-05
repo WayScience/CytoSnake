@@ -52,7 +52,6 @@ class WorkflowSearchPath(argparse.Action):
     """
 
     def __call__(self, parser, args, values, option_string=None):
-
         # checking if user provided workflow exists
         supported_wf = supported_workflows()
         if values not in supported_wf:

@@ -9,13 +9,12 @@ import logging
 import sys
 from pathlib import Path
 
+# cytosnake imports
 from cytosnake.cli.args import CliControlPanel
 from cytosnake.cli.cli_docs import cli_docs, init_doc, run_doc
 from cytosnake.cli.exec.workflow_exec import workflow_executor
 from cytosnake.cli.setup_init import init_cp_data, init_dp_data
 from cytosnake.common.errors import ProjectExistsError, WorkflowFailedException
-
-# cytosnake imports
 from cytosnake.guards.input_guards import check_init_parameter_inputs
 from cytosnake.utils import cyto_paths
 from cytosnake.utils.cytosnake_setup import setup_cytosnake_env
@@ -92,7 +91,6 @@ def run_cmd() -> None:
         # Executed if the user is using the `run` mode. This will execute the
         # workflow that are found within the `workflows` folder
         case "run":
-
             # display run help documentation
             if args_handler.mode_help is True:
                 print(run_doc)
@@ -125,5 +123,4 @@ def run_cmd() -> None:
 
 
 if __name__ == "__main__":
-
     run_cmd()

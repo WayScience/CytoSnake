@@ -144,7 +144,6 @@ def build_dp_consensus(
 
 # building consensus from DeepProfiler datasets
 if __name__ == "__main__":
-
     # snakemake inputs
     # more information how snakemake transfers workflow variables to scripts:
     # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``
