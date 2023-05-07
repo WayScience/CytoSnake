@@ -2,3 +2,12 @@
 # source: https://hadialqattan.github.io/pycln/#/?id=integrations
 [tool.pycln]
 all = true
+
+
+# ruff parameters. Ignoring unused varaible due to snakemake "magic" injecting
+# of varaible name 'snakemake'
+[tool.ruff]
+ignore = ["F821"]
+
+[tool.ruff.flake8-self]
+ignore-names = ["snakemake"]

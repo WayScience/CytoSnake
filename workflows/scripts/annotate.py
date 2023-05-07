@@ -53,7 +53,7 @@ def annotate_cells(
     annotate_config_path = annotate_path_obj.absolute()
     with open(annotate_config_path, "r") as yaml_contents:
         annotate_configs = yaml.safe_load(yaml_contents)["annotate_configs"]["params"]
-        logging.info(f"Annotation configuration loaded")
+        logging.info("Annotation configuration loaded")
 
     # loading in plate map
     logging.info(f"Loading plate data from: {aggregated_data}")
@@ -62,7 +62,7 @@ def annotate_cells(
     barcode_platemap_df = pd.read_csv(barcodes_path)
 
     logging.info("Searching plate map name")
-    plate = Path(aggregated_data).name.split("_")[0]
+    Path(aggregated_data).name.split("_")[0]
     platemap = barcode_platemap_df.query(
         "Assay_Plate_Barcode == @plate"
     ).Plate_Map_Name.values[0]

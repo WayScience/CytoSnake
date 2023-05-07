@@ -31,6 +31,13 @@ repos:
       - id: sourcery
         args: [--diff=git diff HEAD, --fix, --no-summary]
 
+  # adding ruff with auto fix on
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.0.265"
+    hooks:
+      - id: ruff
+        args: [--config=pyproject.toml, --fix, --exit-non-zero-on-fix]
+
   # snakemake formatting
   - repo: https://github.com/snakemake/snakefmt
     rev: v0.8.4

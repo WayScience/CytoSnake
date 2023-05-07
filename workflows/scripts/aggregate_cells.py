@@ -71,7 +71,7 @@ def aggregate(
 
     # Loading appropriate platemaps with given plate data
     logging.info(f"Loading plate data from: {sql_file}")
-    plate = os.path.basename(sql_file).rsplit(".", 1)
+    os.path.basename(sql_file).rsplit(".", 1)
     plate_file_check = Path(sql_file).is_file()
 
     if not plate_file_check:
@@ -90,7 +90,8 @@ def aggregate(
         ).Plate_Map_Name.values[0]
     except IndexError as e:
         logging.error(
-            f"{e} raised. Unable to find associated platemap name with given plate barcode"
+            f"{e} raised."
+            "Unable to find associated platemap name with given plate barcode"
         )
 
     logging.info(f"Identified plate map: {platemap}")

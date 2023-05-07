@@ -56,7 +56,8 @@ class WorkflowSearchPath(argparse.Action):
         supported_wf = supported_workflows()
         if values not in supported_wf:
             raise InvalidWorkflowException(
-                f"Unable to find '{values}'. Please specify a supported workflow: {supported_wf}"
+                f"Unable to find '{values}'."
+                f"Please specify a supported workflow: {supported_wf}"
             )
         # grabbing and setting the new value with the extracted path
         values = str(load_workflow_path(values))
