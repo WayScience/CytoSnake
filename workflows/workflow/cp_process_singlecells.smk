@@ -6,19 +6,23 @@ Description:
 Converts sqlite plate data into parquet and returns selected features from
 single-cell morphology profiles.
 
+The development of this workflow was heavily influenced by:
+https://github.com/WayScience/Benchmarking_NF1_data/tree/main/3_extracting_features
+
 Parameters:
 ----------
 input:
-    Plate data in sqlite format
+    PLATE_DATA: single-cell morphology plate in sqlite format
+    METADATA: associated metadata
 output:
-    CYTOTABLE_OUTPUT_DATA_EXTENDED: Conveted single-cell morphology dataset
-    NORMALIZED_DATA_EXPAND: Normalized single-cell morphology dataset
+    CYTOTABLE_OUTPUT_DATA_EXTENDED: Converted single-cell morphology datasets
+    NORMALIZED_DATA_EXPAND: Normalized single-cell morphology datasets
     SELECTED_FEATURE_DATA_EXPAND: Selected features from normalized single-cell
-    morphology dataset
+    morphology datasets
 
 Returns
 -------
-    Workflow generates selected features profile from single-cell morphology dataset
+    Workflow generates selected features profile from single-cell morphology datasets
 """
 
 

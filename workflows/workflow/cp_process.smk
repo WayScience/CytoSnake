@@ -1,33 +1,30 @@
 """
-#
-
 workflow: cp_process.smk
-
 
 Description:
 ------------
 Uses plate data and converts them to consensus profiles
 
-The development of this workflow was heavily influced this study:
+The development of this workflow was heavily influenced this study:
 https://github.com/broadinstitute/cell-health
 
 Parameters:
 -----------
 input:
-    PLATE_DATA: single-cell morphology plate dataset
-    METADATA: metadata directory asscociated with plate data
+    PLATE_DATA: single-cell morphology plate datasets
+    METADATA: metadata directory associated with plate data
     BARCODE (optional): file containing plate data to plate map pairings
 output:
     AGGREGATE_DATA_EXPAND: Aggregated profiles
     CELL_COUNTS_EXPANDED: Cell counts per well
     ANNOTATED_DATA_EXPAND: Annotated profile that contains aggregated + metadata data
-    NORMALIZED_DATA_EXPAND: Normalized aggregate dataset
-    SELECTED_FEATURE_DATA_EXPAND: Selected features from normalized aggregate dataset
+    NORMALIZED_DATA_EXPAND: Normalized aggregate datasets
+    SELECTED_FEATURE_DATA_EXPAND: Selected features from normalized aggregate datasets
     CONSENSUS_DATA: Profile containing unique signatures
 
 Returns
 -------
-    Consensus profle containing unique signatures associated with specific treatments.
+    Consensus profile containing unique signatures associated with specific treatments.
 """
 
 
