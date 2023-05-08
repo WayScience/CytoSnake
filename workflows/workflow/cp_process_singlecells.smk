@@ -3,19 +3,22 @@ workflow: cp_process_singlecells.smk
 
 Description:
 ------------
-Converts sqlite plate data into parquet and returns selected features in csv
-format
+Converts sqlite plate data into parquet and returns selected features from
+single-cell morphology profiles.
 
 Parameters:
 ----------
 input:
     Plate data in sqlite format
 output:
-    Selected features in csv format
+    CYTOTABLE_OUTPUT_DATA_EXTENDED: Conveted single-cell morphology dataset
+    NORMALIZED_DATA_EXPAND: Normalized single-cell morphology dataset
+    SELECTED_FEATURE_DATA_EXPAND: Selected features from normalized single-cell
+    morphology dataset
 
 Returns
 -------
-    Selected morphological features
+    Workflow generates selected features profile from single-cell morphology dataset
 """
 
 
