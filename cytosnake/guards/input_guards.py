@@ -34,11 +34,13 @@ def is_barcode_required(user_params: NameSpace) -> bool:
     # counting number of platemaps in metadata
     plate_maps_path = metadata_path / "platemaps"
     n_platemaps = len(list(plate_maps_path.glob("*")))
+    print(n_platemaps)
 
     # if the metadata directory has more than 1 plate maps and no barcode file return
     # True.
     # This indicates that a barcode is required
-    return n_platemaps > 1 and barcode_param is None
+    print(n_platemaps > 1 and barcode_param is None)
+    return n_platemaps == 0 and barcode_param is None
 
 
 def check_init_parameter_inputs(user_params: NameSpace) -> bool:
@@ -61,5 +63,5 @@ def check_init_parameter_inputs(user_params: NameSpace) -> bool:
     """
 
     # checking if barcode is required
-    if not is_barcode_required:
-        BarcodeRequiredError("Barcode is required, multiple platemaps found")
+    if is_barcode_required(user_params=user_params):
+        raise BarcodeRequiredError("Barcode is required, multiple platemaps found")
