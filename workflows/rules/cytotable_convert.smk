@@ -15,9 +15,6 @@ Returns:
 """
 
 
-configfile: "configs/configuration.yaml"
-
-
 rule convert:
     input:
         PLATE_DATA,

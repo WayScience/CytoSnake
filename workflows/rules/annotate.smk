@@ -26,9 +26,6 @@ Returns:
 """
 
 
-configfile: "configs/configuration.yaml"
-
-
 rule annotate:
     input:
         aggregate_profile=AGGREGATE_DATA,

@@ -1,10 +1,12 @@
 ---
 repos:
   # remove unused imports
+  # additional configs are in the pyproject.toml file
   - repo: https://github.com/hadialqattan/pycln.git
     rev: v2.1.3
     hooks:
       - id: pycln
+        args: [--config=pyproject.toml]
 
   # import formatter with black configurations
   - repo: https://github.com/pycqa/isort
@@ -17,7 +19,7 @@ repos:
   # Code formatter for both python files and jupyter notebooks
   # support pep 8 standards
   - repo: https://github.com/psf/black
-    rev: 22.10.0
+    rev: 23.3.0
     hooks:
       - id: black-jupyter
       - id: black
@@ -25,20 +27,28 @@ repos:
 
   # AI based formatter to improve readability
   - repo: https://github.com/sourcery-ai/sourcery
-    rev: v1.1.0
+    rev: v1.2.0
     hooks:
       - id: sourcery
-        args: [--diff=git diff HEAD, --no-summary]
+        args: [--diff=git diff HEAD, --fix, --no-summary]
+
+  # adding ruff with auto fix on
+  # additional configs are in the pyproject.toml file
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.0.265"
+    hooks:
+      - id: ruff
+        args: [--config=pyproject.toml, --fix, --exit-non-zero-on-fix]
 
   # snakemake formatting
   - repo: https://github.com/snakemake/snakefmt
-    rev: v0.8.0
+    rev: v0.8.4
     hooks:
       - id: snakefmt
 
   # additional hooks found with in the pre-commit lib
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.4.0
     hooks:
       - id: trailing-whitespace # removes trailing white spaces
       - id: mixed-line-ending # removes mixed end of line

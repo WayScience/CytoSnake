@@ -22,9 +22,6 @@ Output
 """
 
 
-configfile: "configs/configuration.yaml"
-
-
 rule normalize:
     input:
         CYTOTABLE_OUTPUT_DATA,

@@ -20,9 +20,6 @@ Return:
 """
 
 
-configfile: "configs/configuration.yaml"
-
-
 rule create_consensus:
     input:
         SELECTED_FEATURE_DATA_EXPAND,
