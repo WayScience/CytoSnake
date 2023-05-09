@@ -21,9 +21,6 @@ Returns
 """
 
 
-configfile: "configs/configuration.yaml"
-
-
 rule feature_select:
     input:
         NORMALIZED_DATA_EXPAND,

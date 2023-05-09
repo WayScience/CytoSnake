@@ -15,6 +15,7 @@ from cytosnake.cli.cli_docs import cli_docs, init_doc, run_doc
 from cytosnake.cli.exec.workflow_exec import workflow_executor
 from cytosnake.cli.setup_init import init_cp_data, init_dp_data
 from cytosnake.common.errors import ProjectExistsError, WorkflowFailedException
+from cytosnake.guards.input_guards import check_init_parameter_inputs
 from cytosnake.utils import cyto_paths
 from cytosnake.utils.cytosnake_setup import setup_cytosnake_env
 
@@ -63,6 +64,9 @@ def run_cmd() -> None:
             logging.info(msg="Formatting input files")
             init_args = args_handler.parse_init_args()
 
+            # before setup, check the logic of the input parameters
+            check_init_parameter_inputs(user_params=init_args)
+
             # identifying which data type was added and how to set it up
             match init_args.datatype:
                 case "cell_profiler":
@@ -87,7 +91,6 @@ def run_cmd() -> None:
         # Executed if the user is using the `run` mode. This will execute the
         # workflow that are found within the `workflows` folder
         case "run":
-
             # display run help documentation
             if args_handler.mode_help is True:
                 print(run_doc)
@@ -120,5 +123,4 @@ def run_cmd() -> None:
 
 
 if __name__ == "__main__":
-
     run_cmd()

@@ -98,7 +98,6 @@ def build_consensus(
 
 # build consensus profiles from CellProfile data
 if __name__ in "__main__":
-
     # loading inputs
     # more information how snakemake transfers workflow variables to scripts:
     # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``

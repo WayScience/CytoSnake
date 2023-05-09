@@ -7,7 +7,6 @@ from pathlib import Path
 from random import randint
 
 if __name__ == "__main__":
-
     # create 5 random sqlite files
     for _ in range(5):
         rand_id = str(randint(1000, 9999))

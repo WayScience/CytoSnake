@@ -61,7 +61,7 @@ def annotate_cells(
     barcode_platemap_df = pd.read_csv(barcodes_path)
 
     logging.info("Searching plate map name")
-    plate = pathlib.Path(aggregated_data).stem
+    plate = pathlib.Path(aggregated_data).stem  # noqa
     platemap = barcode_platemap_df.query(
         "Assay_Plate_Barcode == @plate"
     ).Plate_Map_Name.values[0]
@@ -108,7 +108,6 @@ def annotate_cells(
 
 # annotates dataset with given metadata
 if __name__ == "__main__":
-
     # snakemake inputs
     # more information how snakemake transfers workflow variables to scripts:
     # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python

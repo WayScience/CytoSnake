@@ -30,9 +30,6 @@ Returns
 """
 
 
-configfile: "configs/configuration.yaml"
-
-
 rule aggregate:
     input:
         sql_files=PLATE_DATA,
@@ -46,6 +43,6 @@ rule aggregate:
     conda:
         "../envs/cytominer_env.yaml"
     params:
-        aggregate_config=config["config_paths"]["single_cell"],
+        aggregate_config=config["aggregate_configs"]["params"],
     script:
         "../scripts/aggregate_cells.py"

@@ -72,7 +72,6 @@ def aggregate(
 
     # Loading appropriate platemaps with given plate data
     logging.info(f"Loading plate data from: {str(sqlite_file_path)}")
-    plate = sqlite_file_path.stem
     plate_file_check = pathlib.Path(sql_file).is_file()
 
     if not plate_file_check:
@@ -91,7 +90,8 @@ def aggregate(
         ).Plate_Map_Name.values[0]
     except IndexError as e:
         logging.error(
-            f"{e} raised. Unable to find associated platemap name with given plate barcode"
+            f"{e} raised."
+            "Unable to find associated platemap name with given plate barcode"
         )
 
     logging.info(f"Identified plate map: {platemap}")
@@ -138,7 +138,6 @@ def aggregate(
 
 # execute main code for aggregation
 if __name__ == "__main__":
-
     # snakemake inputs
     # more information how snakemake transfers workflow variables to scripts:
     # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python

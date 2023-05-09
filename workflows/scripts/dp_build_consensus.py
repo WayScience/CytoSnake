@@ -49,7 +49,6 @@ def build_dp_consensus(dp_profile: str, outname: str, config: str):
 
 # building consensus profile from deep profiler features
 if __name__ == "__main__":
-
     # snakemake inputs
     # more information how snakemake transfers workflow variables to scripts:
     # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python``
