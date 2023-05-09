@@ -10,7 +10,7 @@ is or not allowed.
 import pathlib
 from typing import TypeVar
 
-from cytosnake.common.errors import BarcodeRequiredError
+from cytosnake.common.errors import BarcodeMissingError
 
 # declaring user based type hinting
 NameSpace = TypeVar("NameSpace")
@@ -56,10 +56,10 @@ def check_init_parameter_inputs(user_params: NameSpace) -> bool:
 
     Raises
     ------
-    BarcodeRequiredError
+    BarcodeMissingError
         Raised if a multiple platemaps are found but no barcode file was provided
     """
 
     # checking if barcode is required
     if is_barcode_required(user_params=user_params):
-        raise BarcodeRequiredError("Barcode is required, multiple platemaps found")
+        raise BarcodeMissingError("Barcode is required, multiple platemaps found")

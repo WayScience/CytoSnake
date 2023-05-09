@@ -20,10 +20,6 @@ import shutil
 import subprocess
 from typing import Optional
 
-# import tempfile
-# import pytest
-# import subprocess
-# import test_functions # This will contains helper functions for testing
 from cytosnake.common import errors
 
 
@@ -45,17 +41,29 @@ def transfer_data(
     n_plates: int,
     n_platemaps: int,
     metadata_dir_name: Optional[str] = "metadata",
-    testing_data_dir="dummyfiles",
+    testing_data_dir="emptyfiles",
 ) -> None:
     """Wrapper function that transfer datasets found within the pytest module and
     transfers it to the assigned directory where pytest is conducting the functional
     tests.
 
+    The test dataset is transfered from the `dataset` directory located in the
+    same directory as the functional test module. The dataset directory contains
+    empty files that emulates inputs that a user will put in to CytoSnake.
+
     Parameters
     ----------
-    test_dir : LocalPath
-        `PyTest.LocalPath` object that contains the path were the test is being
-        conducted
+    test_dir : pathlib.Path
+        testing directory
+
+    n_plates: int
+        number of plates
+
+    n_platesmaps: int
+        number of plate maps
+
+    metadata_dir_name : Optional[str]
+        name of the metadata directory (default=metadata)
 
     Return
     ------
@@ -64,6 +72,8 @@ def transfer_data(
     """
 
     # get files to transfer
+    # dataset folder is within the same directory as the test modules, changes
+    # in this path will cause the tests to fail
     dataset_dir = pathlib.Path(f"./datasets/{testing_data_dir}").resolve(strict=True)
 
     # grabbing all input paths
@@ -128,7 +138,7 @@ def test_barcode_logic_no_barcode_one_platemap(tmp_path, request) -> None:
     # starting path
     test_module = str(pathlib.Path().absolute())
 
-    # transfer dummy data to tmpdir
+    # transfer placeholder data to tmpdir
     transfer_data(test_dir=tmp_path, n_plates=2, n_platemaps=1)
 
     # change directory to tmpdir
@@ -158,7 +168,7 @@ def test_barcode_logic_barcode_multi_platemaps(tmp_path, request) -> None:
     # PyTest module directory
     test_module = str(pathlib.Path().absolute())
 
-    # transfer dummy data to tmpdir
+    # transfer placeholder data to tmpdir
     transfer_data(test_dir=tmp_path, n_plates=2, n_platemaps=2)
 
     # change directory to tmpdir
@@ -193,7 +203,7 @@ def test_barcode_logic_no_barcode_multi_platemaps(tmp_path, request) -> None:
     # PyTest module directory
     test_module = str(pathlib.Path().absolute())
 
-    # transfer dummy data to tmpdir
+    # transfer placeholder data to tmpdir
     transfer_data(test_dir=tmp_path, n_plates=2, n_platemaps=2)
 
     # change directory to tmpdir
