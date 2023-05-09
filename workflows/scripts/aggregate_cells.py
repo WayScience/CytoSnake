@@ -5,7 +5,6 @@ from pathlib import Path
 import pandas as pd
 import yaml
 from pycytominer.cyto_utils.cells import SingleCells
-from snakemake.script import Snakemake
 
 
 def aggregate(
@@ -72,7 +71,7 @@ def aggregate(
 
     # Loading appropriate platemaps with given plate data
     logging.info(f"Loading plate data from: {sql_file}")
-    plate = os.path.basename(sql_file).rsplit(".", 1)
+    os.path.basename(sql_file).rsplit(".", 1)
     plate_file_check = Path(sql_file).is_file()
 
     if not plate_file_check:
@@ -91,7 +90,8 @@ def aggregate(
         ).Plate_Map_Name.values[0]
     except IndexError as e:
         logging.error(
-            f"{e} raised. Unable to find associated platemap name with given plate barcode"
+            f"{e} raised."
+            "Unable to find associated platemap name with given plate barcode"
         )
 
     logging.info(f"Identified plate map: {platemap}")
@@ -138,7 +138,6 @@ def aggregate(
 
 # execute main code for aggregation
 if __name__ == "__main__":
-
     # snakemake inputs
     # more information how snakemake transfers workflow variables to scripts:
     # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python

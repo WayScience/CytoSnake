@@ -68,7 +68,6 @@ def transport_project_files() -> None:
     # - configs: contains yaml files providing workflow and cli configurations
     target_dirs = ["workflows", "configs"]
     for target_dir in target_dirs:
-
         # construct source directory path
         src_path = pkg_path / target_dir
         target_dst = proj_path / target_dir
