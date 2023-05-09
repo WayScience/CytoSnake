@@ -211,6 +211,6 @@ def test_barcode_logic_no_barcode_multi_platemaps(tmp_path, request) -> None:
     cleanup_handler = CleanUpHandler(tmp_path)
     request.addfinalizer(cleanup_handler)
 
-    # checking for sucess return code
+    # checking for success return code
     assert proc.returncode == 1
     assert raised_error == errors.BarcodeRequiredError.__name__
