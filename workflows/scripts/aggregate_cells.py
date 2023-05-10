@@ -57,9 +57,9 @@ def aggregate(
     logging.info(f"Loading single cell aggregation configurations from: {config}")
     aggregate_path_obj = pathlib.Path(config)
     aggregate_config_path = aggregate_path_obj.absolute()
-    config_check = pathlib.Path(aggregate_config_path).is_file()
 
-    if not config_check:
+    # checking if the aggregation dataset file exists
+    if not pathlib.Path(aggregate_config_path).is_file():
         e_msg = "Unable to find aggregation configuration file"
         logging.error(e_msg)
         raise FileNotFoundError(e_msg)
@@ -74,7 +74,8 @@ def aggregate(
     logging.info(f"Loading plate data from: {str(sqlite_file_path)}")
     plate_file_check = pathlib.Path(sql_file).is_file()
 
-    if not plate_file_check:
+    # checking if the the sqli_file is found or it's a file type
+    if not pathlib.Path(sql_file).is_file():
         e_msg = f"Unable to find plate file: {sql_file}"
         logging.error(e_msg)
         raise FileNotFoundError(e_msg)
@@ -95,7 +96,7 @@ def aggregate(
         )
 
     logging.info(f"Identified plate map: {platemap}")
-    platemap_file = pathlib.Path(metadata_dir) / "platemap" / f"{platemap}.csv"
+    platemap_file = pathlib.Path(f"{metadata_dir}/platemap/{platemap}.csv")
     platemap_df = pd.read_csv(platemap_file)
 
     logging.info(f"Loading Plate map data from: {sql_file}")
