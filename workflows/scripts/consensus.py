@@ -1,5 +1,5 @@
 import logging
-from pathlib import Path
+import pathlib
 
 import pandas as pd
 import yaml
@@ -31,7 +31,7 @@ def build_consensus(
     """
 
     # initiating Logger
-    log_path = Path(log_file).absolute()
+    log_path = pathlib.Path(log_file).absolute()
     logging.basicConfig(
         filename=log_path,
         encoding="utf-8",
@@ -42,7 +42,7 @@ def build_consensus(
     logging.info("Building consensus profile")
 
     # loading config file
-    consensus_path_obj = Path(config)
+    consensus_path_obj = pathlib.Path(config)
     if not consensus_path_obj.is_file():
         e_msg = "Unable to find consensus configuration file"
         logging.error(e_msg)

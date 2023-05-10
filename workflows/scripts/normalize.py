@@ -1,5 +1,5 @@
 import logging
-from pathlib import Path
+import pathlib
 
 from pycytominer.normalize import normalize
 
@@ -27,7 +27,7 @@ def normalization(
     """
 
     # initiating logger
-    log_path = Path(log_file).absolute()
+    log_path = pathlib.Path(log_file).absolute()
     logging.basicConfig(
         filename=log_path,
         encoding="utf-8",
