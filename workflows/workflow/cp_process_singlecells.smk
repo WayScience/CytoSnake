@@ -40,6 +40,6 @@ include: "../rules/feature_select.smk"
 
 rule all:
     input:
-        CYTOTABLE_OUTPUT_DATA_EXTENDED,
+        CYTOTABLE_CONVERTED_PLATE_DATA_EXTENDED,
         NORMALIZED_DATA_EXPAND,
         SELECTED_FEATURE_DATA_EXPAND,
