@@ -12,7 +12,6 @@ data_configs:
   # cytosnake will search for plate datafiles with the extensions set
   # in `converted_plate_data_format`
   use_converted_plate_data: False
-  converted_plate_data_format: parquet
 
   # These are the data type configurations
   # mostly handles on how outputs and inputs should be named or formatted
@@ -22,6 +21,7 @@ data_configs:
       suffix: cell_counts
     plate_data:
       file_ext: sqlite
+      converted_ext: parquet
       suffix: cell_counts
       compression_ext: null
     aggregated:
