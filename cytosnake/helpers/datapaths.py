@@ -68,16 +68,16 @@ def get_metadata_dir() -> str:
 # --------------------------
 # Main path builder function
 # --------------------------
-def build_path(data_type: str, use_converted: bool) -> str:
+def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
     """Builds a output string path pointing to a specific dataset
 
     data_type : str
         type of dataset string path to be build.
 
-    use_converted : bool
+    use_converted : Optinal[bool]
         indicating to use converted plate dataset. However if this is True and
         data_type != 'plate_data' then the `use_converted` logic will be ignored
-        since it is only meant to be used for plate data
+        since it is only meant to be used for plate data. (default=False)
 
     Returns
     -------
@@ -94,17 +94,18 @@ def build_path(data_type: str, use_converted: bool) -> str:
     data_configs = GENERAL_CONFIGS["data_configs"]
 
     # loading in the config
-    if data_type not in data_configs.keys():
+    if data_type not in data_configs["data_types"].keys():
         raise ValueError(f"`{data_type}` is not a supported dataset")
 
     # loading in data_type specific configs
-    selected_datatype = data_configs[data_type]
+    selected_datatype = data_configs["data_types"][data_type]
+    print(selected_datatype)
 
     # loading default path components into varaibles
     header = cyto_paths.get_results_dir_path()
-    suffix = selected_datatype["suffix"]
+    suffix = f"_{selected_datatype['suffix']}"
     compression = selected_datatype["compression_ext"]
-    ext = selected_datatype["ext"]
+    ext = selected_datatype["file_ext"]
 
     # edit ext if compression is used
     if compression is not None:
@@ -114,6 +115,7 @@ def build_path(data_type: str, use_converted: bool) -> str:
     # folder
     if data_type == "plate_data":
         header = cyto_paths.get_project_root() / "data"
+        suffix = ""
 
         # this will determine if users want to use their converted dataset
         if use_converted:
@@ -121,19 +123,19 @@ def build_path(data_type: str, use_converted: bool) -> str:
 
             # check if there are any converted files
             # if there's none, default to inital plate data type extension
-            n_converted = list(len(header.glob(f"*.{ext}")))
+            n_converted = len(list(header.glob(f"*.{ext}")))
             if n_converted == 0:
-                ext = selected_datatype["ext"]
+                ext = selected_datatype["file_ext"]
 
     # building path
-    return f"{header}/{WILDCARD_BASENAME}_{suffix}.{ext}"
+    return f"{header}/{WILDCARD_BASENAME}{suffix}.{ext}"
 
 
 # --------------------
 # Helper i/o functions
 # --------------------
 def get_all_basenames(
-    dirpath: pathlib.Path, ext_target: Optional[str | None] = None
+    dirpath: str | pathlib.Path, ext_target: Optional[str | None] = None
 ) -> list[str]:
     """Gets the basenames of all files from a given directory. If there's a need for a
     more targeted search, use the `target_ext` which will get all the file basenames
@@ -141,7 +143,7 @@ def get_all_basenames(
 
     Parameters
     ----------
-    dirpath : str
+    dirpath : str | pathlib.Path
         path to directory to be searched
     target_ext : Optional[str  |  None], optional
         allows a more targeted search if given an extension, by default None
@@ -153,7 +155,9 @@ def get_all_basenames(
     """
 
     # check if the path given is a directory path
-    if not is_valid_path():
+    if isinstance(dirpath, str):
+        dirpath = pathlib.Path(dirpath)
+    if not is_valid_path(dirpath):
         raise TypeError("`dirpath` must be a valid path")
     if not dirpath.is_dir():
         raise NotADirectoryError("`dirpath` must be a directory, not a file")

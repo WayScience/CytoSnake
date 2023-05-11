@@ -51,11 +51,11 @@ ANNOTATED_DATA_EXPAND = expand(ANNOTATED_DATA, basename=plate_name)
 
 # level 3 data: aggregated profile based on given aggregation level
 # (e.g aggregating single-cell data to the well level)
-AGGREGATE_DATA = datapaths.aggregate_output(data_type="aggregated")
+AGGREGATE_DATA = datapaths.build_path(data_type="aggregated")
 AGGREGATE_DATA_EXPAND = expand(AGGREGATE_DATA, basename=plate_name)
 
 # level 4a data: noramlzied profile
-NORMALIZED_DATA = datapaths.normalized_output(data_type="normalized")
+NORMALIZED_DATA = datapaths.build_path(data_type="normalized")
 NORMALIZED_DATA_EXPAND = expand(NORMALIZED_DATA, basename=plate_name)
 
 # level 4b: selected features profile
@@ -64,7 +64,7 @@ SELECTED_FEATURE_DATA_EXPAND = expand(SELECTED_FEATURE_DATA, basename=plate_name
 
 # level 5: Consensus profile captures unique signatures that resulted from
 # any external factor (e.g pertubations)
-CONSENSUS_DATA = datapaths.consensus_output(data_type="consensus")
+CONSENSUS_DATA = datapaths.build_path(data_type="consensus")
 CONSENSUS_DATA_EXPAND = expand(CONSENSUS_DATA, basename=plate_name)
 
 # other outputs
