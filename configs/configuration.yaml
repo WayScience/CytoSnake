@@ -1,38 +1,73 @@
 config_name: cytosnake_configs
 
-env_manager: mamba
+env_manager: conda
 
 # computation configs
 analysis_configs:
   preprocessing:
     threads: 4
 
-# data configurations
 data_configs:
-  plate_data_format: sqlite
+  # flag indicates to use converted data. if True, then
+  # cytosnake will search for plate datafiles with the extensions set
+  # in `converted_plate_data_format`
+  use_converted_plate_data: False
+  converted_plate_data_format: parquet
+
+  # These are the data type configurations
+  # mostly handles on how outputs and inputs should be named or formatted
+  data_types:
+    cell_counts:
+      file_ext: csv
+      suffix: cell_counts
+    plate_data:
+      file_ext: sqlite
+      suffix: cell_counts
+      compression_ext: null
+    aggregated:
+      suffix: aggregated
+      file_ext: csv
+      compression_ext: gz
+    annotated:
+      suffix: annotated
+      file_ext: csv
+      compression_ext: gz
+    normalized:
+      suffix: normalized
+      file_ext: csv
+      compression_ext: gz
+    feature_select:
+      suffix: selected_features
+      file_ext: csv
+      compression_ext: gz
+    consensus:
+      suffix: consensus_profile
+      file_ext: csv
+      compression_ext: gz
+
 
 # Analysis configuration file paths
 config_paths:
   # general configs
-  general_configs: "configs/configuration.yaml"
+  general_configs: configs/configuration.yaml
 
   # CellProfiler Specific analysis configurations
-  single_cell: "configs/analysis_configs/single_cell_configs.yaml"
-  normalize: "configs/analysis_configs/normalize_configs.yaml"
-  feature_select: "configs/analysis_configs/feature_select_configs.yaml"
-  aggregate: "configs/analysis_configs/aggregate_configs.yaml"
-  cytotable_config: "configs/analysis_configs/cytotable_convert.yaml"
+  single_cell: configs/analysis_configs/single_cell_configs.yaml
+  normalize: configs/analysis_configs/normalize_configs.yaml
+  feature_select: configs/analysis_configs/feature_select_configs.yaml
+  aggregate: configs/analysis_configs/aggregate_configs.yaml
+  cytotable_config: configs/analysis_configs/cytotable_convert.yaml
 
   # DeepProfiler Specific analysis configurations
-  dp_data: "configs/analysis_configs/dp_data_configs.yaml"
-  dp_aggregator: "configs/analysis_configs/dp_aggregator_config.yaml"
-  dp_normalization: "configs/analysis_configs/dp_normalization_config.yaml"
+  dp_data: configs/analysis_configs/dp_data_configs.yaml
+  dp_aggregator: configs/analysis_configs/dp_aggregator_config.yaml
+  dp_normalization: configs/analysis_configs/dp_normalization_config.yaml
 
   # non datatype specific analysis configurations
-  consensus_config: "configs/analysis_configs/consensus_configs.yaml"
-  annotate: "configs/analysis_configs/annotate_configs.yaml"
+  consensus_config: configs/analysis_configs/consensus_configs.yaml
+  annotate: configs/analysis_configs/annotate_configs.yaml
 
 # work flow specific paths
 workflows:
-  cp_process: "./cp_process"
-  dp_process: "./dp_process"
+  cp_process: ./cp_process
+  dp_process: ./dp_process
