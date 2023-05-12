@@ -121,12 +121,6 @@ def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
         if use_converted:
             ext = selected_datatype["converted_ext"]
 
-            # check if there are any converted files
-            # if there's none, default to inital plate data type extension
-            n_converted = len(list(header.glob(f"*.{ext}")))
-            if n_converted == 0:
-                ext = selected_datatype["file_ext"]
-
     # building path
     return f"{header}/{WILDCARD_BASENAME}{suffix}.{ext}"
 
