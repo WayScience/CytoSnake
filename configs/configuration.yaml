@@ -22,7 +22,7 @@ data_configs:
     plate_data:
       file_ext: sqlite
       converted_ext: parquet
-      suffix: cell_counts
+      suffix: None
       compression_ext: null
     aggregated:
       suffix: aggregated
