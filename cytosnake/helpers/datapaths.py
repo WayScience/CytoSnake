@@ -1,7 +1,7 @@
 """
 module: datapath.py
 
-This module contains fuctions that build stirng path that are snakemake compatible.
+This module contains functions that build string paths that are snakemake compatible.
 """
 
 import pathlib
