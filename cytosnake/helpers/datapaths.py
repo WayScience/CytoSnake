@@ -69,7 +69,7 @@ def get_metadata_dir() -> str:
 # Main path builder function
 # --------------------------
 def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
-    """Builds a output string path pointing to a specific dataset
+    """Builds an output string path pointing to a specific dataset
 
     data_type : str
         type of dataset string path to be build.
