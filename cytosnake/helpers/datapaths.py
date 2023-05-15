@@ -74,7 +74,7 @@ def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
     data_type : str
         type of dataset string path to be build.
 
-    use_converted : Optinal[bool]
+    use_converted : Optional[bool]
         indicating to use converted plate dataset. However if this is True and
         data_type != 'plate_data' then the `use_converted` logic will be ignored
         since it is only meant to be used for plate data. (default=False)
