@@ -76,16 +76,13 @@ def get_cytosnake_package_path() -> pathlib.Path:
     Raises
     ------
     FileNotFoundError
-        Raised if the `.git` folder is not found.
+        Raised if CytoSnake Package is not found
     """
 
-    # get location of this file
-    # -- check if he ".git" folder exists
+    # get parent path of the `__init__.py` module and check it exists
     project_path = pathlib.Path(cytosnake.__path__[0]).parent
-    git_path = project_path / ".git"
-    if not git_path.exists:
+    if not project_path.exists():
         raise FileNotFoundError("Unable to find cytosnake package path")
-
     return project_path
 
 
