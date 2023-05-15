@@ -101,7 +101,7 @@ def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
     selected_datatype = data_configs["data_types"][data_type]
     print(selected_datatype)
 
-    # loading default path components into varaibles
+    # loading default path components into variables
     header = cyto_paths.get_results_dir_path()
     suffix = f"_{selected_datatype['suffix']}"
     compression = selected_datatype["compression_ext"]
