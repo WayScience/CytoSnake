@@ -19,11 +19,11 @@ rule convert:
     input:
         PLATE_DATA,
     output:
-        CYTOTABLE_OUTPUT_DATA,
+        CYTOTABLE_CONVERTED_PLATE_DATA,
     conda:
         "../envs/cytotable.yaml"
     params:
-        data_configs=config["data_configs"]["plate_data_format"],
+        data_configs=config["data_configs"]["data_types"]["plate_data"]["converted_ext"],
         cytotable_config=config["cytotable_convert"],
     script:
         "../scripts/convert.py"
