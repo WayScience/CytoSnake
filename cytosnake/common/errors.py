@@ -95,10 +95,6 @@ class BarcodeMissingError(BaseFileNotFound):
     """Raised when a barcode file is required"""
 
 
-class PlateDataNotFoundError(BaseFileNotFound):
-    """Raised when plate data sets are not found"""
-
-
 # -----------------------
 # Error handling functions
 # -----------------------
