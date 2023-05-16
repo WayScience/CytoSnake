@@ -8,4 +8,4 @@ dependencies:
   - pyyaml
   - pip
   - pip:
-      - git+https://github.com/cytomining/pycytominer.git@c90438fd7c11ad8b1689c21db16dab1a5280de6c
+      - git+https://github.com/cytomining/pycytominer.git@1e984c6b266012e3e5a0f0620bc866c3958f0260

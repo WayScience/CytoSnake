@@ -1,6 +1,5 @@
 from pathlib import Path
 
-import snakemake
 import yaml
 from pycytominer import consensus
 from pycytominer.operations import get_na_columns

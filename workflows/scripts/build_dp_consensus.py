@@ -1,4 +1,4 @@
-from pathlib import Path
+import pathlib
 from typing import Union
 
 import pandas as pd
@@ -59,7 +59,7 @@ def load_configs(config: str) -> dict:
     FileNotFoundError
         raised if provided config file paths is invalid
     """
-    config_path_obj = Path(config)
+    config_path_obj = pathlib.Path(config)
     if not config_path_obj.is_file():
         e_msg = "Unable to find consensus configuration file"
         raise FileNotFoundError(e_msg)

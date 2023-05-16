@@ -1,6 +1,6 @@
+import pathlib
 import shutil
 from datetime import datetime
-from pathlib import Path
 from typing import Union
 
 import pandas as pd
@@ -21,10 +21,10 @@ def archive_logs(files: Union[str, list[str]], dest: str) -> None:
         files = files.split()
 
     # checking if directory is passed
-    if Path(dest).is_file():
+    if pathlib.Path(dest).is_file():
         e_msg = "must be a path to a directory not to a file"
         raise TypeError(e_msg)
-    elif not Path(dest).is_dir():
+    elif not pathlib.Path(dest).is_dir():
         print("Archive folder does not exists")
 
     # moving files
@@ -71,7 +71,7 @@ def sort_log_files(log_paths: list[str]) -> list[str]:
     # collectime time created
     file_time = []
     for log_path in log_paths:
-        log_path_obj = Path(log_path)
+        log_path_obj = pathlib.Path(log_path)
         mod_time = log_path_obj.stat().st_mtime
         time = datetime.fromtimestamp(mod_time)
         path_str = str(log_path_obj.absolute())
@@ -123,7 +123,7 @@ def combine_logs(logs: list[str], outname: str) -> None:
     dir_path = f"logs/{id_tag}-archived_logs"
 
     # -- creating directory for archiving logs
-    archive_dir_obj = Path(dir_path)
+    archive_dir_obj = pathlib.Path(dir_path)
     archive_dir_obj.mkdir(exist_ok=False)
     archive_dir_path = str(archive_dir_obj.absolute())
 

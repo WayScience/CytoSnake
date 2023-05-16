@@ -1,6 +1,5 @@
 import logging
-import os
-from pathlib import Path
+import pathlib
 
 import pandas as pd
 import yaml
@@ -40,8 +39,10 @@ def aggregate(
         No object is returned
         Generates cell counts and aggregate profile output
     """
+    sqlite_file_path = pathlib.Path(sql_file).resolve(strict=True)
+
     # opening logger
-    log_path = Path(log_file).absolute()
+    log_path = pathlib.Path(log_file).absolute()
     logging.basicConfig(
         filename=log_path,
         encoding="utf-8",
@@ -50,15 +51,15 @@ def aggregate(
         datefmt="%Y-%m-%d %H:%M:%S",
     )
 
-    logging.info(f"Aggregating Single Cells in: {sql_file}")
+    logging.info(f"Aggregating Single Cells in: {str(sqlite_file_path)}")
 
     # loading parameters
     logging.info(f"Loading single cell aggregation configurations from: {config}")
-    aggregate_path_obj = Path(config)
+    aggregate_path_obj = pathlib.Path(config)
     aggregate_config_path = aggregate_path_obj.absolute()
-    config_check = Path(aggregate_config_path).is_file()
 
-    if not config_check:
+    # checking if the aggregation dataset file exists
+    if not pathlib.Path(aggregate_config_path).is_file():
         e_msg = "Unable to find aggregation configuration file"
         logging.error(e_msg)
         raise FileNotFoundError(e_msg)
@@ -70,11 +71,11 @@ def aggregate(
         logging.info("Aggregation configurations loaded.")
 
     # Loading appropriate platemaps with given plate data
-    logging.info(f"Loading plate data from: {sql_file}")
-    os.path.basename(sql_file).rsplit(".", 1)
-    plate_file_check = Path(sql_file).is_file()
+    logging.info(f"Loading plate data from: {str(sqlite_file_path)}")
+    plate_file_check = pathlib.Path(sql_file).is_file()
 
-    if not plate_file_check:
+    # checking if the the sqli_file is found or it's a file type
+    if not pathlib.Path(sql_file).is_file():
         e_msg = f"Unable to find plate file: {sql_file}"
         logging.error(e_msg)
         raise FileNotFoundError(e_msg)
@@ -95,11 +96,11 @@ def aggregate(
         )
 
     logging.info(f"Identified plate map: {platemap}")
-    platemap_file = os.path.join(metadata_dir, "platemap", "{}.csv".format(platemap))
+    platemap_file = pathlib.Path(f"{metadata_dir}/platemap/{platemap}.csv")
     platemap_df = pd.read_csv(platemap_file)
 
     logging.info(f"Loading Plate map data from: {sql_file}")
-    sqlite_file = "sqlite:///{}".format(sql_file)
+    sqlite_file = f"sqlite:///{sqlite_file}"
     single_cell_profile = SingleCells(
         sqlite_file,
         strata=aggregate_configs["strata"],

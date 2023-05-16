@@ -1,6 +1,5 @@
 import logging
-import os
-from pathlib import Path
+import pathlib
 
 import pandas as pd
 import yaml
@@ -31,7 +30,7 @@ def annotate_cells(
         path to configuration file
     """
     # initiating Logger
-    log_path = Path(log_file).absolute()
+    log_path = pathlib.Path(log_file).absolute()
     logging.basicConfig(
         filename=log_path,
         encoding="utf-8",
@@ -44,7 +43,7 @@ def annotate_cells(
     # loading in annotate configs
     logging.info(f"Loading Annotation configuration from: {config}")
 
-    annotate_path_obj = Path(config)
+    annotate_path_obj = pathlib.Path(config)
     if not annotate_path_obj.is_file():
         e_msg = "Unable to find Annotation configuration file"
         logging.error(e_msg)
@@ -62,7 +61,7 @@ def annotate_cells(
     barcode_platemap_df = pd.read_csv(barcodes_path)
 
     logging.info("Searching plate map name")
-    Path(aggregated_data).name.split("_")[0]
+    plate = pathlib.Path(aggregated_data).stem  # noqa
     platemap = barcode_platemap_df.query(
         "Assay_Plate_Barcode == @plate"
     ).Plate_Map_Name.values[0]
@@ -77,8 +76,8 @@ def annotate_cells(
 
     # loading for plate file
     logging.info("loading plate map file")
-    platemap_file = os.path.join(metadata_dir, "platemap", "{}.csv".format(platemap))
-    if not Path(platemap_file).is_file():
+    platemap_file = pathlib.Path(metadata_dir) / "platemap" / f"{platemap}.csv"
+    if not pathlib.Path(platemap_file).is_file():
         e_msg = "Unable to locate plate map file"
         logging.error(e_msg)
         raise FileNotFoundError(e_msg)

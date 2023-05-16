@@ -24,13 +24,15 @@ Output
 
 rule normalize:
     input:
-        CYTOTABLE_OUTPUT_DATA,
+        CYTOTABLE_CONVERTED_PLATE_DATA
+        if config["data_configs"]["use_converted_plate_data"]
+        else PLATE_DATA,
     output:
         NORMALIZED_DATA,
     conda:
         "../envs/cytominer_env.yaml"
     log:
-        "logs/normalized_{file_name}.log",
+        "logs/normalized_{basename}.log",
     params:
         normalize_config=config["normalize_configs"],
     script:

@@ -112,6 +112,22 @@ def get_project_root() -> pathlib.Path:
     return project_dir
 
 
+def get_results_dir_path() -> pathlib.Path:
+    """Returns path to results directory. This is where all the outputs generated
+    from the workflow will be placed.
+
+    Returns
+    -------
+    pathlib.Path
+        absolute path to results directory
+    """
+
+    # building results path
+    # will not be check if because the results directory is not generated
+    # until the workflow has been executed
+    return get_project_root() / "results"
+
+
 def get_workflow_fpaths() -> dict:
     """Obtains all file paths located in the `workflows` folder as a dictionary.
 
