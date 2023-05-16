@@ -1,11 +1,18 @@
 """
 module: datapath.py
 
-This module contains functions that build string paths that are snakemake compatible.
+
+The datapath module contains functions that construct string paths that are snakemake
+compatible.
+
+Datapaths obtain pathing information from the `cyto_paths` modules, which contains
+pathing information after executing the `init` mode. With this information, the
+datapath module ensures that each path produced are snakemake compatible.
 """
 
 import pathlib
 from typing import Optional
+from collections import defaultdict
 
 from cytosnake.utils import cyto_paths
 from cytosnake.guards.path_guards import is_valid_path
@@ -20,24 +27,23 @@ GENERAL_CONFIGS = load_general_configs()
 # -----------------------
 # input paths from configs
 # -----------------------
-def get_barcodes() -> str:
-    """Obtains path to the bardcode file within data folder
+def get_barcodes() -> str | None:
+    """Obtains path to the bardcode file within data folder. Returns None if no barcode
+    was provided in the `init` mode.
 
     Returns
     -------
-    str
-        return string with barcode name wildcard
-
+    str | None
+        return string with barcode name wildcard, else None
     """
-    # Barcodes are optional. If not added, set to "None"
-    try:
-        barcode_path = META_PATH_CONFIGS["project_dir"]["data_directory_contents"][
-            "barcode"
-        ]
-    except KeyError:
-        barcode_path = None
+    # create a default dictionary that contains default value if key is not found
+    barcode_path = defaultdict(lambda: None)
 
-    return barcode_path
+    # update default dict with loaded parameters
+    barcode_path |= META_PATH_CONFIGS["project_dir"]["data_directory_contents"]
+
+    # returns None if not found, else the absolute barcode path
+    return barcode_path["barcode"]
 
 
 def get_metadata_dir() -> str:
