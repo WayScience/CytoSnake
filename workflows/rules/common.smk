@@ -32,7 +32,9 @@ METADATA_DIR = datapaths.get_metadata_dir()
 # OUTPUTS
 # -------
 # Things to know:
-# extended = list of the file names with a given wildcard
+# EXTENDED is a list of file names that has been extended by using the wildcard.
+# In this case, the wildcard placeholder is `basename` and is being extended by
+# all basenames of the plate_data
 #
 # To understand the level of data, please refere to PyCytominer documentation
 # https://github.com/cytomining/pycytominer
