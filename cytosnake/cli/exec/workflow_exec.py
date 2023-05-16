@@ -61,7 +61,6 @@ def __base_exec(
         unlock=unlock,
         forceall=force,
         use_conda=True,
-        conda_prefix=env_manager,
         conda_frontend=env_manager,
     )
 
