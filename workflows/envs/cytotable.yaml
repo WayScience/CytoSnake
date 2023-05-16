@@ -7,4 +7,4 @@ dependencies:
   - python==3.8
   - pip
   - pip:
-    - git+https://github.com/cytomining/CytoTable.git@f336d26baf96b8b3d9ed6ca07f617895030bf038
+    - cytotable
