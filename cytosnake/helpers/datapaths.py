@@ -11,13 +11,12 @@ datapath module ensures that each path produced are snakemake compatible.
 """
 
 import pathlib
-from typing import Optional
 from collections import defaultdict
+from typing import Optional
 
-from cytosnake.utils import cyto_paths
 from cytosnake.guards.path_guards import is_valid_path
+from cytosnake.utils import cyto_paths
 from cytosnake.utils.config_utils import load_general_configs, load_meta_path_configs
-
 
 # loading in config files
 META_PATH_CONFIGS = load_meta_path_configs()
