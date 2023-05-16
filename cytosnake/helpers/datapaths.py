@@ -7,12 +7,10 @@ This module contains functions that build string paths that are snakemake compat
 import pathlib
 from typing import Optional
 
-import cytosnake.utils.cyto_paths as cyto_paths
+from cytosnake.utils import cyto_paths
 from cytosnake.guards.path_guards import is_valid_path
 from cytosnake.utils.config_utils import load_general_configs, load_meta_path_configs
 
-# constant wildcard name
-WILDCARD_BASENAME = "{basename}"
 
 # loading in config files
 META_PATH_CONFIGS = load_meta_path_configs()
@@ -99,7 +97,6 @@ def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
 
     # loading in data_type specific configs
     selected_datatype = data_configs["data_types"][data_type]
-    print(selected_datatype)
 
     # loading default path components into variables
     header = cyto_paths.get_results_dir_path()
@@ -122,7 +119,7 @@ def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
             ext = selected_datatype["converted_ext"]
 
     # building path
-    return f"{header}/{WILDCARD_BASENAME}{suffix}.{ext}"
+    return f"{header}/{{basename}}{suffix}.{ext}"
 
 
 # --------------------
@@ -157,8 +154,8 @@ def get_all_basenames(
         raise NotADirectoryError("`dirpath` must be a directory, not a file")
 
     # getting all file base names
-    glob_query = f"*.{ext_target}"
     if ext_target is None:
         return [_file.stem for _file in dirpath.glob("*")]
-    else:
-        return [_file.stem for _file in dirpath.glob(glob_query)]
+
+    # if ext_target is provided
+    return [_file.stem for _file in dirpath.glob(f"*.{ext_target}")]
