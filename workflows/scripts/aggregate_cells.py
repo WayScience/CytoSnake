@@ -72,7 +72,6 @@ def aggregate(
 
     # Loading appropriate platemaps with given plate data
     logging.info(f"Loading plate data from: {str(sqlite_file_path)}")
-    plate_file_check = pathlib.Path(sql_file).is_file()
 
     # checking if the the sqli_file is found or it's a file type
     if not pathlib.Path(sql_file).is_file():
