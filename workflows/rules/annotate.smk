@@ -24,11 +24,12 @@ Returns:
 --------
     Generates an annotated profile stored in the `results/` directory
 """
+# prioritizing which input to use
 
 
 rule annotate:
     input:
-        aggregate_profile=AGGREGATE_DATA,
+        profile=CYTOTABLE_CONVERTED_PLATE_DATA,
         barcodes=BARCODES,
         metadata=METADATA_DIR,
     output:
@@ -36,7 +37,7 @@ rule annotate:
     conda:
         "../envs/cytominer_env.yaml"
     log:
-        "logs/annotate_{file_name}.log",
+        "logs/annotate_{basename}.log",
     params:
         annotate_config=config["config_paths"]["annotate"],
     script:

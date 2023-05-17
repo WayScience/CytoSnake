@@ -11,7 +11,7 @@ data_configs:
   # flag indicates to use converted data. if True, then
   # cytosnake will search for plate datafiles with the extensions set
   # in `converted_plate_data_format`
-  use_converted_plate_data: False
+  use_converted_plate_data: True
 
   # These are the data type configurations
   # mostly handles on how outputs and inputs should be named or formatted

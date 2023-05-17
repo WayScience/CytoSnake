@@ -34,6 +34,7 @@ configfile: "./configs/wf_configs/cp_process_singlecells.yaml"
 # importing modules
 include: "../rules/common.smk"
 include: "../rules/cytotable_convert.smk"
+include: "../rules/annotate.smk"
 include: "../rules/normalize.smk"
 include: "../rules/feature_select.smk"
 
@@ -42,5 +43,6 @@ include: "../rules/feature_select.smk"
 rule all:
     input:
         CYTOTABLE_CONVERTED_PLATE_DATA_EXTENDED,
+        ANNOTATED_DATA_EXPAND,
         NORMALIZED_DATA_EXPAND,
         SELECTED_FEATURE_DATA_EXPAND,
