@@ -15,10 +15,11 @@ input:
     PLATE_DATA: single-cell morphology plate in sqlite format
     METADATA: associated metadata
 output:
-    CYTOTABLE_OUTPUT_DATA_EXTENDED: Converted single-cell morphology datasets
-    NORMALIZED_DATA_EXPAND: Normalized single-cell morphology datasets
+    CYTOTABLE_OUTPUT_DATA_EXTENDED: Converted single-cell morphology datasets.
+    ANNOTATED_DATA_EXPAND: Profile containing metadata.
+    NORMALIZED_DATA_EXPAND: Normalized single-cell morphology datasets.
     SELECTED_FEATURE_DATA_EXPAND: Selected features from normalized single-cell
-    morphology datasets
+    morphology datasets.
 
 Returns
 -------
