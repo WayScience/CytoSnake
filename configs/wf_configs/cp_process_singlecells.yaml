@@ -17,6 +17,12 @@ docs: |
     Uses CytoTable's convert workflow which can be found in:
     https://cytomining.github.io/CytoTable/python-api.html#cytotable.convert.convert
 
+  annoate_configs:
+    Takes in single-cell morphology profiles an annoates them with given metadata
+
+    Uses Pycytominer's annoatation module:
+    https://github.com/cytomining/pycytominer/blob/master/pycytominer/annotate.py
+
   normalize_configs:
     Noramlizes single cell morphological features
 
@@ -41,6 +47,23 @@ cytotable_convert:
     drop_null: True
     preset: cellprofiler_sqlite
     log_level: ERROR
+
+annotate_configs:
+  params:
+    join_on:
+      - Metadata_well_position
+      - Image_Metadata_Well
+    add_metadata_id_to_platemap: True
+    format_broad_cmap: False
+    clean_cellprofiler: True
+    external_metadata: "none"
+    external_join_left: "none"
+    external_join_right: "none"
+    compression_options:
+      method: "gzip"
+      mtime: 1
+    float_format: null
+    cmap_args: {}
 
 normalize_configs:
   params:

@@ -7,7 +7,7 @@ from pycytominer.annotate import annotate
 
 
 def annotate_cells(
-    aggregated_data: str,
+    profile: str,
     barcodes_path: str,
     metadata_dir: str,
     annotate_file_out: str,
@@ -18,8 +18,8 @@ def annotate_cells(
 
     Parameters
     ----------
-    aggregated_data : str
-        path pointing to aggregated dataset
+    profile : str
+        path pointing to specific profile dataset
     barcodes_path : str
         path pointing to platemaps
     metadata_dir : str
@@ -55,13 +55,13 @@ def annotate_cells(
         logging.info("Annotation configuration loaded")
 
     # loading in plate map
-    logging.info(f"Loading plate data from: {aggregated_data}")
+    logging.info(f"Loading plate data from: {profile}")
 
     logging.info(f"loadding barcodes from: {barcodes_path}")
     barcode_platemap_df = pd.read_csv(barcodes_path)
 
     logging.info("Searching plate map name")
-    plate = pathlib.Path(aggregated_data).stem  # noqa
+    plate = pathlib.Path(profile).stem  # noqa
     platemap = barcode_platemap_df.query(
         "Assay_Plate_Barcode == @plate"
     ).Plate_Map_Name.values[0]
@@ -89,7 +89,7 @@ def annotate_cells(
     # annotating the aggregated profiles
     logging.info("Annotating Aggregated profiles")
     annotate(
-        profiles=aggregated_data,
+        profiles=profile,
         platemap=platemap_df,
         join_on=annotate_configs["join_on"],
         output_file=annotate_file_out,
@@ -111,7 +111,7 @@ if __name__ == "__main__":
     # snakemake inputs
     # more information how snakemake transfers workflow variables to scripts:
     # https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#python
-    aggregate_data_path = str(snakemake.input["aggregate_profile"])
+    input_profile = str(snakemake.input["profile"])
     annotate_data_output = str(snakemake.output)
     barcode_path = str(snakemake.input["barcodes"])
     metadata_dir_path = str(snakemake.input["metadata"])
@@ -120,7 +120,7 @@ if __name__ == "__main__":
 
     # annotating cells
     annotate_cells(
-        aggregated_data=aggregate_data_path,
+        profile=input_profile,
         barcodes_path=barcode_path,
         metadata_dir=metadata_dir_path,
         annotate_file_out=annotate_data_output,
