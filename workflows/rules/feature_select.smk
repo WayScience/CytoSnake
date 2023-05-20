@@ -23,7 +23,10 @@ Returns
 
 rule feature_select:
     input:
-        NORMALIZED_DATA_EXPAND,
+        get_input(
+            data_type=config["feature_select_configs"]["params"]["input_data"],
+            tolist=True,
+        ),
     output:
         SELECTED_FEATURE_DATA_EXPAND,
     params:

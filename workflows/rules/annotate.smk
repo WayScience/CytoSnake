@@ -29,7 +29,10 @@ Returns:
 
 rule annotate:
     input:
-        profile=CYTOTABLE_CONVERTED_PLATE_DATA,
+        profile=get_input(
+            data_type=config["annotate_configs"]["params"]["input_data"],
+            use_converted=DATA_CONFIGS["use_converted_plate_data"],
+        ),
         barcodes=BARCODES,
         metadata=METADATA_DIR,
     output:

@@ -22,7 +22,7 @@ Return:
 
 rule create_consensus:
     input:
-        SELECTED_FEATURE_DATA_EXPAND,
+        get_input(data_type=config["consensus_configs"]["params"]["input_data"]),
     output:
         CONSENSUS_DATA,
     params:
