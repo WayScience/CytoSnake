@@ -27,7 +27,7 @@ plate_name = datapaths.get_all_basenames(DATA_DIR, ext_target="sqlite")
 #
 # METADATA_DIR: contains information of what has been added to the cells
 # BARCODES: Unique id that points to a specific level 2 dataset (plate data)
-PLATE_DATA = datapaths.build_path(data_type="plate_data")
+PLATE_DATA = datapaths.build_path(input_type="plate_data")
 BARCODES = datapaths.get_barcodes()
 METADATA_DIR = datapaths.get_metadata_dir()
 
@@ -44,42 +44,42 @@ METADATA_DIR = datapaths.get_metadata_dir()
 
 # Level 2 data: converted into parquet format
 CYTOTABLE_CONVERTED_PLATE_DATA = datapaths.build_path(
-    data_type="plate_data", use_converted=True
+    input_type="plate_data", use_converted=True
 )
 CYTOTABLE_CONVERTED_PLATE_DATA_EXTENDED = expand(
     CYTOTABLE_CONVERTED_PLATE_DATA, basename=plate_name
 )
 
 # level 2.5 data: annotated level 2 data based on given metadata (e.g treatments)
-ANNOTATED_DATA = datapaths.build_path(data_type="annotated")
+ANNOTATED_DATA = datapaths.build_path(input_type="annotated")
 ANNOTATED_DATA_EXPAND = expand(ANNOTATED_DATA, basename=plate_name)
 
 # level 3 data: aggregated profile based on given aggregation level
 # (e.g aggregating single-cell data to the well level)
-AGGREGATE_DATA = datapaths.build_path(data_type="aggregated")
+AGGREGATE_DATA = datapaths.build_path(input_type="aggregated")
 AGGREGATE_DATA_EXPAND = expand(AGGREGATE_DATA, basename=plate_name)
 
 # level 4a data: noramlzied profile
-NORMALIZED_DATA = datapaths.build_path(data_type="normalized")
+NORMALIZED_DATA = datapaths.build_path(input_type="normalized")
 NORMALIZED_DATA_EXPAND = expand(NORMALIZED_DATA, basename=plate_name)
 
 # level 4b: selected features profile
-SELECTED_FEATURE_DATA = datapaths.build_path(data_type="feature_select")
+SELECTED_FEATURE_DATA = datapaths.build_path(input_type="feature_select")
 SELECTED_FEATURE_DATA_EXPAND = expand(SELECTED_FEATURE_DATA, basename=plate_name)
 
 # level 5: Consensus profile captures unique signatures that resulted from
 # any external factor (e.g pertubations)
-CONSENSUS_DATA = datapaths.build_path(data_type="consensus")
+CONSENSUS_DATA = datapaths.build_path(input_type="consensus")
 CONSENSUS_DATA_EXPAND = expand(CONSENSUS_DATA, basename=plate_name)
 
 # other outputsa
 # Cell counts: cell counts per well in level 2 data
-CELL_COUNTS = datapaths.build_path(data_type="consensus")
+CELL_COUNTS = datapaths.build_path(input_type="consensus")
 CELL_COUNTS_EXPANDED = expand(CELL_COUNTS, basename=plate_name)
 
 
 def get_input(
-    data_type: str,
+    input_type: str,
     use_converted: Optional[bool] = False,
     tolist: Optional[bool] = False,
 ) -> str:
@@ -87,7 +87,7 @@ def get_input(
 
     Parameters
     ----------
-    data_type: str
+    input_type: str
         data
 
     use_conveted: Optional[bool]
@@ -103,10 +103,10 @@ def get_input(
     """
 
     # checking
-    if data_type not in DATA_CONFIGS["data_types"].keys():
-        raise ValueError(f"`{data_type}` is not a supported datatype.")
+    if input_type not in DATA_CONFIGS["input_types"].keys():
+        raise ValueError(f"`{input_type}` is not a supported datatype.")
 
-    match data_type:
+    match input_type:
         case "cell_counts":
             return
         case "plate_data":
