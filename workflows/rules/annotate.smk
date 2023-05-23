@@ -29,7 +29,7 @@ Returns:
 
 rule annotate:
     input:
-        profile=get_input(
+        profile=get_data_path(
             input_type=config["annotate_configs"]["params"]["input_data"],
             use_converted=DATA_CONFIGS["use_converted_plate_data"],
         ),

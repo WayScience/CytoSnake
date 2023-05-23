@@ -32,7 +32,7 @@ Returns
 
 rule aggregate:
     input:
-        sql_files=get_input(
+        sql_files=get_data_path(
             input_type=config["aggregate_configs"]["params"]["input_data"],
             use_converted=DATA_CONFIGS["use_converted_plate_data"],
         ),

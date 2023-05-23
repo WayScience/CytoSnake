@@ -23,7 +23,7 @@ Returns
 
 rule feature_select:
     input:
-        get_input(
+        get_data_path(
             input_type=config["feature_select_configs"]["params"]["input_data"],
             tolist=True,
         ),
