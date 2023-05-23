@@ -31,6 +31,7 @@ docs: |
 
 annotate_configs:
   params:
+    input_data: plate_data
     join_on:
       - Metadata_well_position
       - Image_Metadata_Well
@@ -48,22 +49,24 @@ annotate_configs:
 
 aggregate_configs:
   params:
-  strata:
-    - Metadata_Plate
-    - Metadata_Well
-  features: infer
-  operation: median
-  output_file: none
-  compute_object_count: False
-  object_feature: Metadata_ObjectNumber
-  subset_data_df: none
-  compression_options:
-    method: gzip
-    mtime: 1
-  float_format: null
+    input_data: annotated
+    strata:
+      - Metadata_Plate
+      - Metadata_Well
+    features: infer
+    operation: median
+    output_file: none
+    compute_object_count: False
+    object_feature: Metadata_ObjectNumber
+    subset_data_df: none
+    compression_options:
+      method: gzip
+      mtime: 1
+    float_format: null
 
 normalize_configs:
   params:
+    input_data: aggregated
     features: infer
     image_features: False
     meta_features: infer
@@ -80,6 +83,7 @@ normalize_configs:
 
 feature_select_configs:
   params:
+    input_data: normalized
     features: infer
     image_features: False
     samples: all
@@ -105,6 +109,7 @@ feature_select_configs:
 
 consensus_config:
   params:
+    input_data: consensus
     replicate_columns:
       - Metadata_cell_line
       - Metadata_pert_name

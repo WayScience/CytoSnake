@@ -4,12 +4,15 @@ rule module: common.smk
 common.smk is a workflow module that sets up the expected input and output paths
 for the main analytical workflow.
 """
+from typing import Optional
 from snakemake.io import expand
 from cytosnake.helpers import datapaths
-from cytosnake.utils.config_utils import load_data_path_configs
+from cytosnake.utils.config_utils import load_data_path_configs, load_general_configs
 
 # Paths
+CYTOSNAKE_CONFIGS = load_general_configs()
 DATA_DIR = str(load_data_path_configs())
+DATA_CONFIGS = CYTOSNAKE_CONFIGS["data_configs"]
 
 # ------
 # INPUTS
@@ -69,7 +72,64 @@ SELECTED_FEATURE_DATA_EXPAND = expand(SELECTED_FEATURE_DATA, basename=plate_name
 CONSENSUS_DATA = datapaths.build_path(data_type="consensus")
 CONSENSUS_DATA_EXPAND = expand(CONSENSUS_DATA, basename=plate_name)
 
-# other outputs
+# other outputsa
 # Cell counts: cell counts per well in level 2 data
 CELL_COUNTS = datapaths.build_path(data_type="consensus")
 CELL_COUNTS_EXPANDED = expand(CELL_COUNTS, basename=plate_name)
+
+
+def get_input(
+    data_type: str,
+    use_converted: Optional[bool] = False,
+    tolist: Optional[bool] = False,
+) -> str:
+    """Returns absolute path of an input
+
+    Parameters
+    ----------
+    data_type: str
+        data
+
+    use_conveted: Optional[bool]
+        flag to return path conveted single-cell data
+
+    tolist: Optional[bool]
+        flag to return a list of paths of the desired data type
+
+    Returns
+    -------
+    str
+        returns path of select data type input path`
+    """
+
+    # checking
+    if data_type not in DATA_CONFIGS["data_types"].keys():
+        raise ValueError(f"`{data_type}` is not a supported datatype.")
+
+    match data_type:
+        case "cell_counts":
+            return
+        case "plate_data":
+            if use_converted:
+                return CYTOTABLE_CONVERTED_PLATE_DATA
+            return PLATE_DATA
+        case "aggregated":
+            if tolist:
+                return AGGREGATE_DATA_EXPAND
+            return AGGREGATE_DATA
+        case "annotated":
+            if tolist:
+                return ANNOTATED_DATA_EXPAND
+            return ANNOTATED_DATA
+        case "normalized":
+            if tolist:
+                return NORMALIZED_DATA_EXPAND
+            return NORMALIZED_DATA
+        case "feature_select":
+            if tolist:
+                return SELECTED_FEATURE_DATA_EXPAND
+            return SELECTED_FEATURE_DATA
+        case "consensus":
+            if tolist:
+                return CONSENSUS_DATA_EXPAND
+            return CONSENSUS_DATA

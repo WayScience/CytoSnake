@@ -17,7 +17,7 @@ Returns:
 
 rule convert:
     input:
-        PLATE_DATA,
+        get_input(data_type=config["cytotable_convert"]["params"]["input_data"]),
     output:
         CYTOTABLE_CONVERTED_PLATE_DATA,
     conda:

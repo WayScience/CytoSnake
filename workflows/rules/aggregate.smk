@@ -32,7 +32,10 @@ Returns
 
 rule aggregate:
     input:
-        sql_files=PLATE_DATA,
+        sql_files=get_input(
+            data_type=config["aggregate_configs"]["params"]["input_data"],
+            use_converted=DATA_CONFIGS["use_converted_plate_data"],
+        ),
         barcodes=BARCODES,
         metadata=METADATA_DIR,
     output:

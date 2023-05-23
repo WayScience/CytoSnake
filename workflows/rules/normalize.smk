@@ -24,9 +24,10 @@ Output
 
 rule normalize:
     input:
-        CYTOTABLE_CONVERTED_PLATE_DATA
-        if config["data_configs"]["use_converted_plate_data"]
-        else PLATE_DATA,
+        get_input(
+            data_type=config["normalize_configs"]["params"]["input_data"],
+            use_converted=DATA_CONFIGS["use_converted_plate_data"],
+        ),
     output:
         NORMALIZED_DATA,
     conda:
