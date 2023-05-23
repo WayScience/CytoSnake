@@ -29,7 +29,7 @@ rule normalize:
             use_converted=DATA_CONFIGS["use_converted_plate_data"],
         ),
     output:
-        NORMALIZED_DATA,
+        get_data_path(input_type="normalized"),
     conda:
         "../envs/cytominer_env.yaml"
     log:

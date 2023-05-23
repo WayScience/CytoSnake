@@ -39,7 +39,7 @@ rule aggregate:
         barcodes=BARCODES,
         metadata=METADATA_DIR,
     output:
-        aggregate_profile=AGGREGATE_DATA,
+        aggregate_profile=get_data_path(input_type="aggregated", tolist=True),
         cell_counts=CELL_COUNTS,
     log:
         "logs/aggregate_{file_name}.log",

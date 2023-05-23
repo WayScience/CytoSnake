@@ -18,7 +18,7 @@ DATA_CONFIGS = CYTOSNAKE_CONFIGS["data_configs"]
 # INPUTS
 # ------
 # generating a wild card list (just the file base names)
-plate_name = datapaths.get_all_basenames(DATA_DIR, ext_target="sqlite")
+FILE_BASE_NAMES = datapaths.get_all_basenames(DATA_DIR, ext_target="sqlite")
 
 # getting the rest of the input paths from helper functions
 
@@ -42,40 +42,40 @@ METADATA_DIR = datapaths.get_metadata_dir()
 # To understand the level of data, please refere to PyCytominer documentation
 # https://github.com/cytomining/pycytominer
 
-# Level 2 data: converted into parquet format
-CYTOTABLE_CONVERTED_PLATE_DATA = datapaths.build_path(
-    input_type="plate_data", use_converted=True
-)
-CYTOTABLE_CONVERTED_PLATE_DATA_EXTENDED = expand(
-    CYTOTABLE_CONVERTED_PLATE_DATA, basename=plate_name
-)
+# # Level 2 data: converted into parquet format
+# CYTOTABLE_CONVERTED_PLATE_DATA = datapaths.build_path(
+#     input_type="plate_data", use_converted=True
+# )
+# CYTOTABLE_CONVERTED_PLATE_DATA_EXTENDED = expand(
+#     CYTOTABLE_CONVERTED_PLATE_DATA, basename=FILE_BASE_NAMES
+# )
 
-# level 2.5 data: annotated level 2 data based on given metadata (e.g treatments)
-ANNOTATED_DATA = datapaths.build_path(input_type="annotated")
-ANNOTATED_DATA_EXPAND = expand(ANNOTATED_DATA, basename=plate_name)
+# # level 2.5 data: annotated level 2 data based on given metadata (e.g treatments)
+# ANNOTATED_DATA = datapaths.build_path(input_type="annotated")
+# ANNOTATED_DATA_EXPAND = expand(ANNOTATED_DATA, basename=FILE_BASE_NAMES)
 
-# level 3 data: aggregated profile based on given aggregation level
-# (e.g aggregating single-cell data to the well level)
-AGGREGATE_DATA = datapaths.build_path(input_type="aggregated")
-AGGREGATE_DATA_EXPAND = expand(AGGREGATE_DATA, basename=plate_name)
+# # level 3 data: aggregated profile based on given aggregation level
+# # (e.g aggregating single-cell data to the well level)
+# AGGREGATE_DATA = datapaths.build_path(input_type="aggregated")
+# AGGREGATE_DATA_EXPAND = expand(AGGREGATE_DATA, basename=FILE_BASE_NAMES)
 
-# level 4a data: noramlzied profile
-NORMALIZED_DATA = datapaths.build_path(input_type="normalized")
-NORMALIZED_DATA_EXPAND = expand(NORMALIZED_DATA, basename=plate_name)
+# # level 4a data: noramlzied profile
+# NORMALIZED_DATA = datapaths.build_path(input_type="normalized")
+# NORMALIZED_DATA_EXPAND = expand(NORMALIZED_DATA, basename=FILE_BASE_NAMES)
 
-# level 4b: selected features profile
-SELECTED_FEATURE_DATA = datapaths.build_path(input_type="feature_select")
-SELECTED_FEATURE_DATA_EXPAND = expand(SELECTED_FEATURE_DATA, basename=plate_name)
+# # level 4b: selected features profile
+# SELECTED_FEATURE_DATA = datapaths.build_path(input_type="feature_select")
+# SELECTED_FEATURE_DATA_EXPAND = expand(SELECTED_FEATURE_DATA, basename=FILE_BASE_NAMES)
 
-# level 5: Consensus profile captures unique signatures that resulted from
-# any external factor (e.g pertubations)
-CONSENSUS_DATA = datapaths.build_path(input_type="consensus")
-CONSENSUS_DATA_EXPAND = expand(CONSENSUS_DATA, basename=plate_name)
+# # level 5: Consensus profile captures unique signatures that resulted from
+# # any external factor (e.g pertubations)
+# CONSENSUS_DATA = datapaths.build_path(input_type="consensus")
+# CONSENSUS_DATA_EXPAND = expand(CONSENSUS_DATA, basename=FILE_BASE_NAMES)
 
-# other outputsa
-# Cell counts: cell counts per well in level 2 data
-CELL_COUNTS = datapaths.build_path(input_type="consensus")
-CELL_COUNTS_EXPANDED = expand(CELL_COUNTS, basename=plate_name)
+# # other outputsa
+# # Cell counts: cell counts per well in level 2 data
+# CELL_COUNTS = datapaths.build_path(input_type="consensus")
+# CELL_COUNTS_EXPANDED = expand(CELL_COUNTS, basename=FILE_BASE_NAMES)
 
 
 def get_data_path(
@@ -126,12 +126,19 @@ def get_data_path(
     """
 
     # checking if provided `input_type` is valid
-    if input_type not in DATA_CONFIGS["input_types"].keys():
+    if input_type not in DATA_CONFIGS["data_types"].keys():
         raise ValueError(f"`{input_type}` is not a supported datatype.")
+
+    # checking if the user wants to use converted dataset
+    if input_type == "plate_data" and use_converted is True:
+        if tolist:
+            return expand(datapaths.build_path(input_type="plate_data", use_converted=True), basename=FILE_BASE_NAMES)
+        return datapaths.build_path(input_type="plate_data", use_converted=True)
+
 
     # returning constructed path based on in `input_type`
     return (
-        expand(datapaths.build_path(input_type=input_type), basename=plate_name)
+        expand(datapaths.build_path(input_type=input_type), basename=FILE_BASE_NAMES)
         if tolist
         else datapaths.build_path(input_type=input_type)
     )

@@ -36,7 +36,7 @@ rule annotate:
         barcodes=BARCODES,
         metadata=METADATA_DIR,
     output:
-        ANNOTATED_DATA,
+        get_data_path(input_type="annotated"),
     conda:
         "../envs/cytominer_env.yaml"
     log:

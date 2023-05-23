@@ -28,7 +28,7 @@ rule feature_select:
             tolist=True,
         ),
     output:
-        SELECTED_FEATURE_DATA_EXPAND,
+        get_data_path(input_type="feature_select", tolist=True),
     params:
         feature_select_config=config["feature_select_configs"],
     log:

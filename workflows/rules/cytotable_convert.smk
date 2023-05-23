@@ -19,7 +19,7 @@ rule convert:
     input:
         get_data_path(input_type=config["cytotable_convert"]["params"]["input_data"]),
     output:
-        CYTOTABLE_CONVERTED_PLATE_DATA,
+        get_data_path(input_type="plate_data", use_converted=config["data_configs"]["use_converted_plate_data"]),
     conda:
         "../envs/cytotable.yaml"
     params:
