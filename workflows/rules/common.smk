@@ -78,17 +78,40 @@ CELL_COUNTS = datapaths.build_path(input_type="consensus")
 CELL_COUNTS_EXPANDED = expand(CELL_COUNTS, basename=plate_name)
 
 
-def get_input(
+def get_data_path(
     input_type: str,
     use_converted: Optional[bool] = False,
     tolist: Optional[bool] = False,
 ) -> str:
-    """Returns absolute path of an input
+    """Returns absolute path of an input.
+
+    The supported input types are:
+
+    plate_data (level 2):
+        Single cell morphology dataset
+    annotated (level 2.5):
+        Dataset that has been agumented with metdata. This provides additional
+        information to the profiles like pertubations types, cell types,
+        well locations etc.
+    aggregated (level 3):
+        Aggregated single-cell morphology dataset.
+    normalized (level 4a):
+        Normalized profiles.
+    feature_select (level 4b):
+        selected features from given profile
+    consensus (level 5)
+        profile containing unique signatures pertaining to a specific pertubations
+        and/or external factors.
+
+    Other input types:
+
+    cell_counts:
+        refers to the number of cells within a well
 
     Parameters
     ----------
     input_type: str
-        data
+        type of inp
 
     use_conveted: Optional[bool]
         flag to return path conveted single-cell data
@@ -102,34 +125,41 @@ def get_input(
         returns path of select data type input path`
     """
 
-    # checking
+    # checking if provided `input_type` is valid
     if input_type not in DATA_CONFIGS["input_types"].keys():
         raise ValueError(f"`{input_type}` is not a supported datatype.")
 
-    match input_type:
-        case "cell_counts":
-            return
-        case "plate_data":
-            if use_converted:
-                return CYTOTABLE_CONVERTED_PLATE_DATA
-            return PLATE_DATA
-        case "aggregated":
-            if tolist:
-                return AGGREGATE_DATA_EXPAND
-            return AGGREGATE_DATA
-        case "annotated":
-            if tolist:
-                return ANNOTATED_DATA_EXPAND
-            return ANNOTATED_DATA
-        case "normalized":
-            if tolist:
-                return NORMALIZED_DATA_EXPAND
-            return NORMALIZED_DATA
-        case "feature_select":
-            if tolist:
-                return SELECTED_FEATURE_DATA_EXPAND
-            return SELECTED_FEATURE_DATA
-        case "consensus":
-            if tolist:
-                return CONSENSUS_DATA_EXPAND
-            return CONSENSUS_DATA
+    # returning constructed path based on in `input_type`
+    return (
+        expand(datapaths.build_path(input_type=input_type), basename=plate_name)
+        if tolist
+        else datapaths.build_path(input_type=input_type)
+    )
+
+    # match input_type:
+    #     case "cell_counts":
+    #         return
+    #     case "plate_data":
+    #         if use_converted:
+    #             return CYTOTABLE_CONVERTED_PLATE_DATA
+    #         return PLATE_DATA
+    #     case "aggregated":
+    #         if tolist:
+    #             return AGGREGATE_DATA_EXPAND
+    #         return AGGREGATE_DATA
+    #     case "annotated":
+    #         if tolist:
+    #             return ANNOTATED_DATA_EXPAND
+    #         return ANNOTATED_DATA
+    #     case "normalized":
+    #         if tolist:
+    #             return NORMALIZED_DATA_EXPAND
+    #         return NORMALIZED_DATA
+    #     case "feature_select":
+    #         if tolist:
+    #             return SELECTED_FEATURE_DATA_EXPAND
+    #         return SELECTED_FEATURE_DATA
+    #     case "consensus":
+    #         if tolist:
+    #             return CONSENSUS_DATA_EXPAND
+    #         return CONSENSUS_DATA
