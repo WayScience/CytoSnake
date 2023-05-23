@@ -42,42 +42,6 @@ METADATA_DIR = datapaths.get_metadata_dir()
 # To understand the level of data, please refere to PyCytominer documentation
 # https://github.com/cytomining/pycytominer
 
-# # Level 2 data: converted into parquet format
-# CYTOTABLE_CONVERTED_PLATE_DATA = datapaths.build_path(
-#     input_type="plate_data", use_converted=True
-# )
-# CYTOTABLE_CONVERTED_PLATE_DATA_EXTENDED = expand(
-#     CYTOTABLE_CONVERTED_PLATE_DATA, basename=FILE_BASE_NAMES
-# )
-
-# # level 2.5 data: annotated level 2 data based on given metadata (e.g treatments)
-# ANNOTATED_DATA = datapaths.build_path(input_type="annotated")
-# ANNOTATED_DATA_EXPAND = expand(ANNOTATED_DATA, basename=FILE_BASE_NAMES)
-
-# # level 3 data: aggregated profile based on given aggregation level
-# # (e.g aggregating single-cell data to the well level)
-# AGGREGATE_DATA = datapaths.build_path(input_type="aggregated")
-# AGGREGATE_DATA_EXPAND = expand(AGGREGATE_DATA, basename=FILE_BASE_NAMES)
-
-# # level 4a data: noramlzied profile
-# NORMALIZED_DATA = datapaths.build_path(input_type="normalized")
-# NORMALIZED_DATA_EXPAND = expand(NORMALIZED_DATA, basename=FILE_BASE_NAMES)
-
-# # level 4b: selected features profile
-# SELECTED_FEATURE_DATA = datapaths.build_path(input_type="feature_select")
-# SELECTED_FEATURE_DATA_EXPAND = expand(SELECTED_FEATURE_DATA, basename=FILE_BASE_NAMES)
-
-# # level 5: Consensus profile captures unique signatures that resulted from
-# # any external factor (e.g pertubations)
-# CONSENSUS_DATA = datapaths.build_path(input_type="consensus")
-# CONSENSUS_DATA_EXPAND = expand(CONSENSUS_DATA, basename=FILE_BASE_NAMES)
-
-# # other outputsa
-# # Cell counts: cell counts per well in level 2 data
-# CELL_COUNTS = datapaths.build_path(input_type="consensus")
-# CELL_COUNTS_EXPANDED = expand(CELL_COUNTS, basename=FILE_BASE_NAMES)
-
-
 def get_data_path(
     input_type: str,
     use_converted: Optional[bool] = False,
@@ -88,19 +52,19 @@ def get_data_path(
     The supported input types are:
 
     plate_data (level 2):
-        Single cell morphology dataset
+        Single cell morphology datasets
     annotated (level 2.5):
-        Dataset that has been agumented with metdata. This provides additional
-        information to the profiles like pertubations types, cell types,
+        Datasets that has been augmented with metadata. This provides additional
+        information to the profiles like perturbations types, cell types,
         well locations etc.
     aggregated (level 3):
-        Aggregated single-cell morphology dataset.
+        Aggregated single-cell morphology datasets.
     normalized (level 4a):
         Normalized profiles.
     feature_select (level 4b):
         selected features from given profile
     consensus (level 5)
-        profile containing unique signatures pertaining to a specific pertubations
+        profile containing unique signatures pertaining to a specific perturbations
         and/or external factors.
 
     Other input types:
@@ -111,10 +75,10 @@ def get_data_path(
     Parameters
     ----------
     input_type: str
-        type of inp
+        data type to be used in order to generate a path
 
     use_conveted: Optional[bool]
-        flag to return path conveted single-cell data
+        flag to return path converted single-cell data
 
     tolist: Optional[bool]
         flag to return a list of paths of the desired data type
@@ -124,7 +88,6 @@ def get_data_path(
     str
         returns path of select data type input path`
     """
-
     # checking if provided `input_type` is valid
     if input_type not in DATA_CONFIGS["data_types"].keys():
         raise ValueError(f"`{input_type}` is not a supported datatype.")
@@ -142,31 +105,3 @@ def get_data_path(
         if tolist
         else datapaths.build_path(input_type=input_type)
     )
-
-    # match input_type:
-    #     case "cell_counts":
-    #         return
-    #     case "plate_data":
-    #         if use_converted:
-    #             return CYTOTABLE_CONVERTED_PLATE_DATA
-    #         return PLATE_DATA
-    #     case "aggregated":
-    #         if tolist:
-    #             return AGGREGATE_DATA_EXPAND
-    #         return AGGREGATE_DATA
-    #     case "annotated":
-    #         if tolist:
-    #             return ANNOTATED_DATA_EXPAND
-    #         return ANNOTATED_DATA
-    #     case "normalized":
-    #         if tolist:
-    #             return NORMALIZED_DATA_EXPAND
-    #         return NORMALIZED_DATA
-    #     case "feature_select":
-    #         if tolist:
-    #             return SELECTED_FEATURE_DATA_EXPAND
-    #         return SELECTED_FEATURE_DATA
-    #     case "consensus":
-    #         if tolist:
-    #             return CONSENSUS_DATA_EXPAND
-    #         return CONSENSUS_DATA
