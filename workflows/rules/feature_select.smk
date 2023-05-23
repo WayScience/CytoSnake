@@ -24,7 +24,7 @@ Returns
 rule feature_select:
     input:
         get_input(
-            data_type=config["feature_select_configs"]["params"]["input_data"],
+            input_type=config["feature_select_configs"]["params"]["input_data"],
             tolist=True,
         ),
     output:
