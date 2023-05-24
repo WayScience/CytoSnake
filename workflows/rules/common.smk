@@ -52,7 +52,7 @@ def get_data_path(
     The supported input types are:
 
     plate_data (level 2):
-        Single cell morphology datasets
+        Single-cell morphology datasets
     annotated (level 2.5):
         Datasets that has been augmented with metadata. This provides additional
         information to the profiles like perturbations types, cell types,
