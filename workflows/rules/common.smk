@@ -54,7 +54,7 @@ def get_data_path(
     plate_data (level 2):
         Single-cell morphology datasets
     annotated (level 2.5):
-        Datasets that has been augmented with metadata. This provides additional
+        Datasets that have been augmented with metadata. This provides additional
         information to the profiles like perturbations types, cell types,
         well locations etc.
     aggregated (level 3):
