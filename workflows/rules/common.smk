@@ -64,7 +64,7 @@ def get_data_path(
     feature_select (level 4b):
         selected features from given profile
     consensus (level 5)
-        profile containing unique signatures pertaining to a specific perturbations
+        profile containing unique signatures pertaining to specific perturbations
         and/or external factors.
 
     Other input types:
