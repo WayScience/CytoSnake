@@ -1,30 +1,77 @@
-# CytoPipe
+# 🐍CytoSnake
 
 "Reproducible pipelines for processing high-dimensional systems morphology data with snakemake 🐍 "
 
 # Table of contents
 
-- [CytoPipe](#cytopipe)
+- [🐍CytoSnake](#cytosnake)
 - [Table of contents](#table-of-contents)
-  - [Formatting](#formatting)
-    - [Black](#black)
-    - [Snakefmt](#snakefmt)
-- [Testing](#testing)
+  - [About](#about)
+  - [Usage](#usage)
+  - [💻 Development](#-development)
+    - [Pre-commits](#pre-commits)
+      - [how to use it](#how-to-use-it)
+      - [Formatting technologies used](#formatting-technologies-used)
+  - [Testing](#testing)
+    - [Functional](#functional)
+    - [Unit Testing](#unit-testing)
+    - [workflow](#workflow)
   - [Dry Runs](#dry-runs)
 
-## Formatting
+## About 
 
-### Black
+[About description here]
+
+
+
+## Usage 
+
+[Usage description here]
+
+## 💻 Development
+
+### Pre-commits
+
+[pre-commit](https://github.com/pre-commit/pre-commit) is a package that allows developers to run and check their code before commit changes.
+
+The `pre-commit` configurations are found within the `.git/hooks` directory where it contains a list of formatting technologies used in order to ensure that our code meets formatting standrds like: formatting, syntax and style.
+
+
+Below is the list of technolgoies used without our prec-c
+
+#### how to use it
+
+`pre-commits` and its dependencies already come included within the environment file.
+
+Please make sure to active the conda enviroment when applying changes in order to activate our pre-commits and its dependencies. 
+
+When changes are applied, the `pre-commit` workflow will automatically executed on changed files. 
+
+However, if there is a need to run `pre-commit` on both edited and unedited files, you can directly execute the `pre-commit` directly with the `--all-files` paramter:
+
+```sh
+pre-commit run --all-files
+```
+
+This will let `pre-commit` know to execute the workflow on all files.
+
+#### Formatting technologies used
+
+Below are the types of technologies that are used to format our c
+
+**Black**
+
 `Black` is a python code formatter that follows `PEP8` rules in order to maintain source code in a readable fromat.
 
 To install `Black`:
+
 ```
 pip install black
 ```
+
 More in depth informaton can be found in the [Documentation](https://black.readthedocs.io/en/stable/)
 
-
-### Snakefmt
+**Snakefmt**
 
 `snakefmt` is a `snakemake` code formatter that is developed and maintained by the developers of `snakemake`.
 
@@ -32,7 +79,19 @@ In order to use `snakefmt`, `snakemake` must be installed, which can be found he
 
 `snakefmt` installation processes can be found in the [snakefmt](https://github.com/snakemake/snakefmt#install) repository.
 
-# Testing
+## Testing
+
+### Functional
+
+[Functional testing description here]
+
+### Unit Testing
+
+[Unit testing docs ]
+
+### workflow
+
+[Workflow testing Docs]
 
 ## Dry Runs
 
