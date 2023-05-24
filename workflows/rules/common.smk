@@ -93,7 +93,7 @@ def get_data_path(
         raise ValueError(f"`{input_type}` is not a supported datatype.")
 
     # checking if the user wants to use converted dataset
-    if input_type == "plate_data" and use_converted is True:
+    if input_type == "plate_data" and use_converted:
         if tolist:
             return expand(datapaths.build_path(input_type="plate_data", use_converted=True), basename=FILE_BASE_NAMES)
         return datapaths.build_path(input_type="plate_data", use_converted=True)
