@@ -101,5 +101,5 @@ def get_data_path(
 
     # check if the user want a list of paths or a single path
     if tolist:
-        return expand(path, basename=FILE_BASE_NAMES)
+        return expand(data_path, basename=FILE_BASE_NAMES)
     return data_path
