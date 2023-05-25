@@ -96,9 +96,9 @@ def get_data_path(
     # checking if the user wants to use converted dataset
     # if plate data is selected, then check if the converted path is required
     if input_type == "plate_data" and use_converted:
-        if tolist:
-            data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
-        data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
+        data_path = datapaths.build_path(input_type="plate_data", use_converted=use_converted)
+    else:
+        data_path = datapaths.build_path(input_type=input_type)
 
     # check if the user want a list of paths or a single path
     if tolist:

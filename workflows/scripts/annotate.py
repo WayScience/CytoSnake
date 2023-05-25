@@ -31,7 +31,7 @@ def annotate_cells(
     """
     # raise error if input profile ends with `.sqlite`
     if isinstance(profile, str) and pathlib.Path(profile).suffix == ".sqlite":
-        raise ValueError(
+        raise TypeError(
             "Cannot use sqlite files for annotation,"
             "please convert to parquet or csv files formats "
             )
