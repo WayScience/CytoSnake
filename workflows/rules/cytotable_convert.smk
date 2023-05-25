@@ -1,21 +1,18 @@
-"""
-rule module: cytotable_convert.smk
-
-Utilizes CytoTable's convert workflow module:
-https://github.com/cytomining/CytoTable/blob/main/cytotable/convert.py
-
-Parameters:
------------
-
-
-Returns:
---------
-    parquet files stored within the data/ folder
-
-"""
-
-
 rule convert:
+    """
+    Converts single-cell morphology dataset to parquet format.
+
+    Utilizes CytoTable's convert workflow module:
+    https://github.com/cytomining/CytoTable/blob/main/cytotable/convert.py
+
+    :input profiles: single-cell profiles.
+    :input barcode: file containing unique barcodes that maps to a specific plate.
+    :input metadata: metadata file associated with single-cell morphology dataset.
+
+    :config: workflow config pointing to convert configs.
+
+    :output annotated: converted single-cell morphology dataset.
+    """
     input:
         get_data_path(input_type=config["cytotable_convert"]["params"]["input_data"]),
     output:

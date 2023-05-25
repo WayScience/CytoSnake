@@ -1,36 +1,22 @@
-"""
-rule module: aggregate.smk
-
-
-Utilize's pycytominer's aggregate module:
-https://github.com/cytomining/pycytominer/blob/c90438fd7c11ad8b1689c21db16dab1a5280de6c/pycytominer/aggregate.py
-
-Aggregates single-cell profiles into aggregated profiles based on a given strata
-
-For example, users can configure `Metadata_Well` as their strata in order to
-aggregate single-cell data into the Well level.
-
-Parameters:
------------
-input:
-  sql_file: single-cell dataset
-
-  barcodes: file containing unique barcodes that maps to a specific plate
-
-  metadata: directory containing metadata associated with the aggregate
-            profile
-output:
-  aggregated_profile: aggregated profiles
-  cell_counts: CSV file that contains how many cells were counted per well
-
-Returns
--------
-  aggregated profiles and cell count data stored in the `results/` directory
-# --------------------
-"""
-
-
 rule aggregate:
+    """
+    Utilize's pycytominer's aggregate module:
+    https://github.com/cytomining/pycytominer/blob/c90438fd7c11ad8b1689c21db16dab1a5280de6c/pycytominer/aggregate.py
+
+    Aggregates single-cell profiles into aggregated profiles based on a given strata
+
+    For example, users can configure `Metadata_Well` as their strata in order to
+    aggregate single-cell data into the Well level.
+
+    :input profile: single-cell morphology dataset.
+    :input barcode: file containing unique barcodes that maps to a specific plate.
+    :input metadata: metadata file associated with single-cell morphology dataset.
+
+    :config: workflow config file pointing to aggregate configurations step
+
+    :output aggregated-profile: aggregated datsaset
+    :output cell-counts: csv file containg cell counts per well
+    """
     input:
         sql_files=get_data_path(
             input_type=config["aggregate_configs"]["params"]["input_data"],
