@@ -39,8 +39,6 @@ METADATA_DIR = datapaths.get_metadata_dir()
 # In this case, the wildcard placeholder is `basename` and is being extended by
 # all basenames of the plate_data
 #
-# To understand the level of data, please refere to PyCytominer documentation
-# https://github.com/cytomining/pycytominer
 
 def get_data_path(
     input_type: str,
@@ -48,6 +46,9 @@ def get_data_path(
     tolist: Optional[bool] = False,
 ) -> str:
     """Returns absolute path of an input.
+
+    To understand the level of data, please refere to PyCytominer documentation
+    https://github.com/cytomining/pycytominer
 
     The supported input types are:
 
@@ -67,7 +68,7 @@ def get_data_path(
         profile containing unique signatures pertaining to specific perturbations
         and/or external factors.
 
-    Other input types:
+    Other paths generated:
 
     cell_counts:
         refers to the number of cells within a well
@@ -90,7 +91,7 @@ def get_data_path(
     """
     # checking if provided `input_type` is valid
     if input_type not in DATA_CONFIGS["data_types"].keys():
-        raise ValueError(f"`{input_type}` is not a supported datatype.")
+        raise TypeError(f"`{input_type}` is not a supported datatype.")
 
     # checking if the user wants to use converted dataset
     if input_type == "plate_data" and use_converted:
@@ -98,10 +99,7 @@ def get_data_path(
             return expand(datapaths.build_path(input_type="plate_data", use_converted=True), basename=FILE_BASE_NAMES)
         return datapaths.build_path(input_type="plate_data", use_converted=True)
 
-
-    # returning constructed path based on in `input_type`
-    return (
-        expand(datapaths.build_path(input_type=input_type), basename=FILE_BASE_NAMES)
-        if tolist
-        else datapaths.build_path(input_type=input_type)
-    )
+    # check if the user want a list of paths or a single path
+    if tolist:
+        return expand(path, basename=FILE_BASE_NAMES)
+    return path
