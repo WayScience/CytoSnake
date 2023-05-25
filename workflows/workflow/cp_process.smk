@@ -45,9 +45,9 @@ include: "../rules/generate_consensus.smk"
 # set expected outputs from workflow
 rule all:
     input:
-        AGGREGATE_DATA_EXPAND,
-        CELL_COUNTS_EXPANDED,
-        ANNOTATED_DATA_EXPAND,
-        NORMALIZED_DATA_EXPAND,
-        SELECTED_FEATURE_DATA_EXPAND,
-        CONSENSUS_DATA,
+        get_data_path(input_type="aggregated", tolist=True),
+        get_data_path(input_type="cell_counts", tolist=True),
+        get_data_path(input_type="annotated", tolist=True),
+        get_data_path(input_type="normalized", tolist=True),
+        get_data_path(input_type="feature_select", tolist=True),
+        get_data_path(input_type="consensus", tolist=True),

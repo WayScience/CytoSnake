@@ -32,14 +32,14 @@ Returns
 
 rule aggregate:
     input:
-        sql_files=get_input(
-            data_type=config["aggregate_configs"]["params"]["input_data"],
+        sql_files=get_data_path(
+            input_type=config["aggregate_configs"]["params"]["input_data"],
             use_converted=DATA_CONFIGS["use_converted_plate_data"],
         ),
         barcodes=BARCODES,
         metadata=METADATA_DIR,
     output:
-        aggregate_profile=AGGREGATE_DATA,
+        aggregate_profile=get_data_path(input_type="aggregated", tolist=True),
         cell_counts=CELL_COUNTS,
     log:
         "logs/aggregate_{file_name}.log",

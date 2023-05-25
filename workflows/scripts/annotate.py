@@ -29,6 +29,13 @@ def annotate_cells(
     configs:
         path to configuration file
     """
+    # raise error if input profile ends with `.sqlite`
+    if isinstance(profile, str) and pathlib.Path(profile).suffix == ".sqlite":
+        raise TypeError(
+            "Cannot use sqlite files for annotation,"
+            "please convert to parquet or csv files formats "
+            )
+
     # initiating Logger
     log_path = pathlib.Path(log_file).absolute()
     logging.basicConfig(
