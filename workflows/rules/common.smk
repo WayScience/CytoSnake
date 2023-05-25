@@ -94,6 +94,7 @@ def get_data_path(
         raise TypeError(f"`{input_type}` is not a supported datatype.")
 
     # checking if the user wants to use converted dataset
+    # if plate data is selected, then check if the converted path is required
     if input_type == "plate_data" and use_converted:
         if tolist:
             data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
