@@ -96,10 +96,10 @@ def get_data_path(
     # checking if the user wants to use converted dataset
     if input_type == "plate_data" and use_converted:
         if tolist:
-            return expand(datapaths.build_path(input_type="plate_data", use_converted=True), basename=FILE_BASE_NAMES)
-        return datapaths.build_path(input_type="plate_data", use_converted=True)
+            data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
+        data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
 
     # check if the user want a list of paths or a single path
     if tolist:
         return expand(path, basename=FILE_BASE_NAMES)
-    return path
+    return data_path
