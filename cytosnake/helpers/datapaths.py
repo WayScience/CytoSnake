@@ -71,10 +71,10 @@ def get_metadata_dir() -> str:
 # --------------------------
 # Main path builder function
 # --------------------------
-def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
+def build_path(input_type: str, use_converted: Optional[bool] = False) -> str:
     """Builds an output string path pointing to a specific dataset
 
-    data_type : str
+    input_type : str
         type of dataset string path to be build.
 
     use_converted : Optional[bool]
@@ -97,11 +97,11 @@ def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
     data_configs = GENERAL_CONFIGS["data_configs"]
 
     # loading in the config
-    if data_type not in data_configs["data_types"].keys():
-        raise ValueError(f"`{data_type}` is not a supported dataset")
+    if input_type not in data_configs["data_types"].keys():
+        raise ValueError(f"`{input_type}` is not a supported dataset")
 
     # loading in data_type specific configs
-    selected_datatype = data_configs["data_types"][data_type]
+    selected_datatype = data_configs["data_types"][input_type]
 
     # loading default path components into variables
     header = cyto_paths.get_results_dir_path()
@@ -115,7 +115,7 @@ def build_path(data_type: str, use_converted: Optional[bool] = False) -> str:
 
     # plate_data requires some of the defaults to be change since it is in a different
     # folder
-    if data_type == "plate_data":
+    if input_type == "plate_data":
         header = cyto_paths.get_project_root() / "data"
         suffix = ""
 

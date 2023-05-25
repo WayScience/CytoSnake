@@ -43,7 +43,7 @@ include: "../rules/feature_select.smk"
 # define expected outputs
 rule all:
     input:
-        CYTOTABLE_CONVERTED_PLATE_DATA_EXTENDED,
-        ANNOTATED_DATA_EXPAND,
-        NORMALIZED_DATA_EXPAND,
-        SELECTED_FEATURE_DATA_EXPAND,
+        get_data_path(input_type="plate_data", tolist=True, use_converted=config["data_configs"]["use_converted_plate_data"]),
+        get_data_path(input_type="annotated", tolist=True),
+        get_data_path(input_type="normalized", tolist=True),
+        get_data_path(input_type="feature_select", tolist=True),

@@ -29,14 +29,14 @@ Returns:
 
 rule annotate:
     input:
-        profile=get_input(
-            data_type=config["annotate_configs"]["params"]["input_data"],
+        profile=get_data_path(
+            input_type=config["annotate_configs"]["params"]["input_data"],
             use_converted=DATA_CONFIGS["use_converted_plate_data"],
         ),
         barcodes=BARCODES,
         metadata=METADATA_DIR,
     output:
-        ANNOTATED_DATA,
+        get_data_path(input_type="annotated"),
     conda:
         "../envs/cytominer_env.yaml"
     log:

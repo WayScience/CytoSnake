@@ -24,12 +24,12 @@ Output
 
 rule normalize:
     input:
-        get_input(
-            data_type=config["normalize_configs"]["params"]["input_data"],
+        get_data_path(
+            input_type=config["normalize_configs"]["params"]["input_data"],
             use_converted=DATA_CONFIGS["use_converted_plate_data"],
         ),
     output:
-        NORMALIZED_DATA,
+        get_data_path(input_type="normalized"),
     conda:
         "../envs/cytominer_env.yaml"
     log:

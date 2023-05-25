@@ -22,9 +22,9 @@ Return:
 
 rule create_consensus:
     input:
-        get_input(data_type=config["consensus_configs"]["params"]["input_data"]),
+        get_data_path(input_type=config["consensus_configs"]["params"]["input_data"]),
     output:
-        CONSENSUS_DATA,
+        get_data_path(input_type="consensus"),
     params:
         consensus_configs=config["config_paths"]["consensus_config"],
     log:
