@@ -20,10 +20,28 @@
    :show-inheritance:
 ```
 
+## cytosnake.utils.cytosnake_setup module
+
+```{eval-rst}
+.. automodule:: cytosnake.utils.cytosnake_setup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+```
+
 ## cytosnake.utils.feature_utils module
 
 ```{eval-rst}
 .. automodule:: cytosnake.utils.feature_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+```
+
+## cytosnake.utils.file_utils module
+
+```{eval-rst}
+.. automodule:: cytosnake.utils.file_utils
    :members:
    :undoc-members:
    :show-inheritance:

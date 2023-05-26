@@ -1,5 +1,9 @@
 # CytoSnake Tutorial
 
+```{toctree}
+:maxdepth: 4
+```
+
 ## About
 
 This tutorial assumes that you have followed the installation steps and

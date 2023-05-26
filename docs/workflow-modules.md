@@ -1,4 +1,6 @@
-# CytoSnake Installation
+# Workflow Modules
+
+
 
 ```{toctree}
 :maxdepth: 4

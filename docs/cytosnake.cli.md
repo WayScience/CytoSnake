@@ -55,8 +55,6 @@ cytosnake.cli.exec
    :show-inheritance:
 ```
 
-## Module contents
-
 ```{eval-rst}
 .. automodule:: cytosnake.cli
    :members:
