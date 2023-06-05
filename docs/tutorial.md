@@ -58,7 +58,7 @@ all the functions and its parameters used within the workflow. The
 workflow's documentation provides information about the configuration
 files involved within the workflow.
 
-Each workflow posses their own configuratinoal file.
+Each workflow posses their own configurational file.
 
 Below are the currently available workflows and the config files it
 accesses in order to conduct its processes.
@@ -67,30 +67,30 @@ accesses in order to conduct its processes.
 
 | workflow name          | Path to config                                           | Documentation         |
 | -------------- | ---------------------------------------------------------------- | --------------------- |
-| cp_process     | ./CytoSnake/configs/analysis_configs/wf_configfs/cp_process.yaml |  [Workflow Docs](./workflows.md#cp_process)|
+| cp_process     | ./CytoSnake/configs/analysis_configs/wf_configfs/cp_process.yaml |  [Workflow Docs](workflows.md#cp_process)|
 
 | Steps          | Path to config                                                   | Module Documentation  |
 | -------------- | ---------------------------------------------------------------- | --------------------- |
-| aggregate      | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [aggregate docs](./workflow-modules.md#aggregate)      |
-| annotate       | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [annotate docs](./workflow-modules.md#annotate)      |
-| normalize      | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml      | [normalize docs](./workflow-modules.md#normalize)      |
-| feature_select | ./CytoSnake/configs/analysis_configs/feature_select_configs.yaml | [feature select docs](./workflow-modules.md#feature-select) |
-| consensus      | ./CytoSnake/configs/analysis_configs/consensus_configs.yaml      | [consensus docs](./workflow-modules.md#generate-consensus)      |
+| aggregate      | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [aggregate docs](workflow-modules.md#aggregate)      |
+| annotate       | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [annotate docs](workflow-modules.md#annotate)      |
+| normalize      | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml      | [normalize docs](workflow-modules.md#normalize)      |
+| feature_select | ./CytoSnake/configs/analysis_configs/feature_select_configs.yaml | [feature select docs](workflow-modules.md#feature-select) |
+| consensus      | ./CytoSnake/configs/analysis_configs/consensus_configs.yaml      | [consensus docs](workflow-modules.md#generate-consensus)      |
 
 #### cp_process_singlecells
 
 | workflow name          | Path to config                                           | Documentation         |
 | -------------- | ---------------------------------------------------------------- | --------------------- |
-| cp_process_singlecells | ./CytoSnake/configs/analysis_configs/wf_configfs/cp_process_singlecells.yaml |  [Workflow Docs](./workflows.md#cp_process_singlecells)|
+| cp_process_singlecells | ./CytoSnake/configs/analysis_configs/wf_configfs/cp_process_singlecells.yaml |  [Workflow Docs](workflows.md#cp_process_singlecells)|
 
 **modules used**:
 
 | Steps          | Path to config                                                   | Module Documentation  |
 | -------------- | ---------------------------------------------------------------- | --------------------- |
-| convert      | ./CytoSnake/configs/analysis_configs/cytotable_convert.yaml        | [convert docs](./workflow-modules.md#cytotable-convert)      |
-| annotate       | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [annotate docs](./workflow-modules.md#annotate)       |
-| normalize      | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml      | [normalize docs](./workflow-modules.md#normalize)      |
-| feature_select | ./CytoSnake/configs/analysis_configs/feature_select_configs.yaml | [feature select docs](./workflow-modules.md#feature-select) |
+| convert      | ./CytoSnake/configs/analysis_configs/cytotable_convert.yaml        | [convert docs](workflow-modules.md#cytotable-convert)      |
+| annotate       | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [annotate docs](workflow-modules.md#annotate)       |
+| normalize      | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml      | [normalize docs](workflow-modules.md#normalize)      |
+| feature_select | ./CytoSnake/configs/analysis_configs/feature_select_configs.yaml | [feature select docs](workflow-modules.md#feature-select) |
 
 Users can easily find and change parameter values by accessing those
 configurational files.
@@ -207,26 +207,28 @@ INFO: Formatting complete!
 if you are not receiving these messages, please refer to the [install.md] to see
 if the installation process was do correctly.
 
+So what just ocurred here?
+
+`CytoSnake` now recognizes that you current directory is now known as the `ProjectDirectory`.
+
+The `ProjectDirectory` is a way for `CytoSnake` to recognize that a project is occurring therefore  preventing other projects to be created within the same directory.
+
+The `ProjectDirectory` contains meta information that also helps `CytoSnake` know what files have initialized for downstream analysis.
+You can find this information within the the `.cytosnake` directory created after runting the `init` mode.
+
 ### Running Workflow
 
-In your current working directory, a new folder ./data should appear in
+In the `ProjectDirectory`  a new folder `./data` should appear in
 your current directory. Inside the directory, it should contain symbolic
-links of your data files that you have provided in the init mode. This
-directory serves as centralized location of data for the workflows to
+links of your data files that you have provided in the `init` mode. This
+directory serves as a centralized location of data for the workflows to
 have access too. Now that you have your data folder, you can simply
-select which workflow to execute by using the run mode. Since the
+select which workflow to execute by using the `run` mode. Since the
 cell-health dataset contains data extracted from CellProfiler, when we
-will used the cp_process workflow.
+will used the `cp_process` workflow.
 
 ```text
 cytosnake run cp_process
-```
-
-If your data contains features that were extracted by DeepProfiler, then
-the dp_process workflow must be executed
-
-```text
-cytosnake run dp_process
 ```
 
 These workflows contain their own environments, therefore there is no
@@ -243,7 +245,7 @@ This indicates that all tasks within the workflow is complete.
 
 ### Accessing data
 
-In your directory, CytoSnake produces a `results` folder, which will
+In your directory, `CytoSnake` produces a `results/` folder, which will
 contain all the outputs generated from the workflow. To list those
 outputs, simply type:
 
@@ -279,6 +281,3 @@ their suffix:
 - `_consensus`: is the consensus profile contains unique morphological
   signatures associated with a specific external treatment (drug,
   perturbations, controls (pos/neg), etc)
-
-
-[install.md]: install.md
