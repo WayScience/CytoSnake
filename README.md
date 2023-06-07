@@ -7,7 +7,8 @@
 - [🐍CytoSnake](#cytosnake)
   - [Table of contents](#table-of-contents)
   - [About](#about)
-  - [Usage](#usage)
+  - [Installation](#installation)
+  - [Workflows](#workflows)
   - [💻 Development](#-development)
     - [Pre-commits](#pre-commits)
       - [how to use it](#how-to-use-it)
@@ -16,11 +17,97 @@
 
 ## About
 
-[About description here]
+CytoSnake is a command line interface (CLI) tool that contains reproducible workflows that analysis high dimensional single-cell morphology datasets.
+CytoSnake's workflows are written in [`Snakemake`](https://github.com/snakemake/snakemake), which is a well established workflow manager that contains important features like data reproducibility, scalability and modularity.
 
-## Usage
+`CytoSnake` make it easy for user to interact as it requires little inputs and parameters. below is an example on how to execute `CytoSnake` once installed
 
-[Usage description here]
+```text
+
+```
+
+## Installation
+
+First, install `CytoSnake` into your local machine:
+
+```text
+git clone https://github.com/WayScience/CytoSnake.git
+
+```
+
+After cloning the repository, go into the `CytoSnake/` directory and create the `CytoSnake` environment
+
+```text
+conda env create -f cytosnake_env.yaml && conda activate cytosnake
+```
+
+Next is to install the `CytoSnake` module into your newly created environment
+
+```text
+pip install -e .
+```
+
+After this step, `CytoSnake` is installed. To check if `CytoSnake` is properly installed, simply type:
+
+```text
+cytosnake
+```
+
+you should see the CLI documentation pop out.
+
+## Workflows
+
+CytoSnake workflows are the main instructions on how your data is going be processed.
+Each workflow comes with it's appropriate configuration file.
+
+Here is an example below:
+
+```yaml
+annotate_configs:
+  params:
+    input_data: plate_data
+    join_on:
+      - Metadata_well_position
+      - Image_Metadata_Well
+    add_metadata_id_to_platemap: True
+    format_broad_cmap: False
+    clean_cellprofiler: True
+    external_metadata: "none"
+    external_join_left: "none"
+    external_join_right: "none"
+    compression_options:
+      method: "gzip"
+      mtime: 1
+    float_format: null
+    cmap_args: {}
+
+aggregate_configs:
+  params:
+    input_data: annotated
+    strata:
+      - Metadata_Plate
+      - Metadata_Well
+    features: infer
+    operation: median
+    output_file: none
+    compute_object_count: False
+    object_feature: Metadata_ObjectNumber
+    subset_data_df: none
+    compression_options:
+      method: gzip
+      mtime: 1
+    float_format: null
+
+```
+
+Here is a portions of the listed configs from the `cp_process` workflow.
+Each block represents a analytical specific step that is conducted within the workflow.
+In this example, `annotate_configs` and `aggregate_configs` are separate steps that occurs within the `cp_process` workflow.
+Each block has the `param` parameter, which are the parameters associated in the analytical step.
+Users can edit these parameters if they want their workflow to analysis their data in a specific way.
+
+Overall, each workflow will have a designated workflow config file.
+It will contain all the steps conducted in the workflow and users have the options to change the preset that is specific to their dataset.
 
 ## 💻 Development
 
@@ -30,16 +117,14 @@ Below is the list of technologies used when developing CytoSnake.
 
 [pre-commit](https://github.com/pre-commit/pre-commit) is a package that allows developers to run and check their code before commit changes.
 
-The `pre-commit` configurations are found within `.pre-commit-config.yaml` file and installs the technolgies in the `.git/hooks` directory where it contains a list of formatting technologies used in order to ensure that our code meets formatting standards like: formatting, syntax and style.
+The `pre-commit` configurations are found within `.pre-commit-config.yaml` file and installs the technologies in the `.git/hooks` directory where it contains a list of formatting technologies used in order to ensure that our code meets formatting standards like: formatting, syntax and style.
 
 #### how to use it
 
 `pre-commits` and its dependencies already come included within the environment file.
 
 Please make sure to active the conda environment when applying changes in order to activate our pre-commits and its dependencies.
-
 When changes are applied to the source code, the `pre-commit` workflow will automatically executed on changed files.
-
 However, if there is a need to run `pre-commit` on both edited and unedited files, you can directly execute the `pre-commit` directly with the `--all-files` parameter:
 
 ```sh
@@ -76,7 +161,7 @@ The targeted audience is mainly for developers to verify that every single core 
 Each of these tests are written in isolation meaning that the core implementation are being tested as if it was not part of the system.
 This makes it extremely easy to tests edges cases for our core implementations and allows to quickly identify bugs.
 
-Lasty, the **workflow testing** module tests all available workflows that `CytoSnake` contains.
+Lastly, the **workflow testing** module tests all available workflows that `CytoSnake` contains.
 The tests attempt to verify that each analytical steps within the workflow produces the expected input and output paths.
 Pathing verification is also tested when testing for modularization, where specific workflows steps can be imported in other workflows.
 Another important aspect of our workflow testing module is testing reproducibility.
