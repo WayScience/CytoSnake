@@ -12,9 +12,6 @@
     - [Pre-commits](#pre-commits)
       - [how to use it](#how-to-use-it)
     - [Testing](#testing)
-      - [Functional](#functional)
-      - [Unit Testing](#unit-testing)
-      - [workflow](#workflow)
     - [Dry Runs](#dry-runs)
 
 ## About
@@ -33,7 +30,7 @@ Below is the list of technologies used when developing CytoSnake.
 
 [pre-commit](https://github.com/pre-commit/pre-commit) is a package that allows developers to run and check their code before commit changes.
 
-The `pre-commit` configurations are found within `.pre-commit-config.yaml` file and installs the technolgies in the `.git/hooks` directory where it contains a list of formatting technologies used in order to ensure that our code meets formatting standrds like: formatting, syntax and style.
+The `pre-commit` configurations are found within `.pre-commit-config.yaml` file and installs the technolgies in the `.git/hooks` directory where it contains a list of formatting technologies used in order to ensure that our code meets formatting standards like: formatting, syntax and style.
 
 #### how to use it
 
@@ -67,19 +64,31 @@ Below is the list of technologies used within the `pre-commit` workflow:
 
 ### Testing
 
-#### Functional
+Our testing frame are split into 3 testing modules to ensure that our Workflow is able to maintain reproducibility, speed and usability.
 
-Our functional tests focuses on more on the user side `cytosnake/tests/functional`.
+Our **functional** tests focuses on the user perspective to verify if the expected functionalities. `cytosnake/tests/functional`.
 
-Users can provided different paramter inputs. Our tests
+The functional testing modules contains different sets of user based parameter, which  weather our `CytoSnake` is able to conduct what is asked from the user. `
 
-#### Unit Testing
+The next module is the **unit test** module, which individually tests every the core implementation of `CytoSnake`
 
-[Unit testing docs ]
+The targeted audience is mainly for developers to verify that every single core component (modules, functions, objects) work as as expected.
 
-#### workflow
+Each of these tests are written in isolation meaning that the core implementation are being tested as if it was not part of the system.
 
-[Workflow testing Docs]
+This makes it extremely easy to tests edges cases for our core implementations and allows to quickly identify bugs.
+
+Lasty, the **workflow testing** module tests all available workflows that `CytoSnake` contains.
+
+The tests attempt to verify that each analytical steps within the workflow produces the expected input and output paths.
+
+Pathing verification is also tested when testing for modularization, where specific workflows steps can be imported in other workflows.
+
+Another important aspect of our workflow testing module is testing reproducibility.
+
+These test contains expected outputs along with associated parameters.
+
+The workflow tests takes in config files as inputs that is supposed to reproduce the known expected outputs.
 
 ### Dry Runs
 
