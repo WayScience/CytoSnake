@@ -57,7 +57,7 @@ The development of this workflow was heavily influenced by:
 
 inputs:
 
-- **profile**: single-cell morphology plate in sqlite format.
+- **profiles**: single-cell morphology datasets in SQLite format.
 - **metadata**: metadata file associated with single-cell morphology dataset.
 
 outputs:
