@@ -12,7 +12,7 @@ Generates consensus profiles
 
 Consesus profiles contains unique signatures that are associated with a specific state of the cell. (control, DMSO, chemical/genetic perturbations)
 
-The development of this workflow was heavily influenced this study:
+The development of this workflow was heavily influenced by this study:
 <https://github.com/broadinstitute/cell-health>
 
 **included modules**:
