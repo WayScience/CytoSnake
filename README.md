@@ -100,7 +100,7 @@ aggregate_configs:
 
 ```
 
-Here is a portions of the listed configs from the `cp_process` workflow.
+Here is a portion of the listed configs from the `cp_process` workflow.
 Each block represents a analytical specific step that is conducted within the workflow.
 In this example, `annotate_configs` and `aggregate_configs` are separate steps that occurs within the `cp_process` workflow.
 Each block has the `param` parameter, which are the parameters associated in the analytical step.
