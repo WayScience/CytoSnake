@@ -90,7 +90,7 @@ inputs:
 
 outputs:
 
-- **profile**: selected features profile
+- **profiles**: selected features profiles.
 """
 
 ## Generate consensus
