@@ -63,7 +63,7 @@ Utilizes CytoTable's convert workflow module:
 
 inputs:
 
-- **profiles**: single-cell profiles.
+- **profiles**: single-cell morphology profiles.
 - **barcode**: file containing unique barcodes that maps to a specific plate.
 - **metadata**: metadata file associated with single-cell morphology dataset.
 
