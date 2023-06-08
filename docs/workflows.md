@@ -29,7 +29,7 @@ The development of this workflow was heavily influenced this study:
 input:
 
 - **profile**: single-cell morphology plate datasets
-- **metadata**: metadata directory associated with plate data
+- **metadata**: metadata directory associated with plate data.
 - **barcode** (optional): file containing plate data to plate map pairings. Default is `None`.
 
 **outputs**:
