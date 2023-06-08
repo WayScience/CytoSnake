@@ -84,7 +84,7 @@ Utilizes pycytominer's feature select module:
 
 inputs:
 
-- **profile**: single-cell
+- **profiles**: single-cell morphology datasets.
 - **barcode**: file containing unique barcodes that maps to a specific plate.
 - **metadata**: metadata file associated with single-cell morphology dataset.
 
