@@ -121,7 +121,7 @@ Utlizes pycytominer's normalization module:
 <https://github.com/cytomining/pycytominer/blob/c90438fd7c11ad8b1689c21db16dab1a5280de6c/pycytominer/normalize.py>
 
 - **profiles**: single-cell morphology or annotated profiles.
-- barcode: file containing unique barcodes that maps to a specific plate.
+- **barcode**: file containing unique barcodes that maps to a specific plate.
 - **metadata**: metadata file associated with single-cell morphology dataset.
 
 output
