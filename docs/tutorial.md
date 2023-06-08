@@ -154,7 +154,7 @@ supports
 
 In this usage tutorial, we will be using cell health datasets. ([Way, 2021](https://doi.org/10.1091/mbc.e20-12-0784))
 
-You can download these datasets (quite large files):
+You can download these datasets below (quite large files):
 
 - [plate_data_1](https://nih.figshare.com/ndownloader/files/18506036): (10GB download)
 - [plate_data_2](https://nih.figshare.com/ndownloader/files/18031619): (11GB download)
