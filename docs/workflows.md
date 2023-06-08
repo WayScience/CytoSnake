@@ -62,4 +62,4 @@ inputs:
 
 outputs:
 
-- **profile**: annotated, normalized, and selected features profiles
+- **profiles**: annotated, normalized, and feature selected profiles.
