@@ -125,7 +125,7 @@ Within this directory, it contains a list of formatting technologies used in ord
 `pre-commits` and its dependencies already come included within the environment file.
 
 Please make sure to activate the conda environment when applying changes in order to activate our pre-commits and its dependencies.
-When changes are applied to the source code, the `pre-commit` workflow will automatically executed on changed files.
+When changes are applied to the source code, the `pre-commit` workflow will be automatically executed on changed files.
 However, if there is a need to run `pre-commit` on both edited and unedited files, you can directly execute the `pre-commit` directly with the `--all-files` parameter:
 
 ```sh
