@@ -8,7 +8,7 @@ Below are the available workflow modules in `CytoSnake`
 
 ## cp_process
 
-Generates consensus profiles
+Generates consensus profiles.
 
 Consensus profiles contain unique signatures that are associated with a specific state of the cell (e.g., control, DMSO, chemical/genetic perturbations, etc.).
 
