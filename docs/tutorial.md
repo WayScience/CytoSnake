@@ -58,7 +58,7 @@ all the functions and its parameters used within the workflow. The
 workflow's documentation provides information about the configuration
 files involved within the workflow.
 
-Each workflow posses their own configurational file.
+Each workflow possesses its own configurational file.
 
 Below are the currently available workflows and the config files it
 accesses in order to conduct its processes.
