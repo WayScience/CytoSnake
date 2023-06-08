@@ -126,4 +126,4 @@ Utlizes pycytominer's normalization module:
 
 output
 
-- **profile**: normalized profile
+- **profiles**: normalized profiles.
