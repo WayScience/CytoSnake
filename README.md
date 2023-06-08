@@ -117,7 +117,8 @@ Below is the list of technologies used when developing CytoSnake.
 
 [pre-commit](https://github.com/pre-commit/pre-commit) is a package that allows developers to run and check their code before commit changes.
 
-The `pre-commit` configurations are found within `.pre-commit-config.yaml` file and installs the technologies in the `.git/hooks` directory where it contains a list of formatting technologies used in order to ensure that our code meets formatting standards like: formatting, syntax and style.
+The `pre-commit` configurations are found within `.pre-commit-config.yaml` file, and installs the technologies in the `.git/hooks` directory.
+Within this directory, it contains a list of formatting technologies used in order to ensure that our code meets formatting standards like syntax and style.
 
 #### how to use it
 
