@@ -4,7 +4,7 @@
 :maxdepth: 4
 ```
 
-Installing CytoSnake is very simple! The only requi
+Installing CytoSnake is very simple! The only requires ...
 Currently, CytoSnake is not `pip` nor `conda` installable.
 
 However, one can install `CytoSnake` package through github by following these steps:
