@@ -162,7 +162,7 @@ You can download these datasets below (quite large files):
 - [barcode](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/blob/master/1.generate-profiles/data/metadata/barcode_platemap.csv): Maps plate id with plate names
 
 You can also use your dataset but some of the tasks that are being done
-here are specific to the files downloaded.
+here are specific to the cell health dataset example.
 
 ### Setting up files
 
