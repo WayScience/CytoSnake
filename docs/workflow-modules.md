@@ -69,7 +69,7 @@ inputs:
 
 outputs:
 
-- **annotated**: converted single-cell morphology dataset.
+- **profiles**: converted single-cell morphology dataset.
 
 ## Feature Select
 
