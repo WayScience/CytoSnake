@@ -6,7 +6,7 @@
 
 ## Aggregate
 
-Aggregates single-cell profiles into aggregated profiles based on a given strata
+Aggregates single-cell profiles into aggregated profiles based on the given strata.
 
 For example, users can configure `Metadata_Well` as their strata in order to
 aggregate single-cell data into the Well level.
