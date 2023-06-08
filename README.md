@@ -160,7 +160,7 @@ The **functional** testing modules contain different sets of user-based paramete
 The next module is the **unit**  tests, which individually tests every core implementation of `CytoSnake`
 The targeted audience for the **unit** tests is mainly for developers to verify that every core component (modules, functions, objects) works as expected.
 Each of these tests are written in isolation, meaning that the core implementations are being tested as if it was not part of the system.
-This makes it extremely easy to tests edges cases for our core implementations and allows to quickly identify bugs.
+This makes it extremely easy to test edge cases for our core implementations and allows for identification of bugs quickly.
 
 Lastly, the **workflow testing** module tests all available workflows that `CytoSnake` contains.
 The tests attempt to verify that each analytical steps within the workflow produces the expected input and output paths.
