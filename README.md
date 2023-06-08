@@ -163,7 +163,7 @@ Each of these tests are written in isolation, meaning that the core implementati
 This makes it extremely easy to test edge cases for our core implementations and allows for identification of bugs quickly.
 
 Lastly, the **workflow** tests will test all available workflows that `CytoSnake` contains.
-The tests attempt to verify that each analytical steps within the workflow produces the expected input and output paths.
+The tests attempt to verify that each analytical step within the workflow produces the expected input and output paths.
 Pathing verification is also tested when testing for modularization, where specific workflows steps can be imported in other workflows.
 Another important aspect of our workflow testing module is testing reproducibility.
 These test contains expected outputs along with associated parameters.
