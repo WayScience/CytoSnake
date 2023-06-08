@@ -45,7 +45,7 @@ inputs:
 
 output:
 
-- profile: annotated profile.
+- **profiles**: annotated profiles.
 
 ## Common
 
