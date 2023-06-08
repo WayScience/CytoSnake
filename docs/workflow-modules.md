@@ -110,7 +110,7 @@ inputs:
 
 output:
 
-- **profile**: Consensus profile
+- **profiles**: consensus profiles.
 
 ## Normalize
 
