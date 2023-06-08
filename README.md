@@ -167,7 +167,7 @@ The tests attempt to verify that each analytical step within the workflow produc
 Pathing verification is also tested when testing for modularization, where specific workflows steps can be imported in other workflows.
 Another important aspect of our workflow testing module is testing reproducibility.
 These tests contain expected outputs along with associated parameters.
-The workflow tests takes in config files as inputs that is supposed to reproduce the known expected outputs.
+The workflow tests take in config files as input that is supposed to reproduce the known expected outputs.
 
 ### Dry Runs
 
