@@ -60,7 +60,7 @@ files involved within the workflow.
 
 Each workflow possesses its own configurational file.
 
-Below are the currently available workflows and the config files it
+Below are the currently available workflows and the config files it accesses to conduct its processes.
 accesses in order to conduct its processes.
 
 #### **cp_process workflow docs**
