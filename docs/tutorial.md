@@ -218,7 +218,7 @@ You can find this information within the `.cytosnake` directory created after ru
 
 ### Running the workflow
 
-In the `ProjectDirectory`  a new folder `./data` should appear in
+In the `ProjectDirectory`,  a new folder called `./data` should appear in
 your current directory. Inside the directory, it should contain symbolic
 links of your data files that you have provided in the `init` mode. This
 directory serves as a centralized location of data for the workflows to
