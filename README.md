@@ -152,7 +152,7 @@ Below is the list of technologies used within the `pre-commit` workflow:
 
 ![CytoSnake-Testing-Framework-v1](https://github.com/axiomcura/CytoSnake/assets/31600622/010f1d8b-f5ce-4f99-b035-7a036dd12ae0)
 
-Our testing frame are split into 3 testing modules to ensure that our Workflow is able to maintain reproducibility, speed and usability.
+Our testing framework is split into 3 testing modules to ensure that our Workflow can maintain reproducibility, speed, and usability.
 
 Our **functional** tests focuses on the user perspective to verify if the expected functionalities. `cytosnake/tests/functional`.
 The functional testing modules contains different sets of user based parameter, which  weather our `CytoSnake` is able to conduct what is asked from the user. `
