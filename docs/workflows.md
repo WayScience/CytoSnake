@@ -10,7 +10,7 @@ Below are the available workflow modules in `CytoSnake`
 
 Generates consensus profiles
 
-Consesus profiles contains unique signatures that are associated with a specific state of the cell. (control, DMSO, chemical/genetic perturbations)
+Consensus profiles contain unique signatures that are associated with a specific state of the cell (e.g., control, DMSO, chemical/genetic perturbations, etc.).
 
 The development of this workflow was heavily influenced by this study:
 <https://github.com/broadinstitute/cell-health>
