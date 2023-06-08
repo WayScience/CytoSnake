@@ -204,7 +204,7 @@ INFO: Formatting input files
 INFO: Formatting complete!
 ```
 
-if you are not receiving these messages, please refer to the [install.md] to see
+If you are not receiving these messages, please refer to the [install.md] to see
 if the installation process was do correctly.
 
 So what just ocurred here?
