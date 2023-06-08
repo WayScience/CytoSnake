@@ -18,7 +18,7 @@ Utilize's pycytominer's aggregate module:
 
 inputs:
 
-- **profile**: profile single-cell morphology dataset.
+- **profile**: single-cell morphology dataset.
 - **barcode**: file containing unique barcodes that maps to a specific plate
 - **metadata**: metadata file associated with single-cell morphology dataset.
 
