@@ -211,7 +211,7 @@ So what just ocurred here?
 
 `CytoSnake` now recognizes that you current directory is now known as the `ProjectDirectory`.
 
-The `ProjectDirectory` is a way for `CytoSnake` to recognize that a project is occurring therefore  preventing other projects to be created within the same directory.
+The `ProjectDirectory` is a way for `CytoSnake` to recognize that a project is occurring therefore preventing other projects from being created within the same directory.
 
 The `ProjectDirectory` contains meta information that also helps `CytoSnake` know what files have initialized for downstream analysis.
 You can find this information within the the `.cytosnake` directory created after runting the `init` mode.
