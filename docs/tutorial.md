@@ -209,7 +209,7 @@ if the installation process was do correctly.
 
 So what just ocurred here?
 
-`CytoSnake` now recognizes that you current directory is now known as the `ProjectDirectory`.
+`CytoSnake` now recognizes that your current directory is now known as the `ProjectDirectory`.
 
 The `ProjectDirectory` is a way for `CytoSnake` to recognize that a project is occurring therefore preventing other projects from being created within the same directory.
 
