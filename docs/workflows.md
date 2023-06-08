@@ -34,7 +34,7 @@ input:
 
 **outputs**:
 
-- **profiles**: aggregated, annotated, normalized, selected features and consensus profiles
+- **profiles**: aggregated, annotated, normalized, selected features, and consensus profiles.
 - **cell counts**: Cell counts per well
 
 ## cp_process_singlecells
