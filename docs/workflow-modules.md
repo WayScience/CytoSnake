@@ -39,7 +39,7 @@ Utilizes pycytominer's annotate module:
 
 inputs:
 
-- **profiles**: single-cell or aggregate profiles.
+- **profiles**: single-cell morphology or aggregate profiles.
 - **barcode**: file containing unique barcodes that maps to a specific plate.
 - **metadata**: metadata file associated with single-cell morphology dataset.
 
