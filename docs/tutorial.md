@@ -216,7 +216,7 @@ The `ProjectDirectory` is a way for `CytoSnake` to recognize that a project is o
 The `ProjectDirectory` contains metadata information that also helps `CytoSnake` know what files have been initialized for downstream analysis.
 You can find this information within the `.cytosnake` directory created after running the `init` mode.
 
-### Running Workflow
+### Running the workflow
 
 In the `ProjectDirectory`  a new folder `./data` should appear in
 your current directory. Inside the directory, it should contain symbolic
