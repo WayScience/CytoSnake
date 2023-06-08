@@ -154,7 +154,7 @@ Below is the list of technologies used within the `pre-commit` workflow:
 
 Our testing framework is split into 3 testing modules to ensure that our Workflow can maintain reproducibility, speed, and usability.
 
-Our **functional** tests focuses on the user perspective to verify if the expected functionalities. `cytosnake/tests/functional`.
+Our **functional** tests focus on the user perspective to verify if the functions work as expected. `cytosnake/tests/functional`.
 The functional testing modules contains different sets of user based parameter, which  weather our `CytoSnake` is able to conduct what is asked from the user. `
 
 The next module is the **unit test** module, which individually tests every the core implementation of `CytoSnake`
