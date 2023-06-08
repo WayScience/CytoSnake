@@ -21,6 +21,6 @@ cd CytoSnake
 pip install -e . 
 ```
 
-Now you are ready to use `CytoSnake`! Please refer to the [Tutorial](./tutorial.md) to learn on how to use `CytoSnake` .
+Now you are ready to use `CytoSnake`! Please refer to the [Tutorial](./tutorial.md) to learn how to use `CytoSnake`.
 
 To further understand our workflows and modules, please refer to the [CytoSnake Workflows](./workflows.md) and [Workflow Modules](./workflow-modules.md) documentation.
