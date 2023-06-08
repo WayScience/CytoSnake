@@ -39,7 +39,7 @@ input:
 
 ## cp_process_singlecells
 
-Converts sqlite plate data into parquet and returns selected features from
+Converts SQLite plate data into parquet and returns selected features from
 single-cell morphology profiles.
 
 The development of this workflow was heavily influenced by:
