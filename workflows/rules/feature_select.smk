@@ -7,7 +7,7 @@ rule feature_select:
     Utilizes pycytominer's feature select module:
     https://github.com/cytomining/pycytominer/blob/master/pycytominer/feature_select.py
 
-    :input profile: single-cell
+    :input profile: single-cell morphology dataset.
     :input barcode: file containing unique barcodes that maps to a specific plate.
     :input metadata: metadata file associated with single-cell morphology dataset.
 
