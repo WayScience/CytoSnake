@@ -14,7 +14,7 @@ aggregate single-cell data into the Well level.
 Utilize's pycytominer's aggregate module:
 <https://github.com/cytomining/pycytominer/blob/c90438fd7c11ad8b1689c21db16dab1a5280de6c/pycytominer/aggregate.py>
 
-**parameters**
+**Parameters** (params)
 
 inputs:
 
