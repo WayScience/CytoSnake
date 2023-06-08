@@ -29,7 +29,7 @@ outputs:
 
 ## Annotate
 
-Generates an annotated profile with given metadata and is stored instored
+Generates an annotated profile with given metadata and is stored
 in the `results/` directory.
 
 Utilizes pycytominer's annotate module:
