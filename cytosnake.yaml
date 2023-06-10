@@ -8,7 +8,7 @@ dependencies:
   - pip
   - snakemake
   - mamba
-  - myst-parser
+  # - myst-parser
   - sphinx_rtd_theme
   - pre-commit
   - pip:
