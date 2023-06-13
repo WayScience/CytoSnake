@@ -4,5 +4,6 @@ sphinx-autoapi
 sphinx_rtd_theme
 mock
 autodoc
-myst-parse
+myst-parser
 rst-to-mysts
+furo
