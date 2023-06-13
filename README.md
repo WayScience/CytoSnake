@@ -8,10 +8,9 @@
   - [Table of contents](#table-of-contents)
   - [About](#about)
   - [Installation](#installation)
-  - [Workflows](#workflows)
   - [💻 Development](#-development)
     - [Pre-commits](#pre-commits)
-      - [how to use it](#how-to-use-it)
+      - [How to use it](#how-to-use-it)
     - [Testing](#testing)
     - [Dry Runs](#dry-runs)
 
@@ -23,8 +22,14 @@ CytoSnake's workflows are written in [`Snakemake`](https://github.com/snakemake/
 `CytoSnake` make it easy for user to interact as it requires little inputs and parameters. below is an example on how to execute `CytoSnake` once installed
 
 ```text
+# setting up directory
+cytosnake run -d <FILES or LIST OF FILES> -m <METADATA DIR> -b <BARCODE>
 
+# executing workflow
+cytosnake run <WORKFLOW>
 ```
+
+**note**: `-b` is optional, it is used if multiple metadata files are provided
 
 ## Installation
 
@@ -32,7 +37,6 @@ First, install `CytoSnake` into your local machine:
 
 ```text
 git clone https://github.com/WayScience/CytoSnake.git
-
 ```
 
 After cloning the repository, go into the `CytoSnake/` directory and create the `CytoSnake` environment
@@ -47,13 +51,10 @@ Next is to install the `CytoSnake` module into your newly created environment
 pip install -e .
 ```
 
-After this step, `CytoSnake` is installed. To check if `CytoSnake` is properly installed, simply type:
+After this step, `CytoSnake` is installed. To check if `CytoSnake` is properly installed, simply type `cytosnake` to see the CLI documentation:
 
 ```text
 cytosnake
-```
-
-you should see the CLI documentation pop out.
 
 ## Workflows
 
@@ -107,7 +108,7 @@ Each block has the `params` parameter, which are the parameters associated with 
 Users can edit these parameters from the defaults if they want their workflow to analyze their data in a specific way.
 
 Overall, each workflow will have a designated workflow config file.
-It will contain all the steps conducted in the workflow and users have the options to change the preset that is specific to their dataset.
+It will contain all the steps conducted in the workflow and users have the options to change the default parameters to  that is specific to their dataset.
 
 ## 💻 Development
 
