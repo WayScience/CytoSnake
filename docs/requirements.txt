@@ -7,6 +7,3 @@ autodoc
 myst-parser
 rst-to-myst
 furo
-
-# non-docs imports
-snakemake
