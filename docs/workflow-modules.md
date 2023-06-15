@@ -115,7 +115,7 @@ output:
 ## Normalize
 
 Normalizing single-cell or aggregate features. Current default normalization
-method is `standardize`. Other methods include: ...
+method is `standardize`. Other methods include: `robustize`, `mad_robustize`, and `spherize`.
 
 Utlizes pycytominer's normalization module:
 <https://github.com/cytomining/pycytominer/blob/c90438fd7c11ad8b1689c21db16dab1a5280de6c/pycytominer/normalize.py>
