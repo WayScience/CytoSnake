@@ -225,7 +225,7 @@ directory serves as a centralized location of data for the workflows to
 have access too. Now that you have your data folder, you can simply
 select which workflow to execute by using the `run` mode. Since the
 cell-health dataset contains data extracted from CellProfiler, when we
-will used the `cp_process` workflow.
+will use the `cp_process` workflow.
 
 ```text
 cytosnake run cp_process
