@@ -16,6 +16,9 @@ workflow-modules
 modules
 ```
 
+```{include} ../README.md
+```
+
 
 <!-- # Indices and tables
 
