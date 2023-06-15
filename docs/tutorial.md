@@ -69,6 +69,7 @@ accesses in order to conduct its processes.
 | -------------- | ---------------------------------------------------------------- | --------------------- |
 | cp_process     | ./CytoSnake/configs/analysis_configs/wf_configfs/cp_process.yaml |  [Workflow Docs](workflows.md#cp_process)|
 
+**modules used:**
 | Steps          | Path to config                                                   | Module Documentation  |
 | -------------- | ---------------------------------------------------------------- | --------------------- |
 | aggregate      | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [aggregate docs](workflow-modules.md#aggregate)      |
@@ -77,7 +78,7 @@ accesses in order to conduct its processes.
 | feature_select | ./CytoSnake/configs/analysis_configs/feature_select_configs.yaml | [feature select docs](workflow-modules.md#feature-select) |
 | consensus      | ./CytoSnake/configs/analysis_configs/consensus_configs.yaml      | [consensus docs](workflow-modules.md#generate-consensus)      |
 
-#### cp_process_singlecells
+#### **cp_process_singlecells workflow docs**
 
 | workflow name          | Path to config                                           | Documentation         |
 | -------------- | ---------------------------------------------------------------- | --------------------- |
@@ -246,7 +247,7 @@ This indicates that all tasks within the workflow is complete.
 ### Accessing data
 
 In your directory, `CytoSnake` produces a `results/` folder, which will
-contain all the outputs generated from the workflow. 
+contain all the outputs generated from the workflow.
 To list those
 outputs, simply type:
 
