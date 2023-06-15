@@ -108,7 +108,7 @@ Each block has the `params` parameter, which are the parameters associated with 
 Users can edit these parameters from the defaults if they want their workflow to analyze their data in a specific way.
 
 Overall, each workflow will have a designated workflow config file.
-It will contain all the steps conducted in the workflow and users have the options to change the default parameters to  that is specific to their dataset.
+It will contain all the steps conducted in the workflow, and users have the option to change the default parameters that are specific to their dataset.
 
 ## 💻 Development
 
