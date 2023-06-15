@@ -11,3 +11,10 @@ ignore = ["F821"]
 
 [tool.ruff.flake8-self]
 ignore-names = ["snakemake"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.poetry.dependencies]
+python = "^3.10"
