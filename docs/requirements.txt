@@ -5,5 +5,5 @@ sphinx_rtd_theme
 mock
 autodoc
 myst-parser
-rst-to-mysts
+rst-to-myst
 furo
