@@ -205,7 +205,7 @@ INFO: Formatting complete!
 ```
 
 If you are not receiving these messages, please refer to the [install.md] to see
-if the installation process was do correctly.
+if the installation process was done correctly.
 
 So what just ocurred here?
 
