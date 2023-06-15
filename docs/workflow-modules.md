@@ -73,7 +73,7 @@ outputs:
 
 ## Feature Select
 
-Performs feature selection based on this given profiles.
+Performs feature selection based on the given profiles.
 
 PyCytominer contains different operations to conduct its feature selection: variance_threshold, correlation_threshold, drop_na_columns, drop_outliers, and noise_removal.
 
