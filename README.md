@@ -158,7 +158,7 @@ Our testing framework is split into 3 testing modules to ensure that our Workflo
 Our **functional** tests focus on the user perspective to verify if the functions work as expected. `cytosnake/tests/functional`.
 The **functional** testing modules contain different sets of user-based parameters, which determine if `CytoSnake` can conduct what is set by the user.
 
-The next module is the **unit**  tests, which individually tests every core implementation of `CytoSnake`
+The next module is the **unit**  tests, which individually test every core implementation of `CytoSnake`.
 The targeted audience for the **unit** tests is mainly for developers to verify that every core component (modules, functions, objects) works as expected.
 Each of these tests are written in isolation, meaning that the core implementations are being tested as if it was not part of the system.
 This makes it extremely easy to test edge cases for our core implementations and allows for identification of bugs quickly.
