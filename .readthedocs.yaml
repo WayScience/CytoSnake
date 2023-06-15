@@ -9,8 +9,6 @@ python:
   install:
     - requirements: docs/requirements.txt
 
-conda:
-  file: ./cytosnake.yaml
 
 sphinx:
   builder: html

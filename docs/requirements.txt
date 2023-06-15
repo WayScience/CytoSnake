@@ -7,3 +7,4 @@ autodoc
 myst-parser
 rst-to-myst
 furo
+snakemake
