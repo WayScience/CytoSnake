@@ -10,7 +10,7 @@ python:
     - requirements: docs/requirements.txt
 
 conda:
-  file: cytosnake.yaml
+  file: ./cytosnake.yaml
 
 sphinx:
   builder: html
