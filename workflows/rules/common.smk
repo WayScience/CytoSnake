@@ -31,15 +31,7 @@ PLATE_DATA = datapaths.build_path(input_type="plate_data")
 BARCODES = datapaths.get_barcodes()
 METADATA_DIR = datapaths.get_metadata_dir()
 
-# -------
-# OUTPUTS
-# -------
-# Things to know:
-# EXTENDED is a list of file names that has been extended by using the wildcard.
-# In this case, the wildcard placeholder is `basename` and is being extended by
-# all basenames of the plate_data
-#
-
+# helper function 
 def get_data_path(
     input_type: str,
     use_converted: Optional[bool] = False,
@@ -96,9 +88,9 @@ def get_data_path(
     # checking if the user wants to use converted dataset
     # if plate data is selected, then check if the converted path is required
     if input_type == "plate_data" and use_converted:
-        data_path = datapaths.build_path(input_type="plate_data", use_converted=use_converted)
-    else:
-        data_path = datapaths.build_path(input_type=input_type)
+        if tolist:
+            data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
+        data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
 
     # check if the user want a list of paths or a single path
     if tolist:

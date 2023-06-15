@@ -1,5 +1,9 @@
 # CytoSnake Tutorial
 
+```{toctree}
+:maxdepth: 4
+```
+
 ## About
 
 This tutorial assumes that you have followed the installation steps and
@@ -54,36 +58,48 @@ all the functions and its parameters used within the workflow. The
 workflow's documentation provides information about the configuration
 files involved within the workflow.
 
-Below are the two currently available workflows and the config files it
+Each workflow possesses its own configurational file.
+
+Below are the currently available workflows and the config files it accesses to conduct its processes.
 accesses in order to conduct its processes.
 
 #### **cp_process workflow docs**
 
-| Steps          | Path to config                                                   | Documentation         |
+| workflow name          | Path to config                                           | Documentation         |
 | -------------- | ---------------------------------------------------------------- | --------------------- |
-| aggregate      | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [aggregate_docs]      |
-| annotate       | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [annotate_docs]       |
-| normalize      | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml      | [normalize_docs]      |
-| feature_select | ./CytoSnake/configs/analysis_configs/feature_select_configs.yaml | [feature_select_docs] |
-| consensus      | ./CytoSnake/configs/analysis_configs/consensus_configs.yaml      | [consensus_docs]      |
+| cp_process     | ./CytoSnake/configs/analysis_configs/wf_configfs/cp_process.yaml |  [Workflow Docs](workflows.md#cp_process)|
 
-#### **dp_process workflow**
+**modules used:**
+| Steps          | Path to config                                                   | Module Documentation  |
+| -------------- | ---------------------------------------------------------------- | --------------------- |
+| aggregate      | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [aggregate docs](workflow-modules.md#aggregate)      |
+| annotate       | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [annotate docs](workflow-modules.md#annotate)      |
+| normalize      | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml      | [normalize docs](workflow-modules.md#normalize)      |
+| feature_select | ./CytoSnake/configs/analysis_configs/feature_select_configs.yaml | [feature select docs](workflow-modules.md#feature-select) |
+| consensus      | ./CytoSnake/configs/analysis_configs/consensus_configs.yaml      | [consensus docs](workflow-modules.md#generate-consensus)      |
 
-**NOTE**: Currently under development, may change in the future
+#### **cp_process_singlecells workflow docs**
 
-| Steps         | Path to config                                              | Documentation                |
-| ------------- | ----------------------------------------------------------- | ---------------------------- |
-| dp_data       | ./CytoSnake/configs/analysis_configs/dp_data_configs.yaml   | [DeepProfiler_data_docs]     |
-| dp_aggregator | ./CytoSnake/configs/analysis_configs/dp_aggregator.yaml     | [AggregateDeepProfiler_docs] |
-| normalize     | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml | [normalize_docs]             |
-| consensus     | /CytoSnake/configs/analysis_configs/consensus_configs.yaml  | [consensus_docs]             |
+| workflow name          | Path to config                                           | Documentation         |
+| -------------- | ---------------------------------------------------------------- | --------------------- |
+| cp_process_singlecells | ./CytoSnake/configs/analysis_configs/wf_configfs/cp_process_singlecells.yaml |  [Workflow Docs](workflows.md#cp_process_singlecells)|
+
+**modules used**:
+
+| Steps          | Path to config                                                   | Module Documentation  |
+| -------------- | ---------------------------------------------------------------- | --------------------- |
+| convert      | ./CytoSnake/configs/analysis_configs/cytotable_convert.yaml        | [convert docs](workflow-modules.md#cytotable-convert)      |
+| annotate       | ./CytoSnake/configs/analysis_configs/aggregate_configs.yaml      | [annotate docs](workflow-modules.md#annotate)       |
+| normalize      | ./CytoSnake/configs/analysis_configs/normalize_configs.yaml      | [normalize docs](workflow-modules.md#normalize)      |
+| feature_select | ./CytoSnake/configs/analysis_configs/feature_select_configs.yaml | [feature select docs](workflow-modules.md#feature-select) |
 
 Users can easily find and change parameter values by accessing those
 configurational files.
 
 - **Steps** : instructions that the workflows
 - **Path to config** : Location of the configurational files
-- **Documentation** : Relevant pycytominer documentation of
+- **Documentation** : Workflow documentation
+- **Module Documentation** : Module documentation
 
 ## Documentation
 
@@ -137,17 +153,17 @@ supports
 
 ### Download data
 
-In this usage tutorial, we will be using cell health datasets. (Way, 2021 [source], [cell-health-data])
+In this usage tutorial, we will be using cell health datasets. ([Way, 2021](https://doi.org/10.1091/mbc.e20-12-0784))
 
-You can download these datasets (quite large files):
+You can download these datasets below (quite large files):
 
-- [plate_data_1]: (10GB download)
-- [plate_data_2]: (11GB download)
-- [metadata_folder]: Contains all associated perturbations per well
-- [barcode]: Maps plate id with plate names
+- [plate_data_1](https://nih.figshare.com/ndownloader/files/18506036): (10GB download)
+- [plate_data_2](https://nih.figshare.com/ndownloader/files/18031619): (11GB download)
+- [metadata_folder](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/tree/master/1.generate-profiles/data/metadata): Contains all associated perturbations per well
+- [barcode](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/blob/master/1.generate-profiles/data/metadata/barcode_platemap.csv): Maps plate id with plate names
 
 You can also use your dataset but some of the tasks that are being done
-here are specific to the files downloaded.
+here are specific to the cell health dataset example.
 
 ### Setting up files
 
@@ -189,29 +205,31 @@ INFO: Formatting input files
 INFO: Formatting complete!
 ```
 
-if you are not receiving these messages, please refer to the [install.md] to see
-if the installation process was do correctly.
+If you are not receiving these messages, please refer to the [install.md] to see
+if the installation process was done correctly.
 
-### Running Workflow
+So what just ocurred here?
 
-In your current working directory, a new folder ./data should appear in
+`CytoSnake` now recognizes that your current directory is now known as the `ProjectDirectory`.
+
+The `ProjectDirectory` is a way for `CytoSnake` to recognize that a project is occurring therefore preventing other projects from being created within the same directory.
+
+The `ProjectDirectory` contains metadata information that also helps `CytoSnake` know what files have been initialized for downstream analysis.
+You can find this information within the `.cytosnake` directory created after running the `init` mode.
+
+### Running the workflow
+
+In the `ProjectDirectory`,  a new folder called `./data` should appear in
 your current directory. Inside the directory, it should contain symbolic
-links of your data files that you have provided in the init mode. This
-directory serves as centralized location of data for the workflows to
+links of your data files that you have provided in the `init` mode. This
+directory serves as a centralized location of data for the workflows to
 have access too. Now that you have your data folder, you can simply
-select which workflow to execute by using the run mode. Since the
+select which workflow to execute by using the `run` mode. Since the
 cell-health dataset contains data extracted from CellProfiler, when we
-will used the cp_process workflow.
+will use the `cp_process` workflow.
 
 ```text
 cytosnake run cp_process
-```
-
-If your data contains features that were extracted by DeepProfiler, then
-the dp_process workflow must be executed
-
-```text
-cytosnake run dp_process
 ```
 
 These workflows contain their own environments, therefore there is no
@@ -228,8 +246,9 @@ This indicates that all tasks within the workflow is complete.
 
 ### Accessing data
 
-In your directory, CytoSnake produces a `results` folder, which will
-contain all the outputs generated from the workflow. To list those
+In your directory, `CytoSnake` produces a `results/` folder, which will
+contain all the outputs generated from the workflow.
+To list those
 outputs, simply type:
 
 ```text
@@ -264,18 +283,3 @@ their suffix:
 - `_consensus`: is the consensus profile contains unique morphological
   signatures associated with a specific external treatment (drug,
   perturbations, controls (pos/neg), etc)
-
-[aggregate_docs]: https://pycytominer.readthedocs.io/en/latest/pycytominer.html#module-pycytominer.aggregate
-[aggregatedeepprofiler_docs]: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L123-L156
-[annotate_docs]: https://pycytominer.readthedocs.io/en/latest/pycytominer.html?highlight=annotate#pycytominer.annotate.annotate
-[barcode]: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/blob/master/1.generate-profiles/data/metadata/barcode_platemap.csv
-[consensus_docs]: https://pycytominer.readthedocs.io/en/latest/search.html?q=consensus&check_keywords=yes&area=default
-[deepprofiler_data_docs]: https://github.com/cytomining/pycytominer/blob/289c4d322f08becec5e6a57104849f203540df41/pycytominer/cyto_utils/DeepProfiler_processing.py#L19-L43
-[feature_select_docs]: https://pycytominer.readthedocs.io/en/latest/pycytominer.html?highlight=feature%20select#pycytominer.feature_select.feature_select
-[metadata_folder]: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/broadinstitute/cell-health/tree/master/1.generate-profiles/data/metadata
-[normalize_docs]: https://pycytominer.readthedocs.io/en/latest/pycytominer.html?highlight=normalize#pycytominer.normalize.normalize
-[plate_data_1]: https://nih.figshare.com/ndownloader/files/18506036
-[plate_data_2]: https://nih.figshare.com/ndownloader/files/18031619
-[source]: https://doi.org/10.1091/mbc.e20-12-0784
-[install.md]: install.md
-[Usage]: ##usage
