@@ -103,7 +103,7 @@ aggregate_configs:
 
 Here is a portion of the listed configs from the `cp_process` workflow.
 Each block represents an analytical specific step that is conducted within the workflow.
-In this example, `annotate_configs` and `aggregate_configs` are separate steps that occurs within the `cp_process` workflow.
+In this example, `annotate_configs` and `aggregate_configs` are separate steps that occur within the `cp_process` workflow.
 Each block has the `params` parameter, which are the parameters associated with the analytical step.
 Users can edit these parameters from the defaults if they want their workflow to analyze their data in a specific way.
 
