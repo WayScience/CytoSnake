@@ -58,7 +58,7 @@ cytosnake
 
 ## Workflows
 
-CytoSnake workflows are the main instructions on how your data is going be processed.
+CytoSnake workflows are the main instructions on how your data is going to be processed.
 Each workflow comes with its appropriate configuration file.
 
 Here is an example below:
