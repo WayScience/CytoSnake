@@ -118,7 +118,7 @@ Below is the list of technologies used when developing CytoSnake.
 
 [pre-commit](https://github.com/pre-commit/pre-commit) is a package that allows developers to run and check their code before commit changes.
 
-The `pre-commit` configurations are found within the [`.pre-commit-config.yaml` file](path/to/file), and installs the technologies in the `.git/hooks` directory.
+The `pre-commit` configurations are found within the `.pre-commit-config.yaml` file, and installs the technologies in the `.git/hooks` directory.
 Within this directory, it contains a list of formatting technologies used in order to ensure that our code meets formatting standards like syntax and style.
 
 #### How to use it
@@ -155,7 +155,7 @@ Below is the list of technologies used within the `pre-commit` workflow:
 
 Our testing framework is split into 3 testing modules to ensure that our Workflow can maintain reproducibility, speed, and usability.
 
-Our **functional** tests focus on the user perspective to verify if the functions work as expected. `cytosnake/tests/functional`.
+Our **functional** tests focus on the user perspective to verify if the functions work as expected.
 The **functional** testing modules contain different sets of user-based parameters, which determine if `CytoSnake` can conduct what is set by the user.
 
 The next module is the **unit**  tests, which individually test every core implementation of `CytoSnake`.
