@@ -246,7 +246,8 @@ This indicates that all tasks within the workflow is complete.
 ### Accessing data
 
 In your directory, `CytoSnake` produces a `results/` folder, which will
-contain all the outputs generated from the workflow. To list those
+contain all the outputs generated from the workflow. 
+To list those
 outputs, simply type:
 
 ```text
