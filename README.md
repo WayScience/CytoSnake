@@ -1,4 +1,6 @@
-# 🐍CytoSnake
+<img height="200" src="https://raw.githubusercontent.com/WayScience/CytoSnake/main/logo/with-text-for-light-bg.png?raw=true">
+
+# CytoSnake
 
 "Reproducible pipelines for processing high-dimensional systems morphology data with snakemake 🐍 "
 
