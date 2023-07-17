@@ -9,7 +9,6 @@
 :maxdepth: 2
 :hidden:
 
-install
 tutorial
 workflows
 workflow-modules
