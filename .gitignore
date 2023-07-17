@@ -8,3 +8,5 @@ _build
 testing
 CytoSnake.egg-info
 workflows/rules/common.py
+.DS_Store
+build
