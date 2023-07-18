@@ -8,3 +8,8 @@ dependencies:
   - bioconda::snakemake
   - conda-forge::mamba
   - conda-forge::pre-commit
+  - conda-forge::myst-parser
+  - conda-forge::sphinx_rtd_theme
+  - pip:
+    - rst-to-myst
+    - furo
