@@ -1,13 +1,14 @@
 <img height="200" src="https://raw.githubusercontent.com/WayScience/CytoSnake/main/logo/with-text-for-light-bg.png?raw=true">
 
-Orchestrating reproducible pipelines for processing high-dimensional systems morphology data with snakemake
+_CytoSnake: Orchestrating reproducible pipelines for processing high-dimensional systems morphology data with snakemake_
+
+Erik Serrano, Gregory P. Way
+University of Colorado Anschutz School of Medicine
 
 ## Table of contents
 
-- [🐍CytoSnake](#cytosnake)
-  - [Table of contents](#table-of-contents)
-  - [About](#about)
-  - [Installation](#installation)
+- [About](#about)
+- [Installation](#installation)
 
 ## About
 
@@ -98,7 +99,7 @@ aggregate_configs:
 
 ```
 
-Here is a portion of the listed configs from the `cp_process` workflow.
+Above is a portion of the listed configs from the `cp_process` workflow.
 Each block represents an analytical specific step that is conducted within the workflow.
 In this example, `annotate_configs` and `aggregate_configs` are separate steps that occur within the `cp_process` workflow.
 Each block has the `params` parameter, which are the parameters associated with the analytical step.
