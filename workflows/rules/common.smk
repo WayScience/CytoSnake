@@ -31,7 +31,8 @@ PLATE_DATA = datapaths.build_path(input_type="plate_data")
 BARCODES = datapaths.get_barcodes()
 METADATA_DIR = datapaths.get_metadata_dir()
 
-# helper function 
+
+# helper function
 def get_data_path(
     input_type: str,
     use_converted: Optional[bool] = False,
@@ -89,7 +90,9 @@ def get_data_path(
     # if plate data is selected, then check if the converted path is required
     if input_type == "plate_data" and use_converted:
         if tolist:
-            data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
+            data_path = datapaths.build_path(
+                input_type="plate_data", use_converted=True
+            )
         data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
 
     # check if the user want a list of paths or a single path

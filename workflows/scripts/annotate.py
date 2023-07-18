@@ -34,7 +34,7 @@ def annotate_cells(
         raise TypeError(
             "Cannot use sqlite files for annotation,"
             "please convert to parquet or csv files formats "
-            )
+        )
 
     # initiating Logger
     log_path = pathlib.Path(log_file).absolute()

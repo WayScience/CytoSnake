@@ -43,7 +43,11 @@ include: "../rules/feature_select.smk"
 # define expected outputs
 rule all:
     input:
-        get_data_path(input_type="plate_data", tolist=True, use_converted=config["data_configs"]["use_converted_plate_data"]),
+        get_data_path(
+            input_type="plate_data",
+            tolist=True,
+            use_converted=config["data_configs"]["use_converted_plate_data"],
+        ),
         get_data_path(input_type="annotated", tolist=True),
         get_data_path(input_type="normalized", tolist=True),
         get_data_path(input_type="feature_select", tolist=True),
