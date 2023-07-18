@@ -1,16 +1,10 @@
+name: cytosnake
 channels:
   - conda-forge
   - bioconda
-  - anaconda
-  - default
 dependencies:
-  - python>=3.10
-  - pip
-  - snakemake
-  - mamba
-  - myst-parser
-  - sphinx_rtd_theme
-  - pre-commit
-  - pip:
-    - rst-to-myst
-    - furo
+  - conda-forge::python==3.10
+  - conda-forge::pip
+  - bioconda::snakemake
+  - conda-forge::mamba
+  - conda-forge::pre-commit
