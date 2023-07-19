@@ -25,13 +25,6 @@ repos:
       - id: black
         language_version: python3.10
 
-  # AI based formatter to improve readability
-  - repo: https://github.com/sourcery-ai/sourcery
-    rev: v1.2.0
-    hooks:
-      - id: sourcery
-        args: [--diff=git diff HEAD, --fix, --no-summary]
-
   # adding ruff with auto fix on
   # additional configs are in the pyproject.toml file
   - repo: https://github.com/charliermarsh/ruff-pre-commit
