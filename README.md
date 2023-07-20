@@ -7,8 +7,10 @@ University of Colorado Anschutz School of Medicine
 
 ## Table of contents
 
+- [Table of contents](#table-of-contents)
 - [About](#about)
 - [Installation](#installation)
+- [Workflows](#workflows)
 
 ## About
 
@@ -49,10 +51,11 @@ pip install -e .
 ```
 
 After this step, `CytoSnake` is installed.
-To check if `CytoSnake` is properly installed, simply type `cytosnake` to see the CLI documentation:
+To check if `CytoSnake` is properly installed, simply type `cytosnake help` to see the CLI documentation:
 
 ```text
-cytosnake
+cytosnake help
+```
 
 ## Workflows
 
