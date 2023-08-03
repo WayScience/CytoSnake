@@ -21,9 +21,9 @@ provided with valid user parameters. The primary goal is to ensure that the CLI 
 successfully without errors and produces the correct output.
 
 Negative Cases:
-These test cases simulate scenarios where invalid or inappropriate user parameters are
-provided. The objective is to confirm that the CLI can identify and handle errors
-appropriately, providing informative error messages to the user.
+These test cases simulate scenarios where invalid user parameters are provided. 
+The objective is to confirm that the CLI can identify and handle errors appropriately, 
+providing informative error messages to the user.
 """
 
 import os
@@ -32,6 +32,8 @@ import pytest
 import pathlib
 import shutil
 import subprocess
+
+from cytosnake.common import errors
 
 
 # --------------
@@ -43,11 +45,12 @@ class DataFiles:
 
     Attributes:
     -----------
-    metdata: str
-        path to metadata directory
+    metdata: str | list[str]
+        metadata directory name
     plate_data: list[str]
         list of plate data (parquet or sqlite files)
-
+    barcode : str
+        barcode file name
 
     Returns
     -------
@@ -59,8 +62,8 @@ class DataFiles:
     dataset_dir: str | pathlib.Path
 
     # extracted files
-    metadata: str = None
-    plate_data: list[str] = None
+    metadata: str | list[str] = None
+    plate_data: str | list[str] = None
     barcode: str = None
 
     # extracting file paths and setting into dataclass attributes
@@ -114,24 +117,6 @@ class DataFiles:
             barcode_path[0] if len(meta_data_path) == 0 else meta_data_path
         )
 
-
-def prepare_dataset(
-    source_dir: pathlib.Path, test_dir_path: pathlib.Path
-) -> None:
-    """Transports testing datasets into testing directory
-
-    Parameters
-    ----------
-    test_dir_path : pathlib.Path
-        _description_
-
-    Returns
-    -------
-    None
-        Testing files transported to testing directory
-    """
-    # un
-    shutil.copytree(source_dir, test_dir_path, dirs_exist_ok=True)
 
 
 def get_test_data_folder(test_data_name: str) -> DataFiles:
@@ -193,6 +178,34 @@ def get_raised_error(traceback: str) -> str:
     # the order of parsing the traceback to obtain exception name.
     return traceback.splitlines()[-1].split(":")[0].split(".")[-1]
 
+def prepare_dataset(
+    test_data_name: str, test_dir_path: pathlib.Path, 
+) -> DataFiles:
+    """Main function to prepare dataset into testing datafolder. 
+
+    Parameters
+    ----------
+    test_data_name : str
+        name of the testing dataset you want to use
+
+    test_dir_path : pathlib.Path
+        path to testing directory
+
+    Returns
+    -------
+    DataFiles
+        Structured data object that contains all the files within the selected dataset
+    """
+    # get dataset and transfer to testing directory
+    datafiles = get_test_data_folder(test_data_name=test_data_name)
+    shutil.copytree(datafiles.dataset_dir, test_dir_path, dirs_exist_ok=True)
+
+    # change directory to the testing directory
+    os.chdir(test_dir_path)
+
+    return datafiles
+
+
 
 # ---------------
 # PyTest Fixtures
@@ -219,15 +232,13 @@ def testing_dir(tmp_path, request):
     # setting paths
     original_cwd = pathlib.Path()
 
-    # creating a temporary path and cd into it
+    # creating a temporary path 
     tmp_dir = tmp_path / "testing_dir"
     tmp_dir.mkdir()
 
-    # go that directory
-    os.chdir(str(tmp_dir))
-
     # create a custom tear down function
     def teardown():
+
         # go back to original working directory and remove testing directory
         os.chdir(original_cwd)
         shutil.rmtree(tmp_dir)
@@ -243,10 +254,16 @@ def testing_dir(tmp_path, request):
 # ---------------
 # Init Mode Tests
 # ---------------
-def test_barcode_logic_no_barcode_one_platemap(testing_dir) -> None:
-    """Positive case test: Expects a succesfful run.
+def test_one_plate_one_platemap(test_dir) -> None:
+    """Positive case test: Expects a 0 exit code
 
-    Test emulates a user using CytoSnake and using multiple plate
+    This test checks if the CLI can handle one plate and one plate map without barcode 
+    as inputs.
+
+    Rational:
+    ---------
+        As this input involves only one plate, CytoSnake does not require the process 
+        of identifying which platemap corresponds to that plate.
 
     Parameters:
     -----------
@@ -254,18 +271,60 @@ def test_barcode_logic_no_barcode_one_platemap(testing_dir) -> None:
         Testing directory
     """
 
-    # select dataset to use, we are using standard sqlite
-    testing_dataset = get_test_data_folder(test_data_name="standard_sqlite")
-    print(os.getcwd())
+    # prepare testing files
+    datafiles = prepare_dataset(
+        test_data_name="standard_sqlite_single", test_dir_path=testing_dir
+    )
+
+    # selectin datasets (one plate one )
+    plate = datafiles.plate_data[0]
+    metadata
+
+    
+    
+    # execute
+    cmd = "cytosnake init -d *.sqlite -m metadata".split()
+    proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+
+    # change to testing directory
+    os.chdir(testing_dir)
+
+    
+
+def test_multiplate_maps_no_barcode(testing_dir) -> None:
+    """Negative case test: Expects `BarcodeMissingError` and Non-zero return code
+
+    This tests checks if the CLI raises an error when a user provides multiple platemaps
+    but no barcodes.
+
+    Rational:
+    ---------
+        CytoSnake relies on a barcode file to accurately map each platemap to its 
+        corresponding plate. If users provide multiple platemaps without a barcode, 
+        it becomes impossible for CytoSnake to determine the correct association between
+        platemaps and their respective plates.
+
+    Parameters:
+    -----------
+    testing_dir: pytest.fixture
+        Testing directory
+    """
 
     # transfer data to testing folder
     prepare_dataset(
-        source_dir=testing_dataset.dataset_dir, test_dir_path=testing_dir
+        test_data_name="standard_sqlite_multi", test_dir_path=testing_dir
     )
 
     # execute test
     cmd = "cytosnake init -d *.sqlite -m metadata".split()
     proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
 
+    # Grab raised exception
+    raised_exception = get_raised_error(proc.stderr)
+
     # assert checking
-    assert proc.returncode == 0
+    assert proc.returncode == 1
+    assert raised_exception == errors.BarcodeMissingError.__name__
+
+    
+
