@@ -1,4 +1,4 @@
-# CytoSnake API
+# CytoSnake
 
 ```{toctree}
 :maxdepth: 4
