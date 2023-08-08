@@ -187,7 +187,7 @@ def testing_dir(tmp_path, request):
     Parameters
     ----------
     tmp_path : pytest.fixture
-        pytest deafault fixture value to be called when creating a temp dir.
+        pytest default fixture value to be called when creating a temp dir.
 
     request : pytest.fixture
         Allows custom testing function to be added in the testing workflow
