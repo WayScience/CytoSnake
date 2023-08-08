@@ -5,6 +5,7 @@ test_utils.py contain additional functions that enhance testing capabilities, pr
 extra functionality for conducting comprehensive and robust tests.
 """
 
+
 def get_raised_error(traceback: str) -> str:
     """Parses traceback and attempts to obtain raised exception error.
 

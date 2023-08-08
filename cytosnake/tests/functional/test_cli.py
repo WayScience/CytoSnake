@@ -27,11 +27,12 @@ providing informative error messages to the user.
 """
 
 import os
-from dataclasses import dataclass
-import pytest
 import pathlib
 import shutil
 import subprocess
+from dataclasses import dataclass
+
+import pytest
 
 from cytosnake.common import errors
 from cytosnake.tests.test_utils import get_raised_error
@@ -83,13 +84,9 @@ class DataFiles:
         """
         # get all top level files
         if not isinstance(self.dataset_dir, (str, pathlib.Path)):
-            raise TypeError(
-                "dataset_dir must be a string or pathlib.Path object"
-            )
+            raise TypeError("dataset_dir must be a string or pathlib.Path object")
         if isinstance(self.dataset_dir, str):
-            self.dataset_dir = pathlib.Path(self.dataset_dir).resolve(
-                strict=True
-            )
+            self.dataset_dir = pathlib.Path(self.dataset_dir).resolve(strict=True)
 
         # get all files
         all_files = list(self.dataset_dir.glob("*"))
@@ -103,9 +100,7 @@ class DataFiles:
         self.plate_data = plate_data
 
         # get metadata_dir
-        meta_data_path = [
-            str(fpath.name) for fpath in all_files if fpath.is_dir()
-        ]
+        meta_data_path = [str(fpath.name) for fpath in all_files if fpath.is_dir()]
         self.metadata = (
             meta_data_path[0] if len(meta_data_path) == 1 else meta_data_path
         )
@@ -114,9 +109,7 @@ class DataFiles:
         barcode_path = [
             str(fpath.name) for fpath in all_files if fpath.suffix == ".txt"
         ]
-        self.barcode = (
-            barcode_path if len(barcode_path) == 1 else barcode_path
-        )
+        self.barcode = barcode_path if len(barcode_path) == 1 else barcode_path
 
 
 def get_test_data_folder(test_data_name: str) -> DataFiles:
@@ -246,9 +239,7 @@ def test_multiplate_maps_no_barcode(testing_dir) -> None:
     """
 
     # transfer data to testing folder
-    prepare_dataset(
-        test_data_name="standard_sqlite_multi", test_dir_path=testing_dir
-    )
+    prepare_dataset(test_data_name="standard_sqlite_multi", test_dir_path=testing_dir)
 
     # execute test
     cmd = "cytosnake init -d *.sqlite -m metadata".split()
@@ -294,6 +285,7 @@ def test_one_plate_one_platemap(testing_dir) -> None:
 
     # assert check
     assert proc.returncode == 0
+
 
 def test_multiplates_with_multi_platemaps(testing_dir):
     """Positive case test: Expects a 0 exit code
