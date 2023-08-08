@@ -81,6 +81,7 @@ def testing_dir(tmp_path, request):
 # ---------------
 # Init Mode Tests
 # ---------------
+@pytest.mark.negative
 def test_multiplate_maps_no_barcode(testing_dir) -> None:
     """Negative case test: Expects `BarcodeMissingError` and Non-zero return code
 
@@ -116,7 +117,7 @@ def test_multiplate_maps_no_barcode(testing_dir) -> None:
     assert proc.returncode == 1
     assert raised_exception == errors.BarcodeMissingError.__name__
 
-
+@pytest.mark.postive
 def test_one_plate_one_platemap(testing_dir) -> None:
     """Positive case test: Expects a 0 exit code
 
@@ -150,7 +151,7 @@ def test_one_plate_one_platemap(testing_dir) -> None:
     # assert check
     assert proc.returncode == 0
 
-
+@pytest.mark.postive
 def test_multiplates_with_multi_platemaps(testing_dir):
     """Positive case test: Expects a 0 exit code
 
