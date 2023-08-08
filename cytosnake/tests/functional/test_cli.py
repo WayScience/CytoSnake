@@ -47,7 +47,7 @@ class DataFiles:
 
     Attributes:
     -----------
-    metdata: str | list[str]
+    metadata: str | list[str]
         metadata directory name
     plate_data: list[str]
         list of plate data (parquet or sqlite files)
