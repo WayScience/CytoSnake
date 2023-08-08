@@ -107,8 +107,12 @@ def test_multiplate_maps_no_barcode(testing_dir) -> None:
     )
 
     # execute test
-    cmd = "cytosnake init -d *.sqlite -m metadata".split()
-    proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    proc = subprocess.run(
+        "cytosnake init -d *.sqlite -m metadata".split(),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
 
     # Grab raised exception
     raised_exception = test_utils.get_raised_error(proc.stderr)
@@ -116,6 +120,7 @@ def test_multiplate_maps_no_barcode(testing_dir) -> None:
     # assert checking
     assert proc.returncode == 1
     assert raised_exception == errors.BarcodeMissingError.__name__
+
 
 @pytest.mark.postive
 def test_one_plate_one_platemap(testing_dir) -> None:
@@ -145,11 +150,16 @@ def test_one_plate_one_platemap(testing_dir) -> None:
     metadata = datafiles.metadata
 
     # execute
-    cmd = f"cytosnake init -d {plate} -m {metadata}".split()
-    proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    proc = subprocess.run(
+        f"cytosnake init -d {plate} -m {metadata}".split(),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
 
     # assert check
     assert proc.returncode == 0
+
 
 @pytest.mark.postive
 def test_multiplates_with_multi_platemaps(testing_dir):
@@ -180,8 +190,12 @@ def test_multiplates_with_multi_platemaps(testing_dir):
     barcode = datafiles.barcode
 
     # execute
-    cmd = f"cytosnake init -d *plate -m metadata -b {barcode}".split()
-    proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    proc = subprocess.run(
+        f"cytosnake init -d *plate -m metadata -b {barcode}".split(),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
 
     # assert checks
     assert proc.returncode == 0
