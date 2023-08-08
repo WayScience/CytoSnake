@@ -4,6 +4,89 @@ module: test_utils.py
 test_utils.py contain additional functions that enhance testing capabilities, providing
 extra functionality for conducting comprehensive and robust tests.
 """
+import os
+import shutil
+import pathlib
+from dataclasses import dataclass
+
+
+@dataclass
+class DataFiles:
+    """Structured datatype representation that contains all files in a selected dataset
+
+    Attributes:
+    -----------
+    metadata: str | list[str]
+        metadata directory name
+    plate_data: list[str]
+        list of plate data (parquet or sqlite files)
+    barcode : str
+        barcode file name
+
+    Returns
+    -------
+    DataFiles
+        DataStructure representation of test dataset files
+    """
+
+    # required parameters
+    dataset_dir: str | pathlib.Path
+
+    # extracted files
+    metadata: str | list[str] = None
+    plate_data: str | list[str] = None
+    barcode: str = None
+
+    # extracting file paths and setting into dataclass attributes
+    def __post_init__(self):
+        self._extract_content_files()
+
+    def _extract_content_files(self):
+        """extracts all files within given dataset folder and sets the DataFile 
+        dataclass attributes
+
+        Raises
+        ------
+        TypeError
+            raised if dataset_dir is not a str or pathlib.Path object.
+            raised if plate data is not parquet or sqlite file
+        """
+        # get all top level files
+        if not isinstance(self.dataset_dir, (str, pathlib.Path)):
+            raise TypeError(
+                "dataset_dir must be a string or pathlib.Path object"
+            )
+        if isinstance(self.dataset_dir, str):
+            self.dataset_dir = pathlib.Path(self.dataset_dir).resolve(
+                strict=True
+            )
+
+        # get all files
+        all_files = list(self.dataset_dir.glob("*"))
+
+        # get data files
+        plate_data = [
+            str(fpath.name)
+            for fpath in all_files
+            if any(fpath.suffix == ext for ext in [".parquet", ".sqlite"])
+        ]
+        self.plate_data = plate_data
+
+        # get metadata_dir
+        meta_data_path = [
+            str(fpath.name) for fpath in all_files if fpath.is_dir()
+        ]
+        self.metadata = (
+            meta_data_path[0] if len(meta_data_path) == 1 else meta_data_path
+        )
+
+        # get barcode
+        barcode_path = [
+            str(fpath.name)
+            for fpath in all_files
+            if any(fpath.suffix == ext for ext in [".txt", ".csv"])
+        ]
+        self.barcode = barcode_path if len(barcode_path) == 1 else barcode_path
 
 
 def get_raised_error(traceback: str) -> str:
@@ -30,3 +113,68 @@ def get_raised_error(traceback: str) -> str:
     # returns exception name, refer to function documentation to understand
     # the order of parsing the traceback to obtain exception name.
     return traceback.splitlines()[-1].split(":")[0].split(".")[-1]
+
+
+def get_test_data_folder(test_data_name: str) -> DataFiles:
+    """Gets single or multiple datasets. Users provide the name of the datasets
+    that will be used in their tests
+
+    Parameters
+    ----------
+    test_data_name : str | list[str]
+        name or names of datasets to be selected
+
+    Returns
+    -------
+    DataFiles
+        contains all files in a dataclass format
+
+    Raises:
+    -------
+    FileNotFoundError
+        Raised when the provided test_data_name is not a valid testing dataset.
+    """
+
+    # type checking
+    if not isinstance(test_data_name, str):
+        raise TypeError("`test_data_name` must be a string")
+
+    # get testing dataset_path
+    data_dir_path = pathlib.Path("./datasets")
+    sel_test_data = (data_dir_path / test_data_name).resolve(strict=True)
+
+    # convert to DataFiles content
+    data_files = DataFiles(sel_test_data)
+
+    return data_files
+
+
+def prepare_dataset(
+    test_data_name: str,
+    test_dir_path: pathlib.Path,
+) -> DataFiles:
+    """Main function to prepare dataset into testing datafolder.
+
+    Parameters
+    ----------
+    test_data_name : str
+        name of the testing dataset you want to use
+
+    test_dir_path : pathlib.Path
+        path to testing directory
+
+    Returns
+    -------
+    DataFiles
+        Structured data object that contains all the files within the selected dataset
+    """
+    # get dataset and transfer to testing directory
+    datafiles = get_test_data_folder(test_data_name=test_data_name)
+    shutil.copytree(
+        datafiles.dataset_dir, str(test_dir_path), dirs_exist_ok=True
+    )
+
+    # change directory to the testing directory
+    os.chdir(str(test_dir_path))
+
+    return datafiles
