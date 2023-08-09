@@ -10,6 +10,9 @@ import pathlib
 from dataclasses import dataclass
 
 
+# Constants
+TEST_ROOT_PATH = pathlib.Path(__file__).parent
+
 @dataclass
 class DataFiles:
     """Structured datatype representation that contains all files in a selected dataset
@@ -140,7 +143,7 @@ def get_test_data_folder(test_data_name: str) -> DataFiles:
         raise TypeError("`test_data_name` must be a string")
 
     # get testing dataset_path
-    data_dir_path = pathlib.Path("./datasets")
+    data_dir_path = (TEST_ROOT_PATH / "dataset").resolve(strict=True)
     sel_test_data = (data_dir_path / test_data_name).resolve(strict=True)
 
     # convert to DataFiles content
