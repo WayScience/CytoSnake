@@ -106,19 +106,23 @@ def test_multiplate_maps_no_barcode(testing_dir) -> None:
         test_data_name="standard_sqlite_multi", test_dir_path=testing_dir
     )
 
-    # execute test
-    proc = subprocess.run(
-        "cytosnake init -d *.sqlite -m metadata".split(),
-        capture_output=True,
-        text=True,
-        check=False,
-    )
 
     # Grab raised exception
-    raised_exception = test_utils.get_raised_error(proc.stderr)
+    with pytest.raises(subprocess.CalledProcessError) as subproc_error:
+
+        # execute test
+        proc = subprocess.run(
+            "cytosnake init -d *.sqlite -m metadata".split(),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        
+        # parse trace back generated from CytoSnake
+        raised_exception = test_utils.get_raised_error(proc.stderr)
 
     # assert checking
-    assert proc.returncode == 1
+    assert subproc_error.value.returncode == 1
     assert raised_exception == errors.BarcodeMissingError.__name__
 
 
