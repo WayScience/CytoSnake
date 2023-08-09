@@ -172,6 +172,9 @@ def test_multiplates_with_multi_platemaps(testing_dir):
     This test checks if the CLI can handle multiple plates and multiple plate maps
     with a barcode as inputs.
 
+    checks for: data plates, data folder, cytosnake folder, barcodes in datafolder,
+    return code 
+
     Rational:
     ---------
         CytoSnake requires input from multiple platemaps and barcodes. To ensure
@@ -191,15 +194,29 @@ def test_multiplates_with_multi_platemaps(testing_dir):
     )
 
     # Selecting one plate and meta data dir
+    metadata = datafiles.metadata
     barcode = datafiles.barcode
 
     # execute
     proc = subprocess.run(
-        f"cytosnake init -d *plate -m metadata -b {barcode}".split(),
+        f"cytosnake init -d *.sqlite -m {metadata} -b {barcode}".split(),
         capture_output=True,
         text=True,
         check=False,
     )
 
+    # expected files
+    data_folder = testing_dir / "data"
+    cytosnake_file = testing_dir / ".cytosnake"
+    barcodes_in_datafolder = data_folder / "data" / barcode
+    metadata_in_datafolder = data_folder / "data" / datafiles.metadata
+    all_plates = list(data_folder.glob("*.sqlite"))
+
     # assert checks
     assert proc.returncode == 0
+    assert data_folder.exists()
+    assert cytosnake_file.exists()
+    assert barcodes_in_datafolder.exists()
+    assert metadata_in_datafolder.exists()
+    assert all([plate_data.endswith(".sqlite") for plate_data in all_plates])
+    
