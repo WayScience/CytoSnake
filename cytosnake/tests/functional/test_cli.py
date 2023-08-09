@@ -162,8 +162,18 @@ def test_one_plate_one_platemap(testing_dir) -> None:
     )
 
     # assert check
-    assert proc.returncode == 0
+    data_folder = testing_dir / "data"
+    cytosnake_file = testing_dir / ".cytosnake"
+    metadata_in_datafolder = data_folder / "data" / datafiles.metadata
+    all_plates = list(data_folder.glob("*.sqlite"))
 
+    # assert checks
+    assert proc.returncode == 0
+    assert data_folder.exists()
+    assert cytosnake_file.exists()
+    assert metadata_in_datafolder.exists()
+    assert all([plate_data.endswith(".sqlite") for plate_data in all_plates])
+    
 
 @pytest.mark.postive
 def test_multiplates_with_multi_platemaps(testing_dir):
