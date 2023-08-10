@@ -9,9 +9,10 @@ import shutil
 import pathlib
 from dataclasses import dataclass
 
+import cytosnake
 
-# Constants
-TEST_ROOT_PATH = pathlib.Path(__file__).parent
+# setting test root folder path
+TEST_ROOT_PATH = pathlib.Path(cytosnake.__path__[0]).parent / "tests"
 
 @dataclass
 class DataFiles:
@@ -122,9 +123,7 @@ def get_test_data_folder(test_data_name: str) -> DataFiles:
     """Gets single or multiple datasets. Users provide the name of the datasets
     that will be used in their tests
 
-    Parameters
-    ----------
-    test_data_name : str | list[str]
+    Parameters/home/axiom/Projects/CytoSnake/cytosnake/utils/datasets
         name or names of datasets to be selected
 
     Returns
@@ -143,7 +142,7 @@ def get_test_data_folder(test_data_name: str) -> DataFiles:
         raise TypeError("`test_data_name` must be a string")
 
     # get testing dataset_path
-    data_dir_path = (TEST_ROOT_PATH / "dataset").resolve(strict=True)
+    data_dir_path = (TEST_ROOT_PATH / "datasets").resolve(strict=True)
     sel_test_data = (data_dir_path / test_data_name).resolve(strict=True)
 
     # convert to DataFiles content
