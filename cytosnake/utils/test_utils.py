@@ -5,14 +5,15 @@ test_utils.py contain additional functions that enhance testing capabilities, pr
 extra functionality for conducting comprehensive and robust tests.
 """
 import os
-import shutil
 import pathlib
+import shutil
 from dataclasses import dataclass
 
 import cytosnake
 
 # setting test root folder path
 TEST_ROOT_PATH = pathlib.Path(cytosnake.__path__[0]).parent / "tests"
+
 
 @dataclass
 class DataFiles:
@@ -46,7 +47,7 @@ class DataFiles:
         self._extract_content_files()
 
     def _extract_content_files(self):
-        """extracts all files within given dataset folder and sets the DataFile 
+        """extracts all files within given dataset folder and sets the DataFile
         dataclass attributes
 
         Raises
@@ -57,13 +58,9 @@ class DataFiles:
         """
         # get all top level files
         if not isinstance(self.dataset_dir, (str, pathlib.Path)):
-            raise TypeError(
-                "dataset_dir must be a string or pathlib.Path object"
-            )
+            raise TypeError("dataset_dir must be a string or pathlib.Path object")
         if isinstance(self.dataset_dir, str):
-            self.dataset_dir = pathlib.Path(self.dataset_dir).resolve(
-                strict=True
-            )
+            self.dataset_dir = pathlib.Path(self.dataset_dir).resolve(strict=True)
 
         # get all files
         all_files = list(self.dataset_dir.glob("*"))
@@ -77,9 +74,7 @@ class DataFiles:
         self.plate_data = plate_data
 
         # get metadata_dir
-        meta_data_path = [
-            str(fpath.name) for fpath in all_files if fpath.is_dir()
-        ]
+        meta_data_path = [str(fpath.name) for fpath in all_files if fpath.is_dir()]
         self.metadata = (
             meta_data_path[0] if len(meta_data_path) == 1 else meta_data_path
         )
@@ -172,9 +167,7 @@ def prepare_dataset(
     """
     # get dataset and transfer to testing directory
     datafiles = get_test_data_folder(test_data_name=test_data_name)
-    shutil.copytree(
-        datafiles.dataset_dir, str(test_dir_path), dirs_exist_ok=True
-    )
+    shutil.copytree(datafiles.dataset_dir, str(test_dir_path), dirs_exist_ok=True)
 
     # change directory to the testing directory
     os.chdir(str(test_dir_path))

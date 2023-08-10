@@ -34,7 +34,7 @@ import subprocess
 import pytest
 
 from cytosnake.common import errors
-from cytosnake.utils import test_utils 
+from cytosnake.utils import test_utils
 
 
 # ---------------
@@ -102,14 +102,10 @@ def test_multiplate_maps_no_barcode(testing_dir) -> None:
     """
 
     # transfer data to testing folder
-    test_utils.prepare_dataset(
-        test_data_name="nf1-data", test_dir_path=testing_dir
-    )
-
+    test_utils.prepare_dataset(test_data_name="nf1-data", test_dir_path=testing_dir)
 
     # Grab raised exception
     with pytest.raises(subprocess.CalledProcessError) as subproc_error:
-
         # execute test
         proc = subprocess.run(
             "cytosnake init -d *.sqlite -m metadata".split(),
@@ -117,7 +113,7 @@ def test_multiplate_maps_no_barcode(testing_dir) -> None:
             text=True,
             check=True,
         )
-        
+
         # parse trace back generated from CytoSnake
         raised_exception = test_utils.get_raised_error(proc.stderr)
 
@@ -174,7 +170,7 @@ def test_one_plate_one_platemap(testing_dir) -> None:
     assert cytosnake_file.exists()
     assert metadata_in_datafolder.exists()
     assert all([str(plate_data).endswith(".sqlite") for plate_data in all_plates])
-    
+
 
 @pytest.mark.postive
 def test_multiplates_with_multi_platemaps(testing_dir):
@@ -184,7 +180,7 @@ def test_multiplates_with_multi_platemaps(testing_dir):
     with a barcode as inputs.
 
     checks for: data plates, data folder, cytosnake folder, barcodes in datafolder,
-    return code 
+    return code
 
     Rational:
     ---------
@@ -229,4 +225,3 @@ def test_multiplates_with_multi_platemaps(testing_dir):
     assert barcodes_in_datafolder.exists()
     assert metadata_in_datafolder.exists()
     assert all([str(plate_data).endswith(".sqlite") for plate_data in all_plates])
-    
