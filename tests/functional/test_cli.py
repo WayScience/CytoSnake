@@ -34,7 +34,7 @@ import subprocess
 import pytest
 
 from cytosnake.common import errors
-from cytosnake.tests import test_utils
+from cytosnake.utils import test_utils 
 
 
 # ---------------
@@ -146,7 +146,7 @@ def test_one_plate_one_platemap(testing_dir) -> None:
 
     # prepare testing files
     datafiles = test_utils.prepare_dataset(
-        test_data_name="standard_sqlite_single", test_dir_path=testing_dir
+        test_data_name="nf1", test_dir_path=testing_dir
     )
 
     # Selecting one plate and meta data dir
@@ -200,7 +200,7 @@ def test_multiplates_with_multi_platemaps(testing_dir):
 
     # prepare testing files
     datafiles = test_utils.prepare_dataset(
-        test_data_name="standard_sqlite_multi", test_dir_path=testing_dir
+        test_data_name="nf1", test_dir_path=testing_dir
     )
 
     # Selecting one plate and meta data dir
