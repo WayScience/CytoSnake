@@ -1,0 +1,20 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: NF1-CellPainting-Data-Repository
+message: NF1 dataset repository
+type: dataset
+authors:
+  - given-names: Jenna
+    family-names: Tomkinson
+  - given-names: Greg
+    family-names: Way
+identifiers:
+  - type: url
+    value: >-
+      https://github.com/WayScience/nf1_cellpainting_data/tree/main
+    description: Github repository of the dataset
+repository-code: >-
+  https://github.com/WayScience/nf1_cellpainting_data/tree/main
+license: CC0-1.0
