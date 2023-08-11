@@ -102,9 +102,7 @@ def test_multiplate_maps_no_barcode(testing_dir) -> None:
     """
 
     # transfer data to testing folder
-    test_utils.prepare_dataset(
-        test_data_name="nf1-data", test_dir_path=testing_dir
-    )
+    test_utils.prepare_dataset(test_data_name="nf1-data", test_dir_path=testing_dir)
 
     # Grab raised exception
     with pytest.raises(subprocess.CalledProcessError) as subproc_error:

@@ -7,8 +7,8 @@ extra functionality for conducting comprehensive and robust tests.
 import os
 import pathlib
 import shutil
-from typing import Optional
 from dataclasses import dataclass
+from typing import Optional
 
 import cytosnake
 
@@ -59,13 +59,9 @@ class DataFiles:
         """
         # get all top level files
         if not isinstance(self.dataset_dir, (str, pathlib.Path)):
-            raise TypeError(
-                "dataset_dir must be a string or pathlib.Path object"
-            )
+            raise TypeError("dataset_dir must be a string or pathlib.Path object")
         if isinstance(self.dataset_dir, str):
-            self.dataset_dir = pathlib.Path(self.dataset_dir).resolve(
-                strict=True
-            )
+            self.dataset_dir = pathlib.Path(self.dataset_dir).resolve(strict=True)
 
         # get all files
         all_files = list(self.dataset_dir.glob("*"))
@@ -79,9 +75,7 @@ class DataFiles:
         self.plate_data = plate_data
 
         # get metadata_dir
-        meta_data_path = [
-            str(fpath.name) for fpath in all_files if fpath.is_dir()
-        ]
+        meta_data_path = [str(fpath.name) for fpath in all_files if fpath.is_dir()]
         self.metadata = (
             meta_data_path[0] if len(meta_data_path) == 1 else meta_data_path
         )
@@ -93,8 +87,10 @@ class DataFiles:
             if any(fpath.suffix == ext for ext in [".txt", ".csv"])
         ]
         self.barcode = (
-            barcode_path[0] if len(barcode_path) == 1 else barcode_path
-        ) if len(barcode_path) > 0 else None
+            (barcode_path[0] if len(barcode_path) == 1 else barcode_path)
+            if len(barcode_path) > 0
+            else None
+        )
 
 
 def get_raised_error(traceback: str) -> str:
@@ -176,9 +172,7 @@ def prepare_dataset(
     """
     # get dataset and transfer to testing directory
     datafiles = get_test_data_folder(test_data_name=test_data_name)
-    shutil.copytree(
-        datafiles.dataset_dir, str(test_dir_path), dirs_exist_ok=True
-    )
+    shutil.copytree(datafiles.dataset_dir, str(test_dir_path), dirs_exist_ok=True)
 
     # change directory to the testing directory
     os.chdir(str(test_dir_path))
@@ -191,7 +185,7 @@ def check_init_outputs(
     test_dir: pathlib.Path,
     plate_data_ext: Optional[str] = "sqlite",
 ):
-    """verifies if all the files are generated after executing a sucessfull `init` mode 
+    """verifies if all the files are generated after executing a sucessfull `init` mode
     run with CytoSnake.
 
     Parameters
@@ -205,9 +199,7 @@ def check_init_outputs(
     """
     # typpe checking
     if not isinstance(paths, DataFiles):
-        raise TypeError(
-            f"`paths` must be a DataFiles type, not: {type(paths)}"
-        )
+        raise TypeError(f"`paths` must be a DataFiles type, not: {type(paths)}")
     if not isinstance(test_dir, pathlib.Path):
         raise TypeError(
             f"`test_dir` must be a pathlib.Path type, not: {type(test_dir)}"
@@ -222,7 +214,7 @@ def check_init_outputs(
     cytosnake_file = test_dir / ".cytosnake"
     metadata_in_datafolder = data_folder / paths.metadata
     all_plates = list(data_folder.glob("*.sqlite"))
-    
+
     # if the barcode is not None, get the path to barcode and check
     if paths.barcode is not None:
         barcodes_in_datafolder = data_folder / paths.barcode
@@ -234,8 +226,5 @@ def check_init_outputs(
     assert cytosnake_file.exists()
     assert metadata_in_datafolder.exists()
     assert all(
-        [
-            str(plate_data).endswith(f".{plate_data_ext}")
-            for plate_data in all_plates
-        ]
+        [str(plate_data).endswith(f".{plate_data_ext}") for plate_data in all_plates]
     )
