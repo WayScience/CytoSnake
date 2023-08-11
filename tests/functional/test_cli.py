@@ -102,7 +102,9 @@ def test_multiplate_maps_no_barcode(testing_dir) -> None:
     """
 
     # transfer data to testing folder
-    test_utils.prepare_dataset(test_data_name="nf1-data", test_dir_path=testing_dir)
+    test_utils.prepare_dataset(
+        test_data_name="nf1-data", test_dir_path=testing_dir
+    )
 
     # Grab raised exception
     with pytest.raises(subprocess.CalledProcessError) as subproc_error:
@@ -148,7 +150,8 @@ def test_one_plate_one_platemap(testing_dir) -> None:
     # Selecting one plate and meta data dir
     plate = datafiles.plate_data[0]
     metadata = datafiles.metadata
-    print(type(metadata))
+
+    print(datafiles.barcode)
 
     # execute
     proc = subprocess.run(
@@ -158,18 +161,13 @@ def test_one_plate_one_platemap(testing_dir) -> None:
         check=False,
     )
 
-    # assert check
-    data_folder = testing_dir / "data"
-    cytosnake_file = testing_dir / ".cytosnake"
-    metadata_in_datafolder = data_folder / datafiles.metadata
-    all_plates = list(data_folder.glob("*.sqlite"))
-
     # assert checks
     assert proc.returncode == 0
-    assert data_folder.exists()
-    assert cytosnake_file.exists()
-    assert metadata_in_datafolder.exists()
-    assert all([str(plate_data).endswith(".sqlite") for plate_data in all_plates])
+
+    # check generated files
+    test_utils.check_init_outputs(
+        paths=datafiles, test_dir=testing_dir, plate_data_ext="sqlite"
+    )
 
 
 @pytest.mark.postive
@@ -199,9 +197,8 @@ def test_multiplates_with_multi_platemaps(testing_dir):
     datafiles = test_utils.prepare_dataset(
         test_data_name="nf1-data", test_dir_path=testing_dir
     )
-
     metadata = datafiles.metadata
-    barcode = datafiles.barcode[0]
+    barcode = datafiles.barcode
 
     # execute CytoSnake in testing folder
     proc = subprocess.run(
@@ -211,17 +208,10 @@ def test_multiplates_with_multi_platemaps(testing_dir):
         check=False,
     )
 
-    # expected files
-    data_folder = testing_dir / "data"
-    cytosnake_file = testing_dir / ".cytosnake"
-    barcodes_in_datafolder = data_folder / barcode
-    metadata_in_datafolder = data_folder / datafiles.metadata
-    all_plates = list(data_folder.glob("*.sqlite"))
-
-    # assert checks
+    # check subprocess execution
     assert proc.returncode == 0
-    assert data_folder.exists()
-    assert cytosnake_file.exists()
-    assert barcodes_in_datafolder.exists()
-    assert metadata_in_datafolder.exists()
-    assert all([str(plate_data).endswith(".sqlite") for plate_data in all_plates])
+
+    # check generated files
+    test_utils.check_init_outputs(
+        paths=datafiles, test_dir=testing_dir, plate_data_ext="sqlite"
+    )
