@@ -11,3 +11,10 @@ ignore = ["F821"]
 
 [tool.ruff.flake8-self]
 ignore-names = ["snakemake"]
+
+# pytest config
+[tool.pytest.ini_options]
+markers = [
+    "positive: marks for positive test",
+    "negative: marks for a negative test"
+]

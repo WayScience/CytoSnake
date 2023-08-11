@@ -8,6 +8,7 @@
 cytosnake.cli
 cytosnake.common
 cytosnake.guards
+cytosnake.tests
 cytosnake.utils
 ```
 
