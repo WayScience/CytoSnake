@@ -1,15 +1,15 @@
-# CytoSnake Testing
+## CytoSnake Testing General Documentation 
 
-- [CytoSnake Testing](#cytosnake-testing)
-  - [Rationale and Motivation](#rationale-and-motivation)
-    - [Performance](#performance)
-    - [Reproducibility](#reproducibility)
-    - [User-friendliness and Portability](#user-friendliness-and-portability)
-  - [Best Practices](#best-practices)
-    - [Tech stack](#tech-stack)
-    - [Dataset](#dataset)
-    - [Clear and Descriptive test](#clear-and-descriptive-test)
-  - [Testing Module Main Documentation](#testing-module-main-documentation)
+- [CytoSnake Testing General Documentation](#cytosnake-testing-general-documentation)
+- [Rationale and Motivation](#rationale-and-motivation)
+  - [Performance](#performance)
+  - [Reproducibility](#reproducibility)
+  - [User-friendliness and Portability](#user-friendliness-and-portability)
+- [Best Practices](#best-practices)
+  - [Tech stack](#tech-stack)
+  - [Dataset](#dataset)
+  - [Clear and Descriptive test](#clear-and-descriptive-test)
+- [Testing Module Main Documentation](#testing-module-main-documentation)
 
 ---
 

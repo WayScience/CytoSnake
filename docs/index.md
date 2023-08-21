@@ -13,6 +13,7 @@ tutorial
 workflows
 workflow-modules
 modules
+testing
 ```
 
 ```{include} ../README.md
