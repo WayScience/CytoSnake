@@ -72,4 +72,3 @@ We believe that providing easy-to-follow documentation generated from users can 
 By capturing diverse scenarios and potential edge cases, this documentation becomes a reliable reference for users seeking to understand `CytoSnake`'s capabilities.
 Overall, we want the community to refine and expand the testing suite iteratively, ensuring robustness and thoroughness in maintaining `Cytosnake`'s quality.
 With this approach, we like a collaborative ecosystem where documentation and testing help each other, leading to a more stable, reliable, and user-friendly `CytoSnake` environment.
-
