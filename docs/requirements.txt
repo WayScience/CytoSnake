@@ -5,5 +5,5 @@ mock
 autodoc
 myst-parser
 rst-to-myst
-furo
+furo==2023.7.26
 snakemake
