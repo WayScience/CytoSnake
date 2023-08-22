@@ -1,22 +1,21 @@
 ## CytoSnake Testing General Documentation 
 
-- [CytoSnake Testing General Documentation](#cytosnake-testing-general-documentation)
-- [Rationale and Motivation](#rationale-and-motivation)
-  - [Performance](#performance)
-  - [Reproducibility](#reproducibility)
-  - [User-friendliness and Portability](#user-friendliness-and-portability)
-- [Best Practices](#best-practices)
-  - [Tech stack](#tech-stack)
-  - [Dataset](#dataset)
-  - [Clear and Descriptive test](#clear-and-descriptive-test)
-- [Testing Module Main Documentation](#testing-module-main-documentation)
+<p align="center">
+  <img src="../docs/images/testing_diagram.svg", alt="image showing CytoSnake's Testing Suite">
+</p>
 
----
+>This diagram illustrates the testing framework of `CytoSnake`, showcasing the main objectives of each core testing module.
 
 Welcome to the testing documentation for `CytosSnake`, where you'll learn the essential principles of crafting effective and insightful tests.
 Our tests are centered around ensuring that CytoSnake stands as a robust and dependable software tool, capable of generating reproducible workflows for single-cell morphology profiles.
 
 In this documentation, you will gain insight into creating tests within CytoSnake, ensuring that every user who uses the `CytoSnake` can get a reliable experience.
+
+Below are the written documentation for each testing suite:
+
+- [Functional testing](../docs/func-tests.md)
+- [Unit testing](../docs/unit-tests.md)
+- [Workflow testing](../docs/workflow-tests.md)
 
 ## Rationale and Motivation
 
@@ -30,8 +29,7 @@ Our tests in `CytoSnake` are designed to align with our goals of scale, performa
 
 ### Reproducibility
 
-Reproducibility is an integral part of Cytosnake ensuring the reliable robust conclusions
-
+Reproducibility is an integral part of Cytosnake ensuring the reliable robust conclusions.
 Our tests are designed to ensure reproducibility by monitoring `CytoSnake`'s functionality across different scenarios.
 This means that CytoSnake will be subjected to various inputs and conditions to test actively identifying and capturing any inconsistencies with the generated outputs.
 Our testing design aims to offer researchers in the community a sense of reliability, ensuring they can consistently achieve reproducible results that reinforce robust scientific conclusions.
@@ -75,10 +73,3 @@ By capturing diverse scenarios and potential edge cases, this documentation beco
 Overall, we want the community to refine and expand the testing suite iteratively, ensuring robustness and thoroughness in maintaining `Cytosnake`'s quality.
 With this approach, we like a collaborative ecosystem where documentation and testing help each other, leading to a more stable, reliable, and user-friendly `CytoSnake` environment.
 
-## Testing Module Main Documentation
-
-Below are the documentations for each testing suite:
-
-- [Functional testing](./functional/README.md)
-- [Unit testing]()
-- [Workflow testing]()

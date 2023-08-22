@@ -1,6 +1,6 @@
-# CytoSnake Functional Tests
+# Functional Tests
 
-- [CytoSnake Functional Tests](#cytosnake-functional-tests)
+- [Functional Tests](#functional-tests)
   - [Summary](#summary)
   - [Rational](#rational)
   - [Testing Environment](#testing-environment)
@@ -21,7 +21,7 @@ By carefully reviewing this documentation, you can efficiently perform functiona
 
 Functional tests are essential for evaluating `CytoSnake`'s behavior in accurately executing its intended functions with specific input parameters.
 They primarily aim to validate the functionality of the program, ensuring it meets the specified requirements.
-These tests involve feeding CytoSnake's Command Line Interface (CLI) with various parameters to simulate user interactions and thoroughly monitor the user experience
+These tests involve feeding `CytoSnake`'s Command Line Interface (CLI) with various parameters to simulate user interactions and thoroughly monitor the user experience
 By conducting functional tests, developers can ensure that all user-inputted parameters function correctly within `CytoSnake`, leading to a more reliable and user-friendly application.
 Ultimately, the focus of these tests is to guarantee easy and simple user experience with `CytoSnake`.
 
@@ -30,12 +30,12 @@ Ultimately, the focus of these tests is to guarantee easy and simple user experi
 Below is an image on how the testing environment:
 
 <p align="center">
-  <img src="../../../docs/images/functional-testing-diagram-test-env2.png", alt="image showing CytoSnake's functional test env">
+  <img src="../../docs/images/functional-testing-diagram.png", alt="image showing CytoSnake's functional test env">
 </p>
 
 > **Functional Testing Environment**: Schematic dipicting `CytoSnake`'s functional testing envrionment.
 
-Shown above is a basic illustration of the functional testing environment used by CytoSnake. This illustration introduces four fundamental components: the CytoSnake module(shown in blue-green), prepare_data() function (shown in light-green), functional test module (shown in yellow), and fixture (shown in red) working together.
+Shown above is a basic illustration of the functional testing environment used by `CytoSnake`. This illustration introduces four fundamental components: the `CytoSnake` module(shown in blue-green), prepare_data() function (shown in light-green), functional test module (shown in yellow), and fixture (shown in red) working together.
 
 - **`CytoSnake module`**: is used to import `test_utils.py` module in order to use the `prepare_data()` function
 - **`prepare_data()`**: allows developers to easily select data and transport them to the testing directory
@@ -83,7 +83,7 @@ Here is a list below explaining the expected components of the documentation:
 
 - **positive test**: indicates a successful execution with the provided input parameters.
 - **negative test**: indicates that an error is supposed to be expected in the test.
-- **rational**: reason behind this test, what is trying to emulate?
+- **rational**: reason behind this test, what is it trying to emulate?
 - **inputs**: provide input documentation (e.g. explaining the dataset used).
 
 Doing so will enable other developers in the `CytoSnake` community to fully comprehend the implemented functional tests.
@@ -116,24 +116,24 @@ Once the desired files are selected, users can proceed to prepare them for execu
 In the execution step, `CytoSnake` runs with the provided inputs within the testing directory.
 Fortunately, the `prepare_dataset` function not only generates the `DataFile` object but also informs the testing module about the execution location for `CytoSnake`.
 This means after executing `prepare_dataset`, the test automatically changes its directory to the testing folder, `testing_dir`, ensuring that all subsequent executions take place within this designated directory (look at figure).
-This implicit change of directory simplifies the testing process and ensures that CytoSnake runs smoothly within the expected environment.
+This implicit change of directory simplifies the testing process and ensures that `CytoSnake` runs smoothly within the expected environment.
 
 ### Output Check
 
 The output check step is for verifying if the expected outputs of your tests are generated.
 As a user, you can perform checks for multiple outputs to ensure a passing test.
 For instance, you can validate if the correct error is being raised by utilizing one of the test utility functions called `get_raised_error` (please refer to the documentation for more details).
-This helps you to thoroughly examine different aspects of the test results and validate the accuracy of CytoSnake's behavior.
+This helps you to thoroughly examine different aspects of the test results and validate the accuracy of `CytoSnake`'s behavior.
 
 ## Ending Remarking
 
 Congratulations! You now know to create functional tests effectively.
 By understanding the rationale behind each step, following the straightforward process, and referring to the well-documented guidelines, you are fully equipped to create robust and reliable tests for `CytoSnake`.
-So, go ahead and design some tests that not only ensure the stability of the user experience but also contribute to the growth of the `CytoSnake`` community.
+So, go ahead and design some tests that not only ensure the stability of the user experience but also contribute to the growth of the `CytoSnake` community.
 
 If you have any questions or need assistance with creating tests, don't hesitate to reach out to us.
 Simply refer to the [issue](https://github.com/WayScience/CytoSnake/issues) form in the repository, and we'll be more than happy to provide help.
-Your contributions are highly valued, and we want to ensure that your functional testing experience with `CytoSnake`` is easy.
+Your contributions are highly valued, and we want to ensure that your functional testing experience with `CytoSnake` is easy.
 Feel free to ask any questions or add comments, and we'll be there to help you every step of the way!
 
 Happy testing!
