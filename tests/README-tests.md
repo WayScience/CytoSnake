@@ -1,9 +1,8 @@
 ## CytoSnake Testing General Documentation
 
-![testing-diagram](../docs/images/testing_diagram.svg)
-<!-- <p align="center">
+<p align="center">
   <img src="../docs/images/testing_diagram.svg", alt="image showing CytoSnake's Testing Suite">
-</p> -->
+</p>
 
 >This diagram illustrates the testing framework of `CytoSnake`, showcasing the main objectives of each core testing module.
 
@@ -24,7 +23,7 @@ Below are the rationals and motivations behind generating tests for `CytoSnake`
 
 ### Performance
 
-Remarkable technological advances have occurred within the field of high-throughput microscopy imaging, generating a surmount of single-cell morphology readouts, also known as single-cell morphology profiles.
+Remarkable technological advances have occurred within the field of high-throughput microscopy imaging, generating a surmount of image-based profiles, also known as morphology profiles.
 With this increase in data, there is a high need for high-performing software tools that can not only scale with large volumes of single-cell morphology profiles but also create a tool that can orchestrate various analytical tools and make them reproducible.
 Our tests in `CytoSnake` are designed to align with our goals of scale, performance, and orchestration. By rigorously evaluating core functionality, we ensure that users can quickly obtain reproducible conclusions from their data, enabling faster insights and analysis.
 
