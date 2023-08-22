@@ -3,7 +3,7 @@
 <!-- <p align="center">
   <img src="./images/testing_diagram.svg", alt="image showing CytoSnake's Testing Suite">
 </p> -->
-![img](../docs/images/testing_diagram.svg)
+![img](../docs/images/functional-testing-diagram.png
 
 >This diagram illustrates the testing framework of `CytoSnake`, showcasing the main objectives of each core testing module.
 
