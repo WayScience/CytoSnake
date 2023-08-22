@@ -1,4 +1,4 @@
-## CytoSnake Testing General Documentation 
+## CytoSnake Testing General Documentation
 
 <p align="center">
   <img src="../docs/images/testing_diagram.svg", alt="image showing CytoSnake's Testing Suite">
