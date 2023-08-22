@@ -29,9 +29,10 @@ Ultimately, the focus of these tests is to guarantee easy and simple user experi
 
 Below is an image on how the testing environment:
 
-<p align="center">
+![img](../../docs/images/functional-testing-diagram.png)
+<!-- <p align="center">
   <img src="../../docs/images/functional-testing-diagram.png", alt="image showing CytoSnake's functional test env">
-</p>
+</p> -->
 
 > **Functional Testing Environment**: Schematic dipicting `CytoSnake`'s functional testing envrionment.
 

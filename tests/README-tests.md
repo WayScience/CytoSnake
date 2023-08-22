@@ -1,8 +1,9 @@
 ## CytoSnake Testing General Documentation
 
-<p align="center">
+![testing-diagram](../docs/images/testing_diagram.svg)
+<!-- <p align="center">
   <img src="../docs/images/testing_diagram.svg", alt="image showing CytoSnake's Testing Suite">
-</p>
+</p> -->
 
 >This diagram illustrates the testing framework of `CytoSnake`, showcasing the main objectives of each core testing module.
 

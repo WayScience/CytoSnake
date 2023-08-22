@@ -5,5 +5,4 @@
 
 cytosnake
 generate_sample_inputs
-setup
 ```
