@@ -27,7 +27,7 @@ Ultimately, the focus of these tests is to guarantee easy and simple user experi
 
 ## Functional Testing Environment
 
-![img](../docs/images/functional-testing-diagram.png)
+![functional-test-diagram](../docs/images/functional-testing-diagram-test.png)
 > **Functional Testing Environment**: Schematic depicting `CytoSnake`'s functional testing environment.
 
 Shown above is a basic illustration of the functional testing environment used by `CytoSnake`. 
