@@ -67,7 +67,7 @@ Through development, we use code coverage as a monitoring tool that ensures that
 This approach ensures that all functionalities of `CytoSnake` are thoroughly tested, making it a dependable software tool.
 Additionally, developers have the flexibility to create their own datasets, as long as they adhere to `CytoSnake`'s established standards.
 
-### Dataset
+### Datasets
 
 We use structured datasets that attempt to emulate different uses of `CytoSnake`.
 These datasets includes plate data, plate maps and barcode fies, which are used to cover various situations that might occur when users interact with `CytoSnake`.
