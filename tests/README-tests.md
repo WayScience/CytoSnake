@@ -76,7 +76,7 @@ These datasets includes plate data, plate maps and barcode fies, which are used 
 
 In `CytoSnake`, well-structured testing documentation plays an important role.
 It simplifies the software experience for both users and developers by providing a clear understanding of what is being tested within `CytoSnake`.
-We believe that providing easy-to-follow documentation generated from users can serve as a valuable resource. 
+We believe that providing easy-to-follow documentation generated from users can serve as a valuable resource.
 Documentation not only helps in understanding the testing processes but also offers insights into the overall functionality of `CytoSnake`.
 By capturing diverse scenarios and potential edge cases, our testing suite also becomes a reliable reference for users seeking to understand `CytoSnake`'s capabilities.
 Overall, we want the community to refine and expand the testing suite iteratively, ensuring robustness and thoroughness in maintaining `Cytosnake`'s quality.

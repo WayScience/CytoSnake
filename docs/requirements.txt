@@ -4,5 +4,6 @@ mock
 autodoc
 myst-parser
 rst-to-myst
+# specific version added due to later version not allowing rtd compilation
 furo==2023.7.26
 snakemake

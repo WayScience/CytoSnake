@@ -13,7 +13,7 @@
 
 ## Summary
 
-Here, we provide you with `CytoSnake` functional test documentation.
+Here, we provide you with `CytoSnake` [functional test](https://www.geeksforgeeks.org/software-testing-functional-testing/#) documentation.
 It is designed to help you, as both a developer and user, gain a comprehensive understanding of the test cases and their expected outcomes.
 By carefully reviewing this documentation, you can efficiently perform functional tests, validate `CytoSnake`'s behavior, and ensure its reliability in various scenarios.
 
@@ -30,17 +30,17 @@ Ultimately, the focus of these tests is to guarantee easy and simple user experi
 ![functional_test_diagram](../../docs/images/functional-testing-diagram.svg)
 > **Functional Testing Environment**: Schematic depicting `CytoSnake`'s functional testing environment.
 
-Shown above is a basic illustration of the functional testing environment used by `CytoSnake`. 
+Shown above is a basic illustration of the functional testing environment used by `CytoSnake`.
 This illustration introduces four fundamental components: the `CytoSnake` module(shown in blue-green), prepare_data function (shown in light-green), functional test module (shown in yellow), and fixture (shown in red) working together.
 
 - **`CytoSnake module`**: is used to import `test_utils.py` module in order to use the `prepare_data()` function
 - **`prepare_data()`**: allows developers to easily select data and transport them to the testing directory
-- **`functional test`** (shown in yellow) contains the sets of instructions on how to test `CytoSnake`s'CLI. 
-- **`fixture`**: Are [`pytest`](https://docs.pytest.org/en/6.2.x/fixture.html) fixtures that provide essential setup and teardown functionalities to make it easier for developers to form their tests.
+- **`functional test`** (shown in yellow) contains the sets of instructions on how to test `CytoSnake`s'CLI.
+- **`fixture`**: Are [`pytest`](https://docs.pytest.org/en/latest/explanation/fixtures.html) fixtures that provide essential setup and teardown functionalities to make it easier for developers to form their tests.
 
 ## Submitting Tests
 
-Adding functional tests is simple! 
+Here is the run down of creating a functional test!
 You, as a developer, can create a new functional test within the `cytosnake/test/functional` directory and select a module where the test will be added.
 This is similar to adding tests in traditional software packages, but using a consistent pattern to help maintainability.
 
@@ -48,7 +48,7 @@ Below, is an example to illustrate how to add a test in the `test_cli.py` module
 
 ```python
 # inside test_cli.py testing module
-@pytest.mark.positive # or can be negative as well
+@pytest.mark.positive  # or can be negative as well
 def test_example(testing_dir) -> None:
     """
     [ Enter Documentation]
@@ -58,9 +58,7 @@ def test_example(testing_dir) -> None:
     """
 
     # step 1: prepare testing files and select input files
-    datafiles = prepare_dataset(
-        test_data_name="nf1-data", test_dir_path=testing_dir
-    )
+    datafiles = prepare_dataset(test_data_name="nf1-data", test_dir_path=testing_dir)
 
     # Selecting inputs
     plate = datafiles.plate_data[0]
