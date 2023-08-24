@@ -4,5 +4,5 @@
 :maxdepth: 4
 ```
 
-```{include} ../tests/functional/README-functional.md
+```{include} ../tests/functional/functional-test.md
 ```

@@ -4,5 +4,5 @@
 :maxdepth: 4
 ```
 <!-- This imports the README from the /test/workflow directory -->
-```{include} ../tests/workflow/README-workflow-tests.md
+```{include} ../tests/workflow/workflow-tests.md
 ```
