@@ -89,7 +89,7 @@ Doing so will enable other developers in the `CytoSnake` community to fully comp
 
 ### Understanding the main steps of CytoSnake's Functional Tests
 
-The process of creating a functional test is straightforward, involving three key steps that developers must follow to build a successful and robust test.
+The process of creating a successful and robust functional test involves three key steps.
 These steps consist of:
 
 - **preparation**: Preparing testing folder, dataset, and selecting inputs
