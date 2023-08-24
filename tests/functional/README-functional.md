@@ -98,7 +98,7 @@ These steps consist of:
 
 #### Preparation
 
-Preparing your dataset requires minimal effort with the help  `prepare_dataset` function.
+Preparing your dataset requires minimal effort with the help of the `prepare_dataset` function.
 This function readily prepares the dataset using just two parameters: the name of the dataset and the target directory for the test execution.
 
 > **Note**: Thanks to the use of pytest's fixtures, the `testing_dir` variable already holds the path to the generated testing directory. As a result, users **are not required** to create their own testing directories when conducting functional tests.
