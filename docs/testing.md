@@ -10,5 +10,5 @@ workflow-tests
 ```
 
 <!-- This imports the README from the /test directory -->
-```{include} ../tests/README-tests.md
+```{include} ../tests/tests-framework.md
 ```
