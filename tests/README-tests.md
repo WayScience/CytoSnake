@@ -45,8 +45,8 @@ Overall, `CytoSnake`'s tests are designed to not only reach robust conclusions b
 
 While prioritizing reproducibility is crucial, we also intend to make `CytoSnake` accessible to a broader audience, ensuring its user-friendliness and portability.
 Our tests are deployed in GitHub Actions, allowing for multi-platform testing across different operating systems, ensuring `CytoSnake` is system agnostic.
-In addition, we use the `Poetry` package to manage dependencies, assuring that the software can be easily installed.
-We leverage the `conda` environment manager to encapsulate dependencies within `CytoSnake`'s modules allowing it to be portable and consistent across all systems.
+In addition, we use the [`Poetry`](https://python-poetry.org/docs/) package to manage dependencies, assuring that the software can be easily installed.
+We leverage the [`conda`](https://docs.conda.io/projects/conda/en/stable/) environment manager to encapsulate dependencies within `CytoSnake`'s modules allowing it to be portable and consistent across all systems.
 Ultimately, our tests aim to ensure that users have an easy and enjoyable experience while using `CytoSnake`, by providing the convenience of being portable and requiring little effort to use it.
 
 ## Best Practices
@@ -58,7 +58,7 @@ Outlined below are the best practices that we consider instrumental in helping u
 
 ### Tech stack
 
-Our testing suite uses [`pytest`](https://docs.pytest.org/en/7.4.x/) a very powerful, flexible and easy-to-use testing framework.
+Our testing suite uses [`pytest`](https://docs.pytest.org/en/latest/) a very powerful, flexible and easy-to-use testing framework.
 Its user-friendliness enables developers to write and execute tests easily, providing rapid development.
 Additionally, Pytest's modular fixtures and extensive customization provide great opportunities with `CytoSnake`'s development workflow, enhancing code quality and adaptability while maintaining a smooth and efficient testing process.
 

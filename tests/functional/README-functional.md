@@ -76,6 +76,7 @@ Above is an example of how a test should be written.
 To ensure that `pytest` recognizes your functions as tests, it's essential to begin the function name with `test_`.
 
 To maintain clarity in your functional tests, please provide concise and well-structured documentation explaining the **test type** (positive or negative), **rationale**, and **inputs** (if any).
+Doing so will enable other developers in the `CytoSnake` community to fully comprehend the implemented functional tests.
 Here is a list below explaining the expected components of the documentation:
 
 - **positive test**: indicates a successful execution with the provided input parameters.
@@ -83,20 +84,18 @@ Here is a list below explaining the expected components of the documentation:
 - **rational**: reason behind this test, what is it trying to emulate?
 - **inputs**: provide input documentation (e.g. explaining the dataset used).
 
-Doing so will enable other developers in the `CytoSnake` community to fully comprehend the implemented functional tests.
-
 ### Understanding the main steps of CytoSnake's Functional Tests
 
 The process of creating a successful and robust functional test involves three key steps.
 These steps consist of:
 
-- **preparation**: Preparing testing folder, dataset, and selecting inputs
-- **execution**: Execute `CytoSnake` within testing older
-- **assertion checks**: Checking desired outputs
+1. **preparation**: Preparing testing folder, dataset, and selecting inputs
+2. **execution**: Execute `CytoSnake` within testing older
+3. **assertion checks**: Checking desired outputs
 
 #### Preparation
 
-Preparing your dataset requires minimal effort with the help of the `prepare_dataset` function.
+Preparing your dataset requires minimal effort with the help of the [`prepare_dataset`](https://github.com/WayScience/CytoSnake/blob/bdd2339e43b015ad6ab1ec8b9d8496596a548f89/cytosnake/utils/test_utils.py#L154)  function.
 This function readily prepares the dataset using just two parameters: the name of the dataset and the target directory for the test execution.
 
 > **Note**: Thanks to the use of pytest's fixtures, the `testing_dir` variable already holds the path to the generated testing directory. As a result, users **are not required** to create their own testing directories when conducting functional tests.
