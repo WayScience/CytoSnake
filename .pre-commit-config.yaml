@@ -25,6 +25,11 @@ repos:
       - id: black
         language_version: python3.10
 
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: "1.16.0"  # replace with latest tag on GitHub
+    hooks:
+      - id: blacken-docs
+
   # adding ruff with auto fix on
   # additional configs are in the pyproject.toml file
   - repo: https://github.com/charliermarsh/ruff-pre-commit

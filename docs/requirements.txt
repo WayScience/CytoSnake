@@ -1,10 +1,9 @@
-sphinx
 sphinx-autobuild
 sphinx-autoapi
-sphinx_rtd_theme
 mock
 autodoc
 myst-parser
 rst-to-myst
-furo
+# specific version added due to later version not allowing rtd compilation
+furo==2023.7.26
 snakemake
