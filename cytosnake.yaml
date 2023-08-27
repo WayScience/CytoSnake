@@ -5,10 +5,11 @@ channels:
 dependencies:
   - conda-forge::python=3.10.*
   - conda-forge::pip
-  - bioconda::snakemake
   - conda-forge::mamba
   - conda-forge::pre-commit
   - conda-forge::myst-parser
+  - conda-forge::pyyaml>=6.0.0
+  - bioconda::snakemake
   - pip:
     - rst-to-myst
     - furo==2023.7.26

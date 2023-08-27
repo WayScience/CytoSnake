@@ -1,34 +1,46 @@
+{% set name = "cytosnake" %}
+{% set version = "0.0.1" %}
+
 package:
-  name: cytosnake
-  version: 0.0.1
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
 
 source:
-  path: .
+  path: ../
+
 
 build:
   # setting platform independent
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
   noarch: python
 
 requirements:
+  host:
+    - python
   build:
     - python
+    - pip
+    - setuptools
   run:
     - python=3.10.*
     - pip
-    - numpy>=1.17
+    - conda-forge::numpy>=1.17
     - conda-forge::mamba>=1.5.0
     - conda-forge::myst-parser>=2.0.0
     - conda-forge::pre-commit>=3.3.0
     - conda-forge::pyyaml>=6.0.0
+    - conda-forge::furo=2023.7.26
     - bioconda::snakemake>=7.32
-  pip:
-    - rst-to-myst
-    - furo==2023.7.26
 
 channels:
   - conda-forge
   - bioconda
   - defaults
+
+test:
+  import:
+    - cytosnake
 
 about:
   home: https://github.com/WayScience/CytoSnake

@@ -1,0 +1,5 @@
+import snakemake 
+
+
+
+snakemake.snakemake()
