@@ -12,7 +12,4 @@ setup(
             "cytosnake=cytosnake.cli.cmd:run_cmd",
         ]
     },
-    install_requires = [
-        "rst-to-myst"
-    ]
 )
