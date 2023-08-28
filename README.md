@@ -32,26 +32,15 @@ cytosnake run <WORKFLOW>
 
 ## Installation
 
-First, install `CytoSnake` into your local machine:
+`CytoSnake` is can be installed by using `conda`.
 
 ```text
-git clone https://github.com/WayScience/CytoSnake.git
+conda install -c bioconda cytosnake
 ```
 
-After cloning the repository, go into the `CytoSnake/` directory and create the `CytoSnake` environment
+>**NOTE**: In case you don't currently have `conda` installed on your system, you can access the documentation [here](https://docs.conda.io/en/latest/miniconda.html). We recommend using Miniconda, primarily due to its lightweight installation process.
 
-```text
-conda env create -f cytosnake.yaml && conda activate cytosnake
-```
-
-Next is to install the `CytoSnake` module into your newly created environment
-
-```text
-pip install -e .
-```
-
-After this step, `CytoSnake` is installed.
-To check if `CytoSnake` is properly installed, simply type `cytosnake help` to see the CLI documentation:
+To check if `CytoSnake` has been successfully installed, simply type `cytosnake help` to see the CLI documentation:
 
 ```text
 cytosnake help
