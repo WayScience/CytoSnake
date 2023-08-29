@@ -38,7 +38,8 @@ Install `CytoSnake` with `conda`.
 conda install -c bioconda cytosnake
 ```
 
->**NOTE**: In case you don't currently have `conda` installed on your system, you can access the documentation [here](https://docs.conda.io/en/latest/miniconda.html). We recommend using Miniconda, primarily due to its lightweight installation process.
+>**NOTE**: In case you don't currently have `conda` installed on your system, you can access the documentation [here](https://docs.conda.io/en/latest/miniconda.html).
+We recommend using Miniconda, primarily due to its lightweight installation process.
 
 To check if `CytoSnake` has been successfully installed, simply type `cytosnake help` to see the CLI documentation:
 
