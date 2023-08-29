@@ -32,7 +32,7 @@ cytosnake run <WORKFLOW>
 
 ## Installation
 
-`CytoSnake` is can be installed by using `conda`.
+Install `CytoSnake` with `conda`.
 
 ```text
 conda install -c bioconda cytosnake
