@@ -76,7 +76,7 @@ def init_dp_data(data_fp: Union[list[str], str], metadata_fp: str):
     """
 
     # setting up files
-    metadata_path_obj = pathlib.Path(metadata_fp)
+    metadata_path_obj = pathlib.Path(metadata_fp).resolve(strict=True)
 
     # create data folder on working directory
     # raises error if data directory exists (prevents overwriting)
@@ -85,14 +85,10 @@ def init_dp_data(data_fp: Union[list[str], str], metadata_fp: str):
 
     # generating symlink of input data files
     for data_file in data_fp:
-        data_file_obj = pathlib.Path(data_file)
-        data_file_target = pathlib.Path(f"../{data_file}")
-        data_file_symlink = pathlib.Path(
-            f"./{str(data_dir_obj)}/{data_file_obj.name}_dp"
-        )
-        data_file_symlink.symlink_to(data_file_target)
+        data_file_obj = pathlib.Path(data_file).resolve(strict=True)
+        data_file_symlink = data_dir_obj / f"{data_file_obj.name}_dp"
+        data_file_symlink.symlink_to(data_file_obj)
 
     # creating symlink of metadata dir to data directory
-    metadata_target = pathlib.Path(f"../{metadata_path_obj}")
-    metadata_symlink = pathlib.Path(f"./{str(data_dir_obj)}/{metadata_path_obj.name}")
-    metadata_symlink.symlink_to(metadata_target)
+    metadata_symlink = data_dir_obj / metadata_path_obj.name
+    metadata_symlink.symlink_to(metadata_path_obj)
