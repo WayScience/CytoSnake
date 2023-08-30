@@ -20,7 +20,7 @@ CytoSnake's workflows are written in [`Snakemake`](https://github.com/snakemake/
 `CytoSnake` makes it easy for user to process high-dimensional cell morphology data as it requires straighforward inputs and parameters.
 Below is an example on how to execute `CytoSnake` once installed:
 
-```text
+```bash
 # setting up directory
 cytosnake init -d <FILES or LIST OF FILES> -m <METADATA DIR> -b <BARCODE>
 
@@ -34,7 +34,7 @@ cytosnake run <WORKFLOW>
 
 Install `CytoSnake` with `conda`.
 
-```text
+```bash
 conda install -c bioconda cytosnake
 ```
 
@@ -43,7 +43,7 @@ We recommend using Miniconda, primarily due to its lightweight installation proc
 
 To check if `CytoSnake` has been successfully installed, simply type `cytosnake help` to see the CLI documentation:
 
-```text
+```bash
 cytosnake help
 ```
 
