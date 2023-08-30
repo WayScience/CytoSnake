@@ -91,9 +91,14 @@ def get_data_path(
     if input_type == "plate_data" and use_converted:
         if tolist:
             data_path = datapaths.build_path(
-                input_type="plate_data", use_converted=True
+                input_type=input_type, use_converted=use_converted
             )
-        data_path = datapaths.build_path(input_type="plate_data", use_converted=True)
+        data_path = datapaths.build_path(
+            input_type=input_type, use_converted=use_converted
+        )
+
+    # build path without converted data path
+    data_path = datapaths.build_path(input_type=input_type, use_converted=use_converted)
 
     # check if the user want a list of paths or a single path
     if tolist:

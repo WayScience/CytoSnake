@@ -26,7 +26,7 @@ rule aggregate:
         metadata=METADATA_DIR,
     output:
         aggregate_profile=get_data_path(input_type="aggregated", tolist=True),
-        cell_counts=CELL_COUNTS,
+        cell_counts=get_data_path(input_type="cell_counts"),
     log:
         "logs/aggregate_{file_name}.log",
     conda:
