@@ -28,7 +28,7 @@ def load_configs(config_path: str | Path) -> dict:
 
     # check if config path is a valid path
     if not is_valid_path(config_path):
-        raise FileNotFoundError("Invalid config path provided")
+        raise FileNotFoundError(f"Invalid config path provided: {config_path}")
     if isinstance(config_path, str):
         config_path = Path(config_path).resolve(strict=True)
 

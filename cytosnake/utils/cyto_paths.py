@@ -229,21 +229,21 @@ def get_project_dirpaths(args: Namespace) -> dict:
 
             # use the namespace arguments to write _paths.yaml
             if _file.name.lower() == "data":
-                abs_data_path = pathlib.Path(abs_path)
+                abs_data_path = pathlib.Path(abs_path).resolve(strict=True)
 
                 # creating  dictionary for the plate data
                 data_dir_conts = {}
                 for platename in args.data:
                     name = platename.split(".")[0]
                     platedata_path = abs_data_path / platename
-                    data_dir_conts[name] = str(platedata_path)
+                    data_dir_conts[name] = str(platedata_path.resolve())
 
                 # adding single files paths
                 data_dir_conts["data"] = abs_path
                 if args.barcode is None:
                     data_dir_conts["barcode"] = None
                 else:
-                    data_dir_conts["barcode"] = str(abs_data_path / args.barcode)
+                    data_dir_conts["barcode"] = str((abs_data_path / args.barcode))
                 data_dir_conts["metadata"] = str(abs_data_path / args.metadata)
                 all_dirs["data_directory_contents"] = data_dir_conts
 
