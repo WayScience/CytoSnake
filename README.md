@@ -17,7 +17,7 @@ University of Colorado Anschutz School of Medicine
 CytoSnake is a command line interface (CLI) tool that orchestrates reproducible workflows that process high-dimensional single-cell morphology features extracted from microscopy images.
 CytoSnake's workflows are written in [`Snakemake`](https://github.com/snakemake/snakemake), which is a well established workflow manager that facilitates data reproducibility, scalability, and modularity.
 
-`CytoSnake` makes it easy for user to process high-dimensional cell morphology data as it requires straighforward inputs and parameters.
+`CytoSnake` makes it easy for user to process high-dimensional cell morphology data as it requires straightforward inputs and parameters.
 Below is an example on how to execute `CytoSnake` once installed:
 
 ```bash
