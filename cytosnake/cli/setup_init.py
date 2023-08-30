@@ -4,7 +4,7 @@ Contains functions for initializing different data structures
 for processing
 """
 
-from pathlib import Path
+import pathlib
 from typing import Union
 
 
@@ -33,32 +33,29 @@ def init_cp_data(data_fp: Union[list[str], str], metadata_fp: str, barcode_fp: s
     # -- barcode
     barcode_path_obj = barcode_fp
     if barcode_fp is not None:
-        barcode_path_obj = Path(barcode_fp)
+        barcode_path_obj = pathlib.Path(barcode_fp).resolve(strict=True)
 
     # -- metadata_path
-    metadata_path_obj = Path(metadata_fp)
+    metadata_path_obj = pathlib.Path(metadata_fp).resolve(strict=True)
 
     # create data folder on working directory
     # raises error if data directory exists (prevents overwriting)
-    data_dir_obj = Path("data")
+    data_dir_obj = pathlib.Path("data").resolve()
     data_dir_obj.mkdir(exist_ok=False)
 
     # generating symlinks
     for data_file in data_fp:
-        data_file_obj = Path(data_file)
-        target_file = Path(f"../{data_file}")
-        sym_link = Path(f"./{str(data_dir_obj)}/{data_file_obj.name}")
-        sym_link.symlink_to(target_file)
+        data_file_obj = pathlib.Path(data_file).resolve(strict=True)
+        sym_link = data_dir_obj / data_file_obj.name
+        sym_link.symlink_to(data_file_obj)
 
     # generating symlinks of provided barcode file and metadata directory is
     if barcode_fp is not None:
-        barcode_target = Path(f"../{barcode_path_obj}")
-        barcode_symlink = Path(f"./{str(data_dir_obj)}/{barcode_path_obj.name}")
-        barcode_symlink.symlink_to(barcode_target)
+        barcode_symlink = pathlib.Path(data_dir_obj) / barcode_path_obj.name
+        barcode_symlink.symlink_to(barcode_path_obj)
 
-    metadata_target = Path(f"../{metadata_path_obj}")
-    metadata_symlink = Path(f"./{str(data_dir_obj)}/{metadata_path_obj.name}")
-    metadata_symlink.symlink_to(metadata_target)
+    metadata_symlink = pathlib.Path(data_dir_obj) / metadata_path_obj.name
+    metadata_symlink.symlink_to(metadata_path_obj)
 
 
 def init_dp_data(data_fp: Union[list[str], str], metadata_fp: str):
@@ -79,21 +76,23 @@ def init_dp_data(data_fp: Union[list[str], str], metadata_fp: str):
     """
 
     # setting up files
-    metadata_path_obj = Path(metadata_fp)
+    metadata_path_obj = pathlib.Path(metadata_fp)
 
     # create data folder on working directory
     # raises error if data directory exists (prevents overwriting)
-    data_dir_obj = Path("data")
+    data_dir_obj = pathlib.Path("data")
     data_dir_obj.mkdir(exist_ok=False)
 
     # generating symlink of input data files
     for data_file in data_fp:
-        data_file_obj = Path(data_file)
-        data_file_target = Path(f"../{data_file}")
-        data_file_symlink = Path(f"./{str(data_dir_obj)}/{data_file_obj.name}_dp")
+        data_file_obj = pathlib.Path(data_file)
+        data_file_target = pathlib.Path(f"../{data_file}")
+        data_file_symlink = pathlib.Path(
+            f"./{str(data_dir_obj)}/{data_file_obj.name}_dp"
+        )
         data_file_symlink.symlink_to(data_file_target)
 
     # creating symlink of metadata dir to data directory
-    metadata_target = Path(f"../{metadata_path_obj}")
-    metadata_symlink = Path(f"./{str(data_dir_obj)}/{metadata_path_obj.name}")
+    metadata_target = pathlib.Path(f"../{metadata_path_obj}")
+    metadata_symlink = pathlib.Path(f"./{str(data_dir_obj)}/{metadata_path_obj.name}")
     metadata_symlink.symlink_to(metadata_target)
