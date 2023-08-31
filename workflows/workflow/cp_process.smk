@@ -39,7 +39,9 @@ include: "../rules/aggregate.smk"
 include: "../rules/annotate.smk"
 include: "../rules/normalize.smk"
 include: "../rules/feature_select.smk"
-include: "../rules/generate_consensus.smk"
+
+
+# include: "../rules/generate_consensus.smk"
 
 
 # set expected outputs from workflow
@@ -50,4 +52,4 @@ rule all:
         get_data_path(input_type="annotated", tolist=True),
         get_data_path(input_type="normalized", tolist=True),
         get_data_path(input_type="feature_select", tolist=True),
-        get_data_path(input_type="consensus", tolist=True),
+        # get_data_path(input_type="consensus", tolist=True),

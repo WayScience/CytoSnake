@@ -65,13 +65,13 @@ def annotate_cells(
     logging.info(f"Loading plate data from: {profile}")
 
     logging.info(f"loadding barcodes from: {barcodes_path}")
-    barcode_platemap_df = pd.read_csv(barcodes_path)
+    pd.read_csv(barcodes_path)
 
-    logging.info("Searching plate map name")
-    plate = pathlib.Path(profile).stem  # noqa
-    platemap = barcode_platemap_df.query(
-        "Assay_Plate_Barcode == @plate"
-    ).Plate_Map_Name.values[0]
+    # logging.info("Searching plate map name")
+    # plate = pathlib.Path(profile).stem  # noqa
+    # platemap = barcode_platemap_df.query(
+    #     "Assay_Plate_Barcode == @plate"
+    # ).Plate_Map_Name.values[0]
 
     # checking if plate map is found
     if platemap == "" or platemap is None:
@@ -124,6 +124,9 @@ if __name__ == "__main__":
     metadata_dir_path = str(snakemake.input["metadata"])
     config_path = str(snakemake.params["annotate_config"])
     log_path = str(snakemake.log)
+
+    barcode_platemap_df = pd.read_csv(barcode_path)
+    exit()
 
     # annotating cells
     annotate_cells(

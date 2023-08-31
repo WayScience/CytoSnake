@@ -10,6 +10,10 @@ docs: |
   ---------------
   Below the workflow steps are separated in chunks.
 
+  single_cell_config:
+    Parameters used for SingleCell object, used for interacting with single cell data.
+    For more documenation about SingelCell please refer to here:
+
   aggregate_configs:
     aggregates single-cell morphology at a given level of aggregation. For example
     one can aggregate single cell at the well level. This means that all cells within
@@ -29,9 +33,47 @@ docs: |
     Creates a consensus profile. Consensus profiles are unique signatures that are mapped
     to a given perturbations.
 
-annotate_configs:
+single_cell_configs:
+  params:
+    strata:
+      - Image_Metadata_Plate
+      - Image_Metadata_Well
+    image_cols:
+      - TableNumber
+      - ImageNumber
+      - Image_Metadata_Site
+    aggregation_operation: median
+    compartments:
+      - cells
+      - cytoplasm
+      - nuclei
+    compartment_linking_cols: default_linking_cols
+    merge_cols:
+      - TableNumber
+      - ImageNumber
+    add_image_features: False
+    image_feature_categories: None
+    features: infer
+    load_image_data: True
+    subsample_frac: 1
+    subsample_n: all
+    subsampling_random_state: none
+    fields_of_view: all
+    fields_of_view_feature: Metadata_Site
+    object_feature: Metadata_ObjectNumber
+
+aggregate_configs:
   params:
     input_data: plate_data
+    compute_subsample: False
+    output_file: null
+    compression_options: gzip
+    float_format: null
+    n_aggregation_memory_strata: 1
+
+annotate_configs:
+  params:
+    input_data: aggregated
     join_on:
       - Metadata_well_position
       - Image_Metadata_Well
@@ -47,26 +89,10 @@ annotate_configs:
     float_format: null
     cmap_args: {}
 
-aggregate_configs:
-  params:
-    input_data: annotated
-    strata:
-      - Metadata_Plate
-      - Metadata_Well
-    features: infer
-    operation: median
-    output_file: none
-    compute_object_count: False
-    object_feature: Metadata_ObjectNumber
-    subset_data_df: none
-    compression_options:
-      method: gzip
-      mtime: 1
-    float_format: null
 
 normalize_configs:
   params:
-    input_data: aggregated
+    input_data: annotated
     features: infer
     image_features: False
     meta_features: infer
@@ -109,7 +135,7 @@ feature_select_configs:
 
 consensus_config:
   params:
-    input_data: consensus
+    input_data: feature_select
     replicate_columns:
       - Metadata_cell_line
       - Metadata_pert_name
