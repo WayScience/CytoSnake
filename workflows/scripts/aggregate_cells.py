@@ -2,7 +2,6 @@ import logging
 import pathlib
 
 import pandas as pd
-import yaml
 from pycytominer.cyto_utils.cells import SingleCells
 
 
@@ -12,7 +11,8 @@ def aggregate(
     barcode_path: str,
     cell_count_out: str,
     aggregate_file_out: str,
-    config: str,
+    single_cell_config: dict,
+    aggregate_config: dict,
     log_file: str,
 ):
     """aggregates single cell data into aggregate profiles
@@ -29,8 +29,10 @@ def aggregate(
         output file generated for aggregate profiles
     cell_count_out: str
         output file generating cell counts
-    config: str
-        Path to config file
+    single_cell_config: dict
+        contains all single_cell parameters
+    aggregate_config: dict
+        contains all aggregate parameters
     log_file : str
         Path to log file
 
@@ -53,23 +55,6 @@ def aggregate(
 
     logging.info(f"Aggregating Single Cells in: {str(sqlite_file_path)}")
 
-    # loading parameters
-    logging.info(f"Loading single cell aggregation configurations from: {config}")
-    aggregate_path_obj = pathlib.Path(config)
-    aggregate_config_path = aggregate_path_obj.absolute()
-
-    # checking if the aggregation dataset file exists
-    if not pathlib.Path(aggregate_config_path).is_file():
-        e_msg = "Unable to find aggregation configuration file"
-        logging.error(e_msg)
-        raise FileNotFoundError(e_msg)
-
-    with open(aggregate_config_path, "r") as yaml_contents:
-        aggregate_configs = yaml.safe_load(yaml_contents)["single_cell_config"][
-            "params"
-        ]
-        logging.info("Aggregation configurations loaded.")
-
     # Loading appropriate platemaps with given plate data
     logging.info(f"Loading plate data from: {str(sqlite_file_path)}")
 
@@ -79,12 +64,15 @@ def aggregate(
         logging.error(e_msg)
         raise FileNotFoundError(e_msg)
 
-    # generating cell count
+    # loading in barcodes
     logging.info(f"Loading barcodes from: {barcode_path}")
     barcode_platemap_df = pd.read_csv(barcode_path)
 
+    # plate map search
     logging.info("Selecting associated plate map")
     try:
+        # plate varaible is used in the query string below
+        pathlib.Path(plate_data).stem
         platemap = barcode_platemap_df.query(
             "Assay_Plate_Barcode == @plate"
         ).Plate_Map_Name.values[0]
@@ -94,28 +82,30 @@ def aggregate(
             "Unable to find associated platemap name with given plate barcode"
         )
 
+    # loading in indentified platemap
     logging.info(f"Identified plate map: {platemap}")
     platemap_file = pathlib.Path(f"{metadata_dir}/platemap/{platemap}.csv")
     platemap_df = pd.read_csv(platemap_file)
 
+    # Loading single-cell data into the SingleCell object
     logging.info(f"Loading Plate map data from: {sql_file}")
-    sqlite_file = f"sqlite:///{sqlite_file}"
+    sqlite_file = f"sqlite:///{plate_data}"
     single_cell_profile = SingleCells(
         sqlite_file,
-        strata=aggregate_configs["strata"],
-        image_cols=aggregate_configs["image_cols"],
-        aggregation_operation=aggregate_configs["aggregation_operation"],
+        strata=single_cell_config["strata"],
+        image_cols=single_cell_config["image_cols"],
+        aggregation_operation=single_cell_config["aggregation_operation"],
         output_file=aggregate_file_out,
-        merge_cols=aggregate_configs["merge_cols"],
-        add_image_features=aggregate_configs["add_image_features"],
-        image_feature_categories=aggregate_configs["image_feature_categories"],
-        features=aggregate_configs["features"],
-        load_image_data=aggregate_configs["load_image_data"],
-        subsample_frac=aggregate_configs["subsample_frac"],
-        subsampling_random_state=aggregate_configs["subsampling_random_state"],
-        fields_of_view=aggregate_configs["fields_of_view"],
+        merge_cols=single_cell_config["merge_cols"],
+        add_image_features=single_cell_config["add_image_features"],
+        image_feature_categories=single_cell_config["image_feature_categories"],
+        features=single_cell_config["features"],
+        load_image_data=single_cell_config["load_image_data"],
+        subsample_frac=single_cell_config["subsample_frac"],
+        subsampling_random_state=single_cell_config["subsampling_random_state"],
+        fields_of_view=single_cell_config["fields_of_view"],
         fields_of_view_feature="Image_Metadata_Well",
-        object_feature=aggregate_configs["object_feature"],
+        object_feature=single_cell_config["object_feature"],
     )
 
     # counting cells in each well and saving it as csv file
@@ -128,10 +118,14 @@ def aggregate(
     ).drop(["WellRow", "WellCol", "well_position"], axis="columns")
     cell_count_df.to_csv(cell_count_out, sep="\t", index=False)
 
-    # aggregating singel cells into aggregate profile
+    # Using the SingleCell object, aggregate single-cells to aggregate profiles
     logging.info("Aggregating cells")
     single_cell_profile.aggregate_profiles(
-        output_file=aggregate_file_out, compression_options="gzip"
+        output_file=aggregate_file_out,
+        compute_subsample=aggregate_config["compute_subsample"],
+        compression_options=aggregate_config["compression_options"],
+        float_format=aggregate_config["float_format"],
+        n_aggregation_memory_strata=aggregate_config["n_aggregation_memory_strata"],
     )
     logging.info(f"Aggregate profile saved in : {aggregate_file_out}")
 
@@ -146,8 +140,18 @@ if __name__ == "__main__":
     metadata_dir_path = str(snakemake.input["metadata"])
     cell_count_output = str(snakemake.output["cell_counts"])
     aggregate_output = str(snakemake.output["aggregate_profile"])
-    config_path = str(snakemake.params["aggregate_config"])
+    single_cells_config = snakemake.params["single_cell_config"]["params"]
+    aggregate_config = snakemake.params["aggregate_config"]["params"]
     log_path = str(snakemake.log)
+
+    # print(plate_data)
+    # print(barcode_path)
+    # print(metadata_dir_path)
+    # print(cell_count_output)
+    # print(aggregate_output)
+    # print(configs)
+    # print("#################3")
+    # print(log_path)
 
     # execute aggregation function
     aggregate(
@@ -156,6 +160,7 @@ if __name__ == "__main__":
         barcode_path=barcode_path,
         aggregate_file_out=aggregate_output,
         cell_count_out=cell_count_output,
-        config=config_path,
+        single_cell_config=single_cells_config,
+        aggregate_config=aggregate_config,
         log_file=log_path,
     )
