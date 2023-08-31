@@ -14,11 +14,12 @@ CYTOSNAKE_CONFIGS = load_general_configs()
 DATA_DIR = str(load_data_path_configs())
 DATA_CONFIGS = CYTOSNAKE_CONFIGS["data_configs"]
 
+
 # ------
 # INPUTS
 # ------
 # generating a wild card list (just the file base names)
-FILE_BASE_NAMES = datapaths.get_all_basenames(DATA_DIR, ext_target="sqlite")
+BASENAME = datapaths.get_all_basenames(DATA_DIR, ext_target="sqlite")
 
 # getting the rest of the input paths from helper functions
 
@@ -93,14 +94,14 @@ def get_data_path(
             data_path = datapaths.build_path(
                 input_type=input_type, use_converted=use_converted
             )
-        data_path = datapaths.build_path(
-            input_type=input_type, use_converted=use_converted
-        )
+            return expand(data_path, basename=BASENAME)
 
     # build path without converted data path
     data_path = datapaths.build_path(input_type=input_type, use_converted=use_converted)
 
     # check if the user want a list of paths or a single path
     if tolist:
-        return expand(data_path, basename=FILE_BASE_NAMES)
+        expanded_data = expand(data_path, basename=BASENAME)
+        return expanded_data
+
     return data_path
