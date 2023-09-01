@@ -16,7 +16,9 @@ rule create_consensus:
 
     """
     input:
-        get_data_path(input_type=config["consensus_configs"]["params"]["input_data"]),
+        get_data_path(
+            input_type=config["consensus_config"]["params"]["input_data"], tolist=True
+        ),
     output:
         get_data_path(input_type="consensus"),
     params:

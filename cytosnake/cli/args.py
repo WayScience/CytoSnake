@@ -10,6 +10,7 @@ Contains different modes with their respected parameters
 """
 
 import argparse
+import pathlib
 import shutil
 from dataclasses import dataclass
 from typing import Union
@@ -189,6 +190,11 @@ class CliControlPanel:
             help="datatype used for processing",
         )
         args = parser.parse_args(params)
+
+        # updating paths
+        # refer to issue #79
+        args.metadata = str(pathlib.Path(args.metadata).resolve(strict=True))
+        args.barcode = str(pathlib.Path(args.barcode).resolve(strict=True))
 
         return args
 

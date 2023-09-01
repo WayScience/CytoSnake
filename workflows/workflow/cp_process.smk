@@ -50,4 +50,4 @@ rule all:
         get_data_path(input_type="annotated", tolist=True),
         get_data_path(input_type="normalized", tolist=True),
         get_data_path(input_type="feature_select", tolist=True),
-        get_data_path(input_type="consensus", tolist=True),
+        get_data_path(input_type="consensus", tolist=False),

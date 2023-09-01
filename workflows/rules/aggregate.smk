@@ -25,13 +25,14 @@ rule aggregate:
         barcodes=BARCODES,
         metadata=METADATA_DIR,
     output:
-        aggregate_profile=get_data_path(input_type="aggregated", tolist=True),
-        cell_counts=CELL_COUNTS,
+        aggregate_profile=get_data_path(input_type="aggregated"),
+        cell_counts=get_data_path(input_type="cell_counts"),
     log:
-        "logs/aggregate_{file_name}.log",
+        "logs/aggregate_{basename}.log",
     conda:
         "../envs/cytominer_env.yaml"
     params:
-        aggregate_config=config["aggregate_configs"]["params"],
+        single_cell_config=config["single_cell_configs"],
+        aggregate_config=config["aggregate_configs"],
     script:
         "../scripts/aggregate_cells.py"

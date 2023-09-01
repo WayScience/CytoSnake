@@ -19,6 +19,7 @@ data_configs:
     cell_counts:
       file_ext: csv
       suffix: cell_counts
+      compression_ext: gz
     plate_data:
       file_ext: sqlite
       converted_ext: parquet
