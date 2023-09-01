@@ -72,6 +72,7 @@ def aggregate(
     logging.info("Selecting associated plate map")
     try:
         # plate variable is used in the query string below
+
         plate = pathlib.Path(plate_data).stem  # noqa
         platemap = barcode_platemap_df.query(
             "Assay_Plate_Barcode == @plate"
@@ -82,7 +83,7 @@ def aggregate(
             "Unable to find associated platemap name with given plate barcode"
         )
 
-    # loading in indentified platemap
+    # loading in identified platemap
     logging.info(f"Identified plate map: {platemap}")
     platemap_file = pathlib.Path(f"{metadata_dir}/platemap/{platemap}.csv")
     platemap_df = pd.read_csv(platemap_file)
@@ -143,15 +144,6 @@ if __name__ == "__main__":
     single_cells_config = snakemake.params["single_cell_config"]["params"]
     aggregate_config = snakemake.params["aggregate_config"]["params"]
     log_path = str(snakemake.log)
-
-    # print(plate_data)
-    # print(barcode_path)
-    # print(metadata_dir_path)
-    # print(cell_count_output)
-    # print(aggregate_output)
-    # print(configs)
-    # print("#################3")
-    # print(log_path)
 
     # execute aggregation function
     aggregate(
