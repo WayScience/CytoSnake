@@ -17,10 +17,10 @@ University of Colorado Anschutz School of Medicine
 CytoSnake is a command line interface (CLI) tool that orchestrates reproducible workflows that process high-dimensional single-cell morphology features extracted from microscopy images.
 CytoSnake's workflows are written in [`Snakemake`](https://github.com/snakemake/snakemake), which is a well established workflow manager that facilitates data reproducibility, scalability, and modularity.
 
-`CytoSnake` makes it easy for user to process high-dimensional cell morphology data as it requires straighforward inputs and parameters.
+`CytoSnake` makes it easy for user to process high-dimensional cell morphology data as it requires straightforward inputs and parameters.
 Below is an example on how to execute `CytoSnake` once installed:
 
-```text
+```bash
 # setting up directory
 cytosnake init -d <FILES or LIST OF FILES> -m <METADATA DIR> -b <BARCODE>
 
@@ -32,28 +32,18 @@ cytosnake run <WORKFLOW>
 
 ## Installation
 
-First, install `CytoSnake` into your local machine:
+Install `CytoSnake` with `conda`.
 
-```text
-git clone https://github.com/WayScience/CytoSnake.git
+```bash
+conda install -c bioconda cytosnake
 ```
 
-After cloning the repository, go into the `CytoSnake/` directory and create the `CytoSnake` environment
+>**NOTE**: In case you don't currently have `conda` installed on your system, you can access the documentation [here](https://docs.conda.io/en/latest/miniconda.html).
+We recommend using Miniconda, primarily due to its lightweight installation process.
 
-```text
-conda env create -f cytosnake.yaml && conda activate cytosnake
-```
+To check if `CytoSnake` has been successfully installed, simply type `cytosnake help` to see the CLI documentation:
 
-Next is to install the `CytoSnake` module into your newly created environment
-
-```text
-pip install -e .
-```
-
-After this step, `CytoSnake` is installed.
-To check if `CytoSnake` is properly installed, simply type `cytosnake help` to see the CLI documentation:
-
-```text
+```bash
 cytosnake help
 ```
 
