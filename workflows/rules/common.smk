@@ -96,12 +96,18 @@ def get_data_path(
             )
             return expand(data_path, basename=BASENAME)
 
+    # look at
+    elif input_type == "consensus":
+        data_path = datapaths.build_path(input_type=input_type).replace(
+            "{basename}_", ""
+        )
+        return data_path
+
     # build path without converted data path
     data_path = datapaths.build_path(input_type=input_type, use_converted=use_converted)
 
     # check if the user want a list of paths or a single path
     if tolist:
-        expanded_data = expand(data_path, basename=BASENAME)
-        return expanded_data
+        return expand(data_path, basename=BASENAME)
 
     return data_path
