@@ -12,7 +12,7 @@ docs: |
 
   single_cell_config:
     Parameters used for SingleCell object, used for interacting with single cell data.
-    For more documenation about SingelCell please refer to here:
+    For more documentation about SingleCell please refer here:
 
   aggregate_configs:
     aggregates single-cell morphology at a given level of aggregation. For example
