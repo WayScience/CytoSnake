@@ -71,7 +71,7 @@ def aggregate(
     # plate map search
     logging.info("Selecting associated plate map")
     try:
-        # plate varaible is used in the query string below
+        # plate variable is used in the query string below
         plate = pathlib.Path(plate_data).stem  # noqa
         platemap = barcode_platemap_df.query(
             "Assay_Plate_Barcode == @plate"
