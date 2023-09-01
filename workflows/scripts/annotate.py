@@ -68,7 +68,7 @@ def annotate_cells(
     barcode_platemap_df = pd.read_csv(barcodes_path)
 
     logging.info("Searching plate map name")
-    plate = pathlib.Path(profile).stem  # noqa
+    plate = pathlib.Path(profile).stem.split(".")[0].split("_")[0]  # noqa
     platemap = barcode_platemap_df.query(
         "Assay_Plate_Barcode == @plate"
     ).Plate_Map_Name.values[0]
