@@ -248,3 +248,24 @@ def get_project_dirpaths(args: Namespace) -> dict:
                 all_dirs["data_directory_contents"] = data_dir_conts
 
     return all_dirs
+
+
+def get_benchmarks_path() -> pathlib.Path:
+    """
+    Get the path to the benchmarks directory.
+
+    This function retrieves the path to the 'benchmarks' directory within the project
+    root directory.
+    If the directory does not exist, it will be created.
+
+    Returns:
+        pathlib.Path: The path to the 'benchmarks' directory.
+    """
+    # builds path
+    project_path = get_project_root()
+    benchmark_path = project_path / "benchmarks"
+
+    # creates dir if needed
+    benchmark_path.mkdir(exist_ok=True)
+
+    return benchmark_path
