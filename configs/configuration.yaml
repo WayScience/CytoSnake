@@ -7,6 +7,9 @@ analysis_configs:
   preprocessing:
     threads: 4
 
+# enable memory profiling
+enable_profiling: False
+
 data_configs:
   # flag indicates to use converted data. if True, then
   # cytosnake will search for plate datafiles with the extensions set
