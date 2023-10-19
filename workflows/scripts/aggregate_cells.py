@@ -1,6 +1,7 @@
 import logging
 import pathlib
 
+import memray
 import pandas as pd
 from pycytominer.cyto_utils.cells import SingleCells
 
@@ -144,15 +145,31 @@ if __name__ == "__main__":
     single_cells_config = snakemake.params["single_cell_config"]["params"]
     aggregate_config = snakemake.params["aggregate_config"]["params"]
     log_path = str(snakemake.log)
+    enable_profiling = snakemake.config["enable_profiling"]
 
-    # execute aggregation function
-    aggregate(
-        sql_file=plate_data,
-        metadata_dir=metadata_dir_path,
-        barcode_path=barcode_path,
-        aggregate_file_out=aggregate_output,
-        cell_count_out=cell_count_output,
-        single_cell_config=single_cells_config,
-        aggregate_config=aggregate_config,
-        log_file=log_path,
-    )
+    # exeucuting pycytominer aggregate function
+    if enable_profiling:
+        # anything below this context manager will be profiled
+        root_name = pathlib.Path(plate_data).stem.split("_")[0]
+        with memray.Tracker(f"{root_name}_aggregate_benchmark.bin"):
+            aggregate(
+                sql_file=plate_data,
+                metadata_dir=metadata_dir_path,
+                barcode_path=barcode_path,
+                aggregate_file_out=aggregate_output,
+                cell_count_out=cell_count_output,
+                single_cell_config=single_cells_config,
+                aggregate_config=aggregate_config,
+                log_file=log_path,
+            )
+    else:
+        aggregate(
+            sql_file=plate_data,
+            metadata_dir=metadata_dir_path,
+            barcode_path=barcode_path,
+            aggregate_file_out=aggregate_output,
+            cell_count_out=cell_count_output,
+            single_cell_config=single_cells_config,
+            aggregate_config=aggregate_config,
+            log_file=log_path,
+        )
