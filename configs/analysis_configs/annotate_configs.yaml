@@ -6,9 +6,9 @@ annotate_configs:
     add_metadata_id_to_platemap: True
     format_broad_cmap: False
     clean_cellprofiler: True
-    external_metadata: "none"
-    external_join_left: "none"
-    external_join_right: "none"
+    external_metadata: null
+    external_join_left: null
+    external_join_right: null
     compression_options:
       method: "gzip"
       mtime: 1
