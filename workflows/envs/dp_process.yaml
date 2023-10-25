@@ -9,4 +9,4 @@ dependencies:
   - pip
   - memray
   - pip:
-      - git+https://github.com/cytomining/pycytominer.git@338475b1790448575eaf3c6dfcba97962030192b
+      - git+https://github.com/cytomining/pycytominer.git@afe5df3db07f1c23237e90fcb5179bc0afa30032
