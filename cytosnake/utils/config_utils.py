@@ -1,4 +1,4 @@
-from pathlib import Path
+import pathlib
 
 import yaml
 
@@ -131,3 +131,56 @@ def load_cytosnake_configs() -> dict:
     # gets absolute path to cytosnake configs and load the configs
     cytosnake_config_path = cyto_paths.get_cytosnake_config_path()
     return load_configs(cytosnake_config_path)
+
+
+def update_config(config_path: str | pathlib.Path, key_map, new_key_value):
+    """
+    Updates configs when given a key, value pair.
+
+    Parameters
+    ----------
+    config_path : str | pathlib.path
+        The nested dictionary to update.
+
+    key_map : list[str]
+        A list of keys representing the path to the value.
+
+    new_key_value : dict[Any]
+        A dictionary containing the new key-value pair to add.
+
+    Returns
+    -------
+    bool
+        True if the update was successful, False if any key is missing.
+
+    Raises
+    ------
+    KeyError
+        If any key in the path is missing or not a dictionary.
+    """
+
+    # loading in config file
+    configs = load_configs(config_path)
+
+    # searching selected key
+    try:
+        # Iterate through the keys to find location within the config file
+        for key in key_map[:-1]:
+            if key in configs and isinstance(configs[key], dict):
+                configs = configs[key]
+            else:
+                raise KeyError(f"Key '{key}' is missing or not a dictionary.")
+
+        # Update the value if the last key exists in the dictionary
+        last_key = key_map[-1]
+        if last_key in configs and isinstance(configs[last_key], dict):
+            configs[last_key].update(new_key_value)
+        else:
+            raise KeyError(f"Key '{last_key}' is missing or not a dictionary.")
+
+    except KeyError as e:
+        print(f"Update failed: {e}")
+
+    # overwrite config file with updated configs
+    with open(config_path, "w") as config:
+        yaml.dump(configs, config)
