@@ -102,7 +102,7 @@ def run_cmd() -> None:
             gen_configs = load_cytosnake_configs()
             if gen_configs["enable_profiling"]:
                 # create benchmark directory
-                benchmark_folder = pathlib.path("benchmarks")
+                benchmark_folder = pathlib.path("benchmark_dir")
                 benchmark_folder.mkdir(exist_ok=True)
 
                 # update _paths.yaml with path to benchmark folder
