@@ -10,3 +10,6 @@ CytoSnake.egg-info
 workflows/rules/common.py
 .DS_Store
 build
+_*
+datasets/
+prototype.ipynb
