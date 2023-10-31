@@ -84,8 +84,14 @@ if __name__ == "__main__":
     enable_profiling = snakemake.config["enable_profiling"]
 
     if enable_profiling:
+        # setting up output path to benchmark folder
+        benchmark_dir = pathlib.Path(str(snakemake.config["benchmark_dir"])).resolve(
+            strict=True
+        )
+        output_path = benchmark_dir / "feature_select_benchmark.bin"
+
         # anything below this context manager will be profiled
-        with memray.Tracker("feature_select_benchmark.bin"):
+        with memray.Tracker(output_path):
             # iteratively passing normalized data
             for norm_data, feature_file_out in io_files:
                 feature_selection(

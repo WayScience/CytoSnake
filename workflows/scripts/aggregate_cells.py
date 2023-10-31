@@ -149,9 +149,15 @@ if __name__ == "__main__":
 
     # exeucuting pycytominer aggregate function
     if enable_profiling:
-        # anything below this context manager will be profiled
+        # setting up output path to benchmark folder
+        benchmark_dir = pathlib.Path(str(snakemake.config["benchmark_dir"])).resolve(
+            strict=True
+        )
         root_name = pathlib.Path(plate_data).stem.split("_")[0]
-        with memray.Tracker(f"{root_name}_aggregate_benchmark.bin"):
+        output_path = benchmark_dir / f"{root_name}_aggregate_benchmark.bin"
+
+        # anything below this context manager will be profiled
+        with memray.Tracker(output_path):
             aggregate(
                 sql_file=plate_data,
                 metadata_dir=metadata_dir_path,

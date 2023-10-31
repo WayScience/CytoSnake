@@ -110,8 +110,14 @@ if __name__ in "__main__":
 
     # normalization step
     if enable_profiling:
+        # setting up output path to benchmark folder
+        benchmark_dir = pathlib.Path(str(snakemake.config["benchmark_dir"])).resolve(
+            strict=True
+        )
+        output_path = benchmark_dir / "consensus_benchmark.bin"
+
         # anything below this context manager will be profiled
-        with memray.Tracker("consensus_benchmark.bin"):
+        with memray.Tracker(output_path):
             # concatenated all Normalized aggregated profiles
             build_consensus(
                 profile_list=inputs,

@@ -129,9 +129,15 @@ if __name__ == "__main__":
 
     # exeucuting pycytominer annotate function
     if enable_profiling:
-        # anything below this context manager will be profiled
+        # setting up output path to benchmark folder
+        benchmark_dir = pathlib.Path(str(snakemake.config["benchmark_dir"])).resolve(
+            strict=True
+        )
         root_name = pathlib.Path(input_profile).stem.split("_")[0]
-        with memray.Tracker(f"{root_name}_annotate_benchmark.bin"):
+        output_path = benchmark_dir / f"{root_name}_annotate_benchmark.bin"
+
+        # anything below this context manager will be profiled
+        with memray.Tracker(output_path):
             annotate_cells(
                 profile=input_profile,
                 barcodes_path=barcode_path,
