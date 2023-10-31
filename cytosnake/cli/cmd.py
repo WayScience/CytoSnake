@@ -6,10 +6,9 @@ cmd.py Module
 Generates CLI interface in order to interact with CytoSnake.
 """
 import logging
+import pathlib
 import sys
-from pathlib import Path
 
-# cytosnake imports
 from cytosnake.cli.args import CliControlPanel
 from cytosnake.cli.cli_docs import cli_docs, init_doc, run_doc
 from cytosnake.cli.exec.workflow_exec import workflow_executor
@@ -17,6 +16,9 @@ from cytosnake.cli.setup_init import init_cp_data, init_dp_data
 from cytosnake.common.errors import ProjectExistsError, WorkflowFailedException
 from cytosnake.guards.input_guards import check_init_parameter_inputs
 from cytosnake.utils import cyto_paths
+
+# cytosnake imports
+from cytosnake.utils.config_utils import load_cytosnake_configs, update_config
 from cytosnake.utils.cytosnake_setup import setup_cytosnake_env
 
 
@@ -96,9 +98,24 @@ def run_cmd() -> None:
                 print(run_doc)
                 sys.exit(0)
 
+            # check if benchmarking is enabled. if so, create benchmarks folder
+            gen_configs = load_cytosnake_configs()
+            if gen_configs["enable_profiling"]:
+                # create benchmark directory
+                benchmark_folder = pathlib.path("benchmarks")
+                benchmark_folder.mkdir(exist_ok=True)
+
+                # update _paths.yaml with path to benchmark folder
+                paths_configs_path = cyto_paths.get_meta_path() / "._paths.yaml"
+                update_config(
+                    config_path=paths_configs_path,
+                    key="benchmarks",
+                    value=str(benchmark_folder.absolute()),
+                )
+
             # parsing workflow parameters
             wf_params = args_handler.parse_workflow_args()
-            wf_name = Path(wf_params.workflow).name
+            wf_name = pathlib.Path(wf_params.workflow).name
             print(f"Executing {wf_name} workflow")
             wf_executor = workflow_executor(
                 workflow=wf_params.workflow,
