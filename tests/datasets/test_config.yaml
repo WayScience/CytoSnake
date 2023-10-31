@@ -1,0 +1,42 @@
+{
+    "project_dir_path": "/placeholder/project/directory",
+    "project_dir": {
+        "metadata": "/placeholder/project/directory/metadata",
+        "workflows": "/placeholder/project/directory/workflows",
+        ".cytosnake": "/placeholder/project/directory/.cytosnake",
+        "data": "/placeholder/project/directory/data",
+        "data_directory_contents": {
+            "SQ00014610": "/placeholder/cellplate_data/SQ00014610.sqlite",
+            "SQ00014611": "/placeholder/cellplate_data/SQ00014611.sqlite",
+            "SQ00014612": "/placeholder/cellplate_data/SQ00014612.sqlite",
+            "SQ00014613": "/placeholder/cellplate_data/SQ00014613.sqlite",
+            "SQ00014614": "/placeholder/cellplate_data/SQ00014614.sqlite",
+            "SQ00014615": "/placeholder/cellplate_data/SQ00014615.sqlite",
+            "SQ00014616": "/placeholder/cellplate_data/SQ00014616.sqlite",
+            "SQ00014617": "/placeholder/cellplate_data/SQ00014617.sqlite",
+            "SQ00014618": "/placeholder/cellplate_data/SQ00014618.sqlite",
+            "data": "/placeholder/project/directory/data",
+            "barcode": "/placeholder/cellplate_data/barcode_platemap.csv",
+            "metadata": "/placeholder/cellplate_data/metadata"
+        },
+        "configs": "/placeholder/project/directory/configs"
+    },
+    "config_dir": {
+        "wf_configs": {
+            "cp_process_singlecells": "/placeholder/project/directory/configs/wf_configs/cp_process_singlecells.yaml",
+            "cp_process": "/placeholder/project/directory/configs/wf_configs/cp_process.yaml"
+        },
+        "configuration": "/placeholder/project/directory/configs/configuration.yaml",
+        "analysis_configs": {
+            "cytotable_convert": "/placeholder/project/directory/configs/analysis_configs/cytotable_convert.yaml",
+            "dp_aggregator_config": "/placeholder/project/directory/configs/analysis_configs/dp_aggregator_config.yaml",
+            "dp_data_configs": "/placeholder/project/directory/configs/analysis_configs/dp_data_configs.yaml",
+            "single_cell_configs": "/placeholder/project/directory/configs/analysis_configs/single_cell_configs.yaml",
+            "consensus_configs": "/placeholder/project/directory/configs/analysis_configs/consensus_configs.yaml",
+            "normalize_configs": "/placeholder/project/directory/configs/analysis_configs/normalize_configs.yaml",
+            "feature_select_configs": "/placeholder/project/directory/configs/analysis_configs/feature_select_configs.yaml",
+            "annotate_configs": "/placeholder/project/directory/configs/analysis_configs/annotate_configs.yaml",
+            "aggregate_configs": "/placeholder/project/directory/configs/analysis_configs/aggregate_configs.yaml"
+        }
+    }
+}
