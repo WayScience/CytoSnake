@@ -1,4 +1,5 @@
 import pathlib
+from typing import Any
 
 import yaml
 
@@ -7,7 +8,7 @@ from cytosnake.guards.path_guards import is_valid_path
 from cytosnake.utils import cyto_paths
 
 
-def load_configs(config_path: str | Path) -> dict:
+def load_configs(config_path: str | pathlib.Path) -> dict:
     """Returns a dictionary of given configurations
 
     Parameters
@@ -30,7 +31,7 @@ def load_configs(config_path: str | Path) -> dict:
     if not is_valid_path(config_path):
         raise FileNotFoundError(f"Invalid config path provided: {config_path}")
     if isinstance(config_path, str):
-        config_path = Path(config_path).resolve(strict=True)
+        config_path = pathlib.Path(config_path).resolve(strict=True)
 
     # loading in config_path
     with open(config_path, "r") as yaml_contents:
@@ -65,7 +66,7 @@ def load_meta_path_configs() -> dict:
     return load_configs(meta_path)
 
 
-def load_workflow_path(wf_name: str) -> Path:
+def load_workflow_path(wf_name: str) -> pathlib.Path:
     """Loads in configurations and returns path pointing to
     workflow
 
@@ -96,7 +97,7 @@ def load_workflow_path(wf_name: str) -> Path:
         raise WorkflowNotFoundError(f"Unable to find {wf_name} workflow")
 
     # returning workflow path
-    return Path(workflows[wf_name])
+    return pathlib.Path(workflows[wf_name])
 
 
 def load_data_path_configs():
@@ -110,7 +111,7 @@ def load_data_path_configs():
 
     # load in `_paths.yaml` meta data
     loaded_meta_paths = load_meta_path_configs()
-    return Path(loaded_meta_paths["project_dir"]["data"])
+    return pathlib.Path(loaded_meta_paths["project_dir"]["data"])
 
 
 def load_workflow_paths_config() -> dict:
@@ -133,54 +134,71 @@ def load_cytosnake_configs() -> dict:
     return load_configs(cytosnake_config_path)
 
 
-def update_config(config_path: str | pathlib.Path, key_map, new_key_value):
-    """
-    Updates configs when given a key, value pair.
+def update_config(
+    config_file_path: str | pathlib.Path,
+    new_key: str,
+    new_value: str | Any,
+    update=False,
+) -> None:
+    """This updates config level in the upper level.
 
     Parameters
     ----------
-    config_path : str | pathlib.path
-        The nested dictionary to update.
-
-    key_map : list[str]
-        A list of keys representing the path to the value.
-
-    new_key_value : dict[Any]
-        A dictionary containing the new key-value pair to add.
-
-    Returns
-    -------
-    bool
-        True if the update was successful, False if any key is missing.
+    key : str
+        key to add into the config
+    value : str | Number
+        Value to add to the given key.
+    update : bool
+        Update value to existing key
 
     Raises
     ------
+    ValueError
+        raised if the key value cannot be converted into a string
+    TypeError
+        raised if there is a type error with any parameter
+    FileNotFoundError
+        raised if the config file is not found
     KeyError
-        If any key in the path is missing or not a dictionary.
+        raised if given key exists within the config file
     """
 
-    # loading in config file
-    configs = load_configs(config_path)
+    # type checking
+    if not isinstance(config_file_path, pathlib.Path):
+        if isinstance(config_file_path, str):
+            config_file_path = pathlib.Path(config_file_path).resolve(strict=True)
+        raise TypeError(
+            "'config_file_path' must be str or pathlib.Path."
+            f"not: {type(config_file_path)}"
+        )
+    if not isinstance(new_key, str):
+        try:
+            new_key = str(new_key)
+        except Exception:
+            raise ValueError("Unable to convert key value into a string")
+    if not isinstance(new_value, (str, float, int)):
+        raise TypeError("value must either be a string, float, or int")
 
-    # searching selected key
-    try:
-        # Iterate through the keys to find location within the config file
-        for key in key_map[:-1]:
-            if key in configs and isinstance(configs[key], dict):
-                configs = configs[key]
-            else:
-                raise KeyError(f"Key '{key}' is missing or not a dictionary.")
+    # open config file
+    loaded_configs = load_configs(config_path=config_file_path)
 
-        # Update the value if the last key exists in the dictionary
-        last_key = key_map[-1]
-        if last_key in configs and isinstance(configs[last_key], dict):
-            configs[last_key].update(new_key_value)
-        else:
-            raise KeyError(f"Key '{last_key}' is missing or not a dictionary.")
+    # updating configs
+    new_key_value_pair = {new_key: new_value}
+    if new_key in [keys for keys in loaded_configs.keys()]:
+        if update:
+            loaded_configs.update(new_key_value_pair)
+        raise KeyError(
+            f"key: `{new_key}` already exists in the config. "
+            "Please use a different key to prevent key clashing"
+        )
+    loaded_configs.update(new_key_value_pair)
 
-    except KeyError as e:
-        print(f"Update failed: {e}")
+    # capture empty dictionaries before writing
+    if not loaded_configs:
+        raise RuntimeError(
+            "Empty dictionary captured when entrying new key value pairs"
+        )
 
-    # overwrite config file with updated configs
-    with open(config_path, "w") as config:
-        yaml.dump(configs, config)
+    # write our the updated config
+    with open(config_file_path, mode="w", encoding="utf-8") as stream:
+        yaml.dump(loaded_configs, stream)
