@@ -107,11 +107,13 @@ def run_cmd() -> None:
                 benchmark_folder.mkdir(exist_ok=True)
 
                 # update _paths.yaml with path to benchmark folder
-                paths_configs_path = cyto_paths.get_meta_path() / "._paths.yaml"
+                paths_configs_path = (
+                    cyto_paths.get_meta_path() / "_paths.yaml"
+                ).resolve(strict=True)
                 update_config(
-                    config_path=paths_configs_path,
-                    key="benchmarks",
-                    value=str(benchmark_folder.absolute()),
+                    config_file_path=paths_configs_path,
+                    new_key="benchmarks",
+                    new_value=str(benchmark_folder.absolute()),
                 )
 
             # parsing workflow parameters
