@@ -22,13 +22,11 @@ You'll learn not only on how to execute benchmarking but also how to interpret a
 ## Enable benchmarking in cytosnake
 
 To enable benchmarking, modify the `config/configurational.yaml` file and opening it using your preferred text editor.
-Once inside the config file, set the `enable_profiling` to `True`:
+Once inside the config file, set the `enable_profiling` to `True`, informing CytoSnake that you intend to perform benchmarking on the workflow.
 
 ```yaml
 enable_profiling: True
 ```
-
-This will inform inform CytoSnake that you intend to perform benchmarking on the workflow.
 
 ## Executing benchmarking
 
@@ -39,3 +37,7 @@ cytosnake run cp_process
 ```
 
 Behind the scenes, benchmarking will be automatically initialized, and it will start benchmarking each step within the workflow.
+
+## Plotting Benchmarks
+
+Coming soon.
