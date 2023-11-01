@@ -127,7 +127,7 @@ if __name__ == "__main__":
     log_path = str(snakemake.log)
     enable_profiling = snakemake.config["enable_profiling"]
 
-    # exeucuting pycytominer annotate function
+    # executing pycytominer annotate function
     if enable_profiling:
         # setting up output path to benchmark folder
         benchmark_dir = pathlib.Path(str(snakemake.config["benchmark_dir"])).resolve(
