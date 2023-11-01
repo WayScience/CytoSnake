@@ -101,9 +101,9 @@ def run_cmd() -> None:
             # check if benchmarking is enabled. if so, create benchmarks folder
             gen_configs = load_cytosnake_configs()
             if gen_configs["enable_profiling"]:
-                # create benchmark directory
+                # create benchmark directory, raise error if
                 logging.info("Memory profiling enabled")
-                benchmark_folder = pathlib.Path("benchmark_dir")
+                benchmark_folder = pathlib.Path("benchmarks")
                 benchmark_folder.mkdir(exist_ok=True)
 
                 # update _paths.yaml with path to benchmark folder
