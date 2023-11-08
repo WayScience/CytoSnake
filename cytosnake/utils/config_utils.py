@@ -168,7 +168,7 @@ def update_config(
         if isinstance(config_file_path, str):
             config_file_path = pathlib.Path(config_file_path).resolve(strict=True)
         raise TypeError(
-            "'config_file_path' must be str or pathlib.Path."
+            "'config_file_path' must be str or pathlib.Path which is able to resolve as a Path."
             f"not: {type(config_file_path)}"
         )
     if not isinstance(new_key, str):
