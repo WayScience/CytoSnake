@@ -196,7 +196,7 @@ def update_config(
     # capture empty dictionaries before writing
     if not loaded_configs:
         raise RuntimeError(
-            "Empty dictionary captured when entrying new key value pairs"
+            "Empty dictionary captured when entering new key value pairs"
         )
 
     # write our the updated config
