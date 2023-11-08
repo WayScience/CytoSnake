@@ -174,8 +174,8 @@ def update_config(
     if not isinstance(new_key, str):
         try:
             new_key = str(new_key)
-        except Exception:
-            raise ValueError("Unable to convert key value into a string")
+        except Exception as exc:
+            raise ValueError("Unable to convert key value into a string") from exc
     if not isinstance(new_value, (str, float, int)):
         raise TypeError("value must either be a string, float, or int")
 
