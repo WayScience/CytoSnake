@@ -1,5 +1,14 @@
+"""
+Module: config_utils.py
+
+`config_uitls.py` serves as a utility module, that manages configuration files
+within the CytoSnake workflow framework.  This module offers an array of
+functions that aids in loading, parsing, and dynamic modification of
+configuration files.
+
+"""
 import pathlib
-from typing import Any
+from typing import Any, Optional
 
 import yaml
 
@@ -138,7 +147,7 @@ def update_config(
     config_file_path: str | pathlib.Path,
     new_key: str,
     new_value: str | Any,
-    update=False,
+    update: Optional[bool] = False,
 ) -> None:
     """This updates config level in the upper level.
 
@@ -168,14 +177,10 @@ def update_config(
         if isinstance(config_file_path, str):
             config_file_path = pathlib.Path(config_file_path).resolve(strict=True)
         raise TypeError(
-            "'config_file_path' must be str or pathlib.Path which is able to resolve as a Path."
+            "'config_file_path' must be str or pathlib.Path which is able "
+            "to resolve as a Path."
             f"not: {type(config_file_path)}"
         )
-    if not isinstance(new_key, str):
-        try:
-            new_key = str(new_key)
-        except Exception as exc:
-            raise ValueError("Unable to convert key value into a string") from exc
     if not isinstance(new_value, (str, float, int)):
         raise TypeError("value must either be a string, float, or int")
 
@@ -184,7 +189,7 @@ def update_config(
 
     # updating configs
     new_key_value_pair = {new_key: new_value}
-    if new_key in [keys for keys in loaded_configs.keys()]:
+    if new_key in loaded_configs:
         if update:
             loaded_configs.update(new_key_value_pair)
         raise KeyError(

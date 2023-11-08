@@ -16,8 +16,6 @@ from cytosnake.cli.setup_init import init_cp_data, init_dp_data
 from cytosnake.common.errors import ProjectExistsError, WorkflowFailedException
 from cytosnake.guards.input_guards import check_init_parameter_inputs
 from cytosnake.utils import cyto_paths
-
-# cytosnake imports
 from cytosnake.utils.config_utils import load_cytosnake_configs, update_config
 from cytosnake.utils.cytosnake_setup import setup_cytosnake_env
 

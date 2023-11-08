@@ -7,7 +7,7 @@
 
 ## Introduction to Benchmarking with Cytosnake
 
-Cytosnake is a Python package known for it  collection of workflows designed for analyzing image-based profiles.
+Cytosnake is a Python package known for its collection of workflows designed for performing image-based profiling.
 To ensure these workflows perform at their best, it's essential to conduct benchmarking.
 Benchmarking allows us to assess and optimize the efficiency and reliability of Cytosnake's image analysis processes.
 This tutorial will guide you through the benchmarking process, helping you gauge and improve the performance of these image-based profiling workflows.
