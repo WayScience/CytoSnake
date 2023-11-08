@@ -15,6 +15,9 @@ Whether you're a developer seeking to enhance Cytosnake's functionalities or a u
 
 Here in Cytosnake, we use Memray to benchmark our workflows, making it a great tool for tackling memory usage issues, identifying memory leaks, and pinpointing code hotspots that result in excessive allocations.
 Memray's notable features include tracing every function call, handling native calls in C/C++ libraries, minimal application slowdown during profiling, diverse report generation like flame graphs, compatibility with Python threads, and support for native threads.
+Howwever, using the `memray` command-line interface directly on the workflows is not effective, as all workflows are executed through Snakemake.
+The workflow itself doesn't directly engage in image-based profiling but acts as an orchestrator for various scripts involved in the process.
+Consequently, memory allocation and resource utilization are delegated to the scripts orchestrated by the workflows, rather than being directly handled by the workflow.
 
 In this guide, you'll gain an understanding of how to conduct benchmarks with Cytosnake.
 You'll learn not only on how to execute benchmarking but also how to interpret and make the most of the benchmarking outputs.
@@ -38,7 +41,6 @@ cytosnake run cp_process
 ```
 
 Behind the scenes, benchmarking will be automatically initialized, and it will start benchmarking each step within the workflow.
-
 
 ## Examining the Benchmarks
 
