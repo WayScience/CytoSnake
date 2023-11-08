@@ -265,7 +265,4 @@ def get_benchmarks_path() -> pathlib.Path:
     project_path = get_project_root()
     benchmark_path = project_path / "benchmarks"
 
-    # creates dir if needed
-    benchmark_path.mkdir(exist_ok=True)
-
     return benchmark_path
