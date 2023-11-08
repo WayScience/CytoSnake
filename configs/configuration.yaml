@@ -8,7 +8,7 @@ analysis_configs:
     threads: 4
 
 # enable memory profiling
-enable_profiling: False
+enable_memory_tracking: False
 
 data_configs:
   # flag indicates to use converted data. if True, then

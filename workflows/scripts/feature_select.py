@@ -81,7 +81,7 @@ if __name__ == "__main__":
     config_path = snakemake.params["feature_select_config"]
     io_files = zip(all_norm_profile, out_files)
     log_path = str(snakemake.log)
-    enable_profiling = snakemake.config["enable_profiling"]
+    enable_profiling = snakemake.config["enable_memory_tracking"]
 
     if enable_profiling:
         # setting up output path to benchmark folder

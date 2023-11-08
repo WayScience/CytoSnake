@@ -71,7 +71,7 @@ if __name__ == "__main__":
     normalize_configs = snakemake.params["normalize_config"]
     normalized_data_output = str(snakemake.output)
     log_path = str(snakemake.log)
-    enable_profiling = snakemake.config["enable_profiling"]
+    enable_profiling = snakemake.config["enable_memory_tracking"]
 
     # normalization step
     if enable_profiling:

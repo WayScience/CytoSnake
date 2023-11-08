@@ -106,7 +106,7 @@ if __name__ in "__main__":
     output = str(snakemake.output)
     config_path = str(snakemake.params["consensus_configs"])
     log_path = str(snakemake.log)
-    enable_profiling = snakemake.config["enable_profiling"]
+    enable_profiling = snakemake.config["enable_memory_tracking"]
 
     # normalization step
     if enable_profiling:

@@ -145,7 +145,7 @@ if __name__ == "__main__":
     single_cells_config = snakemake.params["single_cell_config"]["params"]
     aggregate_config = snakemake.params["aggregate_config"]["params"]
     log_path = str(snakemake.log)
-    enable_profiling = snakemake.config["enable_profiling"]
+    enable_profiling = snakemake.config["enable_memory_tracking"]
 
     # exeucuting pycytominer aggregate function
     if enable_profiling:

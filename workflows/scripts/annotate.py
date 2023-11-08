@@ -125,7 +125,7 @@ if __name__ == "__main__":
     metadata_dir_path = str(snakemake.input["metadata"])
     config_path = str(snakemake.params["annotate_config"])
     log_path = str(snakemake.log)
-    enable_profiling = snakemake.config["enable_profiling"]
+    enable_profiling = snakemake.config["enable_memory_tracking"]
 
     # executing pycytominer annotate function
     if enable_profiling:
