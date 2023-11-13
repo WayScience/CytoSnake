@@ -1,6 +1,7 @@
 import logging
 import pathlib
 
+import memray
 from pycytominer.normalize import normalize
 
 
@@ -70,11 +71,29 @@ if __name__ == "__main__":
     normalize_configs = snakemake.params["normalize_config"]
     normalized_data_output = str(snakemake.output)
     log_path = str(snakemake.log)
+    enable_profiling = snakemake.config["enable_memory_tracking"]
 
     # normalization step
-    normalization(
-        anno_file=annotated_data_path,
-        norm_outfile=normalized_data_output,
-        config=normalize_configs,
-        log_file=log_path,
-    )
+    if enable_profiling:
+        # setting up output path to benchmark folder
+        benchmark_dir = pathlib.Path(str(snakemake.config["benchmark_dir"])).resolve(
+            strict=True
+        )
+        root_name = pathlib.Path(annotated_data_path).stem.split("_")[0]
+        output_path = benchmark_dir / f"{root_name}_normalize_benchmark.bin"
+
+        # anything below this context manager will be profiled
+        with memray.Tracker(output_path):
+            normalization(
+                anno_file=annotated_data_path,
+                norm_outfile=normalized_data_output,
+                config=normalize_configs,
+                log_file=log_path,
+            )
+    else:
+        normalization(
+            anno_file=annotated_data_path,
+            norm_outfile=normalized_data_output,
+            config=normalize_configs,
+            log_file=log_path,
+        )

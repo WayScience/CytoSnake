@@ -1,6 +1,7 @@
 import logging
 import pathlib
 
+import memray
 import pandas as pd
 import yaml
 from pycytominer.annotate import annotate
@@ -124,13 +125,33 @@ if __name__ == "__main__":
     metadata_dir_path = str(snakemake.input["metadata"])
     config_path = str(snakemake.params["annotate_config"])
     log_path = str(snakemake.log)
+    enable_profiling = snakemake.config["enable_memory_tracking"]
 
-    # annotating cells
-    annotate_cells(
-        profile=input_profile,
-        barcodes_path=barcode_path,
-        metadata_dir=metadata_dir_path,
-        annotate_file_out=annotate_data_output,
-        config=config_path,
-        log_file=log_path,
-    )
+    # executing pycytominer annotate function
+    if enable_profiling:
+        # setting up output path to benchmark folder
+        benchmark_dir = pathlib.Path(str(snakemake.config["benchmark_dir"])).resolve(
+            strict=True
+        )
+        root_name = pathlib.Path(input_profile).stem.split("_")[0]
+        output_path = benchmark_dir / f"{root_name}_annotate_benchmark.bin"
+
+        # anything below this context manager will be profiled
+        with memray.Tracker(output_path):
+            annotate_cells(
+                profile=input_profile,
+                barcodes_path=barcode_path,
+                metadata_dir=metadata_dir_path,
+                annotate_file_out=annotate_data_output,
+                config=config_path,
+                log_file=log_path,
+            )
+    else:
+        annotate_cells(
+            profile=input_profile,
+            barcodes_path=barcode_path,
+            metadata_dir=metadata_dir_path,
+            annotate_file_out=annotate_data_output,
+            config=config_path,
+            log_file=log_path,
+        )

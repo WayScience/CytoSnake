@@ -10,3 +10,7 @@ CytoSnake.egg-info
 workflows/rules/common.py
 .DS_Store
 build
+
+# removing prototyping files
+_*
+prototype.ipynb

@@ -7,5 +7,6 @@ dependencies:
   - python=3.9
   - pyyaml
   - pip
+  - memray
   - pip:
-      - git+https://github.com/cytomining/pycytominer.git@1e984c6b266012e3e5a0f0620bc866c3958f0260
+      - pycytominer

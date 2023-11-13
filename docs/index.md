@@ -14,6 +14,7 @@ workflows
 workflow-modules
 modules
 testing
+benchmarking
 ```
 
 ```{include} ../README.md

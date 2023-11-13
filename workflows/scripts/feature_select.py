@@ -1,6 +1,7 @@
 import logging
 import pathlib
 
+import memray
 from pycytominer.feature_select import feature_select
 
 
@@ -80,12 +81,30 @@ if __name__ == "__main__":
     config_path = snakemake.params["feature_select_config"]
     io_files = zip(all_norm_profile, out_files)
     log_path = str(snakemake.log)
+    enable_profiling = snakemake.config["enable_memory_tracking"]
 
-    # iteratively passing normalized data
-    for norm_data, feature_file_out in io_files:
-        feature_selection(
-            normalized_profile=norm_data,
-            out_file=feature_file_out,
-            config=config_path,
-            log_file=log_path,
+    if enable_profiling:
+        # setting up output path to benchmark folder
+        benchmark_dir = pathlib.Path(str(snakemake.config["benchmark_dir"])).resolve(
+            strict=True
         )
+        output_path = benchmark_dir / "feature_select_benchmark.bin"
+
+        # anything below this context manager will be profiled
+        with memray.Tracker(output_path):
+            # iteratively passing normalized data
+            for norm_data, feature_file_out in io_files:
+                feature_selection(
+                    normalized_profile=norm_data,
+                    out_file=feature_file_out,
+                    config=config_path,
+                    log_file=log_path,
+                )
+    else:
+        for norm_data, feature_file_out in io_files:
+            feature_selection(
+                normalized_profile=norm_data,
+                out_file=feature_file_out,
+                config=config_path,
+                log_file=log_path,
+            )

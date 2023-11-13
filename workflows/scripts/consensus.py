@@ -1,6 +1,7 @@
 import logging
 import pathlib
 
+import memray
 import pandas as pd
 import yaml
 from pycytominer import consensus
@@ -105,11 +106,30 @@ if __name__ in "__main__":
     output = str(snakemake.output)
     config_path = str(snakemake.params["consensus_configs"])
     log_path = str(snakemake.log)
+    enable_profiling = snakemake.config["enable_memory_tracking"]
 
-    # concatenated all Normalized aggregated profiles
-    build_consensus(
-        profile_list=inputs,
-        consensus_file_out=output,
-        config=config_path,
-        log_file=log_path,
-    )
+    # normalization step
+    if enable_profiling:
+        # setting up output path to benchmark folder
+        benchmark_dir = pathlib.Path(str(snakemake.config["benchmark_dir"])).resolve(
+            strict=True
+        )
+        output_path = benchmark_dir / "consensus_benchmark.bin"
+
+        # anything below this context manager will be profiled
+        with memray.Tracker(output_path):
+            # concatenated all Normalized aggregated profiles
+            build_consensus(
+                profile_list=inputs,
+                consensus_file_out=output,
+                config=config_path,
+                log_file=log_path,
+            )
+    else:
+        # concatenated all Normalized aggregated profiles
+        build_consensus(
+            profile_list=inputs,
+            consensus_file_out=output,
+            config=config_path,
+            log_file=log_path,
+        )
